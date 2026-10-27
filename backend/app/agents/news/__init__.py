@@ -5,6 +5,13 @@ from .analyzer import (
     NewsAnalyzerConfig,
 )
 
+from .llm import (
+    NewsLLMAnalyzer,
+    NewsLLMConfig,
+    NewsLLMEventAnalysis,
+    NewsLLMResult,
+)
+
 from .models import (
     NewsArticle,
     NewsCategory,
@@ -17,6 +24,10 @@ __all__ = [
     "NewsAgent",
     "NewsAnalyzer",
     "NewsAnalyzerConfig",
+    "NewsLLMAnalyzer",
+    "NewsLLMConfig",
+    "NewsLLMEventAnalysis",
+    "NewsLLMResult",
     "NewsArticle",
     "NewsCategory",
     "NewsEvent",
