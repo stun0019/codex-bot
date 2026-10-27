@@ -2,6 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -12,13 +13,17 @@
     content="Codex Bot - Multi-Agent Crypto Trading System"
   >
 
-  <title>Codex Bot</title>
+  <title>
+    Codex Bot
+  </title>
 
   <style>
     :root {
       --bg: #020407;
       --panel: #080d14;
       --panel-2: #0c131d;
+      --panel-3: #101925;
+
       --border: #182330;
       --border-2: #273647;
 
@@ -26,8 +31,12 @@
       --muted: #8794a5;
       --muted-2: #596777;
 
-      --green: #40e58d;
+      --green: #42e58d;
       --red: #ff5e70;
+      --yellow: #ffd54a;
+      --blue: #4d9fff;
+      --purple: #b56cff;
+      --orange: #ff9c42;
 
       --scout: #ffd54a;
       --news: #ff5f6d;
@@ -61,6 +70,11 @@
           rgba(77, 159, 255, 0.12),
           transparent 32%
         ),
+        radial-gradient(
+          circle at 5% 50%,
+          rgba(66, 229, 141, 0.035),
+          transparent 25%
+        ),
         var(--bg);
 
       color: var(--text);
@@ -70,12 +84,22 @@
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
         sans-serif;
     }
 
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
+
     button,
-    select {
+    input,
+    select,
+    textarea {
       font: inherit;
     }
 
@@ -87,35 +111,61 @@
 
     button:disabled {
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: 0.55;
+    }
+
+
+    input,
+    select,
+    textarea {
+      outline: none;
     }
 
 
     .container {
-      width: min(
-        1180px,
-        calc(100% - 28px)
-      );
+      width:
+        min(
+          1180px,
+          calc(100% - 28px)
+        );
 
       margin: 0 auto;
     }
 
 
-    /* =========================
+    .positive {
+      color: var(--green) !important;
+    }
+
+
+    .negative {
+      color: var(--red) !important;
+    }
+
+
+    .warning {
+      color: var(--yellow) !important;
+    }
+
+
+    /* =========================================
        HEADER
-    ========================= */
+    ========================================= */
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid
+        var(--border);
 
       background:
-        rgba(2, 4, 7, 0.86);
+        rgba(2, 4, 7, 0.87);
 
-      backdrop-filter: blur(18px);
+      backdrop-filter:
+        blur(18px);
     }
 
 
@@ -126,13 +176,14 @@
       align-items: center;
       justify-content: space-between;
 
-      gap: 16px;
+      gap: 15px;
     }
 
 
     .brand {
       display: flex;
       align-items: center;
+
       gap: 10px;
     }
 
@@ -144,7 +195,10 @@
       display: grid;
       place-items: center;
 
-      border: 1px solid var(--border-2);
+      border:
+        1px solid
+        var(--border-2);
+
       border-radius: 10px;
 
       background:
@@ -168,8 +222,9 @@
       margin-top: 1px;
 
       color: var(--muted-2);
+
       font-size: 8px;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.7px;
     }
 
 
@@ -177,7 +232,7 @@
       display: flex;
       align-items: center;
 
-      gap: 9px;
+      gap: 7px;
     }
 
 
@@ -189,16 +244,21 @@
 
       gap: 6px;
 
-      padding: 6px 9px;
+      padding:
+        6px
+        9px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 999px;
 
       background: var(--panel);
 
       color: var(--muted);
 
-      font-size: 9px;
+      font-size: 8px;
     }
 
 
@@ -213,7 +273,11 @@
 
       border-radius: 50%;
 
-      background: #f4c94b;
+      background: var(--yellow);
+
+      box-shadow:
+        0 0 8px
+        rgba(255, 213, 74, 0.4);
     }
 
 
@@ -228,29 +292,44 @@
 
     .dot.offline {
       background: var(--red);
+
+      box-shadow:
+        0 0 9px
+        rgba(255, 94, 112, 0.55);
     }
 
 
-    /* =========================
-       MARKET
-    ========================= */
+    /* =========================================
+       MAIN
+    ========================================= */
 
     main {
-      padding: 18px 0 40px;
+      padding:
+        18px
+        0
+        42px;
     }
 
+
+    /* =========================================
+       MARKET
+    ========================================= */
 
     .market {
       padding: 16px;
 
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius);
 
       background:
         linear-gradient(
           180deg,
-          rgba(10, 17, 27, 0.96),
-          rgba(4, 8, 13, 0.98)
+          rgba(10, 17, 27, 0.97),
+          rgba(4, 8, 13, 0.99)
         );
     }
 
@@ -275,12 +354,13 @@
 
       font-size:
         clamp(
-          27px,
+          28px,
           5vw,
           40px
         );
 
       font-weight: 850;
+
       letter-spacing: -1px;
     }
 
@@ -289,17 +369,8 @@
       margin-top: 3px;
 
       color: var(--muted);
+
       font-size: 9px;
-    }
-
-
-    .positive {
-      color: var(--green) !important;
-    }
-
-
-    .negative {
-      color: var(--red) !important;
     }
 
 
@@ -307,28 +378,48 @@
       display: flex;
 
       gap: 6px;
+
       flex-wrap: wrap;
 
       justify-content: flex-end;
     }
 
 
-    select,
-    .small-button {
+    .control,
+    .button {
       min-height: 33px;
 
-      padding: 7px 9px;
+      padding:
+        7px
+        9px;
 
-      border: 1px solid var(--border-2);
+      border:
+        1px solid
+        var(--border-2);
+
       border-radius: 8px;
 
-      background: var(--panel-2);
+      background:
+        var(--panel-2);
 
       color: var(--text);
 
       font-size: 9px;
+    }
 
-      outline: none;
+
+    .button:hover:not(:disabled) {
+      border-color:
+        rgba(77, 159, 255, 0.5);
+    }
+
+
+    .button.primary {
+      border-color:
+        rgba(66, 229, 141, 0.3);
+
+      background:
+        rgba(66, 229, 141, 0.07);
     }
 
 
@@ -339,7 +430,10 @@
 
       overflow: hidden;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 11px;
 
       background: #03070c;
@@ -368,9 +462,14 @@
 
 
     .market-stat {
+      min-width: 0;
+
       padding: 9px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 9px;
 
       background:
@@ -382,23 +481,26 @@
       color: var(--muted-2);
 
       font-size: 7px;
+
       text-transform: uppercase;
+
+      letter-spacing: 0.4px;
     }
 
 
     .market-stat-value {
       margin-top: 3px;
 
+      overflow-wrap: anywhere;
+
       font-size: 11px;
       font-weight: 750;
-
-      overflow-wrap: anywhere;
     }
 
 
-    /* =========================
+    /* =========================================
        AGENTS
-    ========================= */
+    ========================================= */
 
     .agents-section {
       margin-top: 18px;
@@ -414,6 +516,7 @@
 
     .agents-title strong {
       font-size: 15px;
+
       letter-spacing: 0.7px;
     }
 
@@ -443,7 +546,7 @@
 
 
     .agent {
-      --agent-color: #fff;
+      --agent-color: #ffffff;
 
       position: relative;
 
@@ -472,7 +575,7 @@
         linear-gradient(
           180deg,
           rgba(11, 18, 28, 0.97),
-          rgba(4, 8, 13, 0.98)
+          rgba(4, 8, 13, 0.99)
         );
 
       cursor: pointer;
@@ -496,16 +599,20 @@
 
       border-radius: 50%;
 
-      background: var(--agent-color);
+      background:
+        var(--agent-color);
 
       opacity: 0.11;
 
       filter: blur(30px);
+
+      pointer-events: none;
     }
 
 
     .agent:hover {
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
 
       border-color:
         color-mix(
@@ -579,15 +686,6 @@
           var(--agent-color) 10%,
           transparent
         );
-
-      box-shadow:
-        inset
-        0 0 22px
-        color-mix(
-          in srgb,
-          var(--agent-color) 7%,
-          transparent
-        );
     }
 
 
@@ -601,7 +699,7 @@
         grayscale(1)
         brightness(1.7);
 
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
 
@@ -613,7 +711,8 @@
 
       border-radius: 50%;
 
-      background: var(--agent-color);
+      background:
+        var(--agent-color);
 
       opacity: 0.24;
 
@@ -624,7 +723,8 @@
     .agent-name {
       margin-top: 10px;
 
-      color: var(--agent-color);
+      color:
+        var(--agent-color);
 
       font-size: 12px;
       font-weight: 850;
@@ -636,7 +736,8 @@
     .agent-role {
       margin-top: 2px;
 
-      color: var(--muted-2);
+      color:
+        var(--muted-2);
 
       font-size: 8px;
     }
@@ -663,7 +764,8 @@
 
       border-radius: 50%;
 
-      background: var(--agent-color);
+      background:
+        var(--agent-color);
 
       box-shadow:
         0 0 8px
@@ -674,13 +776,14 @@
     .agent.pending
     .agent-state-dot {
       box-shadow: none;
+
       opacity: 0.55;
     }
 
 
-    /* =========================
+    /* =========================================
        MODAL
-    ========================= */
+    ========================================= */
 
     .modal {
       position: fixed;
@@ -695,9 +798,10 @@
       padding: 18px;
 
       background:
-        rgba(0, 0, 0, 0.68);
+        rgba(0, 0, 0, 0.72);
 
-      backdrop-filter: blur(7px);
+      backdrop-filter:
+        blur(8px);
     }
 
 
@@ -709,21 +813,24 @@
     .modal-panel {
       width:
         min(
-          660px,
+          760px,
           100%
         );
 
       max-height:
         min(
-          78vh,
-          720px
+          86vh,
+          820px
         );
 
       overflow-y: auto;
 
       padding: 18px;
 
-      border: 1px solid var(--border-2);
+      border:
+        1px solid
+        var(--border-2);
+
       border-radius: 18px;
 
       background:
@@ -753,16 +860,19 @@
 
 
     .modal-icon {
-      width: 44px;
-      height: 44px;
+      width: 45px;
+      height: 45px;
 
       display: grid;
       place-items: center;
 
-      border: 1px solid var(--border-2);
+      border:
+        1px solid
+        var(--border-2);
+
       border-radius: 12px;
 
-      font-size: 27px;
+      font-size: 28px;
     }
 
 
@@ -785,10 +895,14 @@
       width: 32px;
       height: 32px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 50%;
 
-      background: var(--panel);
+      background:
+        var(--panel);
 
       color: var(--text);
 
@@ -825,12 +939,18 @@
 
 
     .detail-box {
+      min-width: 0;
+
       padding: 9px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 9px;
 
-      background: rgba(2, 6, 10, 0.75);
+      background:
+        rgba(2, 6, 10, 0.75);
     }
 
 
@@ -838,12 +958,15 @@
       color: var(--muted-2);
 
       font-size: 7px;
+
       text-transform: uppercase;
     }
 
 
     .detail-value {
       margin-top: 4px;
+
+      overflow-wrap: anywhere;
 
       font-size: 10px;
       font-weight: 750;
@@ -855,7 +978,10 @@
 
       padding: 9px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid
+        var(--border);
+
       border-radius: 9px;
 
       color: var(--muted-2);
@@ -865,13 +991,18 @@
     }
 
 
-    /* =========================
-       SCOUT INSIDE MODAL
-    ========================= */
+    .runtime {
+      margin-top: 14px;
 
-    .scout-action {
-      margin-top: 13px;
+      padding-top: 13px;
 
+      border-top:
+        1px solid
+        var(--border);
+    }
+
+
+    .runtime-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -880,17 +1011,129 @@
     }
 
 
-    .scout-status {
+    .runtime-status {
       color: var(--muted);
 
       font-size: 8px;
     }
 
 
-    .scout-table {
+    .result {
+      margin-top: 11px;
+    }
+
+
+    .result-empty {
+      padding: 20px;
+
+      border:
+        1px dashed
+        var(--border-2);
+
+      border-radius: 10px;
+
+      color: var(--muted-2);
+
+      text-align: center;
+
+      font-size: 8px;
+    }
+
+
+    .result-summary {
+      padding: 10px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 9px;
+
+      background:
+        rgba(3, 7, 12, 0.8);
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+
+    .result-grid {
+      margin-top: 8px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap: 7px;
+    }
+
+
+    .result-list {
+      margin-top: 9px;
+
+      display: grid;
+
+      gap: 6px;
+    }
+
+
+    .result-item {
+      padding: 8px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 8px;
+
+      background:
+        rgba(3, 7, 12, 0.75);
+    }
+
+
+    .result-item-title {
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+
+    .result-item-sub {
+      margin-top: 3px;
+
+      color: var(--muted-2);
+
+      font-size: 7px;
+      line-height: 1.5;
+    }
+
+
+    /* =========================================
+       TABLE
+    ========================================= */
+
+    .table-wrap {
+      margin-top: 9px;
+
+      overflow-x: auto;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 9px;
+    }
+
+
+    .data-table {
       width: 100%;
 
-      margin-top: 10px;
+      min-width: 520px;
 
       border-collapse: collapse;
 
@@ -898,34 +1141,195 @@
     }
 
 
-    .scout-table th,
-    .scout-table td {
-      padding: 7px 5px;
+    .data-table th,
+    .data-table td {
+      padding:
+        7px
+        7px;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid
+        var(--border);
 
       text-align: right;
     }
 
 
-    .scout-table th {
+    .data-table th {
       color: var(--muted-2);
+
       font-size: 7px;
+
+      text-transform: uppercase;
     }
 
 
-    .scout-table th:first-child,
-    .scout-table td:first-child {
+    .data-table th:first-child,
+    .data-table td:first-child {
       text-align: left;
     }
 
 
-    /* =========================
+    .data-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+
+    /* =========================================
+       RISK FORM
+    ========================================= */
+
+    .risk-form {
+      display: none;
+
+      margin-top: 12px;
+    }
+
+
+    .risk-form.show {
+      display: block;
+    }
+
+
+    .form-section {
+      margin-top: 11px;
+    }
+
+
+    .form-title {
+      margin-bottom: 7px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+    }
+
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap: 7px;
+    }
+
+
+    .field {
+      min-width: 0;
+    }
+
+
+    .field label {
+      display: block;
+
+      margin-bottom: 4px;
+
+      color: var(--muted-2);
+
+      font-size: 7px;
+    }
+
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+
+      min-height: 34px;
+
+      padding:
+        7px
+        8px;
+
+      border:
+        1px solid
+        var(--border-2);
+
+      border-radius: 8px;
+
+      background: #060b12;
+
+      color: var(--text);
+
+      font-size: 9px;
+    }
+
+
+    .field textarea {
+      min-height: 92px;
+
+      resize: vertical;
+
+      font-family:
+        Consolas,
+        monospace;
+
+      font-size: 8px;
+    }
+
+
+    .checkbox-row {
+      margin-top: 9px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    .checkbox-row input {
+      accent-color: var(--green);
+    }
+
+
+    details {
+      margin-top: 10px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 9px;
+
+      padding: 9px;
+
+      background:
+        rgba(2, 6, 10, 0.55);
+    }
+
+
+    summary {
+      cursor: pointer;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    /* =========================================
        FOOTER
-    ========================= */
+    ========================================= */
 
     footer {
-      padding: 25px 0 35px;
+      padding:
+        25px
+        0
+        35px;
 
       color: var(--muted-2);
 
@@ -935,13 +1339,14 @@
     }
 
 
-    /* =========================
+    /* =========================================
        RESPONSIVE
-    ========================= */
+    ========================================= */
 
     @media (
       max-width: 720px
     ) {
+
       .market-head {
         display: block;
       }
@@ -982,12 +1387,33 @@
       .agent {
         min-height: 145px;
       }
+
+
+      .form-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
+
+      .result-grid,
+      .detail-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
     }
 
 
     @media (
-      max-width: 440px
+      max-width: 500px
     ) {
+
       .container {
         width:
           calc(100% - 18px);
@@ -999,7 +1425,7 @@
       }
 
 
-      .system-pill {
+      .agents-pill {
         display: none;
       }
 
@@ -1019,6 +1445,13 @@
       }
 
 
+      .agent {
+        min-height: 137px;
+
+        padding: 11px;
+      }
+
+
       .alien-wrap {
         width: 52px;
         height: 52px;
@@ -1030,18 +1463,17 @@
       }
 
 
-      .agent {
-        min-height: 137px;
-
-        padding: 11px;
-      }
-
-
       .agent-name {
         font-size: 10px;
       }
 
 
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .result-grid,
       .detail-grid {
         grid-template-columns:
           repeat(
@@ -1049,12 +1481,17 @@
             minmax(0, 1fr)
           );
       }
+
     }
   </style>
 </head>
 
 
 <body>
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
   <header>
 
@@ -1086,20 +1523,36 @@
         <div class="pill">
 
           <span
-            id="connectionDot"
+            id="okxDot"
             class="dot"
           ></span>
 
           <span
-            id="connectionText"
+            id="okxText"
           >
-            Connecting
+            OKX...
           </span>
 
         </div>
 
 
-        <div class="pill system-pill">
+        <div class="pill">
+
+          <span
+            id="apiDot"
+            class="dot"
+          ></span>
+
+          <span
+            id="apiText"
+          >
+            API...
+          </span>
+
+        </div>
+
+
+        <div class="pill agents-pill">
 
           <span>
             AGENTS
@@ -1120,7 +1573,9 @@
 
   <main class="container">
 
-    <!-- MARKET -->
+    <!-- =========================================
+         MARKET
+    ========================================== -->
 
     <section class="market">
 
@@ -1135,12 +1590,14 @@
             BTC-USDT-SWAP
           </div>
 
+
           <div
             id="lastPrice"
             class="price"
           >
             --
           </div>
+
 
           <div
             id="priceChange"
@@ -1154,7 +1611,10 @@
 
         <div class="market-controls">
 
-          <select id="symbolSelect">
+          <select
+            id="symbolSelect"
+            class="control"
+          >
 
             <option value="BTC-USDT-SWAP">
               BTC
@@ -1179,10 +1639,17 @@
           </select>
 
 
-          <select id="timeframeSelect">
+          <select
+            id="timeframeSelect"
+            class="control"
+          >
 
             <option value="1m">
               1m
+            </option>
+
+            <option value="3m">
+              3m
             </option>
 
             <option value="5m">
@@ -1196,12 +1663,28 @@
               15m
             </option>
 
+            <option value="30m">
+              30m
+            </option>
+
             <option value="1H">
               1H
             </option>
 
+            <option value="2H">
+              2H
+            </option>
+
             <option value="4H">
               4H
+            </option>
+
+            <option value="6Hutc">
+              6H
+            </option>
+
+            <option value="12Hutc">
+              12H
             </option>
 
             <option value="1Dutc">
@@ -1216,12 +1699,16 @@
               1M
             </option>
 
+            <option value="3Mutc">
+              3M
+            </option>
+
           </select>
 
 
           <button
             id="refreshButton"
-            class="small-button"
+            class="button"
           >
             Refresh
           </button>
@@ -1310,7 +1797,9 @@
     </section>
 
 
-    <!-- SIX AGENTS -->
+    <!-- =========================================
+         AGENTS
+    ========================================== -->
 
     <section class="agents-section">
 
@@ -1321,7 +1810,7 @@
         </strong>
 
         <span>
-          Tap an agent for details
+          Tap an agent
         </span>
 
       </div>
@@ -1544,7 +2033,9 @@
   </footer>
 
 
-  <!-- AGENT DETAIL MODAL -->
+  <!-- =========================================
+       AGENT MODAL
+  ========================================== -->
 
   <div
     id="agentModal"
@@ -1570,7 +2061,7 @@
               id="modalName"
               class="modal-name"
             >
-              SCOUT
+              AGENT
             </div>
 
             <div
@@ -1607,59 +2098,319 @@
         ></div>
 
 
+        <!-- NORMAL AGENT RUNTIME -->
+
         <div
-          id="scoutControls"
-          style="display: none;"
+          id="agentRuntime"
+          class="runtime"
         >
 
-          <div class="scout-action">
+          <div class="runtime-top">
 
             <div
-              id="scoutStatus"
-              class="scout-status"
+              id="runtimeStatus"
+              class="runtime-status"
             >
               Ready
             </div>
 
 
             <button
-              id="scanScoutButton"
-              class="small-button"
+              id="runAgentButton"
+              class="button primary"
             >
-              Scan Market
+              Run Agent
             </button>
 
           </div>
 
 
-          <table class="scout-table">
+          <div
+            id="agentResult"
+            class="result"
+          >
 
-            <thead>
+            <div class="result-empty">
+              No live result yet.
+            </div>
 
-              <tr>
+          </div>
 
-                <th>
+        </div>
+
+
+        <!-- RISK INPUT -->
+
+        <div
+          id="riskForm"
+          class="risk-form"
+        >
+
+          <div class="form-section">
+
+            <div class="form-title">
+              Account
+            </div>
+
+
+            <div class="form-grid">
+
+              <div class="field">
+
+                <label>
+                  Account Equity USDT
+                </label>
+
+                <input
+                  id="riskEquity"
+                  type="number"
+                  step="0.01"
+                  value="10000"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Available Balance USDT
+                </label>
+
+                <input
+                  id="riskAvailable"
+                  type="number"
+                  step="0.01"
+                  value="8000"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Daily PnL USDT
+                </label>
+
+                <input
+                  id="riskDailyPnl"
+                  type="number"
+                  step="0.01"
+                  value="0"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-section">
+
+            <div class="form-title">
+              Proposed Position
+            </div>
+
+
+            <div class="form-grid">
+
+              <div class="field">
+
+                <label>
                   Symbol
-                </th>
+                </label>
 
-                <th>
-                  Score
-                </th>
+                <input
+                  id="riskSymbol"
+                  type="text"
+                  readonly
+                >
 
-                <th>
-                  24H
-                </th>
-
-              </tr>
-
-            </thead>
+              </div>
 
 
-            <tbody
-              id="scoutBody"
-            ></tbody>
+              <div class="field">
 
-          </table>
+                <label>
+                  Direction
+                </label>
+
+                <select id="riskSide">
+
+                  <option value="long">
+                    LONG
+                  </option>
+
+                  <option value="short">
+                    SHORT
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Entry Price
+                </label>
+
+                <input
+                  id="riskEntry"
+                  type="number"
+                  step="any"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Stop Loss
+                </label>
+
+                <input
+                  id="riskStop"
+                  type="number"
+                  step="any"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Take Profit
+                </label>
+
+                <input
+                  id="riskTakeProfit"
+                  type="number"
+                  step="any"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Leverage
+                </label>
+
+                <input
+                  id="riskLeverage"
+                  type="number"
+                  step="0.1"
+                  min="1"
+                  value="3"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Position Notional USDT
+                </label>
+
+                <input
+                  id="riskNotional"
+                  type="number"
+                  step="0.01"
+                  value="1000"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="checkbox-row">
+
+              <input
+                id="riskIncludeNews"
+                type="checkbox"
+              >
+
+              <label for="riskIncludeNews">
+                Include NEWS enrichment
+              </label>
+
+            </div>
+
+
+            <details>
+
+              <summary>
+                Advanced · Existing Positions
+              </summary>
+
+
+              <div
+                class="field"
+                style="margin-top: 9px;"
+              >
+
+                <label>
+                  JSON array
+                </label>
+
+                <textarea
+                  id="riskOpenPositions"
+                  spellcheck="false"
+                >[]</textarea>
+
+              </div>
+
+            </details>
+
+          </div>
+
+
+          <div
+            class="runtime"
+            style="margin-top: 13px;"
+          >
+
+            <div class="runtime-top">
+
+              <div
+                id="riskRuntimeStatus"
+                class="runtime-status"
+              >
+                Ready for position review
+              </div>
+
+
+              <button
+                id="runRiskButton"
+                class="button primary"
+              >
+                Evaluate Position
+              </button>
+
+            </div>
+
+
+            <div
+              id="riskResult"
+              class="result"
+            >
+
+              <div class="result-empty">
+                Enter the position and run RISK.
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
 
@@ -1680,8 +2431,33 @@
     "use strict";
 
 
+    /* =========================================
+       CONFIG
+    ========================================== */
+
     const OKX_BASE =
       "https://www.okx.com";
+
+
+    const API_BASE = (
+      window.CODEX_API_BASE
+      ||
+      (
+        window.location.protocol
+        ===
+        "file:"
+          ? "http://127.0.0.1:8000"
+          : window.location.origin
+      )
+    );
+
+
+    const MARKET_REFRESH_MS =
+      15000;
+
+
+    const API_HEALTH_REFRESH_MS =
+      30000;
 
 
     const CANDLE_LIMIT =
@@ -1692,20 +2468,46 @@
       [];
 
 
-    let scoutLoading =
+    let currentMarketLast =
+      null;
+
+
+    let marketLoading =
       false;
 
 
+    let agentLoading =
+      false;
+
+
+    let currentAgent =
+      null;
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
     const elements = {
 
-      connectionDot:
+      okxDot:
         document.getElementById(
-          "connectionDot"
+          "okxDot"
         ),
 
-      connectionText:
+      okxText:
         document.getElementById(
-          "connectionText"
+          "okxText"
+        ),
+
+      apiDot:
+        document.getElementById(
+          "apiDot"
+        ),
+
+      apiText:
+        document.getElementById(
+          "apiText"
         ),
 
       symbolSelect:
@@ -1798,31 +2600,116 @@
           "modalClose"
         ),
 
-      scoutControls:
+      agentRuntime:
         document.getElementById(
-          "scoutControls"
+          "agentRuntime"
         ),
 
-      scanScoutButton:
+      runtimeStatus:
         document.getElementById(
-          "scanScoutButton"
+          "runtimeStatus"
         ),
 
-      scoutStatus:
+      runAgentButton:
         document.getElementById(
-          "scoutStatus"
+          "runAgentButton"
         ),
 
-      scoutBody:
+      agentResult:
         document.getElementById(
-          "scoutBody"
+          "agentResult"
+        ),
+
+      riskForm:
+        document.getElementById(
+          "riskForm"
+        ),
+
+      riskEquity:
+        document.getElementById(
+          "riskEquity"
+        ),
+
+      riskAvailable:
+        document.getElementById(
+          "riskAvailable"
+        ),
+
+      riskDailyPnl:
+        document.getElementById(
+          "riskDailyPnl"
+        ),
+
+      riskSymbol:
+        document.getElementById(
+          "riskSymbol"
+        ),
+
+      riskSide:
+        document.getElementById(
+          "riskSide"
+        ),
+
+      riskEntry:
+        document.getElementById(
+          "riskEntry"
+        ),
+
+      riskStop:
+        document.getElementById(
+          "riskStop"
+        ),
+
+      riskTakeProfit:
+        document.getElementById(
+          "riskTakeProfit"
+        ),
+
+      riskLeverage:
+        document.getElementById(
+          "riskLeverage"
+        ),
+
+      riskNotional:
+        document.getElementById(
+          "riskNotional"
+        ),
+
+      riskIncludeNews:
+        document.getElementById(
+          "riskIncludeNews"
+        ),
+
+      riskOpenPositions:
+        document.getElementById(
+          "riskOpenPositions"
+        ),
+
+      runRiskButton:
+        document.getElementById(
+          "runRiskButton"
+        ),
+
+      riskRuntimeStatus:
+        document.getElementById(
+          "riskRuntimeStatus"
+        ),
+
+      riskResult:
+        document.getElementById(
+          "riskResult"
         )
     };
 
 
+    /* =========================================
+       AGENT INFO
+    ========================================== */
+
     const agentInfo = {
 
       scout: {
+
         name:
           "SCOUT",
 
@@ -1830,20 +2717,33 @@
           "Opportunity Scanner",
 
         description:
-          "掃描 OKX USDT 永續市場，找出成交量、流動性、波動率、Open Interest 與價格活動較值得優先研究的標的。",
+          "掃描 OKX USDT 永續市場，依照成交量、流動性、波動率、Open Interest 與市場活動，找出值得其他 Agent 優先研究的標的。",
 
         details: [
-          ["Status", "READY"],
-          ["Universe", "USDT-SWAP"],
-          ["Top", "10"]
+          [
+            "Status",
+            "READY"
+          ],
+          [
+            "Universe",
+            "USDT-SWAP"
+          ],
+          [
+            "Source",
+            "OKX"
+          ]
         ],
 
+        button:
+          "Run SCOUT",
+
         note:
-          "Browser SCOUT 只做市場機會排序，不代表 LONG / SHORT 訊號。"
+          "SCOUT score 代表研究優先級，不代表 LONG、SHORT 或勝率。Backend 無法連線時會自動使用 Browser fallback。"
       },
 
 
       news: {
+
         name:
           "NEWS",
 
@@ -1851,20 +2751,33 @@
           "News Analyst",
 
         description:
-          "聚合新聞來源，辨識市場事件、相關標的、事件重要度、方向性、時間尺度與 priced-in 風險。",
+          "聚合市場新聞，分析事件類型、受影響標的、事件重要度、方向、信心以及可能的市場影響。",
 
         details: [
-          ["Status", "V1 READY"],
-          ["Sources", "RSS / Atom"],
-          ["LLM", "Backend"]
+          [
+            "Status",
+            "V1 READY"
+          ],
+          [
+            "Sources",
+            "RSS / Atom"
+          ],
+          [
+            "LLM",
+            "Backend"
+          ]
         ],
 
+        button:
+          "Run NEWS",
+
         note:
-          "Python NEWS pipeline 尚未透過 API 接到這個首頁。"
+          "如果 Backend 設定 OPENAI_API_KEY，NEWS 可以使用 LLM semantic analysis；否則仍會保留 deterministic analysis。"
       },
 
 
       sentiment: {
+
         name:
           "SENTIMENT",
 
@@ -1872,13 +2785,25 @@
           "Market Sentiment",
 
         description:
-          "分析 Funding、Open Interest、crowding、positioning 與市場活動，判斷情緒方向和擁擠風險。",
+          "分析 Funding、Open Interest、long/short positioning、liquidation 與市場活動，判斷 crowding 與 sentiment regime。",
 
         details: [
-          ["Status", "V1 READY"],
-          ["Funding", "READY"],
-          ["OI", "READY"]
+          [
+            "Status",
+            "V1 READY"
+          ],
+          [
+            "Funding",
+            "READY"
+          ],
+          [
+            "OI",
+            "READY"
+          ]
         ],
+
+        button:
+          "Run SENTIMENT",
 
         note:
           "Sentiment bias 是研究證據，不是交易指令。"
@@ -1886,6 +2811,7 @@
 
 
       charts: {
+
         name:
           "CHARTS",
 
@@ -1893,20 +2819,33 @@
           "Technical Analyst",
 
         description:
-          "執行多時間框架技術分析，包括 EMA、RSI、MACD、ATR、Bollinger、成交量、趨勢結構、支撐壓力與突破。",
+          "執行多時間框架技術分析，包括 EMA、RSI、MACD、ATR、Bollinger、Volume、Market Structure、Support / Resistance 與 Breakout。",
 
         details: [
-          ["Status", "V1 READY"],
-          ["EMA", "20 / 50 / 200"],
-          ["MTF", "READY"]
+          [
+            "Status",
+            "V1 READY"
+          ],
+          [
+            "EMA",
+            "20 / 50 / 200"
+          ],
+          [
+            "MTF",
+            "READY"
+          ]
         ],
 
+        button:
+          "Run CHARTS",
+
         note:
-          "小寫 m 為分鐘，大寫 M 為月份。CHARTS 不直接決定是否下單。"
+          "CHARTS bias 是技術方向，不等於訂單指令。小寫 m 代表分鐘，大寫 M 代表月份。"
       },
 
 
       risk: {
+
         name:
           "RISK",
 
@@ -1914,20 +2853,30 @@
           "Risk Manager",
 
         description:
-          "評估新倉位的止損風險、帳戶曝險、槓桿、Risk / Reward、可用保證金、既有持倉與其他 Agent 的市場風險證據。",
+          "評估新倉位的止損風險、Risk / Reward、槓桿、帳戶曝險、總曝險與市場風險。可自動整合 CHARTS 與 SENTIMENT。",
 
         details: [
-          ["Status", "V1 READY"],
-          ["Verdict", "APPROVE / REDUCE / REJECT"],
-          ["Execution", "ADVISORY"]
+          [
+            "Status",
+            "V1 READY"
+          ],
+          [
+            "Verdict",
+            "APPROVE / REDUCE / REJECT"
+          ],
+          [
+            "Mode",
+            "ADVISORY"
+          ]
         ],
 
         note:
-          "RISK 是風險顧問。真正硬性限制仍應由獨立 deterministic risk engine 執行。"
+          "RISK 只是 advisory layer。真正 hard risk limits 仍應由獨立 deterministic risk engine 執行。"
       },
 
 
       decision: {
+
         name:
           "DECISION",
 
@@ -1935,19 +2884,68 @@
           "Final Decision Maker",
 
         description:
-          "未來整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，輸出最終 LONG / SHORT / WAIT。",
+          "未來整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，形成最終 LONG / SHORT / WAIT 決策。",
 
         details: [
-          ["Status", "SKELETON"],
-          ["Current", "WAIT"],
-          ["Execution", "OFF"]
+          [
+            "Status",
+            "SKELETON"
+          ],
+          [
+            "Current",
+            "WAIT"
+          ],
+          [
+            "Execution",
+            "OFF"
+          ]
         ],
 
+        button:
+          null,
+
         note:
-          "DECISION 尚未完成，目前不應視為有效交易決策。"
+          "DECISION 尚未完整開發，目前不能視為有效交易決策。"
       }
 
     };
+
+
+    /* =========================================
+       BASIC HELPERS
+    ========================================== */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(
+        value
+        ??
+        ""
+      )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+    }
 
 
     function finiteNumber(
@@ -1956,26 +2954,113 @@
     ) {
 
       const number =
-        Number(value);
+        Number(
+          value
+        );
 
 
-      return Number.isFinite(number)
+      return Number.isFinite(
+        number
+      )
         ? number
         : fallback;
 
     }
 
 
-    function compact(
+    function formatPrice(
       value
     ) {
 
       const number =
-        finiteNumber(value);
+        finiteNumber(
+          value
+        );
 
 
       if (
-        number === null
+        number
+        ===
+        null
+      ) {
+
+        return "--";
+
+      }
+
+
+      if (
+        Math.abs(
+          number
+        )
+        >=
+        1000
+      ) {
+
+        return number.toLocaleString(
+          undefined,
+          {
+            minimumFractionDigits:
+              2,
+
+            maximumFractionDigits:
+              2
+          }
+        );
+
+      }
+
+
+      if (
+        Math.abs(
+          number
+        )
+        >=
+        1
+      ) {
+
+        return number.toLocaleString(
+          undefined,
+          {
+            minimumFractionDigits:
+              2,
+
+            maximumFractionDigits:
+              5
+          }
+        );
+
+      }
+
+
+      return number.toLocaleString(
+        undefined,
+        {
+          minimumFractionDigits:
+            4,
+
+          maximumFractionDigits:
+            8
+        }
+      );
+
+    }
+
+
+    function formatCompact(
+      value
+    ) {
+
+      const number =
+        finiteNumber(
+          value
+        );
+
+
+      if (
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -1992,21 +3077,28 @@
           maximumFractionDigits:
             2
         }
-      ).format(number);
+      ).format(
+        number
+      );
 
     }
 
 
-    function price(
-      value
+    function formatPercent(
+      value,
+      digits = 2
     ) {
 
       const number =
-        finiteNumber(value);
+        finiteNumber(
+          value
+        );
 
 
       if (
-        number === null
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -2014,46 +3106,289 @@
       }
 
 
-      if (
-        number >= 1000
-      ) {
-
-        return number.toLocaleString(
-          undefined,
-          {
-            maximumFractionDigits:
-              2
-          }
-        );
-
-      }
-
-
-      if (
-        number >= 1
-      ) {
-
-        return number.toLocaleString(
-          undefined,
-          {
-            maximumFractionDigits:
-              5
-          }
-        );
-
-      }
-
-
-      return number.toLocaleString(
-        undefined,
-        {
-          maximumFractionDigits:
-            8
-        }
+      return (
+        (
+          number > 0
+            ? "+"
+            : ""
+        )
+        +
+        number.toFixed(
+          digits
+        )
+        +
+        "%"
       );
 
     }
 
+
+    function selectedSymbol(
+    ) {
+
+      return (
+        elements
+        .symbolSelect
+        .value
+      );
+
+    }
+
+
+    function chartsTimeframes(
+    ) {
+
+      const selected =
+        elements
+        .timeframeSelect
+        .value;
+
+
+      const normalized = {
+        "6Hutc":
+          "6H",
+
+        "12Hutc":
+          "12H",
+
+        "1Dutc":
+          "1D",
+
+        "1Wutc":
+          "1W",
+
+        "1Mutc":
+          "1M",
+
+        "3Mutc":
+          "3M"
+      }[
+        selected
+      ]
+      ||
+      selected;
+
+
+      return [
+        ...new Set(
+          [
+            normalized,
+            "1H",
+            "4H"
+          ]
+        )
+      ];
+
+    }
+
+
+    function resultBox(
+      label,
+      value
+    ) {
+
+      return `
+        <div class="detail-box">
+          <div class="detail-label">
+            ${escapeHtml(label)}
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(value)}
+          </div>
+        </div>
+      `;
+
+    }
+
+
+    /* =========================================
+       BACKEND API
+    ========================================== */
+
+    async function apiGet(
+      path
+    ) {
+
+      const response =
+        await fetch(
+          API_BASE
+          +
+          path,
+
+          {
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          `API HTTP ${response.status}`
+        );
+
+      }
+
+
+      return (
+        await response.json()
+      );
+
+    }
+
+
+    async function apiPost(
+      path,
+      body
+    ) {
+
+      const response =
+        await fetch(
+          API_BASE
+          +
+          path,
+
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify(
+                body
+              ),
+
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        let detail =
+          "";
+
+
+        try {
+
+          detail =
+            JSON.stringify(
+              await response.json()
+            );
+
+        } catch (
+          error
+        ) {
+
+          detail =
+            response.statusText;
+
+        }
+
+
+        throw new Error(
+          (
+            `API HTTP ${response.status}`
+            +
+            (
+              detail
+                ? `: ${detail}`
+                : ""
+            )
+          )
+        );
+
+      }
+
+
+      return (
+        await response.json()
+      );
+
+    }
+
+
+    async function checkBackend(
+    ) {
+
+      try {
+
+        const health =
+          await apiGet(
+            "/api/health"
+          );
+
+
+        if (
+          health.status
+          ===
+          "ok"
+        ) {
+
+          elements.apiDot
+            .classList
+            .remove(
+              "offline"
+            );
+
+
+          elements.apiDot
+            .classList
+            .add(
+              "online"
+            );
+
+
+          elements.apiText.textContent =
+            "API Online";
+
+
+          return;
+
+        }
+
+      } catch (
+        error
+      ) {
+
+        // handled below
+      }
+
+
+      elements.apiDot
+        .classList
+        .remove(
+          "online"
+        );
+
+
+      elements.apiDot
+        .classList
+        .add(
+          "offline"
+        );
+
+
+      elements.apiText.textContent =
+        "API Offline";
+
+    }
+
+
+    /* =========================================
+       OKX
+    ========================================== */
 
     async function okxGet(
       path,
@@ -2078,10 +3413,28 @@
           ]
         ) => {
 
-          url.searchParams.set(
-            key,
-            String(value)
-          );
+          if (
+            value
+            !==
+            null
+            &&
+            value
+            !==
+            undefined
+            &&
+            value
+            !==
+            ""
+          ) {
+
+            url.searchParams.set(
+              key,
+              String(
+                value
+              )
+            );
+
+          }
 
         }
       );
@@ -2090,6 +3443,7 @@
       const response =
         await fetch(
           url.toString(),
+
           {
             cache:
               "no-store"
@@ -2115,7 +3469,9 @@
       if (
         String(
           payload.code
-        ) !== "0"
+        )
+        !==
+        "0"
       ) {
 
         throw new Error(
@@ -2127,56 +3483,117 @@
       }
 
 
-      return payload.data
-      ||
-      [];
+      return (
+        payload.data
+        ||
+        []
+      );
 
     }
 
 
-    function setConnection(
-      online
+    function setOkxConnection(
+      state
     ) {
 
-      elements.connectionDot.classList
+      elements.okxDot
+        .classList
         .remove(
           "online",
           "offline"
         );
 
 
-      elements.connectionDot.classList
+      if (
+        state
+        ===
+        "online"
+      ) {
+
+        elements.okxDot
+          .classList
+          .add(
+            "online"
+          );
+
+
+        elements.okxText.textContent =
+          "OKX Online";
+
+
+        return;
+
+      }
+
+
+      if (
+        state
+        ===
+        "partial"
+      ) {
+
+        elements.okxText.textContent =
+          "OKX Partial";
+
+
+        return;
+
+      }
+
+
+      elements.okxDot
+        .classList
         .add(
-          online
-            ? "online"
-            : "offline"
+          "offline"
         );
 
 
-      elements.connectionText.textContent =
-        online
-          ? "OKX Online"
-          : "OKX Offline";
+      elements.okxText.textContent =
+        "OKX Offline";
 
     }
 
 
-    async function refreshMarket() {
+    /* =========================================
+       MARKET REFRESH
+    ========================================== */
 
-      const symbol =
-        elements.symbolSelect.value;
+    async function refreshMarket(
+    ) {
+
+      if (
+        marketLoading
+      ) {
+
+        return;
+
+      }
 
 
-      const bar =
-        elements.timeframeSelect.value;
-
-
-      elements.symbolLabel.textContent =
-        symbol;
+      marketLoading =
+        true;
 
 
       elements.refreshButton.disabled =
         true;
+
+
+      elements.refreshButton.textContent =
+        "...";
+
+
+      const symbol =
+        selectedSymbol();
+
+
+      const bar =
+        elements
+        .timeframeSelect
+        .value;
+
+
+      elements.symbolLabel.textContent =
+        symbol;
 
 
       try {
@@ -2193,6 +3610,7 @@
 
               okxGet(
                 "/api/v5/market/ticker",
+
                 {
                   instId:
                     symbol
@@ -2201,6 +3619,7 @@
 
               okxGet(
                 "/api/v5/market/candles",
+
                 {
                   instId:
                     symbol,
@@ -2214,6 +3633,7 @@
 
               okxGet(
                 "/api/v5/public/funding-rate",
+
                 {
                   instId:
                     symbol
@@ -2222,6 +3642,7 @@
 
               okxGet(
                 "/api/v5/public/open-interest",
+
                 {
                   instType:
                     "SWAP",
@@ -2233,6 +3654,7 @@
 
               okxGet(
                 "/api/v5/market/books",
+
                 {
                   instId:
                     symbol,
@@ -2245,6 +3667,8 @@
             ]
           );
 
+
+        /* TICKER */
 
         if (
           tickerResult.status
@@ -2264,6 +3688,10 @@
             );
 
 
+          currentMarketLast =
+            last;
+
+
           const open =
             finiteNumber(
               ticker.open24h
@@ -2272,9 +3700,13 @@
 
           const change =
             (
-              Number.isFinite(last)
+              Number.isFinite(
+                last
+              )
               &&
-              Number.isFinite(open)
+              Number.isFinite(
+                open
+              )
               &&
               open !== 0
             )
@@ -2293,24 +3725,23 @@
 
 
           elements.lastPrice.textContent =
-            price(last);
+            formatPrice(
+              last
+            );
 
 
           elements.priceChange.textContent =
             (
-              `24H `
+              "24H "
               +
-              (
-                change > 0
-                  ? "+"
-                  : ""
+              formatPercent(
+                change
               )
-              +
-              `${change.toFixed(2)}%`
             );
 
 
-          elements.priceChange.classList
+          elements.priceChange
+            .classList
             .remove(
               "positive",
               "negative"
@@ -2321,7 +3752,8 @@
             change > 0
           ) {
 
-            elements.priceChange.classList
+            elements.priceChange
+              .classList
               .add(
                 "positive"
               );
@@ -2330,7 +3762,8 @@
             change < 0
           ) {
 
-            elements.priceChange.classList
+            elements.priceChange
+              .classList
               .add(
                 "negative"
               );
@@ -2355,7 +3788,9 @@
           if (
             volumeCurrency > 0
             &&
-            Number.isFinite(last)
+            Number.isFinite(
+              last
+            )
           ) {
 
             volume =
@@ -2369,10 +3804,14 @@
           elements.volume.textContent =
             "$"
             +
-            compact(volume);
+            formatCompact(
+              volume
+            );
 
         }
 
+
+        /* CANDLES */
 
         if (
           candleResult.status
@@ -2385,17 +3824,43 @@
               .map(
                 row => ({
                   open:
-                    Number(row[1]),
+                    Number(
+                      row[1]
+                    ),
 
                   high:
-                    Number(row[2]),
+                    Number(
+                      row[2]
+                    ),
 
                   low:
-                    Number(row[3]),
+                    Number(
+                      row[3]
+                    ),
 
                   close:
-                    Number(row[4])
+                    Number(
+                      row[4]
+                    )
                 })
+              )
+              .filter(
+                candle =>
+                  Number.isFinite(
+                    candle.open
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.high
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.low
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.close
+                  )
               )
               .reverse();
 
@@ -2404,6 +3869,8 @@
 
         }
 
+
+        /* FUNDING */
 
         if (
           fundingResult.status
@@ -2420,18 +3887,30 @@
 
 
           elements.funding.textContent =
-            rate === null
-              ? "--"
-              : (
-                  rate
-                  *
-                  100
-                ).toFixed(5)
-                +
-                "%";
+            (
+              rate === null
+                ? "--"
+                : (
+                    rate
+                    *
+                    100
+                  )
+                  .toFixed(
+                    5
+                  )
+                  +
+                  "%"
+            );
+
+        } else {
+
+          elements.funding.textContent =
+            "--";
 
         }
 
+
+        /* OPEN INTEREST */
 
         if (
           oiResult.status
@@ -2448,14 +3927,25 @@
 
 
           elements.openInterest.textContent =
-            oi === null
-              ? "--"
-              : "$"
-                +
-                compact(oi);
+            (
+              oi === null
+                ? "--"
+                : "$"
+                  +
+                  formatCompact(
+                    oi
+                  )
+            );
+
+        } else {
+
+          elements.openInterest.textContent =
+            "--";
 
         }
 
+
+        /* SPREAD */
 
         if (
           bookResult.status
@@ -2486,12 +3976,16 @@
 
 
           if (
-            Number.isFinite(ask)
+            Number.isFinite(
+              ask
+            )
             &&
-            Number.isFinite(bid)
+            Number.isFinite(
+              bid
+            )
           ) {
 
-            const mid =
+            const midpoint =
               (
                 ask
                 +
@@ -2502,50 +3996,122 @@
 
 
             const spread =
-              (
-                ask
-                -
-                bid
-              )
-              /
-              mid
-              *
-              100;
+              midpoint > 0
+                ? (
+                    (
+                      ask
+                      -
+                      bid
+                    )
+                    /
+                    midpoint
+                    *
+                    100
+                  )
+                : null;
 
 
             elements.spread.textContent =
-              spread.toFixed(5)
-              +
-              "%";
+              (
+                spread === null
+                  ? "--"
+                  : spread.toFixed(
+                      5
+                    )
+                    +
+                    "%"
+              );
 
           }
+
+        } else {
+
+          elements.spread.textContent =
+            "--";
 
         }
 
 
-        setConnection(
-          true
-        );
+        /* CONNECTION INDICATOR */
+
+        const marketResults = [
+          tickerResult,
+          candleResult,
+          fundingResult,
+          oiResult,
+          bookResult
+        ];
+
+
+        const successfulRequests =
+          marketResults.filter(
+            result =>
+              result.status
+              ===
+              "fulfilled"
+          ).length;
+
+
+        if (
+          successfulRequests
+          ===
+          marketResults.length
+        ) {
+
+          setOkxConnection(
+            "online"
+          );
+
+        } else if (
+          successfulRequests
+          >
+          0
+        ) {
+
+          setOkxConnection(
+            "partial"
+          );
+
+        } else {
+
+          setOkxConnection(
+            "offline"
+          );
+
+        }
 
       } catch (
         error
       ) {
 
-        setConnection(
-          false
+        setOkxConnection(
+          "offline"
         );
 
       } finally {
 
+        marketLoading =
+          false;
+
+
         elements.refreshButton.disabled =
           false;
+
+
+        elements.refreshButton.textContent =
+          "Refresh";
 
       }
 
     }
 
 
-    function drawCandles() {
+    /* =========================================
+       CHART CANVAS
+    ========================================== */
+
+    function drawCandles(
+    ) {
 
       const canvas =
         elements.priceChart;
@@ -2555,6 +4121,17 @@
         canvas.getBoundingClientRect();
 
 
+      if (
+        rect.width <= 0
+        ||
+        rect.height <= 0
+      ) {
+
+        return;
+
+      }
+
+
       const ratio =
         window.devicePixelRatio
         ||
@@ -2562,15 +4139,25 @@
 
 
       canvas.width =
-        rect.width
-        *
-        ratio;
+        Math.max(
+          1,
+          Math.floor(
+            rect.width
+            *
+            ratio
+          )
+        );
 
 
       canvas.height =
-        rect.height
-        *
-        ratio;
+        Math.max(
+          1,
+          Math.floor(
+            rect.height
+            *
+            ratio
+          )
+        );
 
 
       const ctx =
@@ -2691,8 +4278,14 @@
       }
 
 
+      /* HORIZONTAL GRID */
+
       ctx.strokeStyle =
         "rgba(90,103,119,0.12)";
+
+
+      ctx.lineWidth =
+        1;
 
 
       for (
@@ -2713,10 +4306,12 @@
 
         ctx.beginPath();
 
+
         ctx.moveTo(
           padding,
           gridY
         );
+
 
         ctx.lineTo(
           rect.width
@@ -2725,10 +4320,13 @@
           gridY
         );
 
+
         ctx.stroke();
 
       }
 
+
+      /* CANDLES */
 
       candles.forEach(
         (
@@ -2770,6 +4368,7 @@
 
           ctx.beginPath();
 
+
           ctx.moveTo(
             x,
             y(
@@ -2777,12 +4376,14 @@
             )
           );
 
+
           ctx.lineTo(
             x,
             y(
               candle.low
             )
           );
+
 
           ctx.stroke();
 
@@ -2829,12 +4430,18 @@
     }
 
 
+    /* =========================================
+       MODAL
+    ========================================== */
+
     function openAgent(
       key
     ) {
 
       const agent =
-        agentInfo[key];
+        agentInfo[
+          key
+        ];
 
 
       if (
@@ -2844,6 +4451,10 @@
         return;
 
       }
+
+
+      currentAgent =
+        key;
 
 
       elements.modalName.textContent =
@@ -2874,53 +4485,151 @@
           ]
         ) => {
 
-          const box =
-            document.createElement(
-              "div"
+          elements.modalDetails
+            .insertAdjacentHTML(
+              "beforeend",
+              resultBox(
+                label,
+                value
+              )
             );
-
-
-          box.className =
-            "detail-box";
-
-
-          box.innerHTML =
-            `
-              <div class="detail-label">
-                ${label}
-              </div>
-
-              <div class="detail-value">
-                ${value}
-              </div>
-            `;
-
-
-          elements.modalDetails.appendChild(
-            box
-          );
 
         }
       );
 
 
-      elements.scoutControls.style.display =
-        key === "scout"
-          ? ""
-          : "none";
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-empty">
+            No live result yet.
+          </div>
+        `;
 
 
-      elements.agentModal.classList.add(
-        "show"
-      );
+      elements.runtimeStatus.textContent =
+        "Ready";
+
+
+      if (
+        key
+        ===
+        "risk"
+      ) {
+
+        elements.agentRuntime.style.display =
+          "none";
+
+
+        elements.riskForm.classList.add(
+          "show"
+        );
+
+
+        elements.riskSymbol.value =
+          selectedSymbol();
+
+
+        if (
+          Number.isFinite(
+            currentMarketLast
+          )
+        ) {
+
+          elements.riskEntry.value =
+            currentMarketLast;
+
+        }
+
+
+        elements.riskResult.innerHTML =
+          `
+            <div class="result-empty">
+              Enter the position and run RISK.
+            </div>
+          `;
+
+      } else {
+
+        elements.riskForm.classList.remove(
+          "show"
+        );
+
+
+        elements.agentRuntime.style.display =
+          "";
+
+
+        if (
+          agent.button
+        ) {
+
+          elements.runAgentButton.style.display =
+            "";
+
+
+          elements.runAgentButton.textContent =
+            agent.button;
+
+        } else {
+
+          elements.runAgentButton.style.display =
+            "none";
+
+
+          elements.runtimeStatus.textContent =
+            "Not implemented";
+
+        }
+
+      }
+
+
+      elements.agentModal
+        .classList
+        .add(
+          "show"
+        );
+
+
+      document.body
+        .classList
+        .add(
+          "modal-open"
+        );
 
     }
 
 
-    async function runScout() {
+    function closeModal(
+    ) {
+
+      elements.agentModal
+        .classList
+        .remove(
+          "show"
+        );
+
+
+      document.body
+        .classList
+        .remove(
+          "modal-open"
+        );
+
+    }
+
+
+    /* =========================================
+       GENERIC AGENT RUNNER
+    ========================================== */
+
+    async function runCurrentAgent(
+    ) {
 
       if (
-        scoutLoading
+        !currentAgent
+        ||
+        agentLoading
       ) {
 
         return;
@@ -2928,380 +4637,99 @@
       }
 
 
-      scoutLoading =
+      if (
+        currentAgent
+        ===
+        "decision"
+      ) {
+
+        return;
+
+      }
+
+
+      agentLoading =
         true;
 
 
-      elements.scanScoutButton.disabled =
+      elements.runAgentButton.disabled =
         true;
 
 
-      elements.scoutStatus.textContent =
-        "Scanning...";
+      elements.runtimeStatus.textContent =
+        "Running...";
+
+
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-empty">
+            Loading ${escapeHtml(
+              currentAgent.toUpperCase()
+            )}...
+          </div>
+        `;
 
 
       try {
 
-        const [
-          instruments,
-          tickers,
-          oiData
-        ] =
-          await Promise.all(
-            [
-
-              okxGet(
-                "/api/v5/public/instruments",
-                {
-                  instType:
-                    "SWAP"
-                }
-              ),
-
-              okxGet(
-                "/api/v5/market/tickers",
-                {
-                  instType:
-                    "SWAP"
-                }
-              ),
-
-              okxGet(
-                "/api/v5/public/open-interest",
-                {
-                  instType:
-                    "SWAP"
-                }
-              )
-
-            ]
-          );
-
-
-        const live =
-          new Set(
-            instruments
-              .filter(
-                item =>
-                  item.state
-                  ===
-                  "live"
-                  &&
-                  item.instId
-                    ?.endsWith(
-                      "-USDT-SWAP"
-                    )
-              )
-              .map(
-                item =>
-                  item.instId
-              )
-          );
-
-
-        const oiMap =
-          new Map(
-            oiData.map(
-              item => [
-                item.instId,
-                finiteNumber(
-                  item.oiUsd,
-                  0
-                )
-              ]
-            )
-          );
-
-
-        const rows =
-          tickers
-
-            .filter(
-              ticker =>
-                live.has(
-                  ticker.instId
-                )
-            )
-
-            .map(
-              ticker => {
-
-                const last =
-                  finiteNumber(
-                    ticker.last,
-                    0
-                  );
-
-
-                const open =
-                  finiteNumber(
-                    ticker.open24h,
-                    last
-                  );
-
-
-                const high =
-                  finiteNumber(
-                    ticker.high24h,
-                    last
-                  );
-
-
-                const low =
-                  finiteNumber(
-                    ticker.low24h,
-                    last
-                  );
-
-
-                const vol =
-                  finiteNumber(
-                    ticker.volCcy24h,
-                    0
-                  )
-                  *
-                  last;
-
-
-                const change =
-                  open > 0
-                    ? Math.abs(
-                        (
-                          last
-                          -
-                          open
-                        )
-                        /
-                        open
-                      )
-                    : 0;
-
-
-                const range =
-                  open > 0
-                    ? (
-                        high
-                        -
-                        low
-                      )
-                      /
-                      open
-                    : 0;
-
-
-                const oi =
-                  oiMap.get(
-                    ticker.instId
-                  )
-                  ||
-                  0;
-
-
-                return {
-                  symbol:
-                    ticker.instId,
-
-                  last,
-
-                  open,
-
-                  volume:
-                    vol,
-
-                  activity:
-                    change,
-
-                  range,
-
-                  oi
-                };
-
-              }
-            );
-
-
-        function normalized(
-          value,
-          max
+        if (
+          currentAgent
+          ===
+          "scout"
         ) {
 
-          return max > 0
-            ? value / max
-            : 0;
+          await runScout();
+
+        } else if (
+          currentAgent
+          ===
+          "news"
+        ) {
+
+          await runNews();
+
+        } else if (
+          currentAgent
+          ===
+          "sentiment"
+        ) {
+
+          await runSentiment();
+
+        } else if (
+          currentAgent
+          ===
+          "charts"
+        ) {
+
+          await runCharts();
 
         }
-
-
-        const maxVolume =
-          Math.max(
-            ...rows.map(
-              row =>
-                row.volume
-            ),
-            1
-          );
-
-
-        const maxActivity =
-          Math.max(
-            ...rows.map(
-              row =>
-                row.activity
-            ),
-            1
-          );
-
-
-        const maxRange =
-          Math.max(
-            ...rows.map(
-              row =>
-                row.range
-            ),
-            1
-          );
-
-
-        const maxOi =
-          Math.max(
-            ...rows.map(
-              row =>
-                row.oi
-            ),
-            1
-          );
-
-
-        rows.forEach(
-          row => {
-
-            row.score =
-              normalized(
-                row.volume,
-                maxVolume
-              )
-              *
-              0.35
-              +
-              normalized(
-                row.range,
-                maxRange
-              )
-              *
-              0.25
-              +
-              normalized(
-                row.oi,
-                maxOi
-              )
-              *
-              0.20
-              +
-              normalized(
-                row.activity,
-                maxActivity
-              )
-              *
-              0.20;
-
-          }
-        );
-
-
-        rows.sort(
-          (
-            a,
-            b
-          ) =>
-            b.score
-            -
-            a.score
-        );
-
-
-        const top =
-          rows.slice(
-            0,
-            10
-          );
-
-
-        elements.scoutBody.innerHTML =
-          "";
-
-
-        top.forEach(
-          row => {
-
-            const tr =
-              document.createElement(
-                "tr"
-              );
-
-
-            const change =
-              row.open > 0
-                ? (
-                    row.last
-                    -
-                    row.open
-                  )
-                  /
-                  row.open
-                  *
-                  100
-                : 0;
-
-
-            tr.innerHTML =
-              `
-                <td>
-                  ${row.symbol}
-                </td>
-
-                <td>
-                  ${row.score.toFixed(3)}
-                </td>
-
-                <td class="${
-                  change >= 0
-                    ? "positive"
-                    : "negative"
-                }">
-                  ${
-                    change > 0
-                      ? "+"
-                      : ""
-                  }${change.toFixed(2)}%
-                </td>
-              `;
-
-
-            elements.scoutBody.appendChild(
-              tr
-            );
-
-          }
-        );
-
-
-        elements.scoutStatus.textContent =
-          `${rows.length} markets · Top ${top.length}`;
 
       } catch (
         error
       ) {
 
-        elements.scoutStatus.textContent =
-          `Error: ${error.message}`;
+        elements.runtimeStatus.textContent =
+          "Error";
+
+
+        elements.agentResult.innerHTML =
+          `
+            <div class="result-summary negative">
+              ${escapeHtml(
+                error.message
+              )}
+            </div>
+          `;
 
       } finally {
 
-        scoutLoading =
+        agentLoading =
           false;
 
 
-        elements.scanScoutButton.disabled =
+        elements.runAgentButton.disabled =
           false;
 
       }
@@ -3309,95 +4737,1759 @@
     }
 
 
-    document.querySelectorAll(
-      ".agent"
-    ).forEach(
-      card => {
+    /* =========================================
+       SCOUT
+    ========================================== */
 
-        card.addEventListener(
-          "click",
-          () => {
+    async function runScout(
+    ) {
 
-            openAgent(
-              card.dataset.agent
-            );
+      try {
 
-          }
-        );
+        const output =
+          await apiPost(
+            "/api/scout",
 
-      }
-    );
+            {
+              context: {
+                symbol:
+                  "MARKET",
 
+                exchange:
+                  "OKX",
 
-    elements.modalClose.addEventListener(
-      "click",
-      () => {
+                market_type:
+                  "swap"
+              },
 
-        elements.agentModal.classList.remove(
-          "show"
-        );
+              payload: {
+                symbols: []
+              }
+            }
+          );
 
-      }
-    );
-
-
-    elements.agentModal.addEventListener(
-      "click",
-      event => {
 
         if (
-          event.target
-          ===
-          elements.agentModal
+          output.status
+          !==
+          "success"
         ) {
 
-          elements.agentModal.classList.remove(
-            "show"
+          throw new Error(
+            output.summary
+            ||
+            "Backend SCOUT failed."
           );
 
         }
 
+
+        renderScout(
+          output.candidates
+          ||
+          [],
+          "Backend SCOUT"
+        );
+
+
+        elements.runtimeStatus.textContent =
+          "Backend SCOUT";
+
+
+        return;
+
+      } catch (
+        backendError
+      ) {
+
+        elements.runtimeStatus.textContent =
+          "Browser fallback";
+
+
+        const candidates =
+          await runBrowserScout();
+
+
+        renderScout(
+          candidates,
+          "Browser fallback"
+        );
+
       }
-    );
+
+    }
 
 
-    elements.scanScoutButton.addEventListener(
-      "click",
-      runScout
-    );
+    function renderScout(
+      candidates,
+      mode
+    ) {
+
+      const rows =
+        candidates
+        .slice(
+          0,
+          10
+        )
+        .map(
+          candidate => {
+
+            const metrics =
+              candidate.metrics
+              ||
+              {};
 
 
-    elements.refreshButton.addEventListener(
-      "click",
-      refreshMarket
-    );
+            const change =
+              finiteNumber(
+                metrics
+                .price_change_pct
+              );
 
 
-    elements.symbolSelect.addEventListener(
-      "change",
-      refreshMarket
-    );
+            return `
+              <tr>
+
+                <td>
+                  ${escapeHtml(
+                    candidate.symbol
+                  )}
+                </td>
+
+                <td>
+                  ${finiteNumber(
+                    candidate.score,
+                    0
+                  ).toFixed(3)}
+                </td>
+
+                <td class="${
+                  change !== null
+                  &&
+                  change >= 0
+                    ? "positive"
+                    : "negative"
+                }">
+
+                  ${
+                    change === null
+                      ? "--"
+                      : formatPercent(
+                          change
+                        )
+                  }
+
+                </td>
+
+              </tr>
+            `;
+
+          }
+        )
+        .join(
+          ""
+        );
 
 
-    elements.timeframeSelect.addEventListener(
-      "change",
-      refreshMarket
-    );
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-summary">
+            ${escapeHtml(mode)} ·
+            ${candidates.length} candidates
+          </div>
+
+          <div class="table-wrap">
+
+            <table class="data-table">
+
+              <thead>
+
+                <tr>
+                  <th>Symbol</th>
+                  <th>Score</th>
+                  <th>24H</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+                ${rows}
+              </tbody>
+
+            </table>
+
+          </div>
+        `;
+
+    }
 
 
-    window.addEventListener(
-      "resize",
-      drawCandles
-    );
+    async function runBrowserScout(
+    ) {
+
+      const [
+        instruments,
+        tickers,
+        oiData
+      ] =
+        await Promise.all(
+          [
+
+            okxGet(
+              "/api/v5/public/instruments",
+
+              {
+                instType:
+                  "SWAP"
+              }
+            ),
+
+            okxGet(
+              "/api/v5/market/tickers",
+
+              {
+                instType:
+                  "SWAP"
+              }
+            ),
+
+            okxGet(
+              "/api/v5/public/open-interest",
+
+              {
+                instType:
+                  "SWAP"
+              }
+            )
+
+          ]
+        );
+
+
+      const liveSymbols =
+        new Set(
+          instruments
+            .filter(
+              item =>
+                item.state
+                ===
+                "live"
+                &&
+                item.instId
+                  ?.endsWith(
+                    "-USDT-SWAP"
+                  )
+            )
+            .map(
+              item =>
+                item.instId
+            )
+        );
+
+
+      const oiMap =
+        new Map(
+          oiData.map(
+            item => [
+              item.instId,
+              finiteNumber(
+                item.oiUsd,
+                0
+              )
+            ]
+          )
+        );
+
+
+      const rows =
+        tickers
+
+          .filter(
+            ticker =>
+              liveSymbols.has(
+                ticker.instId
+              )
+          )
+
+          .map(
+            ticker => {
+
+              const last =
+                finiteNumber(
+                  ticker.last,
+                  0
+                );
+
+
+              const open =
+                finiteNumber(
+                  ticker.open24h,
+                  last
+                );
+
+
+              const high =
+                finiteNumber(
+                  ticker.high24h,
+                  last
+                );
+
+
+              const low =
+                finiteNumber(
+                  ticker.low24h,
+                  last
+                );
+
+
+              const volume =
+                finiteNumber(
+                  ticker.volCcy24h,
+                  0
+                )
+                *
+                last;
+
+
+              const activity =
+                open > 0
+                  ? Math.abs(
+                      (
+                        last
+                        -
+                        open
+                      )
+                      /
+                      open
+                    )
+                  : 0;
+
+
+              const range =
+                open > 0
+                  ? (
+                      high
+                      -
+                      low
+                    )
+                    /
+                    open
+                  : 0;
+
+
+              const oi =
+                oiMap.get(
+                  ticker.instId
+                )
+                ||
+                0;
+
+
+              const changePct =
+                open > 0
+                  ? (
+                      last
+                      -
+                      open
+                    )
+                    /
+                    open
+                    *
+                    100
+                  : 0;
+
+
+              return {
+                symbol:
+                  ticker.instId,
+
+                score:
+                  0,
+
+                metrics: {
+                  price_change_pct:
+                    changePct,
+
+                  volume,
+
+                  activity,
+
+                  range,
+
+                  oi
+                }
+              };
+
+            }
+          );
+
+
+      const maxVolume =
+        Math.max(
+          ...rows.map(
+            row =>
+              row.metrics.volume
+          ),
+          1
+        );
+
+
+      const maxActivity =
+        Math.max(
+          ...rows.map(
+            row =>
+              row.metrics.activity
+          ),
+          1
+        );
+
+
+      const maxRange =
+        Math.max(
+          ...rows.map(
+            row =>
+              row.metrics.range
+          ),
+          1
+        );
+
+
+      const maxOi =
+        Math.max(
+          ...rows.map(
+            row =>
+              row.metrics.oi
+          ),
+          1
+        );
+
+
+      rows.forEach(
+        row => {
+
+          row.score =
+            (
+              row.metrics.volume
+              /
+              maxVolume
+            )
+            *
+            0.35
+            +
+            (
+              row.metrics.range
+              /
+              maxRange
+            )
+            *
+            0.25
+            +
+            (
+              row.metrics.oi
+              /
+              maxOi
+            )
+            *
+            0.20
+            +
+            (
+              row.metrics.activity
+              /
+              maxActivity
+            )
+            *
+            0.20;
+
+        }
+      );
+
+
+      rows.sort(
+        (
+          a,
+          b
+        ) =>
+          b.score
+          -
+          a.score
+      );
+
+
+      return rows.slice(
+        0,
+        10
+      );
+
+    }
+
+
+    /* =========================================
+       NEWS
+    ========================================== */
+
+    async function runNews(
+    ) {
+
+      const symbol =
+        selectedSymbol();
+
+
+      const output =
+        await apiPost(
+          "/api/news",
+
+          {
+            context: {
+              symbol,
+
+              exchange:
+                "OKX",
+
+              market_type:
+                "swap"
+            },
+
+            focus_symbols: [
+              symbol
+            ]
+          }
+        );
+
+
+      elements.runtimeStatus.textContent =
+        (
+          output.status
+          ===
+          "success"
+            ? "Complete"
+            : output.status
+        );
+
+
+      const events =
+        Array.isArray(
+          output.events
+        )
+          ? output.events
+          : [];
+
+
+      const items =
+        events
+          .slice(
+            0,
+            8
+          )
+          .map(
+            event => {
+
+              return `
+                <div class="result-item">
+
+                  <div class="result-item-title">
+                    ${escapeHtml(
+                      event.title
+                    )}
+                  </div>
+
+                  <div class="result-item-sub">
+                    ${escapeHtml(
+                      event.category
+                      ||
+                      "other"
+                    )}
+                    · bias
+                    ${escapeHtml(
+                      event.bias
+                      ||
+                      "neutral"
+                    )}
+                    · impact
+                    ${finiteNumber(
+                      event.impact_score,
+                      0
+                    ).toFixed(2)}
+                    · confidence
+                    ${finiteNumber(
+                      event.confidence,
+                      0
+                    ).toFixed(2)}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join(
+            ""
+          );
+
+
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-summary">
+            ${escapeHtml(
+              output.summary
+              ||
+              "NEWS analysis complete."
+            )}
+          </div>
+
+          <div class="result-grid">
+
+            ${resultBox(
+              "Bias",
+              output.bias
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Confidence",
+              finiteNumber(
+                output.confidence,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Events",
+              events.length
+            )}
+
+          </div>
+
+          <div class="result-list">
+            ${
+              items
+              ||
+              `
+                <div class="result-empty">
+                  No relevant events.
+                </div>
+              `
+            }
+          </div>
+        `;
+
+    }
+
+
+    /* =========================================
+       SENTIMENT
+    ========================================== */
+
+    async function runSentiment(
+    ) {
+
+      const symbol =
+        selectedSymbol();
+
+
+      const output =
+        await apiPost(
+          "/api/sentiment",
+
+          {
+            context: {
+              symbol,
+
+              exchange:
+                "OKX",
+
+              market_type:
+                "swap"
+            }
+          }
+        );
+
+
+      elements.runtimeStatus.textContent =
+        (
+          output.status
+          ===
+          "success"
+            ? "Complete"
+            : output.status
+        );
+
+
+      const metrics =
+        output.metrics
+        ||
+        {};
+
+
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-summary">
+            ${escapeHtml(
+              output.summary
+              ||
+              "SENTIMENT analysis complete."
+            )}
+          </div>
+
+          <div class="result-grid">
+
+            ${resultBox(
+              "Bias",
+              output.bias
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Confidence",
+              finiteNumber(
+                output.confidence,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Regime",
+              output.regime
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Crowding",
+              output.crowding_side
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Crowding Score",
+              finiteNumber(
+                metrics.crowding_score,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Composite",
+              finiteNumber(
+                metrics.composite_score,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Data Quality",
+              finiteNumber(
+                metrics.data_quality_score,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Disagreement",
+              finiteNumber(
+                metrics.disagreement_score,
+                0
+              ).toFixed(2)
+            )}
+
+          </div>
+        `;
+
+    }
+
+
+    /* =========================================
+       CHARTS
+    ========================================== */
+
+    async function runCharts(
+    ) {
+
+      const symbol =
+        selectedSymbol();
+
+
+      const output =
+        await apiPost(
+          "/api/charts",
+
+          {
+            context: {
+              symbol,
+
+              exchange:
+                "OKX",
+
+              market_type:
+                "swap",
+
+              timeframes:
+                chartsTimeframes()
+            }
+          }
+        );
+
+
+      elements.runtimeStatus.textContent =
+        (
+          output.status
+          ===
+          "success"
+            ? "Complete"
+            : output.status
+        );
+
+
+      const timeframeAnalyses =
+        output.timeframe_analyses
+        ||
+        {};
+
+
+      const timeframeRows =
+        Object.entries(
+          timeframeAnalyses
+        )
+        .map(
+          (
+            [
+              timeframe,
+              analysis
+            ]
+          ) => {
+
+            return `
+              <tr>
+
+                <td>
+                  ${escapeHtml(
+                    timeframe
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    analysis.bias
+                    ||
+                    "--"
+                  )}
+                </td>
+
+                <td>
+                  ${finiteNumber(
+                    analysis.confidence,
+                    0
+                  ).toFixed(2)}
+                </td>
+
+                <td>
+                  ${finiteNumber(
+                    analysis.composite_score,
+                    0
+                  ).toFixed(2)}
+                </td>
+
+              </tr>
+            `;
+
+          }
+        )
+        .join(
+          ""
+        );
+
+
+      elements.agentResult.innerHTML =
+        `
+          <div class="result-summary">
+            ${escapeHtml(
+              output.summary
+              ||
+              "CHARTS analysis complete."
+            )}
+          </div>
+
+          <div class="result-grid">
+
+            ${resultBox(
+              "Bias",
+              output.bias
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Confidence",
+              finiteNumber(
+                output.confidence,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Composite",
+              finiteNumber(
+                output.composite_score,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Trend",
+              output.trend_regime
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Volatility",
+              output.volatility_regime
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Primary TF",
+              output.primary_timeframe
+              ||
+              "--"
+            )}
+
+            ${resultBox(
+              "Data Quality",
+              finiteNumber(
+                output.data_quality_score,
+                0
+              ).toFixed(2)
+            )}
+
+            ${resultBox(
+              "Disagreement",
+              finiteNumber(
+                output.disagreement_score,
+                0
+              ).toFixed(2)
+            )}
+
+          </div>
+
+          ${
+            timeframeRows
+              ? `
+                <div class="table-wrap">
+
+                  <table class="data-table">
+
+                    <thead>
+
+                      <tr>
+                        <th>TF</th>
+                        <th>Bias</th>
+                        <th>Confidence</th>
+                        <th>Score</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+                      ${timeframeRows}
+                    </tbody>
+
+                  </table>
+
+                </div>
+              `
+              : ""
+          }
+        `;
+
+    }
+
+
+    /* =========================================
+       RISK
+    ========================================== */
+
+    function requiredPositive(
+      element,
+      label
+    ) {
+
+      const value =
+        finiteNumber(
+          element.value
+        );
+
+
+      if (
+        value === null
+        ||
+        value <= 0
+      ) {
+
+        throw new Error(
+          `${label} must be greater than 0.`
+        );
+
+      }
+
+
+      return value;
+
+    }
+
+
+    async function runRisk(
+    ) {
+
+      if (
+        agentLoading
+      ) {
+
+        return;
+
+      }
+
+
+      agentLoading =
+        true;
+
+
+      elements.runRiskButton.disabled =
+        true;
+
+
+      elements.riskRuntimeStatus.textContent =
+        "Running CHARTS + SENTIMENT + RISK...";
+
+
+      elements.riskResult.innerHTML =
+        `
+          <div class="result-empty">
+            Evaluating position...
+          </div>
+        `;
+
+
+      try {
+
+        const symbol =
+          selectedSymbol();
+
+
+        const equity =
+          requiredPositive(
+            elements.riskEquity,
+            "Account equity"
+          );
+
+
+        const available =
+          finiteNumber(
+            elements.riskAvailable.value,
+            0
+          );
+
+
+        const dailyPnl =
+          finiteNumber(
+            elements.riskDailyPnl.value,
+            0
+          );
+
+
+        const entry =
+          requiredPositive(
+            elements.riskEntry,
+            "Entry price"
+          );
+
+
+        const stop =
+          requiredPositive(
+            elements.riskStop,
+            "Stop loss"
+          );
+
+
+        const takeProfit =
+          requiredPositive(
+            elements.riskTakeProfit,
+            "Take profit"
+          );
+
+
+        const leverage =
+          requiredPositive(
+            elements.riskLeverage,
+            "Leverage"
+          );
+
+
+        const notional =
+          requiredPositive(
+            elements.riskNotional,
+            "Position notional"
+          );
+
+
+        let openPositions =
+          [];
+
+
+        const openPositionsText =
+          elements
+          .riskOpenPositions
+          .value
+          .trim();
+
+
+        if (
+          openPositionsText
+        ) {
+
+          openPositions =
+            JSON.parse(
+              openPositionsText
+            );
+
+
+          if (
+            !Array.isArray(
+              openPositions
+            )
+          ) {
+
+            throw new Error(
+              "Existing positions must be a JSON array."
+            );
+
+          }
+
+        }
+
+
+        const payload =
+          await apiPost(
+            "/api/risk",
+
+            {
+              context: {
+                symbol,
+
+                exchange:
+                  "OKX",
+
+                market_type:
+                  "swap",
+
+                timeframes:
+                  chartsTimeframes()
+              },
+
+              payload: {
+                account_equity:
+                  equity,
+
+                available_balance:
+                  available,
+
+                daily_pnl:
+                  dailyPnl,
+
+                open_positions:
+                  openPositions,
+
+                proposed_trade: {
+                  symbol,
+
+                  side:
+                    elements
+                    .riskSide
+                    .value,
+
+                  entry_price:
+                    entry,
+
+                  current_price:
+                    Number.isFinite(
+                      currentMarketLast
+                    )
+                      ? currentMarketLast
+                      : entry,
+
+                  stop_loss:
+                    stop,
+
+                  take_profit:
+                    takeProfit,
+
+                  leverage,
+
+                  notional_usdt:
+                    notional
+                }
+              },
+
+              enrich:
+                true,
+
+              include_news:
+                elements
+                .riskIncludeNews
+                .checked
+            }
+          );
+
+
+        const risk =
+          payload.risk;
+
+
+        const metrics =
+          risk.metrics
+          ||
+          {};
+
+
+        const checks =
+          Array.isArray(
+            risk.checks
+          )
+            ? risk.checks
+            : [];
+
+
+        const recommendations =
+          Array.isArray(
+            risk.recommendations
+          )
+            ? risk.recommendations
+            : [];
+
+
+        const failedChecks =
+          checks.filter(
+            check =>
+              !check.passed
+          );
+
+
+        const checkItems =
+          failedChecks
+            .slice(
+              0,
+              8
+            )
+            .map(
+              check => {
+
+                return `
+                  <div class="result-item">
+
+                    <div class="result-item-title negative">
+                      ${escapeHtml(
+                        check.name
+                      )}
+                    </div>
+
+                    <div class="result-item-sub">
+                      ${escapeHtml(
+                        check.reason
+                        ||
+                        ""
+                      )}
+                    </div>
+
+                  </div>
+                `;
+
+              }
+            )
+            .join(
+              ""
+            );
+
+
+        const recommendationItems =
+          recommendations
+            .slice(
+              0,
+              8
+            )
+            .map(
+              recommendation => {
+
+                return `
+                  <div class="result-item">
+
+                    <div class="result-item-title">
+                      ${escapeHtml(
+                        recommendation
+                      )}
+                    </div>
+
+                  </div>
+                `;
+
+              }
+            )
+            .join(
+              ""
+            );
+
+
+        elements.riskRuntimeStatus.textContent =
+          (
+            risk.status
+            ===
+            "success"
+              ? "Complete"
+              : risk.status
+          );
+
+
+        elements.riskResult.innerHTML =
+          `
+            <div class="result-summary">
+              ${escapeHtml(
+                risk.summary
+                ||
+                "Risk analysis complete."
+              )}
+            </div>
+
+            <div class="result-grid">
+
+              ${resultBox(
+                "Verdict",
+                String(
+                  risk.verdict
+                  ||
+                  "--"
+                ).toUpperCase()
+              )}
+
+              ${resultBox(
+                "Approved",
+                risk.approved
+                  ? "YES"
+                  : "NO"
+              )}
+
+              ${resultBox(
+                "Confidence",
+                finiteNumber(
+                  risk.confidence,
+                  0
+                ).toFixed(2)
+              )}
+
+              ${resultBox(
+                "Risk % Equity",
+                metrics.risk_pct_equity
+                ===
+                null
+                ||
+                metrics.risk_pct_equity
+                ===
+                undefined
+                  ? "--"
+                  : finiteNumber(
+                      metrics.risk_pct_equity,
+                      0
+                    ).toFixed(2)
+                    +
+                    "%"
+              )}
+
+              ${resultBox(
+                "R / R",
+                metrics.risk_reward_ratio
+                ===
+                null
+                ||
+                metrics.risk_reward_ratio
+                ===
+                undefined
+                  ? "--"
+                  : finiteNumber(
+                      metrics.risk_reward_ratio,
+                      0
+                    ).toFixed(2)
+              )}
+
+              ${resultBox(
+                "Stop Distance",
+                metrics.stop_distance_pct
+                ===
+                null
+                ||
+                metrics.stop_distance_pct
+                ===
+                undefined
+                  ? "--"
+                  : finiteNumber(
+                      metrics.stop_distance_pct,
+                      0
+                    ).toFixed(2)
+                    +
+                    "%"
+              )}
+
+              ${resultBox(
+                "Est. Loss",
+                metrics.estimated_loss_usdt
+                ===
+                null
+                ||
+                metrics.estimated_loss_usdt
+                ===
+                undefined
+                  ? "--"
+                  : "$"
+                    +
+                    finiteNumber(
+                      metrics.estimated_loss_usdt,
+                      0
+                    ).toFixed(2)
+              )}
+
+              ${resultBox(
+                "Est. Reward",
+                metrics.estimated_reward_usdt
+                ===
+                null
+                ||
+                metrics.estimated_reward_usdt
+                ===
+                undefined
+                  ? "--"
+                  : "$"
+                    +
+                    finiteNumber(
+                      metrics.estimated_reward_usdt,
+                      0
+                    ).toFixed(2)
+              )}
+
+              ${resultBox(
+                "Position Exposure",
+                metrics.position_exposure_pct
+                ===
+                null
+                ||
+                metrics.position_exposure_pct
+                ===
+                undefined
+                  ? "--"
+                  : finiteNumber(
+                      metrics.position_exposure_pct,
+                      0
+                    ).toFixed(2)
+                    +
+                    "%"
+              )}
+
+              ${resultBox(
+                "Total Exposure",
+                metrics.total_exposure_after_pct
+                ===
+                null
+                ||
+                metrics.total_exposure_after_pct
+                ===
+                undefined
+                  ? "--"
+                  : finiteNumber(
+                      metrics.total_exposure_after_pct,
+                      0
+                    ).toFixed(2)
+                    +
+                    "%"
+              )}
+
+              ${resultBox(
+                "Recommended",
+                metrics.recommended_notional_usdt
+                ===
+                null
+                ||
+                metrics.recommended_notional_usdt
+                ===
+                undefined
+                  ? "--"
+                  : "$"
+                    +
+                    finiteNumber(
+                      metrics.recommended_notional_usdt,
+                      0
+                    ).toFixed(2)
+              )}
+
+              ${resultBox(
+                "Risk Score",
+                finiteNumber(
+                  metrics.overall_risk_score,
+                  0
+                ).toFixed(2)
+              )}
+
+            </div>
+
+            ${
+              failedChecks.length
+                ? `
+                  <div class="result-list">
+
+                    <div
+                      class="form-title"
+                      style="margin-top: 5px;"
+                    >
+                      Failed Checks
+                    </div>
+
+                    ${checkItems}
+
+                  </div>
+                `
+                : `
+                  <div
+                    class="result-summary positive"
+                    style="margin-top: 9px;"
+                  >
+                    No failed risk checks.
+                  </div>
+                `
+            }
+
+            ${
+              recommendationItems
+                ? `
+                  <div class="result-list">
+
+                    <div
+                      class="form-title"
+                      style="margin-top: 5px;"
+                    >
+                      Recommendations
+                    </div>
+
+                    ${recommendationItems}
+
+                  </div>
+                `
+                : ""
+            }
+          `;
+
+      } catch (
+        error
+      ) {
+
+        elements.riskRuntimeStatus.textContent =
+          "Error";
+
+
+        elements.riskResult.innerHTML =
+          `
+            <div class="result-summary negative">
+              ${escapeHtml(
+                error.message
+              )}
+            </div>
+          `;
+
+      } finally {
+
+        agentLoading =
+          false;
+
+
+        elements.runRiskButton.disabled =
+          false;
+
+      }
+
+    }
+
+
+    /* =========================================
+       EVENTS
+    ========================================== */
+
+    elements.refreshButton
+      .addEventListener(
+        "click",
+        refreshMarket
+      );
+
+
+    elements.symbolSelect
+      .addEventListener(
+        "change",
+        () => {
+
+          refreshMarket();
+
+
+          if (
+            currentAgent
+            ===
+            "risk"
+          ) {
+
+            elements.riskSymbol.value =
+              selectedSymbol();
+
+          }
+
+        }
+      );
+
+
+    elements.timeframeSelect
+      .addEventListener(
+        "change",
+        refreshMarket
+      );
+
+
+    document
+      .querySelectorAll(
+        ".agent"
+      )
+      .forEach(
+        card => {
+
+          card.addEventListener(
+            "click",
+            () => {
+
+              openAgent(
+                card.dataset.agent
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    elements.modalClose
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+
+    elements.agentModal
+      .addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target
+            ===
+            elements.agentModal
+          ) {
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+    document
+      .addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key
+            ===
+            "Escape"
+          ) {
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+    elements.runAgentButton
+      .addEventListener(
+        "click",
+        runCurrentAgent
+      );
+
+
+    elements.runRiskButton
+      .addEventListener(
+        "click",
+        runRisk
+      );
+
+
+    window
+      .addEventListener(
+        "resize",
+        drawCandles
+      );
+
+
+    /* =========================================
+       STARTUP
+    ========================================== */
+
+    checkBackend();
 
 
     refreshMarket();
 
 
     setInterval(
-      refreshMarket,
-      15000
+      () => {
+
+        if (
+          document.visibilityState
+          ===
+          "visible"
+        ) {
+
+          refreshMarket();
+
+        }
+
+      },
+      MARKET_REFRESH_MS
     );
+
+
+    setInterval(
+      () => {
+
+        if (
+          document.visibilityState
+          ===
+          "visible"
+        ) {
+
+          checkBackend();
+
+        }
+
+      },
+      API_HEALTH_REFRESH_MS
+    );
+
   </script>
 
 </body>
