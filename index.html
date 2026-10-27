@@ -14,111 +14,64 @@
   >
 
   <title>
-    Codex Bot | AI Trading System
+    Codex Bot | Multi-Agent Trading System
   </title>
 
   <style>
     :root {
-      --bg:
-        #07090d;
+      --bg: #07090d;
+      --bg-2: #0b1017;
+      --panel: #111720;
+      --panel-2: #151d28;
+      --panel-3: #0d131c;
 
-      --bg-2:
-        #0b1017;
+      --border: #222c39;
+      --border-2: #303c4d;
 
-      --panel:
-        #111720;
+      --text: #f2f5f8;
+      --muted: #8c99aa;
+      --muted-2: #606d7d;
 
-      --panel-2:
-        #151d28;
+      --green: #39d98a;
+      --red: #ff6675;
+      --yellow: #f6c453;
+      --blue: #66a6ff;
+      --purple: #b493ff;
+      --cyan: #65d7e8;
 
-      --panel-3:
-        #0d131c;
-
-      --border:
-        #222c39;
-
-      --border-2:
-        #303c4d;
-
-      --text:
-        #f2f5f8;
-
-      --muted:
-        #8c99aa;
-
-      --muted-2:
-        #606d7d;
-
-      --green:
-        #39d98a;
-
-      --red:
-        #ff6675;
-
-      --yellow:
-        #f6c453;
-
-      --blue:
-        #66a6ff;
-
-      --purple:
-        #b493ff;
-
-      --cyan:
-        #65d7e8;
-
-      --radius:
-        14px;
+      --radius: 14px;
     }
 
 
     * {
-      box-sizing:
-        border-box;
-
-      margin:
-        0;
-
-      padding:
-        0;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
 
     html {
-      scroll-behavior:
-        smooth;
+      scroll-behavior: smooth;
     }
 
 
     body {
-      min-height:
-        100vh;
+      min-height: 100vh;
 
       background:
         radial-gradient(
           circle at 90% 0%,
-          rgba(
-            102,
-            166,
-            255,
-            0.08
-          ),
+          rgba(102, 166, 255, 0.08),
           transparent 32%
         ),
         radial-gradient(
           circle at 0% 10%,
-          rgba(
-            57,
-            217,
-            138,
-            0.05
-          ),
+          rgba(57, 217, 138, 0.05),
           transparent 28%
         ),
         var(--bg);
 
-      color:
-        var(--text);
+      color: var(--text);
 
       font-family:
         Inter,
@@ -130,21 +83,29 @@
         Arial,
         sans-serif;
 
-      line-height:
-        1.5;
+      line-height: 1.5;
     }
 
 
     button,
     select {
-      font:
-        inherit;
+      font: inherit;
     }
 
 
     button {
-      cursor:
-        pointer;
+      cursor: pointer;
+    }
+
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+
+    a {
+      color: inherit;
     }
 
 
@@ -158,1217 +119,358 @@
     }
 
 
-    a {
-      color:
-        inherit;
-    }
-
-
     .container {
-      width:
-        min(
-          1440px,
-          calc(
-            100% - 36px
-          )
-        );
+      width: min(
+        1440px,
+        calc(100% - 36px)
+      );
 
-      margin:
-        0 auto;
+      margin: 0 auto;
     }
 
 
-    /*
-     * ==============================
-     * Header
-     * ==============================
-     */
+    /* =========================
+       Header
+    ========================= */
 
     header {
-      position:
-        sticky;
+      position: sticky;
+      top: 0;
+      z-index: 100;
 
-      top:
-        0;
-
-      z-index:
-        50;
+      border-bottom: 1px solid var(--border);
 
       background:
-        rgba(
-          7,
-          9,
-          13,
-          0.88
-        );
+        rgba(7, 9, 13, 0.9);
 
-      backdrop-filter:
-        blur(18px);
-
-      border-bottom:
-        1px solid
-        var(--border);
+      backdrop-filter: blur(18px);
     }
 
 
     .navbar {
-      min-height:
-        68px;
+      min-height: 68px;
 
-      display:
-        flex;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        20px;
+      gap: 20px;
     }
 
 
     .brand {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        11px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
     }
 
 
     .brand-logo {
-      width:
-        38px;
+      width: 38px;
+      height: 38px;
 
-      height:
-        38px;
+      display: grid;
+      place-items: center;
 
-      display:
-        grid;
-
-      place-items:
-        center;
-
-      border:
-        1px solid
-        var(--border-2);
-
-      border-radius:
-        10px;
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
 
       background:
         linear-gradient(
           135deg,
-          rgba(
-            102,
-            166,
-            255,
-            0.15
-          ),
-          rgba(
-            57,
-            217,
-            138,
-            0.08
-          )
+          rgba(102, 166, 255, 0.15),
+          rgba(57, 217, 138, 0.08)
         );
 
-      font-weight:
-        800;
+      font-weight: 800;
     }
 
 
     .brand h1 {
-      font-size:
-        16px;
-
-      letter-spacing:
-        0.4px;
+      font-size: 16px;
+      letter-spacing: 0.4px;
     }
 
 
     .brand p {
-      margin-top:
-        1px;
+      margin-top: 1px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        11px;
+      font-size: 11px;
     }
 
 
     .header-actions {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      gap:
-        10px;
+      gap: 10px;
     }
 
 
     .pill,
     .link-button {
-      min-height:
-        34px;
+      min-height: 34px;
 
-      display:
-        inline-flex;
+      display: inline-flex;
+      align-items: center;
 
-      align-items:
-        center;
+      gap: 8px;
 
-      gap:
-        8px;
+      padding: 7px 11px;
 
-      padding:
-        7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
 
-      border:
-        1px solid
-        var(--border);
+      background: var(--panel);
 
-      border-radius:
-        999px;
+      color: var(--muted);
 
-      background:
-        var(--panel);
-
-      color:
-        var(--muted);
-
-      font-size:
-        12px;
-
-      text-decoration:
-        none;
+      font-size: 12px;
+      text-decoration: none;
     }
 
 
     .link-button {
-      border-radius:
-        9px;
-
-      color:
-        var(--text);
+      border-radius: 9px;
+      color: var(--text);
     }
 
 
     .status-dot {
-      width:
-        8px;
+      width: 8px;
+      height: 8px;
 
-      height:
-        8px;
+      border-radius: 50%;
 
-      border-radius:
-        50%;
-
-      background:
-        var(--yellow);
+      background: var(--yellow);
 
       box-shadow:
         0 0 10px
-        rgba(
-          246,
-          196,
-          83,
-          0.55
-        );
+        rgba(246, 196, 83, 0.55);
     }
 
 
     .status-dot.online {
-      background:
-        var(--green);
+      background: var(--green);
 
       box-shadow:
         0 0 10px
-        rgba(
-          57,
-          217,
-          138,
-          0.6
-        );
+        rgba(57, 217, 138, 0.6);
     }
 
 
     .status-dot.offline {
-      background:
-        var(--red);
+      background: var(--red);
 
       box-shadow:
         0 0 10px
-        rgba(
-          255,
-          102,
-          117,
-          0.6
-        );
+        rgba(255, 102, 117, 0.6);
     }
 
 
-    /*
-     * ==============================
-     * Main
-     * ==============================
-     */
+    /* =========================
+       Shared
+    ========================= */
 
     main {
-      padding:
-        34px 0 60px;
+      padding-bottom: 28px;
     }
 
-
-    .hero {
-      margin-bottom:
-        28px;
-    }
-
-
-    .hero-row {
-      display:
-        flex;
-
-      align-items:
-        flex-end;
-
-      justify-content:
-        space-between;
-
-      gap:
-        20px;
-    }
-
-
-    .hero h2 {
-      font-size:
-        clamp(
-          26px,
-          4vw,
-          40px
-        );
-
-      letter-spacing:
-        -1px;
-    }
-
-
-    .hero p {
-      max-width:
-        800px;
-
-      margin-top:
-        9px;
-
-      color:
-        var(--muted);
-
-      font-size:
-        14px;
-    }
-
-
-    .hero-progress {
-      min-width:
-        190px;
-
-      padding:
-        13px 15px;
-
-      border:
-        1px solid
-        rgba(
-          57,
-          217,
-          138,
-          0.18
-        );
-
-      border-radius:
-        12px;
-
-      background:
-        rgba(
-          57,
-          217,
-          138,
-          0.05
-        );
-    }
-
-
-    .hero-progress-label {
-      color:
-        var(--muted);
-
-      font-size:
-        10px;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        0.7px;
-    }
-
-
-    .hero-progress-value {
-      margin-top:
-        4px;
-
-      color:
-        var(--green);
-
-      font-size:
-        21px;
-
-      font-weight:
-        800;
-    }
-
-
-    .hero-progress-sub {
-      margin-top:
-        2px;
-
-      color:
-        var(--muted-2);
-
-      font-size:
-        10px;
-    }
-
-
-    .notice {
-      margin-top:
-        16px;
-
-      padding:
-        12px 14px;
-
-      border:
-        1px solid
-        rgba(
-          246,
-          196,
-          83,
-          0.22
-        );
-
-      border-radius:
-        10px;
-
-      background:
-        rgba(
-          246,
-          196,
-          83,
-          0.06
-        );
-
-      color:
-        #d9c28c;
-
-      font-size:
-        12px;
-    }
-
-
-    /*
-     * ==============================
-     * Section
-     * ==============================
-     */
 
     .section {
-      margin-top:
-        30px;
+      margin-top: 22px;
     }
 
 
     .section-header {
-      margin-bottom:
-        13px;
+      margin-bottom: 12px;
 
-      display:
-        flex;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      align-items:
-        flex-end;
-
-      justify-content:
-        space-between;
-
-      gap:
-        14px;
+      gap: 18px;
     }
 
 
     .section-header h3 {
-      font-size:
-        16px;
+      font-size: 16px;
     }
 
 
     .section-header p {
-      margin-top:
-        2px;
+      margin-top: 3px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        11px;
+      font-size: 11px;
     }
 
 
-    /*
-     * ==============================
-     * Controls
-     * ==============================
-     */
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        rgba(17, 23, 32, 0.82);
+
+      padding: 16px;
+    }
+
+
+    .grid-2 {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 12px;
+    }
+
+
+    .grid-4 {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(0, 1fr)
+        );
+
+      gap: 12px;
+    }
+
+
+    .metric-label {
+      color: var(--muted-2);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 0.35px;
+
+      text-transform: uppercase;
+    }
+
+
+    .metric-value {
+      margin-top: 6px;
+
+      font-size: 22px;
+      font-weight: 780;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    .metric-sub {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    .positive {
+      color: var(--green) !important;
+    }
+
+
+    .negative {
+      color: var(--red) !important;
+    }
+
+
+    .warning-text {
+      color: var(--yellow) !important;
+    }
+
+
+    .blue {
+      color: var(--blue) !important;
+    }
+
+
+    .purple {
+      color: var(--purple) !important;
+    }
+
+
+    .cyan {
+      color: var(--cyan) !important;
+    }
+
 
     .controls {
-      display:
-        flex;
+      margin-bottom: 12px;
 
-      flex-wrap:
-        wrap;
+      display: flex;
+      align-items: center;
 
-      gap:
-        10px;
+      gap: 9px;
 
-      margin-bottom:
-        14px;
+      flex-wrap: wrap;
     }
 
 
     .select,
     .button {
-      min-height:
-        39px;
+      min-height: 36px;
 
-      padding:
-        8px 12px;
+      border: 1px solid var(--border-2);
+      border-radius: 9px;
 
-      border:
-        1px solid
-        var(--border);
+      background: var(--panel);
 
-      border-radius:
-        9px;
+      color: var(--text);
 
-      background:
-        var(--panel);
+      padding: 8px 11px;
 
-      color:
-        var(--text);
-
-      outline:
-        none;
+      outline: none;
     }
 
 
     .select {
-      min-width:
-        185px;
-    }
-
-
-    .select:focus {
-      border-color:
-        var(--blue);
-    }
-
-
-    .button:hover {
-      background:
-        var(--panel-2);
+      min-width: 150px;
     }
 
 
     .button.primary {
       border-color:
-        var(--green);
+        rgba(102, 166, 255, 0.32);
 
       background:
-        var(--green);
-
-      color:
-        #07140e;
-
-      font-weight:
-        750;
+        rgba(102, 166, 255, 0.12);
     }
 
 
     .button.secondary {
-      border-color:
-        rgba(
-          102,
-          166,
-          255,
-          0.35
-        );
-
-      background:
-        rgba(
-          102,
-          166,
-          255,
-          0.09
-        );
-
-      color:
-        #bcd7ff;
-    }
-
-
-    .button:disabled {
-      cursor:
-        not-allowed;
-
-      opacity:
-        0.55;
-    }
-
-
-    /*
-     * ==============================
-     * Grids
-     * ==============================
-     */
-
-    .grid-4 {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          4,
-          minmax(
-            0,
-            1fr
-          )
-        );
-
-      gap:
-        12px;
-    }
-
-
-    .grid-3 {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(
-            0,
-            1fr
-          )
-        );
-
-      gap:
-        12px;
-    }
-
-
-    .grid-2 {
-      display:
-        grid;
-
-      grid-template-columns:
-        minmax(
-          0,
-          2fr
-        )
-        minmax(
-          300px,
-          1fr
-        );
-
-      gap:
-        12px;
-    }
-
-
-    /*
-     * ==============================
-     * Cards
-     * ==============================
-     */
-
-    .card {
-      min-width:
-        0;
-
-      padding:
-        18px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius);
-
-      background:
-        rgba(
-          17,
-          23,
-          32,
-          0.9
-        );
-    }
-
-
-    .metric-label {
-      color:
-        var(--muted);
-
-      font-size:
-        11px;
-
-      letter-spacing:
-        0.7px;
-
-      text-transform:
-        uppercase;
-    }
-
-
-    .metric-value {
-      margin-top:
-        7px;
-
-      overflow:
-        hidden;
-
-      color:
-        var(--text);
-
-      font-size:
-        24px;
-
-      font-weight:
-        750;
-
-      text-overflow:
-        ellipsis;
-
-      white-space:
-        nowrap;
-    }
-
-
-    .metric-sub {
-      margin-top:
-        5px;
-
-      color:
-        var(--muted-2);
-
-      font-size:
-        11px;
-    }
-
-
-    .positive {
-      color:
-        var(--green) !important;
-    }
-
-
-    .negative {
-      color:
-        var(--red) !important;
-    }
-
-
-    .warning-text {
-      color:
-        var(--yellow) !important;
-    }
-
-
-    .blue {
-      color:
-        var(--blue) !important;
-    }
-
-
-    .purple {
-      color:
-        var(--purple) !important;
-    }
-
-
-    /*
-     * ==============================
-     * Chart
-     * ==============================
-     */
-
-    .chart-card {
-      min-height:
-        330px;
-    }
-
-
-    .chart-head {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
-
-      margin-bottom:
-        14px;
-    }
-
-
-    .chart-symbol {
-      font-size:
-        17px;
-
-      font-weight:
-        700;
-    }
-
-
-    .chart-sub {
-      color:
-        var(--muted-2);
-
-      font-size:
-        11px;
-    }
-
-
-    .chart-wrap {
-      position:
-        relative;
-
-      width:
-        100%;
-
-      height:
-        245px;
-    }
-
-
-    #priceChart {
-      display:
-        block;
-
-      width:
-        100%;
-
-      height:
-        100%;
-    }
-
-
-    /*
-     * ==============================
-     * Order Book
-     * ==============================
-     */
-
-    .book-list {
-      display:
-        grid;
-
-      gap:
-        18px;
-
-      margin-top:
-        16px;
-    }
-
-
-    /*
-     * ==============================
-     * SCOUT
-     * ==============================
-     */
-
-    .scout-toolbar {
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        12px;
-
-      margin-bottom:
-        14px;
-    }
-
-
-    .scout-status {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        9px;
-
-      color:
-        var(--muted);
-
-      font-size:
-        12px;
-    }
-
-
-    .spinner {
-      width:
-        14px;
-
-      height:
-        14px;
-
-      display:
-        none;
-
-      border:
-        2px solid
-        var(--border-2);
-
-      border-top-color:
-        var(--green);
-
-      border-radius:
-        50%;
-
-      animation:
-        spin
-        0.7s
-        linear
-        infinite;
-    }
-
-
-    .spinner.show {
-      display:
-        inline-block;
-    }
-
-
-    @keyframes spin {
-      to {
-        transform:
-          rotate(
-            360deg
-          );
-      }
-    }
-
-
-    .scout-summary {
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          4,
-          minmax(
-            0,
-            1fr
-          )
-        );
-
-      gap:
-        10px;
-
-      margin-bottom:
-        12px;
-    }
-
-
-    .scout-table-wrap {
-      overflow-x:
-        auto;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius);
-
-      background:
-        rgba(
-          17,
-          23,
-          32,
-          0.9
-        );
-    }
-
-
-    .scout-table {
-      width:
-        100%;
-
-      min-width:
-        980px;
-
-      border-collapse:
-        collapse;
-    }
-
-
-    .scout-table th,
-    .scout-table td {
-      padding:
-        12px 11px;
-
-      border-bottom:
-        1px solid
-        var(--border);
-
-      text-align:
-        right;
-
-      font-size:
-        12px;
-
-      white-space:
-        nowrap;
-    }
-
-
-    .scout-table th {
-      position:
-        sticky;
-
-      top:
-        68px;
-
-      z-index:
-        4;
-
-      background:
-        #0f151e;
-
-      color:
-        var(--muted);
-
-      font-size:
-        10px;
-
-      font-weight:
-        650;
-
-      letter-spacing:
-        0.5px;
-
-      text-transform:
-        uppercase;
-    }
-
-
-    .scout-table th:first-child,
-    .scout-table td:first-child,
-    .scout-table th:nth-child(2),
-    .scout-table td:nth-child(2) {
-      text-align:
-        left;
-    }
-
-
-    .scout-table tbody tr {
-      transition:
-        background
-        0.16s;
-    }
-
-
-    .scout-table tbody tr:hover {
-      background:
-        rgba(
-          102,
-          166,
-          255,
-          0.045
-        );
-    }
-
-
-    .scout-table tbody tr:last-child td {
-      border-bottom:
-        0;
-    }
-
-
-    .rank {
-      width:
-        36px;
-
-      color:
-        var(--muted-2);
-
-      font-weight:
-        700;
-    }
-
-
-    .symbol-cell {
-      font-weight:
-        700;
-    }
-
-
-    .score-badge {
-      display:
-        inline-flex;
-
-      min-width:
-        58px;
-
-      justify-content:
-        center;
-
-      padding:
-        4px 8px;
-
-      border:
-        1px solid
-        rgba(
-          57,
-          217,
-          138,
-          0.22
-        );
-
-      border-radius:
-        999px;
-
-      background:
-        rgba(
-          57,
-          217,
-          138,
-          0.08
-        );
-
-      color:
-        var(--green);
-
-      font-weight:
-        750;
-    }
-
-
-    .reasons-row td {
-      padding-top:
-        0;
-
-      color:
-        var(--muted-2);
-
-      font-size:
-        10px;
-
-      text-align:
-        left !important;
-    }
-
-
-    .reason-chip {
-      display:
-        inline-flex;
-
-      margin:
-        0 5px 5px 0;
-
-      padding:
-        3px 7px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        999px;
-
-      background:
-        var(--bg-2);
-
-      color:
-        var(--muted);
-    }
-
-
-    .empty-state {
-      padding:
-        34px 18px;
-
-      color:
-        var(--muted-2);
-
-      text-align:
-        center;
-
-      font-size:
-        12px;
+      background: var(--panel-2);
     }
 
 
     .progress {
-      height:
-        4px;
+      height: 4px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      background:
-        var(--border);
+      background: var(--border);
     }
 
 
     .progress > div {
-      width:
-        0%;
+      width: 0%;
+      height: 100%;
 
-      height:
-        100%;
-
-      border-radius:
-        inherit;
+      border-radius: inherit;
 
       background:
         linear-gradient(
@@ -1377,567 +479,783 @@
           var(--green)
         );
 
-      transition:
-        width
-        0.2s;
+      transition: width 0.2s;
     }
 
 
-    /*
-     * ==============================
-     * NEWS
-     * ==============================
-     */
+    /* =========================
+       Hero
+    ========================= */
 
-    .news-overview {
-      display:
-        grid;
+    .hero {
+      margin-top: 22px;
+
+      padding: 20px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 166, 255, 0.07),
+          rgba(57, 217, 138, 0.025)
+        );
+    }
+
+
+    .hero-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 28px;
+    }
+
+
+    .hero h2 {
+      font-size: 24px;
+    }
+
+
+    .hero p {
+      max-width: 760px;
+
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .hero-progress {
+      min-width: 240px;
+
+      padding: 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: var(--panel-3);
+    }
+
+
+    .hero-progress-label {
+      color: var(--muted-2);
+
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+
+    .hero-progress-value {
+      margin-top: 3px;
+
+      color: var(--green);
+
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+
+    .hero-progress-sub {
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    .notice {
+      margin-top: 14px;
+
+      padding: 11px 13px;
+
+      border:
+        1px solid
+        rgba(246, 196, 83, 0.18);
+
+      border-radius: 9px;
+
+      background:
+        rgba(246, 196, 83, 0.035);
+
+      color: #c8b57e;
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       Chart
+    ========================= */
+
+    .chart-card {
+      min-height: 360px;
+    }
+
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .chart-symbol {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+
+    .chart-sub {
+      margin-top: 3px;
+
+      color: var(--muted-2);
+
+      font-size: 10px;
+    }
+
+
+    .chart-wrap {
+      height: 285px;
+
+      margin-top: 12px;
+    }
+
+
+    .chart-wrap canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    /* =========================
+       Order Book
+    ========================= */
+
+    .book-list {
+      margin-top: 10px;
+
+      display: grid;
+
+      gap: 12px;
+    }
+
+
+    /* =========================
+       SCOUT
+    ========================= */
+
+    .scout-toolbar {
+      margin-bottom: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+    }
+
+
+    .scout-status {
+      display: flex;
+      align-items: center;
+
+      gap: 8px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+
+    .spinner {
+      width: 12px;
+      height: 12px;
+
+      display: none;
+
+      border:
+        2px solid
+        rgba(102, 166, 255, 0.25);
+
+      border-top-color: var(--blue);
+      border-radius: 50%;
+
+      animation:
+        spin
+        0.8s
+        linear
+        infinite;
+    }
+
+
+    .spinner.show {
+      display: inline-block;
+    }
+
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    .scout-summary {
+      margin-bottom: 12px;
+
+      display: grid;
 
       grid-template-columns:
         repeat(
           4,
-          minmax(
-            0,
-            1fr
-          )
+          minmax(0, 1fr)
         );
 
-      gap:
-        10px;
+      gap: 12px;
     }
 
 
-    .news-pipeline {
-      display:
-        grid;
+    .scout-table-wrap {
+      overflow-x: auto;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        rgba(17, 23, 32, 0.75);
+    }
+
+
+    .scout-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 1050px;
+
+      font-size: 10px;
+    }
+
+
+    .scout-table th,
+    .scout-table td {
+      padding: 9px 10px;
+
+      border-bottom:
+        1px solid
+        var(--border);
+
+      text-align: right;
+    }
+
+
+    .scout-table th {
+      color: var(--muted-2);
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+    }
+
+
+    .scout-table th:first-child,
+    .scout-table td:first-child,
+    .scout-table th:nth-child(2),
+    .scout-table td:nth-child(2) {
+      text-align: left;
+    }
+
+
+    .scout-table tbody tr:hover {
+      background:
+        rgba(102, 166, 255, 0.04);
+    }
+
+
+    .scout-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+
+    .rank {
+      width: 36px;
+
+      color: var(--muted-2);
+
+      font-weight: 700;
+    }
+
+
+    .symbol-cell {
+      font-weight: 700;
+    }
+
+
+    .score-badge {
+      display: inline-flex;
+
+      min-width: 58px;
+
+      justify-content: center;
+
+      padding: 4px 8px;
+
+      border:
+        1px solid
+        rgba(57, 217, 138, 0.22);
+
+      border-radius: 999px;
+
+      background:
+        rgba(57, 217, 138, 0.08);
+
+      color: var(--green);
+
+      font-weight: 750;
+    }
+
+
+    .reasons-row td {
+      padding-top: 0;
+
+      color: var(--muted-2);
+
+      font-size: 9px;
+
+      text-align: left !important;
+    }
+
+
+    .reason-chip {
+      display: inline-flex;
+
+      margin: 0 5px 5px 0;
+
+      padding: 3px 7px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--bg-2);
+
+      color: var(--muted);
+    }
+
+
+    .empty-state {
+      padding: 30px 18px;
+
+      color: var(--muted-2);
+
+      text-align: center;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================
+       Agent Pipeline
+    ========================= */
+
+    .pipeline {
+      display: grid;
 
       grid-template-columns:
         repeat(
           5,
-          minmax(
-            0,
-            1fr
-          )
+          minmax(0, 1fr)
         );
 
-      gap:
-        10px;
-
-      margin-top:
-        12px;
+      gap: 10px;
     }
 
 
     .pipeline-node {
-      position:
-        relative;
+      position: relative;
 
-      min-width:
-        0;
+      padding: 13px;
 
-      padding:
-        14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
 
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        11px;
-
-      background:
-        var(--bg-2);
-    }
-
-
-    .pipeline-node:not(
-      :last-child
-    )::after {
-      content:
-        "→";
-
-      position:
-        absolute;
-
-      top:
-        50%;
-
-      right:
-        -9px;
-
-      z-index:
-        2;
-
-      color:
-        var(--muted-2);
-
-      transform:
-        translateY(
-          -50%
-        );
+      background: var(--bg-2);
     }
 
 
     .pipeline-node strong {
-      display:
-        block;
+      display: block;
 
-      color:
-        var(--text);
-
-      font-size:
-        12px;
+      font-size: 11px;
     }
 
 
     .pipeline-node span {
-      display:
-        block;
+      display: block;
 
-      margin-top:
-        5px;
+      margin-top: 4px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        10px;
+      font-size: 9px;
 
-      line-height:
-        1.5;
+      line-height: 1.5;
     }
 
 
-    .news-components {
-      display:
-        grid;
+    .pipeline-node:not(:last-child)::after {
+      content: "→";
+
+      position: absolute;
+
+      right: -9px;
+      top: 50%;
+
+      z-index: 2;
+
+      color: var(--muted-2);
+
+      transform:
+        translateY(-50%);
+    }
+
+
+    .component-grid {
+      margin-top: 12px;
+
+      display: grid;
 
       grid-template-columns:
         repeat(
           3,
-          minmax(
-            0,
-            1fr
-          )
+          minmax(0, 1fr)
         );
 
-      gap:
-        10px;
-
-      margin-top:
-        12px;
+      gap: 10px;
     }
 
 
     .component {
-      padding:
-        13px;
+      padding: 12px;
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
+      border-radius: 9px;
 
-      border-radius:
-        10px;
-
-      background:
-        var(--panel-3);
+      background: var(--panel-3);
     }
 
 
     .component-top {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
+      gap: 8px;
     }
 
 
     .component-name {
-      font-size:
-        12px;
-
-      font-weight:
-        700;
-    }
-
-
-    .component-status {
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      padding:
-        3px 7px;
-
-      border:
-        1px solid
-        rgba(
-          57,
-          217,
-          138,
-          0.22
-        );
-
-      border-radius:
-        999px;
-
-      background:
-        rgba(
-          57,
-          217,
-          138,
-          0.07
-        );
-
-      color:
-        var(--green);
-
-      font-size:
-        9px;
-
-      font-weight:
-        750;
-
-      letter-spacing:
-        0.3px;
+      font-size: 11px;
+      font-weight: 700;
     }
 
 
     .component-detail {
-      margin-top:
-        6px;
+      margin-top: 6px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        10px;
+      font-size: 9px;
 
-      line-height:
-        1.55;
+      line-height: 1.55;
     }
 
 
-    .news-runtime {
-      margin-top:
-        12px;
-
-      padding:
-        13px 14px;
+    .component-status {
+      padding: 3px 7px;
 
       border:
         1px solid
-        rgba(
-          246,
-          196,
-          83,
-          0.18
-        );
+        rgba(57, 217, 138, 0.2);
 
-      border-radius:
-        10px;
+      border-radius: 999px;
 
       background:
-        rgba(
-          246,
-          196,
-          83,
-          0.04
-        );
+        rgba(57, 217, 138, 0.07);
 
-      color:
-        #c8b57e;
+      color: var(--green);
 
-      font-size:
-        11px;
+      font-size: 8px;
+      font-weight: 750;
     }
 
 
-    /*
-     * ==============================
-     * Agents
-     * ==============================
-     */
+    .runtime-note {
+      margin-top: 12px;
+
+      padding: 11px 12px;
+
+      border:
+        1px solid
+        rgba(246, 196, 83, 0.18);
+
+      border-radius: 9px;
+
+      background:
+        rgba(246, 196, 83, 0.035);
+
+      color: #c8b57e;
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       Agent cards
+    ========================= */
 
     .agent-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
           3,
-          minmax(
-            0,
-            1fr
-          )
+          minmax(0, 1fr)
         );
 
-      gap:
-        12px;
+      gap: 12px;
     }
 
 
     .agent-card {
-      padding:
-        17px;
+      padding: 16px;
 
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
 
       background:
-        rgba(
-          17,
-          23,
-          32,
-          0.8
-        );
+        rgba(17, 23, 32, 0.8);
     }
 
 
     .agent-top {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
+      gap: 10px;
     }
 
 
     .agent-name {
-      font-size:
-        14px;
-
-      font-weight:
-        750;
+      font-size: 13px;
+      font-weight: 750;
     }
 
 
     .agent-tag {
-      padding:
-        4px 8px;
+      padding: 4px 8px;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
       background:
-        rgba(
-          102,
-          166,
-          255,
-          0.1
-        );
+        rgba(102, 166, 255, 0.1);
 
-      color:
-        var(--blue);
+      color: var(--blue);
 
-      font-size:
-        10px;
-
-      font-weight:
-        700;
+      font-size: 9px;
+      font-weight: 700;
     }
 
 
     .agent-tag.live {
       background:
-        rgba(
-          57,
-          217,
-          138,
-          0.1
-        );
+        rgba(57, 217, 138, 0.1);
 
-      color:
-        var(--green);
+      color: var(--green);
     }
 
 
-    .agent-tag.code-complete {
+    .agent-tag.complete {
       background:
-        rgba(
-          180,
-          147,
-          255,
-          0.1
-        );
+        rgba(180, 147, 255, 0.1);
 
-      color:
-        var(--purple);
+      color: var(--purple);
     }
 
 
     .agent-tag.pending {
       background:
-        rgba(
-          246,
-          196,
-          83,
-          0.08
-        );
+        rgba(246, 196, 83, 0.08);
 
-      color:
-        var(--yellow);
+      color: var(--yellow);
     }
 
 
     .agent-role {
-      margin-top:
-        9px;
+      margin-top: 8px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        12px;
+      font-size: 11px;
     }
 
 
     .agent-detail {
-      margin-top:
-        10px;
+      margin-top: 8px;
 
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      font-size:
-        11px;
+      font-size: 10px;
+
+      line-height: 1.6;
     }
 
 
-    /*
-     * ==============================
-     * System
-     * ==============================
-     */
+    /* =========================
+       Architecture
+    ========================= */
+
+    .architecture {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          7,
+          minmax(0, 1fr)
+        );
+
+      gap: 8px;
+
+      align-items: stretch;
+    }
+
+
+    .architecture-node {
+      padding: 12px;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      background: var(--bg-2);
+
+      text-align: center;
+    }
+
+
+    .architecture-node strong {
+      display: block;
+
+      font-size: 10px;
+    }
+
+
+    .architecture-node span {
+      display: block;
+
+      margin-top: 4px;
+
+      color: var(--muted-2);
+
+      font-size: 8px;
+    }
+
+
+    /* =========================
+       System
+    ========================= */
 
     .system-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         1fr
         1fr;
 
-      gap:
-        12px;
+      gap: 12px;
     }
 
 
     .endpoint-list {
-      display:
-        grid;
+      display: grid;
 
-      gap:
-        8px;
+      gap: 8px;
     }
 
 
     .endpoint {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      align-items:
-        center;
+      gap: 10px;
 
-      justify-content:
-        space-between;
+      padding: 9px 11px;
 
-      gap:
-        10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
 
-      padding:
-        10px 12px;
+      background: var(--bg-2);
 
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        8px;
-
-      background:
-        var(--bg-2);
-
-      font-size:
-        11px;
+      font-size: 10px;
     }
 
 
     .endpoint code {
-      overflow-wrap:
-        anywhere;
+      overflow-wrap: anywhere;
 
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
 
     .endpoint-state {
-      color:
-        var(--muted-2);
+      color: var(--muted-2);
 
-      white-space:
-        nowrap;
+      white-space: nowrap;
     }
 
 
     .endpoint-state.ok {
-      color:
-        var(--green);
+      color: var(--green);
     }
 
 
     .endpoint-state.error {
-      color:
-        var(--red);
+      color: var(--red);
+    }
+
+
+    .endpoint-state.pending {
+      color: var(--yellow);
     }
 
 
     .log-box {
-      height:
-        245px;
+      height: 300px;
 
-      overflow-y:
-        auto;
+      overflow-y: auto;
 
-      padding:
-        12px;
+      padding: 12px;
 
-      border:
-        1px solid
-        var(--border);
+      border: 1px solid var(--border);
+      border-radius: 9px;
 
-      border-radius:
-        9px;
+      background: #07090d;
 
-      background:
-        #07090d;
-
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font:
-        11px/1.7
+        10px/1.7
         "SFMono-Regular",
         Consolas,
         monospace;
@@ -1945,103 +1263,93 @@
 
 
     .log-line.success {
-      color:
-        var(--green);
+      color: var(--green);
     }
 
 
     .log-line.error {
-      color:
-        var(--red);
+      color: var(--red);
     }
 
 
     .log-line.info {
-      color:
-        var(--blue);
+      color: var(--blue);
     }
 
 
-    /*
-     * ==============================
-     * Footer
-     * ==============================
-     */
+    .log-line.warning {
+      color: var(--yellow);
+    }
+
+
+    /* =========================
+       Footer
+    ========================= */
 
     footer {
-      padding:
-        24px 0 38px;
+      margin-top: 30px;
 
-      border-top:
-        1px solid
-        var(--border);
+      padding: 24px 0 38px;
 
-      color:
-        var(--muted-2);
+      border-top: 1px solid var(--border);
 
-      text-align:
-        center;
+      color: var(--muted-2);
 
-      font-size:
-        11px;
+      text-align: center;
+
+      font-size: 10px;
     }
 
 
-    /*
-     * ==============================
-     * Responsive
-     * ==============================
-     */
+    /* =========================
+       Responsive
+    ========================= */
 
     @media (
-      max-width:
-      1150px
+      max-width: 1150px
     ) {
-      .news-pipeline {
+      .pipeline {
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0, 1fr)
           );
       }
 
 
       .pipeline-node::after {
-        display:
-          none;
+        display: none;
       }
 
 
-      .news-components {
+      .component-grid {
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0, 1fr)
+          );
+      }
+
+
+      .architecture {
+        grid-template-columns:
+          repeat(
+            4,
+            minmax(0, 1fr)
           );
       }
     }
 
 
     @media (
-      max-width:
-      1050px
+      max-width: 1050px
     ) {
       .grid-4,
-      .scout-summary,
-      .news-overview {
+      .scout-summary {
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0, 1fr)
           );
       }
 
@@ -2050,18 +1358,14 @@
         grid-template-columns:
           repeat(
             2,
-            minmax(
-              0,
-              1fr
-            )
+            minmax(0, 1fr)
           );
       }
     }
 
 
     @media (
-      max-width:
-      760px
+      max-width: 760px
     ) {
       .container {
         width:
@@ -2073,73 +1377,62 @@
 
 
       .github-link {
-        display:
-          none;
+        display: none;
       }
 
 
       .grid-2,
       .system-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
 
       .agent-grid,
-      .news-components,
-      .news-pipeline {
-        grid-template-columns:
-          1fr;
+      .component-grid,
+      .pipeline,
+      .architecture {
+        grid-template-columns: 1fr;
       }
 
 
       .section-header,
-      .hero-row {
-        align-items:
-          flex-start;
-
-        flex-direction:
-          column;
+      .hero-row,
+      .scout-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
 
       .hero-progress {
-        width:
-          100%;
+        width: 100%;
       }
     }
 
 
     @media (
-      max-width:
-      520px
+      max-width: 520px
     ) {
       .grid-4,
-      .scout-summary,
-      .news-overview {
-        grid-template-columns:
-          1fr;
+      .scout-summary {
+        grid-template-columns: 1fr;
       }
 
 
       .controls {
-        display:
-          grid;
+        display: grid;
       }
 
 
       .select,
       .button {
-        width:
-          100%;
+        width: 100%;
       }
 
 
       .header-actions
       .pill
       span:last-child {
-        display:
-          none;
+        display: none;
       }
     }
   </style>
@@ -2147,6 +1440,10 @@
 
 
 <body>
+
+  <!-- =========================
+       Header
+  ========================== -->
 
   <header>
 
@@ -2165,7 +1462,7 @@
           </h1>
 
           <p>
-            Multi-Agent Trading System
+            Multi-Agent Crypto Trading System
           </p>
 
         </div>
@@ -2197,10 +1494,8 @@
             Agents
           </span>
 
-          <strong
-            class="positive"
-          >
-            2 / 6
+          <strong class="positive">
+            4 / 6
           </strong>
 
         </div>
@@ -2240,8 +1535,8 @@
 
           <p>
             Multi-agent crypto research architecture
-            combining market discovery, news analysis,
-            sentiment, technical analysis, risk assessment
+            combining opportunity discovery, news intelligence,
+            market sentiment, technical analysis, risk assessment
             and final decision synthesis.
           </p>
 
@@ -2255,11 +1550,11 @@
           </div>
 
           <div class="hero-progress-value">
-            2 / 6
+            4 / 6
           </div>
 
           <div class="hero-progress-sub">
-            SCOUT + NEWS implemented
+            SCOUT · NEWS · SENTIMENT · CHARTS V1 implemented
           </div>
 
         </div>
@@ -2268,9 +1563,12 @@
 
 
       <div class="notice">
-        Browser mode only uses OKX public market endpoints.
-        No OKX private credentials or OpenAI API key are stored
-        in this page. Python NEWS / LLM execution remains backend-only.
+        This dashboard currently operates in browser public-data mode.
+        Market Monitor and Browser SCOUT call OKX public endpoints directly.
+        Python NEWS, SENTIMENT and CHARTS pipelines remain backend-side and
+        are not yet connected to this page through an HTTP API.
+        No OKX private credentials or OpenAI API key should ever be stored
+        inside this HTML file.
       </div>
 
     </section>
@@ -2291,9 +1589,13 @@
           </h3>
 
           <p>
-            OKX public market data
+            Direct OKX public market data
           </p>
 
+        </div>
+
+        <div class="agent-tag live">
+          LIVE PUBLIC DATA
         </div>
 
       </div>
@@ -2306,33 +1608,23 @@
           class="select"
         >
 
-          <option
-            value="BTC-USDT-SWAP"
-          >
+          <option value="BTC-USDT-SWAP">
             BTC-USDT-SWAP
           </option>
 
-          <option
-            value="ETH-USDT-SWAP"
-          >
+          <option value="ETH-USDT-SWAP">
             ETH-USDT-SWAP
           </option>
 
-          <option
-            value="SOL-USDT-SWAP"
-          >
+          <option value="SOL-USDT-SWAP">
             SOL-USDT-SWAP
           </option>
 
-          <option
-            value="XRP-USDT-SWAP"
-          >
+          <option value="XRP-USDT-SWAP">
             XRP-USDT-SWAP
           </option>
 
-          <option
-            value="DOGE-USDT-SWAP"
-          >
+          <option value="DOGE-USDT-SWAP">
             DOGE-USDT-SWAP
           </option>
 
@@ -2348,6 +1640,10 @@
             1m
           </option>
 
+          <option value="3m">
+            3m
+          </option>
+
           <option value="5m">
             5m
           </option>
@@ -2359,16 +1655,44 @@
             15m
           </option>
 
+          <option value="30m">
+            30m
+          </option>
+
           <option value="1H">
             1H
+          </option>
+
+          <option value="2H">
+            2H
           </option>
 
           <option value="4H">
             4H
           </option>
 
+          <option value="6Hutc">
+            6H
+          </option>
+
+          <option value="12Hutc">
+            12H
+          </option>
+
           <option value="1Dutc">
             1D
+          </option>
+
+          <option value="1Wutc">
+            1W
+          </option>
+
+          <option value="1Mutc">
+            1M
+          </option>
+
+          <option value="3Mutc">
+            3M
           </option>
 
         </select>
@@ -2502,7 +1826,7 @@
                 id="chartSub"
                 class="chart-sub"
               >
-                15m · 60 candles
+                15m · 80 candles
               </div>
 
             </div>
@@ -2593,7 +1917,7 @@
 
 
     <!-- =========================
-         SCOUT
+         Browser SCOUT
     ========================== -->
 
     <section class="section">
@@ -2603,19 +1927,34 @@
         <div>
 
           <h3>
-            SCOUT
+            Browser SCOUT
           </h3>
 
           <p>
-            Opportunity discovery across live OKX USDT perpetual markets
+            Browser-side opportunity discovery across live OKX USDT perpetual markets
           </p>
 
+        </div>
+
+        <div class="agent-tag live">
+          LIVE
         </div>
 
       </div>
 
 
-      <div class="scout-toolbar">
+      <div class="runtime-note">
+        Browser SCOUT mirrors the current high-level Python SCOUT ranking model
+        for dashboard convenience, but it is not the authoritative backend Agent.
+        Final production orchestration should consume ScoutAgent output through
+        the future backend API rather than maintaining duplicate browser logic.
+      </div>
+
+
+      <div
+        class="scout-toolbar"
+        style="margin-top: 12px;"
+      >
 
         <div class="scout-status">
 
@@ -2714,9 +2053,7 @@
             Mode
           </div>
 
-          <div
-            class="metric-value blue"
-          >
+          <div class="metric-value blue">
             Browser
           </div>
 
@@ -2806,7 +2143,7 @@
               <td colspan="10">
 
                 <div class="empty-state">
-                  SCOUT has not completed yet.
+                  Waiting for SCOUT scan.
                 </div>
 
               </td>
@@ -2823,7 +2160,7 @@
 
 
     <!-- =========================
-         NEWS V1
+         NEWS
     ========================== -->
 
     <section class="section">
@@ -2837,110 +2174,21 @@
           </h3>
 
           <p>
-            Multi-source crypto news ingestion and AI semantic analysis
+            Multi-source news intelligence and semantic event analysis
           </p>
 
         </div>
 
-        <div
-          class="agent-tag code-complete"
-        >
+        <div class="agent-tag complete">
           V1 CODE COMPLETE
         </div>
 
       </div>
 
 
-      <div class="news-overview">
+      <div class="card">
 
-        <div class="card">
-
-          <div class="metric-label">
-            Source Layer
-          </div>
-
-          <div
-            class="metric-value positive"
-          >
-            READY
-          </div>
-
-          <div class="metric-sub">
-            RSS / Atom + source manager
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="metric-label">
-            Deterministic
-          </div>
-
-          <div
-            class="metric-value positive"
-          >
-            READY
-          </div>
-
-          <div class="metric-sub">
-            dedupe · category · impact
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="metric-label">
-            LLM Layer
-          </div>
-
-          <div
-            class="metric-value positive"
-          >
-            READY
-          </div>
-
-          <div class="metric-sub">
-            bias · horizon · priced-in risk
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="metric-label">
-            Runtime
-          </div>
-
-          <div
-            class="metric-value warning-text"
-          >
-            PENDING
-          </div>
-
-          <div class="metric-sub">
-            local tests not yet confirmed here
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card"
-           style="margin-top: 12px;"
-      >
-
-        <div class="metric-label">
-          NEWS Pipeline
-        </div>
-
-
-        <div class="news-pipeline">
+        <div class="pipeline">
 
           <div class="pipeline-node">
 
@@ -2949,7 +2197,7 @@
             </strong>
 
             <span>
-              RSS 2.0 / Atom / future APIs
+              RSS / Atom / future APIs
             </span>
 
           </div>
@@ -2962,7 +2210,7 @@
             </strong>
 
             <span>
-              concurrent fetch · partial failure · dedupe
+              concurrent aggregation · dedupe · partial failure
             </span>
 
           </div>
@@ -2975,7 +2223,7 @@
             </strong>
 
             <span>
-              clustering · symbols · category · impact
+              clustering · category · symbols · impact
             </span>
 
           </div>
@@ -2984,11 +2232,11 @@
           <div class="pipeline-node">
 
             <strong>
-              NewsLLMAnalyzer
+              LLM Analyzer
             </strong>
 
             <span>
-              LONG / SHORT / NEUTRAL · confidence · priced-in
+              direction · confidence · horizon · priced-in
             </span>
 
           </div>
@@ -3001,7 +2249,7 @@
             </strong>
 
             <span>
-              structured events for DECISION
+              structured evidence for DECISION
             </span>
 
           </div>
@@ -3009,7 +2257,7 @@
         </div>
 
 
-        <div class="news-components">
+        <div class="component-grid">
 
           <div class="component">
 
@@ -3048,8 +2296,8 @@
             </div>
 
             <div class="component-detail">
-              Event clustering, stale filtering,
-              classification, symbols and deterministic scoring.
+              Deterministic event extraction,
+              classification and impact scoring.
             </div>
 
           </div>
@@ -3070,8 +2318,8 @@
             </div>
 
             <div class="component-detail">
-              Structured AI event analysis,
-              direction, confidence, horizon and priced-in risk.
+              Structured semantic analysis
+              using server-side OpenAI execution.
             </div>
 
           </div>
@@ -3082,7 +2330,7 @@
             <div class="component-top">
 
               <div class="component-name">
-                rss.py
+                sources/
               </div>
 
               <div class="component-status">
@@ -3092,8 +2340,8 @@
             </div>
 
             <div class="component-detail">
-              Async RSS 2.0 / Atom parser,
-              symbol detection and feed isolation.
+              RSS source, defaults,
+              source manager and feed isolation.
             </div>
 
           </div>
@@ -3104,7 +2352,7 @@
             <div class="component-top">
 
               <div class="component-name">
-                manager.py
+                agent.py
               </div>
 
               <div class="component-status">
@@ -3114,8 +2362,8 @@
             </div>
 
             <div class="component-detail">
-              Source aggregation, concurrent fetch,
-              partial failures and cross-source evidence.
+              Agent orchestration and
+              structured AgentOutput evidence.
             </div>
 
           </div>
@@ -3136,8 +2384,8 @@
             </div>
 
             <div class="component-detail">
-              End-to-end orchestration,
-              source metadata and duplicate LLM-call cache.
+              Source-to-agent end-to-end
+              orchestration layer.
             </div>
 
           </div>
@@ -3145,11 +2393,500 @@
         </div>
 
 
-        <div class="news-runtime">
-          GitHub Pages cannot execute the Python NEWS pipeline.
-          Live NEWS output will be exposed to this dashboard later
-          through the backend API layer. OpenAI credentials must remain
-          server-side only.
+        <div class="runtime-note">
+          NEWS V1 code is present in the Python backend.
+          This browser page does not execute the Python NEWS pipeline.
+          Runtime verification and backend API exposure remain separate steps.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SENTIMENT
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            SENTIMENT Agent
+          </h3>
+
+          <p>
+            Positioning, crowding and market sentiment analysis
+          </p>
+
+        </div>
+
+        <div class="agent-tag complete">
+          V1 CODE COMPLETE
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="pipeline">
+
+          <div class="pipeline-node">
+
+            <strong>
+              OKX Source
+            </strong>
+
+            <span>
+              funding · open interest · market activity
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              SentimentInput
+            </strong>
+
+            <span>
+              normalized source metrics
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              Analyzer
+            </strong>
+
+            <span>
+              positioning · extremes · crowding · quality
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              Snapshot
+            </strong>
+
+            <span>
+              composite score · regime · disagreement
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              SentimentOutput
+            </strong>
+
+            <span>
+              directional sentiment evidence for DECISION
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="component-grid">
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                models.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              SentimentInput, metrics,
+              signals, regime and output models.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                analyzer.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Deterministic sentiment scoring,
+              crowding detection and data quality.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                sources/okx.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              OKX public source integration
+              with partial data handling.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                agent.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Bias, confidence,
+              evidence and structured output.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                service.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Source orchestration,
+              merge and failure isolation.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                tests
+              </div>
+
+              <div class="component-status">
+                PRESENT
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Deterministic and pipeline
+              test scripts exist in backend/.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="runtime-note">
+          SENTIMENT V1 code is complete structurally.
+          Browser execution is intentionally not duplicated here.
+          The dashboard should eventually consume SentimentOutput from the backend API.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHARTS
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            CHARTS Agent
+          </h3>
+
+          <p>
+            Deterministic multi-timeframe technical analysis
+          </p>
+
+        </div>
+
+        <div class="agent-tag complete">
+          V1 CODE COMPLETE
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="pipeline">
+
+          <div class="pipeline-node">
+
+            <strong>
+              OKX Candles
+            </strong>
+
+            <span>
+              multi-timeframe OHLCV
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              Indicators
+            </strong>
+
+            <span>
+              EMA · RSI · MACD · ATR · Bollinger · Volume
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              Structure
+            </strong>
+
+            <span>
+              HH/HL · LH/LL · support · resistance · breakout
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              MTF Analyzer
+            </strong>
+
+            <span>
+              weighted timeframe synthesis · disagreement
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              ChartsOutput
+            </strong>
+
+            <span>
+              technical bias · confidence · evidence
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="component-grid">
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                indicators.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Pure-Python EMA20/50/200,
+              RSI14, MACD, ATR, Bollinger and volume.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                analyzer.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Trend, momentum, volatility,
+              structure, support/resistance and breakout logic.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                sources/okx.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Concurrent OKX candle retrieval
+              and partial timeframe failure isolation.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                service.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Multi-source candle merge,
+              diagnostics and Agent orchestration.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                timeframe rules
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              lowercase m = minute,
+              uppercase M = month.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                tests
+              </div>
+
+              <div class="component-status">
+                PRESENT
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              test_charts.py and
+              test_charts_pipeline.py exist.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="runtime-note">
+          CHARTS V1 source code is structurally complete.
+          Technical bias is analysis evidence, not a direct order instruction.
+          Live runtime verification remains separate from source-code completeness.
         </div>
 
       </div>
@@ -3172,7 +2909,7 @@
           </h3>
 
           <p>
-            Six-agent architecture
+            Current six-agent backend development state
           </p>
 
         </div>
@@ -3201,9 +2938,8 @@
           </div>
 
           <div class="agent-detail">
-            Market universe scanning,
-            liquidity, volume, volatility,
-            open interest and activity ranking.
+            Scans live OKX USDT perpetual markets using volume,
+            liquidity, volatility, open interest and price activity.
           </div>
 
         </div>
@@ -3217,7 +2953,7 @@
               02 · NEWS
             </div>
 
-            <div class="agent-tag code-complete">
+            <div class="agent-tag complete">
               V1 COMPLETE
             </div>
 
@@ -3228,9 +2964,8 @@
           </div>
 
           <div class="agent-detail">
-            RSS ingestion, source manager,
-            deterministic event extraction,
-            LLM semantic analysis and caching.
+            RSS ingestion, source aggregation, deterministic event analysis
+            and optional server-side LLM semantic interpretation.
           </div>
 
         </div>
@@ -3244,20 +2979,19 @@
               03 · SENTIMENT
             </div>
 
-            <div class="agent-tag pending">
-              NEXT
+            <div class="agent-tag complete">
+              V1 COMPLETE
             </div>
 
           </div>
 
           <div class="agent-role">
-            Crowd and positioning analysis
+            Positioning and crowd analysis
           </div>
 
           <div class="agent-detail">
-            Funding, open interest,
-            long-short ratios, crowding,
-            extremes and social sentiment.
+            Funding, open interest, market activity,
+            crowding, extremes, disagreement and data quality.
           </div>
 
         </div>
@@ -3271,8 +3005,8 @@
               04 · CHARTS
             </div>
 
-            <div class="agent-tag">
-              SKELETON
+            <div class="agent-tag complete">
+              V1 COMPLETE
             </div>
 
           </div>
@@ -3282,8 +3016,8 @@
           </div>
 
           <div class="agent-detail">
-            Structure, trend, momentum,
-            volatility, volume and multi-timeframe analysis.
+            Multi-timeframe technical indicators, trend,
+            structure, volatility, volume, support/resistance and breakout.
           </div>
 
         </div>
@@ -3297,7 +3031,7 @@
               05 · RISK
             </div>
 
-            <div class="agent-tag">
+            <div class="agent-tag pending">
               SKELETON
             </div>
 
@@ -3308,8 +3042,9 @@
           </div>
 
           <div class="agent-detail">
-            Risk interpretation and trade-quality assessment.
-            Deterministic hard risk controls remain separate.
+            Current agent only initializes a neutral risk result.
+            Full trade-quality and risk interpretation logic remains to be developed.
+            Deterministic hard risk limits will remain outside the AI agent.
           </div>
 
         </div>
@@ -3323,7 +3058,7 @@
               06 · DECISION
             </div>
 
-            <div class="agent-tag">
+            <div class="agent-tag pending">
               SKELETON
             </div>
 
@@ -3334,10 +3069,142 @@
           </div>
 
           <div class="agent-detail">
-            Combines agent outputs into a final
-            LONG, SHORT or WAIT decision.
+            Current implementation defaults to WAIT.
+            Full synthesis of SCOUT, NEWS, SENTIMENT, CHARTS and RISK
+            is not implemented yet.
           </div>
 
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         Architecture
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            Target Runtime Architecture
+          </h3>
+
+          <p>
+            Intended production direction
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="architecture">
+
+          <div class="architecture-node">
+
+            <strong>
+              Dashboard
+            </strong>
+
+            <span>
+              index.html
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              Backend API
+            </strong>
+
+            <span>
+              future FastAPI layer
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              Research Agents
+            </strong>
+
+            <span>
+              SCOUT / NEWS / SENTIMENT / CHARTS
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              RISK
+            </strong>
+
+            <span>
+              AI risk advisor
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              DECISION
+            </strong>
+
+            <span>
+              LONG / SHORT / WAIT
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              Hard Risk Engine
+            </strong>
+
+            <span>
+              deterministic controls
+            </span>
+
+          </div>
+
+
+          <div class="architecture-node">
+
+            <strong>
+              Execution
+            </strong>
+
+            <span>
+              OKX adapter
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="runtime-note">
+          Current repository does not yet contain the complete production
+          Backend API, deterministic hard risk engine or live execution layer.
+          This dashboard must not directly hold private exchange credentials.
         </div>
 
       </div>
@@ -3376,7 +3243,7 @@
             class="metric-label"
             style="margin-bottom: 12px;"
           >
-            OKX Public Endpoints
+            Public / Backend Connectivity
           </div>
 
 
@@ -3385,7 +3252,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/market/ticker
+                OKX /api/v5/market/ticker
               </code>
 
               <span
@@ -3401,7 +3268,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/market/candles
+                OKX /api/v5/market/candles
               </code>
 
               <span
@@ -3417,7 +3284,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/market/books
+                OKX /api/v5/market/books
               </code>
 
               <span
@@ -3433,7 +3300,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/public/funding-rate
+                OKX /api/v5/public/funding-rate
               </code>
 
               <span
@@ -3449,7 +3316,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/public/open-interest
+                OKX /api/v5/public/open-interest
               </code>
 
               <span
@@ -3465,7 +3332,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/public/instruments
+                OKX /api/v5/public/instruments
               </code>
 
               <span
@@ -3481,7 +3348,7 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/market/tickers
+                OKX /api/v5/market/tickers
               </code>
 
               <span
@@ -3489,6 +3356,21 @@
                 class="endpoint-state"
               >
                 waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                Codex Backend API
+              </code>
+
+              <span
+                class="endpoint-state pending"
+              >
+                NOT CONNECTED
               </span>
 
             </div>
@@ -3525,7 +3407,8 @@
 
     <div class="container">
       Codex Bot · Research & development dashboard ·
-      public market data only
+      OKX public market data only ·
+      private credentials remain backend-only
     </div>
 
   </footer>
@@ -3535,11 +3418,9 @@
     "use strict";
 
 
-    /*
-     * ==============================
-     * Config
-     * ==============================
-     */
+    /* =========================
+       Config
+    ========================= */
 
     const OKX_BASE =
       "https://www.okx.com";
@@ -3551,6 +3432,10 @@
 
     const SCOUT_REFRESH_MS =
       300000;
+
+
+    const MARKET_CANDLE_LIMIT =
+      80;
 
 
     const SCOUT_TOP_N =
@@ -3577,11 +3462,9 @@
       [];
 
 
-    /*
-     * ==============================
-     * Elements
-     * ==============================
-     */
+    /* =========================
+       Elements
+    ========================= */
 
     const elements = {
 
@@ -3777,11 +3660,9 @@
     };
 
 
-    /*
-     * ==============================
-     * Logging
-     * ==============================
-     */
+    /* =========================
+       Logging
+    ========================= */
 
     function log(
       message,
@@ -3816,7 +3697,9 @@
       while (
         elements.systemLog
           .children
-          .length > 100
+          .length
+        >
+        120
       ) {
 
         elements.systemLog
@@ -3830,30 +3713,31 @@
     }
 
 
-    /*
-     * ==============================
-     * Status helpers
-     * ==============================
-     */
+    /* =========================
+       Status
+    ========================= */
 
     function setConnection(
       status
     ) {
 
       elements.connectionDot
-        .classList.remove(
+        .classList
+        .remove(
           "online",
           "offline"
         );
 
 
       if (
-        status ===
+        status
+        ===
         "online"
       ) {
 
         elements.connectionDot
-          .classList.add(
+          .classList
+          .add(
             "online"
           );
 
@@ -3862,13 +3746,20 @@
           .textContent =
             "OKX Online";
 
-      } else if (
-        status ===
+        return;
+
+      }
+
+
+      if (
+        status
+        ===
         "offline"
       ) {
 
         elements.connectionDot
-          .classList.add(
+          .classList
+          .add(
             "offline"
           );
 
@@ -3877,13 +3768,14 @@
           .textContent =
             "OKX Offline";
 
-      } else {
-
-        elements.connectionText
-          .textContent =
-            "Connecting";
+        return;
 
       }
+
+
+      elements.connectionText
+        .textContent =
+          "Connecting";
 
     }
 
@@ -3929,11 +3821,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Number helpers
-     * ==============================
-     */
+    /* =========================
+       Helpers
+    ========================= */
 
     function finiteNumber(
       value,
@@ -3966,7 +3856,9 @@
 
 
       if (
-        number === null
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -3977,18 +3869,17 @@
       if (
         Math.abs(
           number
-        ) >= 1000
+        )
+        >=
+        1000
       ) {
 
         return number
           .toLocaleString(
             undefined,
             {
-              minimumFractionDigits:
-                2,
-
-              maximumFractionDigits:
-                2
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
             }
           );
 
@@ -3998,18 +3889,17 @@
       if (
         Math.abs(
           number
-        ) >= 1
+        )
+        >=
+        1
       ) {
 
         return number
           .toLocaleString(
             undefined,
             {
-              minimumFractionDigits:
-                2,
-
-              maximumFractionDigits:
-                5
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 5
             }
           );
 
@@ -4020,11 +3910,8 @@
         .toLocaleString(
           undefined,
           {
-            minimumFractionDigits:
-              4,
-
-            maximumFractionDigits:
-              8
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 8
           }
         );
 
@@ -4042,7 +3929,9 @@
 
 
       if (
-        number === null
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -4054,11 +3943,8 @@
         .NumberFormat(
           undefined,
           {
-            notation:
-              "compact",
-
-            maximumFractionDigits:
-              2
+            notation: "compact",
+            maximumFractionDigits: 2
           }
         )
         .format(
@@ -4080,7 +3966,9 @@
 
 
       if (
-        number === null
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -4097,9 +3985,7 @@
       return (
         `${sign}`
         +
-        `${number.toFixed(
-          digits
-        )}%`
+        `${number.toFixed(digits)}%`
       );
 
     }
@@ -4116,7 +4002,9 @@
 
 
       if (
-        number === null
+        number
+        ===
+        null
       ) {
 
         return "--";
@@ -4126,10 +4014,10 @@
 
       return (
         `${(
-          number * 100
-        ).toFixed(
-          5
-        )}%`
+          number
+          *
+          100
+        ).toFixed(5)}%`
       );
 
     }
@@ -4141,13 +4029,9 @@
     ) {
 
       if (
-        !Number.isFinite(
-          last
-        )
+        !Number.isFinite(last)
         ||
-        !Number.isFinite(
-          open
-        )
+        !Number.isFinite(open)
         ||
         open === 0
       ) {
@@ -4159,7 +4043,9 @@
 
       return (
         (
-          last - open
+          last
+          -
+          open
         )
         /
         open
@@ -4177,17 +4063,11 @@
     ) {
 
       if (
-        !Number.isFinite(
-          high
-        )
+        !Number.isFinite(high)
         ||
-        !Number.isFinite(
-          low
-        )
+        !Number.isFinite(low)
         ||
-        !Number.isFinite(
-          base
-        )
+        !Number.isFinite(base)
         ||
         base <= 0
       ) {
@@ -4199,7 +4079,9 @@
 
       return (
         (
-          high - low
+          high
+          -
+          low
         )
         /
         base
@@ -4216,13 +4098,9 @@
     ) {
 
       if (
-        !Number.isFinite(
-          bid
-        )
+        !Number.isFinite(bid)
         ||
-        !Number.isFinite(
-          ask
-        )
+        !Number.isFinite(ask)
         ||
         bid <= 0
         ||
@@ -4236,9 +4114,11 @@
       }
 
 
-      const mid =
+      const midpoint =
         (
-          bid + ask
+          bid
+          +
+          ask
         )
         /
         2;
@@ -4246,10 +4126,12 @@
 
       return (
         (
-          ask - bid
+          ask
+          -
+          bid
         )
         /
-        mid
+        midpoint
       )
       *
       100;
@@ -4257,11 +4139,25 @@
     }
 
 
-    /*
-     * ==============================
-     * OKX
-     * ==============================
-     */
+    function selectedTimeframeLabel() {
+
+      const option =
+        elements.barSelect
+          .selectedOptions[0];
+
+
+      return (
+        option?.textContent?.trim()
+        ||
+        elements.barSelect.value
+      );
+
+    }
+
+
+    /* =========================
+       OKX HTTP
+    ========================= */
 
     async function okxGet(
       path,
@@ -4299,9 +4195,7 @@
               url.searchParams
                 .set(
                   key,
-                  String(
-                    value
-                  )
+                  String(value)
                 );
 
             }
@@ -4314,14 +4208,12 @@
         await fetch(
           url.toString(),
           {
-            method:
-              "GET",
+            method: "GET",
 
-            headers:
-              {
-                Accept:
-                  "application/json"
-              },
+            headers: {
+              Accept:
+                "application/json"
+            },
 
             cache:
               "no-store"
@@ -4376,11 +4268,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Market Monitor
-     * ==============================
-     */
+    /* =========================
+       Market Monitor
+    ========================= */
 
     async function refreshMarket() {
 
@@ -4417,6 +4307,10 @@
           .value;
 
 
+      const barLabel =
+        selectedTimeframeLabel();
+
+
       elements.chartSymbol
         .textContent =
           symbol;
@@ -4424,7 +4318,11 @@
 
       elements.chartSub
         .textContent =
-          `${bar} · 60 candles`;
+          (
+            `${barLabel}`
+            +
+            ` · ${MARKET_CANDLE_LIMIT} candles`
+          );
 
 
       try {
@@ -4456,7 +4354,7 @@
                   bar,
 
                   limit:
-                    60
+                    MARKET_CANDLE_LIMIT
                 }
               ),
 
@@ -4494,9 +4392,7 @@
           );
 
 
-        /*
-         * Ticker
-         */
+        /* Ticker */
 
         if (
           tickerResult.status
@@ -4588,7 +4484,9 @@
 
 
           if (
-            change > 0
+            change
+            >
+            0
           ) {
 
             elements.priceChange
@@ -4598,7 +4496,9 @@
               );
 
           } else if (
-            change < 0
+            change
+            <
+            0
           ) {
 
             elements.priceChange
@@ -4615,11 +4515,11 @@
 
 
           if (
-            volCcy24h > 0
+            volCcy24h
+            >
+            0
             &&
-            Number.isFinite(
-              last
-            )
+            Number.isFinite(last)
           ) {
 
             approximateVolume =
@@ -4641,6 +4541,16 @@
               );
 
 
+          const rangeBase =
+            (
+              Number.isFinite(open24h)
+              &&
+              open24h > 0
+            )
+              ? open24h
+              : last;
+
+
           elements.range24h
             .textContent =
               (
@@ -4649,14 +4559,9 @@
                 rangePercent(
                   high24h,
                   low24h,
-
-                  open24h > 0
-                    ? open24h
-                    : last
+                  rangeBase
                 )
-                .toFixed(
-                  2
-                )
+                .toFixed(2)
                 +
                 "%"
               );
@@ -4671,9 +4576,7 @@
         }
 
 
-        /*
-         * Candles
-         */
+        /* Candles */
 
         if (
           candlesResult.status
@@ -4691,9 +4594,7 @@
             candlesResult.value
 
               .map(
-                (
-                  row
-                ) => ({
+                row => ({
                   timestamp:
                     finiteNumber(
                       row[0]
@@ -4722,9 +4623,7 @@
               )
 
               .filter(
-                (
-                  candle
-                ) =>
+                candle =>
                   Number.isFinite(
                     candle.open
                   )
@@ -4759,9 +4658,7 @@
         }
 
 
-        /*
-         * Order book
-         */
+        /* Order Book */
 
         if (
           booksResult.status
@@ -4808,19 +4705,17 @@
 
 
           if (
-            Number.isFinite(
-              ask
-            )
+            Number.isFinite(ask)
             &&
-            Number.isFinite(
-              bid
-            )
+            Number.isFinite(bid)
           ) {
 
             elements.spreadValue
               .textContent =
                 formatPrice(
-                  ask - bid
+                  ask
+                  -
+                  bid
                 );
 
 
@@ -4836,10 +4731,19 @@
                 Number.isFinite(
                   spread
                 )
-                  ? `${spread.toFixed(
-                      5
-                    )}%`
+                  ? `${spread.toFixed(5)}%`
                   : "--";
+
+          } else {
+
+            elements.spreadValue
+              .textContent =
+                "--";
+
+
+            elements.spreadPercent
+              .textContent =
+                "--";
 
           }
 
@@ -4853,9 +4757,7 @@
         }
 
 
-        /*
-         * Funding
-         */
+        /* Funding */
 
         if (
           fundingResult.status
@@ -4903,7 +4805,9 @@
 
 
           if (
-            rate > 0
+            rate
+            >
+            0
           ) {
 
             elements.fundingRate
@@ -4913,7 +4817,9 @@
               );
 
           } else if (
-            rate < 0
+            rate
+            <
+            0
           ) {
 
             elements.fundingRate
@@ -4927,11 +4833,9 @@
 
           elements.fundingTime
             .textContent =
-
               Number.isFinite(
                 nextFunding
               )
-
                 ? (
                     "Next "
                     +
@@ -4940,7 +4844,6 @@
                     )
                     .toLocaleString()
                   )
-
                 : "Next funding --";
 
         } else {
@@ -4953,9 +4856,7 @@
         }
 
 
-        /*
-         * Open interest
-         */
+        /* Open Interest */
 
         if (
           oiResult.status
@@ -4989,11 +4890,9 @@
 
           elements.openInterestUsd
             .textContent =
-
               Number.isFinite(
                 oiUsd
               )
-
                 ? (
                     "$"
                     +
@@ -5001,17 +4900,14 @@
                       oiUsd
                     )
                   )
-
                 : "--";
 
 
           elements.openInterestRaw
             .textContent =
-
               Number.isFinite(
                 oiRaw
               )
-
                 ? (
                     "OI "
                     +
@@ -5019,7 +4915,6 @@
                       oiRaw
                     )
                   )
-
                 : "OI --";
 
         } else {
@@ -5041,9 +4936,7 @@
             oiResult
           ]
           .some(
-            (
-              result
-            ) =>
+            result =>
               result.status
               ===
               "fulfilled"
@@ -5065,9 +4958,20 @@
             (
               `Market refreshed: `
               +
-              `${symbol} ${bar}`
+              `${symbol} ${barLabel}`
             ),
             "success"
+          );
+
+        } else {
+
+          log(
+            (
+              `Market refresh failed: `
+              +
+              `${symbol} ${barLabel}`
+            ),
+            "error"
           );
 
         }
@@ -5083,7 +4987,7 @@
 
         log(
           (
-            `Market refresh error: `
+            "Market refresh error: "
             +
             error.message
           ),
@@ -5110,11 +5014,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Canvas chart
-     * ==============================
-     */
+    /* =========================
+       Candlestick Canvas
+    ========================= */
 
     function drawCandles(
       candles
@@ -5191,20 +5093,12 @@
       }
 
 
-      const padding =
-        {
-          top:
-            10,
-
-          right:
-            12,
-
-          bottom:
-            12,
-
-          left:
-            12
-        };
+      const padding = {
+        top: 10,
+        right: 12,
+        bottom: 12,
+        left: 12
+      };
 
 
       const width =
@@ -5242,7 +5136,9 @@
 
 
       const range =
-        highest - lowest
+        highest
+        -
+        lowest
         ||
         1;
 
@@ -5273,7 +5169,9 @@
           padding.top
           +
           (
-            highest - price
+            highest
+            -
+            price
           )
           /
           range
@@ -5440,17 +5338,14 @@
     }
 
 
-    /*
-     * ==============================
-     * Ranking
-     * ==============================
-     */
+    /* =========================
+       SCOUT Ranking
+    ========================= */
 
     function rankScores(
       rows,
       valueGetter,
-      higherIsBetter =
-        true
+      higherIsBetter = true
     ) {
 
       const values =
@@ -5471,9 +5366,7 @@
           )
 
           .filter(
-            (
-              item
-            ) =>
+            item =>
               Number.isFinite(
                 item.value
               )
@@ -5500,7 +5393,20 @@
 
 
       if (
-        values.length === 1
+        values.length
+        ===
+        0
+      ) {
+
+        return scores;
+
+      }
+
+
+      if (
+        values.length
+        ===
+        1
       ) {
 
         scores[
@@ -5591,25 +5497,19 @@
         ) => {
 
           row.volumeScore =
-            volumeScores[
-              index
-            ]
+            volumeScores[index]
             ??
             0;
 
 
           row.volatilityScore =
-            volatilityScores[
-              index
-            ]
+            volatilityScores[index]
             ??
             0;
 
 
           row.activityScore =
-            activityScores[
-              index
-            ]
+            activityScores[index]
             ??
             0;
 
@@ -5651,7 +5551,7 @@
         );
 
 
-      const spreadScores =
+      const liquidityScores =
         rankScores(
           rows,
           row =>
@@ -5691,37 +5591,28 @@
         ) => {
 
           row.volumeScore =
-            volumeScores[
-              index
-            ];
+            volumeScores[index];
 
 
           row.liquidityScore =
-            spreadScores[
-              index
-            ];
+            liquidityScores[index];
 
 
           row.volatilityScore =
-            volatilityScores[
-              index
-            ];
+            volatilityScores[index];
 
 
           row.openInterestScore =
-            oiScores[
-              index
-            ];
+            oiScores[index];
 
 
           row.activityScore =
-            activityScores[
-              index
-            ];
+            activityScores[index];
 
 
           const components =
             [
+
               [
                 row.volumeScore,
                 0.30
@@ -5746,6 +5637,7 @@
                 row.activityScore,
                 0.10
               ]
+
             ]
             .filter(
               (
@@ -5759,26 +5651,25 @@
             );
 
 
-          const weight =
+          const totalWeight =
             components
               .reduce(
                 (
                   total,
                   [
                     ,
-                    componentWeight
+                    weight
                   ]
                 ) =>
                   total
                   +
-                  componentWeight,
+                  weight,
                 0
               );
 
 
           row.finalScore =
-            weight > 0
-
+            totalWeight > 0
               ? (
                   components
                     .reduce(
@@ -5786,7 +5677,7 @@
                         total,
                         [
                           score,
-                          componentWeight
+                          weight
                         ]
                       ) =>
                         total
@@ -5794,14 +5685,13 @@
                         (
                           score
                           *
-                          componentWeight
+                          weight
                         ),
                       0
                     )
                   /
-                  weight
+                  totalWeight
                 )
-
               : 0;
 
         }
@@ -5810,11 +5700,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Funding attachment
-     * ==============================
-     */
+    /* =========================
+       Funding Attachment
+    ========================= */
 
     async function attachFunding(
       rows
@@ -5850,9 +5738,7 @@
 
 
           const row =
-            rows[
-              index
-            ];
+            rows[index];
 
 
           try {
@@ -5874,8 +5760,7 @@
               );
 
 
-            successCount +=
-              1;
+            successCount += 1;
 
           } catch (
             error
@@ -5903,9 +5788,9 @@
 
 
       for (
-        let i = 0;
-        i < workerCount;
-        i += 1
+        let index = 0;
+        index < workerCount;
+        index += 1
       ) {
 
         workers.push(
@@ -5925,11 +5810,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Reasons
-     * ==============================
-     */
+    /* =========================
+       SCOUT Reasons
+    ========================= */
 
     function buildReasons(
       row
@@ -6020,11 +5903,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Render SCOUT
-     * ==============================
-     */
+    /* =========================
+       SCOUT Render
+    ========================= */
 
     function renderScout(
       rows
@@ -6071,25 +5952,17 @@
 
           const changeClass =
             row.changePct > 0
-
               ? "positive"
-
               : row.changePct < 0
-
                 ? "negative"
-
                 : "";
 
 
           const fundingClass =
             row.fundingRate > 0
-
               ? "positive"
-
               : row.fundingRate < 0
-
                 ? "negative"
-
                 : "";
 
 
@@ -6128,9 +6001,7 @@
                   Number.isFinite(
                     row.spreadPct
                   )
-
                     ? `${row.spreadPct.toFixed(5)}%`
-
                     : "--"
                 }
               </td>
@@ -6146,11 +6017,9 @@
                   Number.isFinite(
                     row.openInterestUsd
                   )
-
                     ? `$${formatCompact(
                         row.openInterestUsd
                       )}`
-
                     : "--"
                 }
               </td>
@@ -6191,9 +6060,7 @@
 
           row.reasons
             .forEach(
-              (
-                reason
-              ) => {
+              reason => {
 
                 const chip =
                   document.createElement(
@@ -6234,41 +6101,31 @@
                 row.volumeScore
                 ??
                 0
-              ).toFixed(
-                2
-              )}`
+              ).toFixed(2)}`
               +
               ` · L ${(
                 row.liquidityScore
                 ??
                 0
-              ).toFixed(
-                2
-              )}`
+              ).toFixed(2)}`
               +
               ` · Vol ${(
                 row.volatilityScore
                 ??
                 0
-              ).toFixed(
-                2
-              )}`
+              ).toFixed(2)}`
               +
               ` · OI ${(
                 row.openInterestScore
                 ??
                 0
-              ).toFixed(
-                2
-              )}`
+              ).toFixed(2)}`
               +
               ` · Act ${(
                 row.activityScore
                 ??
                 0
-              ).toFixed(
-                2
-              )}`
+              ).toFixed(2)}`
             );
 
 
@@ -6295,11 +6152,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Run SCOUT
-     * ==============================
-     */
+    /* =========================
+       Browser SCOUT
+    ========================= */
 
     async function runScout() {
 
@@ -6344,7 +6199,7 @@
 
 
       log(
-        "SCOUT scan started.",
+        "Browser SCOUT scan started.",
         "info"
       );
 
@@ -6399,7 +6254,13 @@
           );
 
 
-          throw instrumentsResult.reason;
+          throw (
+            instrumentsResult.reason
+            ||
+            new Error(
+              "Instrument request failed."
+            )
+          );
 
         }
 
@@ -6422,7 +6283,13 @@
           );
 
 
-          throw tickersResult.reason;
+          throw (
+            tickersResult.reason
+            ||
+            new Error(
+              "Ticker request failed."
+            )
+          );
 
         }
 
@@ -6486,9 +6353,7 @@
             instruments
 
               .filter(
-                (
-                  item
-                ) =>
+                item =>
                   item.state
                   ===
                   "live"
@@ -6504,9 +6369,7 @@
 
                   (
                     !item.settleCcy
-
                     ||
-
                     item.settleCcy
                     ===
                     "USDT"
@@ -6514,9 +6377,7 @@
               )
 
               .map(
-                (
-                  item
-                ) =>
+                item =>
                   item.instId
               )
           );
@@ -6528,9 +6389,7 @@
 
         openInterest
           .forEach(
-            (
-              item
-            ) => {
+            item => {
 
               oiMap.set(
                 item.instId,
@@ -6587,9 +6446,7 @@
 
 
           if (
-            !Number.isFinite(
-              last
-            )
+            !Number.isFinite(last)
             ||
             last <= 0
           ) {
@@ -6650,9 +6507,7 @@
           if (
             volCcy24h > 0
             &&
-            Number.isFinite(
-              last
-            )
+            Number.isFinite(last)
           ) {
 
             approximateQuoteVolume =
@@ -6670,14 +6525,21 @@
             );
 
 
+          const rangeBase =
+            (
+              Number.isFinite(open24h)
+              &&
+              open24h > 0
+            )
+              ? open24h
+              : last;
+
+
           const rangePct =
             rangePercent(
               high24h,
               low24h,
-
-              open24h > 0
-                ? open24h
-                : last
+              rangeBase
             );
 
 
@@ -6881,14 +6743,12 @@
 
 
         topRows.forEach(
-          (
-            row
-          ) => {
+          row => {
 
-          row.reasons =
-            buildReasons(
-              row
-            );
+            row.reasons =
+              buildReasons(
+                row
+              );
 
           }
         );
@@ -6917,9 +6777,7 @@
                   "Score "
                   +
                   top.finalScore
-                    .toFixed(
-                      4
-                    )
+                    .toFixed(4)
                 )
               : "Score --";
 
@@ -6959,7 +6817,7 @@
 
         log(
           (
-            `SCOUT completed: `
+            `Browser SCOUT completed: `
             +
             `${rows.length} markets → `
             +
@@ -6994,7 +6852,7 @@
               <tr>
                 <td colspan="10">
                   <div class="empty-state">
-                    SCOUT scan failed.
+                    Browser SCOUT scan failed.
                     Check System Log.
                   </div>
                 </td>
@@ -7004,7 +6862,7 @@
 
         log(
           (
-            "SCOUT error: "
+            "Browser SCOUT error: "
             +
             error.message
           ),
@@ -7038,11 +6896,9 @@
     }
 
 
-    /*
-     * ==============================
-     * Events
-     * ==============================
-     */
+    /* =========================
+       Events
+    ========================= */
 
     elements.refreshMarketButton
       .addEventListener(
@@ -7090,11 +6946,9 @@
     );
 
 
-    /*
-     * ==============================
-     * Startup
-     * ==============================
-     */
+    /* =========================
+       Startup
+    ========================= */
 
     log(
       "Codex Bot dashboard initialized.",
@@ -7103,25 +6957,55 @@
 
 
     log(
+      "Agent development status: 4 / 6.",
+      "info"
+    );
+
+
+    log(
+      "SCOUT implemented.",
+      "success"
+    );
+
+
+    log(
+      "NEWS V1 code complete.",
+      "success"
+    );
+
+
+    log(
+      "SENTIMENT V1 code complete.",
+      "success"
+    );
+
+
+    log(
+      "CHARTS V1 code complete.",
+      "success"
+    );
+
+
+    log(
+      "RISK remains skeleton.",
+      "warning"
+    );
+
+
+    log(
+      "DECISION remains skeleton.",
+      "warning"
+    );
+
+
+    log(
+      "Backend API is not connected to this dashboard yet.",
+      "warning"
+    );
+
+
+    log(
       "Public market-data mode. No private exchange key is loaded.",
-      "info"
-    );
-
-
-    log(
-      "SCOUT implementation available in browser and Python backend.",
-      "info"
-    );
-
-
-    log(
-      "NEWS V1 code complete: RSS → Manager → Analyzer → LLM → NewsOutput.",
-      "info"
-    );
-
-
-    log(
-      "NEWS runtime execution remains backend-only.",
       "info"
     );
 
@@ -7132,11 +7016,9 @@
     runScout();
 
 
-    /*
-     * ==============================
-     * Auto refresh
-     * ==============================
-     */
+    /* =========================
+       Auto Refresh
+    ========================= */
 
     setInterval(
       () => {
