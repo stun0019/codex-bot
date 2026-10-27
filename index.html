@@ -2,7 +2,6 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -13,47 +12,31 @@
     content="Codex Bot - Multi-Agent Crypto Trading System"
   >
 
-  <title>
-    Codex Bot | Market Command Center
-  </title>
+  <title>Codex Bot</title>
 
   <style>
     :root {
       --bg: #020407;
-      --bg-soft: #050810;
-      --bg-elevated: #080d14;
+      --panel: #080d14;
+      --panel-2: #0c131d;
+      --border: #182330;
+      --border-2: #273647;
 
-      --panel: #09101a;
-      --panel-2: #0c1420;
-      --panel-3: #101a28;
+      --text: #f3f6fa;
+      --muted: #8794a5;
+      --muted-2: #596777;
 
-      --border: #172232;
-      --border-strong: #26364b;
+      --green: #40e58d;
+      --red: #ff5e70;
 
-      --text: #f4f7fb;
-      --muted: #8c9aab;
-      --muted-2: #5f6d7e;
-
-      --green: #3de58f;
-      --red: #ff5f72;
-      --yellow: #ffd04f;
-      --blue: #4f9cff;
-      --purple: #c177ff;
-      --orange: #ff9f3d;
-      --cyan: #4ed8e8;
-
-      --scout: #ffd04f;
-      --news: #ff5f72;
-      --sentiment: #c177ff;
-      --charts: #4f9cff;
-      --risk: #3de58f;
-      --decision: #ff9f3d;
+      --scout: #ffd54a;
+      --news: #ff5f6d;
+      --sentiment: #b56cff;
+      --charts: #4d9fff;
+      --risk: #42e58d;
+      --decision: #ff9c42;
 
       --radius: 16px;
-
-      --shadow:
-        0 24px 70px
-        rgba(0, 0, 0, 0.32);
     }
 
 
@@ -74,19 +57,9 @@
 
       background:
         radial-gradient(
-          circle at 50% -20%,
-          rgba(79, 156, 255, 0.11),
-          transparent 33%
-        ),
-        radial-gradient(
-          circle at -10% 30%,
-          rgba(61, 229, 143, 0.045),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 110% 55%,
-          rgba(193, 119, 255, 0.045),
-          transparent 30%
+          circle at 50% -15%,
+          rgba(77, 159, 255, 0.12),
+          transparent 32%
         ),
         var(--bg);
 
@@ -97,12 +70,7 @@
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
         sans-serif;
-
-      line-height: 1.5;
     }
 
 
@@ -123,106 +91,76 @@
     }
 
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    code,
-    .mono {
-      font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        monospace;
-    }
-
-
     .container {
-      width:
-        min(
-          1460px,
-          calc(100% - 36px)
-        );
+      width: min(
+        1180px,
+        calc(100% - 28px)
+      );
 
       margin: 0 auto;
     }
 
 
-    /* =========================================
+    /* =========================
        HEADER
-    ========================================= */
+    ========================= */
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
 
-      border-bottom:
-        1px solid
-        rgba(38, 54, 75, 0.72);
+      border-bottom: 1px solid var(--border);
 
       background:
         rgba(2, 4, 7, 0.86);
 
-      backdrop-filter:
-        blur(18px);
+      backdrop-filter: blur(18px);
     }
 
 
     .navbar {
-      min-height: 68px;
+      min-height: 62px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      gap: 18px;
+      gap: 16px;
     }
 
 
     .brand {
       display: flex;
       align-items: center;
-
-      gap: 11px;
+      gap: 10px;
     }
 
 
-    .brand-logo {
-      width: 38px;
-      height: 38px;
+    .logo {
+      width: 36px;
+      height: 36px;
 
       display: grid;
       place-items: center;
 
-      border:
-        1px solid
-        rgba(79, 156, 255, 0.35);
-
+      border: 1px solid var(--border-2);
       border-radius: 10px;
 
       background:
         linear-gradient(
-          145deg,
-          rgba(79, 156, 255, 0.18),
-          rgba(61, 229, 143, 0.07)
+          135deg,
+          rgba(77, 159, 255, 0.16),
+          rgba(66, 229, 141, 0.06)
         );
-
-      box-shadow:
-        0 0 24px
-        rgba(79, 156, 255, 0.1);
 
       font-weight: 900;
     }
 
 
-    .brand-title {
+    .brand-name {
       font-size: 14px;
-      font-weight: 800;
-
-      letter-spacing: 0.5px;
+      font-weight: 850;
     }
 
 
@@ -230,14 +168,12 @@
       margin-top: 1px;
 
       color: var(--muted-2);
-
-      font-size: 9px;
-
-      letter-spacing: 0.4px;
+      font-size: 8px;
+      letter-spacing: 0.6px;
     }
 
 
-    .header-right {
+    .header-status {
       display: flex;
       align-items: center;
 
@@ -245,180 +181,115 @@
     }
 
 
-    .header-pill {
-      min-height: 34px;
+    .pill {
+      min-height: 31px;
 
-      display: inline-flex;
+      display: flex;
       align-items: center;
 
-      gap: 7px;
+      gap: 6px;
 
-      padding:
-        7px
-        10px;
+      padding: 6px 9px;
 
-      border:
-        1px solid
-        var(--border);
-
+      border: 1px solid var(--border);
       border-radius: 999px;
-
-      background:
-        rgba(9, 16, 26, 0.84);
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-
-    .header-pill strong {
-      color: var(--text);
-    }
-
-
-    .header-button {
-      min-height: 34px;
-
-      display: inline-flex;
-      align-items: center;
-
-      padding:
-        7px
-        11px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 9px;
 
       background: var(--panel);
 
-      color: var(--text);
+      color: var(--muted);
 
-      font-size: 10px;
+      font-size: 9px;
     }
 
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
+    .pill strong {
+      color: var(--green);
+    }
+
+
+    .dot {
+      width: 7px;
+      height: 7px;
 
       border-radius: 50%;
 
-      background: var(--yellow);
-
-      box-shadow:
-        0 0 12px
-        rgba(255, 208, 79, 0.5);
+      background: #f4c94b;
     }
 
 
-    .status-dot.online {
+    .dot.online {
       background: var(--green);
 
       box-shadow:
-        0 0 14px
-        rgba(61, 229, 143, 0.65);
+        0 0 10px
+        rgba(66, 229, 141, 0.65);
     }
 
 
-    .status-dot.offline {
+    .dot.offline {
       background: var(--red);
-
-      box-shadow:
-        0 0 14px
-        rgba(255, 95, 114, 0.65);
     }
 
 
-    /* =========================================
-       SHARED
-    ========================================= */
+    /* =========================
+       MARKET
+    ========================= */
 
     main {
-      padding:
-        20px
-        0
-        40px;
+      padding: 18px 0 40px;
     }
 
 
-    .section {
-      margin-top: 20px;
-    }
+    .market {
+      padding: 16px;
 
-
-    .section-head {
-      margin-bottom: 11px;
-
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-
-      gap: 16px;
-    }
-
-
-    .section-kicker {
-      color: var(--blue);
-
-      font-size: 8px;
-      font-weight: 800;
-
-      letter-spacing: 1.6px;
-
-      text-transform: uppercase;
-    }
-
-
-    .section-title {
-      margin-top: 3px;
-
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-
-    .section-sub {
-      margin-top: 3px;
-
-      color: var(--muted-2);
-
-      font-size: 10px;
-    }
-
-
-    .panel {
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
 
       background:
         linear-gradient(
           180deg,
-          rgba(12, 20, 32, 0.94),
-          rgba(7, 12, 20, 0.96)
+          rgba(10, 17, 27, 0.96),
+          rgba(4, 8, 13, 0.98)
         );
-
-      box-shadow:
-        var(--shadow);
     }
 
 
-    .metric-label {
-      color: var(--muted-2);
+    .market-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
 
-      font-size: 8px;
+      gap: 14px;
+    }
+
+
+    .symbol {
+      font-size: 12px;
       font-weight: 800;
+    }
 
-      letter-spacing: 0.6px;
 
-      text-transform: uppercase;
+    .price {
+      margin-top: 3px;
+
+      font-size:
+        clamp(
+          27px,
+          5vw,
+          40px
+        );
+
+      font-weight: 850;
+      letter-spacing: -1px;
+    }
+
+
+    .change {
+      margin-top: 3px;
+
+      color: var(--muted);
+      font-size: 9px;
     }
 
 
@@ -432,337 +303,46 @@
     }
 
 
-    .warning {
-      color: var(--yellow) !important;
-    }
-
-
-    .muted {
-      color: var(--muted);
-    }
-
-
-    .button {
-      min-height: 36px;
-
-      padding:
-        8px
-        12px;
-
-      border:
-        1px solid
-        var(--border-strong);
-
-      border-radius: 9px;
-
-      background:
-        var(--panel-2);
-
-      color: var(--text);
-
-      font-size: 10px;
-
-      transition:
-        border-color 0.15s,
-        background 0.15s,
-        transform 0.15s;
-    }
-
-
-    .button:hover:not(:disabled) {
-      border-color:
-        rgba(79, 156, 255, 0.55);
-
-      background:
-        #101a28;
-
-      transform:
-        translateY(-1px);
-    }
-
-
-    .button.primary {
-      border-color:
-        rgba(61, 229, 143, 0.28);
-
-      background:
-        rgba(61, 229, 143, 0.08);
-
-      color:
-        #b9fbd6;
-    }
-
-
-    .select {
-      min-height: 36px;
-
-      padding:
-        8px
-        11px;
-
-      border:
-        1px solid
-        var(--border-strong);
-
-      border-radius: 9px;
-
-      outline: none;
-
-      background:
-        var(--panel-2);
-
-      color: var(--text);
-
-      font-size: 10px;
-    }
-
-
-    /* =========================================
-       COMMAND CENTER
-    ========================================= */
-
-    .command-center {
-      position: relative;
-
-      overflow: hidden;
-
-      padding:
-        19px;
-
-      border:
-        1px solid
-        var(--border-strong);
-
-      border-radius:
-        18px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(10, 18, 29, 0.97),
-          rgba(3, 7, 12, 0.98)
-        );
-
-      box-shadow:
-        0 30px 90px
-        rgba(0, 0, 0, 0.36);
-    }
-
-
-    .command-center::before {
-      content: "";
-
-      position: absolute;
-
-      width: 600px;
-      height: 600px;
-
-      top: -450px;
-      left: calc(50% - 300px);
-
-      border-radius: 50%;
-
-      background:
-        rgba(79, 156, 255, 0.12);
-
-      filter: blur(80px);
-
-      pointer-events: none;
-    }
-
-
-    .command-top {
-      position: relative;
-
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      gap: 18px;
-    }
-
-
-    .command-kicker {
-      color: var(--green);
-
-      font-size: 8px;
-      font-weight: 800;
-
-      letter-spacing: 2px;
-
-      text-transform: uppercase;
-    }
-
-
-    .command-title {
-      margin-top: 5px;
-
-      font-size: 25px;
-      font-weight: 850;
-
-      letter-spacing: -0.5px;
-    }
-
-
-    .command-desc {
-      max-width: 660px;
-
-      margin-top: 5px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-
-    .development-state {
-      min-width: 180px;
-
-      padding: 11px 13px;
-
-      border:
-        1px solid
-        rgba(61, 229, 143, 0.15);
-
-      border-radius: 11px;
-
-      background:
-        rgba(61, 229, 143, 0.035);
-    }
-
-
-    .development-value {
-      margin-top: 3px;
-
-      color: var(--green);
-
-      font-size: 23px;
-      font-weight: 850;
-    }
-
-
-    .development-sub {
-      margin-top: 2px;
-
-      color: var(--muted-2);
-
-      font-size: 8px;
-    }
-
-
-    /* =========================================
-       MARKET TERMINAL
-    ========================================= */
-
-    .market-terminal {
-      position: relative;
-
-      margin-top: 16px;
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 1fr)
-        280px;
-
-      gap: 12px;
-    }
-
-
-    .market-main {
-      min-width: 0;
-
-      padding:
-        15px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        14px;
-
-      background:
-        rgba(4, 9, 15, 0.88);
-    }
-
-
-    .market-main-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      gap: 16px;
-    }
-
-
-    .symbol {
-      font-size: 14px;
-      font-weight: 850;
-    }
-
-
-    .price {
-      margin-top: 5px;
-
-      font-size:
-        clamp(
-          28px,
-          4vw,
-          42px
-        );
-
-      font-weight: 850;
-
-      letter-spacing: -1.4px;
-    }
-
-
-    .market-meta {
-      margin-top: 5px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 10px;
-
-      color: var(--muted);
-
-      font-size: 9px;
-    }
-
-
     .market-controls {
       display: flex;
-      gap: 7px;
 
+      gap: 6px;
       flex-wrap: wrap;
 
       justify-content: flex-end;
     }
 
 
-    .chart-container {
-      height: 330px;
+    select,
+    .small-button {
+      min-height: 33px;
 
-      margin-top: 12px;
+      padding: 7px 9px;
 
-      position: relative;
+      border: 1px solid var(--border-2);
+      border-radius: 8px;
+
+      background: var(--panel-2);
+
+      color: var(--text);
+
+      font-size: 9px;
+
+      outline: none;
+    }
+
+
+    .chart {
+      height: 280px;
+
+      margin-top: 11px;
 
       overflow: hidden;
 
-      border:
-        1px solid
-        rgba(23, 34, 50, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 11px;
 
-      border-radius: 10px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(6, 11, 19, 1),
-          rgba(3, 7, 12, 1)
-        );
+      background: #03070c;
     }
 
 
@@ -772,129 +352,73 @@
     }
 
 
-    .market-side {
-      display: grid;
-
-      grid-template-columns:
-        1fr;
-
-      gap: 9px;
-    }
-
-
-    .side-card {
-      padding: 12px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 11px;
-
-      background:
-        rgba(7, 13, 22, 0.9);
-    }
-
-
-    .side-value {
-      margin-top: 5px;
-
-      font-size: 17px;
-      font-weight: 780;
-
-      overflow-wrap: anywhere;
-    }
-
-
-    .side-sub {
-      margin-top: 2px;
-
-      color: var(--muted-2);
-
-      font-size: 8px;
-    }
-
-
-    .bid-ask {
-      margin-top: 7px;
+    .market-mini {
+      margin-top: 10px;
 
       display: grid;
 
       grid-template-columns:
-        1fr
-        1fr;
+        repeat(
+          4,
+          minmax(0, 1fr)
+        );
 
       gap: 7px;
     }
 
 
-    .book-box {
-      padding: 8px;
+    .market-stat {
+      padding: 9px;
 
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 8px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
 
       background:
-        rgba(2, 5, 9, 0.7);
+        rgba(8, 13, 20, 0.72);
     }
 
 
-    .book-label {
+    .market-stat-label {
       color: var(--muted-2);
+
       font-size: 7px;
+      text-transform: uppercase;
     }
 
 
-    .book-value {
+    .market-stat-value {
       margin-top: 3px;
 
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 750;
+
+      overflow-wrap: anywhere;
     }
 
 
-    /* =========================================
-       AGENT FLOOR
-    ========================================= */
+    /* =========================
+       AGENTS
+    ========================= */
 
-    .agent-floor {
-      padding:
-        16px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius);
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(5, 10, 17, 0.98),
-          rgba(2, 5, 9, 0.98)
-        );
-
-      box-shadow:
-        var(--shadow);
+    .agents-section {
+      margin-top: 18px;
     }
 
 
-    .agent-floor-title {
+    .agents-title {
+      margin-bottom: 11px;
+
       text-align: center;
     }
 
 
-    .agent-floor-title strong {
+    .agents-title strong {
       font-size: 15px;
       letter-spacing: 0.7px;
     }
 
 
-    .agent-floor-title span {
+    .agents-title span {
       display: block;
 
       margin-top: 3px;
@@ -905,9 +429,7 @@
     }
 
 
-    .agent-grid {
-      margin-top: 15px;
-
+    .agents {
       display: grid;
 
       grid-template-columns:
@@ -916,217 +438,198 @@
           minmax(0, 1fr)
         );
 
-      gap: 11px;
+      gap: 10px;
     }
 
 
-    .agent-card {
+    .agent {
+      --agent-color: #fff;
+
       position: relative;
 
-      min-height: 190px;
+      min-height: 155px;
 
       overflow: hidden;
 
-      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 15px;
 
       border:
         1px solid
-        var(--border);
+        color-mix(
+          in srgb,
+          var(--agent-color) 24%,
+          var(--border)
+        );
 
-      border-radius: 13px;
+      border-radius: 15px;
 
       background:
         linear-gradient(
           180deg,
-          rgba(12, 21, 34, 0.96),
-          rgba(6, 11, 19, 0.97)
+          rgba(11, 18, 28, 0.97),
+          rgba(4, 8, 13, 0.98)
         );
 
       cursor: pointer;
 
       transition:
-        transform 0.18s,
-        border-color 0.18s,
-        box-shadow 0.18s;
+        transform 0.16s,
+        border-color 0.16s,
+        box-shadow 0.16s;
     }
 
 
-    .agent-card::before {
+    .agent::before {
       content: "";
 
       position: absolute;
 
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
 
-      right: -60px;
-      top: -65px;
+      top: -80px;
 
       border-radius: 50%;
 
-      opacity: 0.12;
+      background: var(--agent-color);
 
-      filter: blur(25px);
+      opacity: 0.11;
+
+      filter: blur(30px);
     }
 
 
-    .agent-card:hover {
-      transform:
-        translateY(-2px);
-    }
+    .agent:hover {
+      transform: translateY(-2px);
 
-
-    .agent-card.active {
-      transform:
-        translateY(-2px);
-    }
-
-
-    .agent-card.scout::before {
-      background: var(--scout);
-    }
-
-
-    .agent-card.news::before {
-      background: var(--news);
-    }
-
-
-    .agent-card.sentiment::before {
-      background: var(--sentiment);
-    }
-
-
-    .agent-card.charts::before {
-      background: var(--charts);
-    }
-
-
-    .agent-card.risk::before {
-      background: var(--risk);
-    }
-
-
-    .agent-card.decision::before {
-      background: var(--decision);
-    }
-
-
-    .agent-card.scout.active,
-    .agent-card.scout:hover {
       border-color:
-        rgba(255, 208, 79, 0.45);
+        color-mix(
+          in srgb,
+          var(--agent-color) 60%,
+          transparent
+        );
 
       box-shadow:
-        0 0 32px
-        rgba(255, 208, 79, 0.07);
+        0 0 30px
+        color-mix(
+          in srgb,
+          var(--agent-color) 9%,
+          transparent
+        );
     }
 
 
-    .agent-card.news.active,
-    .agent-card.news:hover {
-      border-color:
-        rgba(255, 95, 114, 0.45);
+    .agent.scout {
+      --agent-color: var(--scout);
     }
 
 
-    .agent-card.sentiment.active,
-    .agent-card.sentiment:hover {
-      border-color:
-        rgba(193, 119, 255, 0.45);
+    .agent.news {
+      --agent-color: var(--news);
     }
 
 
-    .agent-card.charts.active,
-    .agent-card.charts:hover {
-      border-color:
-        rgba(79, 156, 255, 0.45);
+    .agent.sentiment {
+      --agent-color: var(--sentiment);
     }
 
 
-    .agent-card.risk.active,
-    .agent-card.risk:hover {
-      border-color:
-        rgba(61, 229, 143, 0.45);
+    .agent.charts {
+      --agent-color: var(--charts);
     }
 
 
-    .agent-card.decision.active,
-    .agent-card.decision:hover {
-      border-color:
-        rgba(255, 159, 61, 0.45);
+    .agent.risk {
+      --agent-color: var(--risk);
     }
 
 
-    .agent-head {
+    .agent.decision {
+      --agent-color: var(--decision);
+    }
+
+
+    .alien-wrap {
+      width: 58px;
+      height: 58px;
+
       position: relative;
-
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      gap: 8px;
-    }
-
-
-    .agent-identity {
-      display: flex;
-      align-items: center;
-
-      gap: 8px;
-    }
-
-
-    .agent-icon {
-      width: 34px;
-      height: 34px;
 
       display: grid;
       place-items: center;
 
-      border-radius: 10px;
+      border:
+        1px solid
+        color-mix(
+          in srgb,
+          var(--agent-color) 45%,
+          transparent
+        );
+
+      border-radius: 17px;
 
       background:
-        rgba(255, 255, 255, 0.035);
+        color-mix(
+          in srgb,
+          var(--agent-color) 10%,
+          transparent
+        );
 
-      font-size: 13px;
-      font-weight: 900;
+      box-shadow:
+        inset
+        0 0 22px
+        color-mix(
+          in srgb,
+          var(--agent-color) 7%,
+          transparent
+        );
     }
 
 
-    .scout .agent-icon {
-      color: var(--scout);
+    .alien {
+      position: relative;
+      z-index: 2;
+
+      font-size: 34px;
+
+      filter:
+        grayscale(1)
+        brightness(1.7);
+
+      opacity: 0.95;
     }
 
 
-    .news .agent-icon {
-      color: var(--news);
-    }
+    .alien-glow {
+      position: absolute;
 
+      width: 35px;
+      height: 35px;
 
-    .sentiment .agent-icon {
-      color: var(--sentiment);
-    }
+      border-radius: 50%;
 
+      background: var(--agent-color);
 
-    .charts .agent-icon {
-      color: var(--charts);
-    }
+      opacity: 0.24;
 
-
-    .risk .agent-icon {
-      color: var(--risk);
-    }
-
-
-    .decision .agent-icon {
-      color: var(--decision);
+      filter: blur(15px);
     }
 
 
     .agent-name {
-      font-size: 11px;
+      margin-top: 10px;
+
+      color: var(--agent-color);
+
+      font-size: 12px;
       font-weight: 850;
+
+      letter-spacing: 0.5px;
     }
 
 
@@ -1140,27 +643,17 @@
 
 
     .agent-state {
-      display: inline-flex;
+      margin-top: 8px;
+
+      display: flex;
       align-items: center;
 
       gap: 5px;
-
-      padding:
-        4px
-        7px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 999px;
 
       color: var(--muted);
 
       font-size: 7px;
       font-weight: 800;
-
-      white-space: nowrap;
     }
 
 
@@ -1170,77 +663,154 @@
 
       border-radius: 50%;
 
-      background: var(--muted-2);
-    }
-
-
-    .agent-state.ready {
-      color: var(--green);
-
-      border-color:
-        rgba(61, 229, 143, 0.16);
-
-      background:
-        rgba(61, 229, 143, 0.035);
-    }
-
-
-    .agent-state.ready
-    .agent-state-dot {
-      background: var(--green);
+      background: var(--agent-color);
 
       box-shadow:
-        0 0 9px
-        rgba(61, 229, 143, 0.65);
+        0 0 8px
+        var(--agent-color);
     }
 
 
-    .agent-state.pending {
-      color: var(--yellow);
-
-      border-color:
-        rgba(255, 208, 79, 0.15);
-    }
-
-
-    .agent-state.pending
+    .agent.pending
     .agent-state-dot {
-      background: var(--yellow);
+      box-shadow: none;
+      opacity: 0.55;
     }
 
 
-    .agent-body {
-      position: relative;
+    /* =========================
+       MODAL
+    ========================= */
 
-      margin-top: 13px;
+    .modal {
+      position: fixed;
+      inset: 0;
+
+      z-index: 500;
+
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+
+      padding: 18px;
+
+      background:
+        rgba(0, 0, 0, 0.68);
+
+      backdrop-filter: blur(7px);
     }
 
 
-    .agent-big-label {
-      color: var(--muted-2);
-
-      font-size: 7px;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.6px;
+    .modal.show {
+      display: flex;
     }
 
 
-    .agent-big-value {
-      margin-top: 3px;
+    .modal-panel {
+      width:
+        min(
+          660px,
+          100%
+        );
 
-      min-height: 23px;
+      max-height:
+        min(
+          78vh,
+          720px
+        );
 
+      overflow-y: auto;
+
+      padding: 18px;
+
+      border: 1px solid var(--border-2);
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #0b121c,
+          #05090f
+        );
+    }
+
+
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+
+    .modal-agent {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+
+    .modal-icon {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border-2);
+      border-radius: 12px;
+
+      font-size: 27px;
+    }
+
+
+    .modal-name {
       font-size: 17px;
-      font-weight: 800;
-
-      overflow-wrap: anywhere;
+      font-weight: 850;
     }
 
 
-    .agent-metrics {
-      margin-top: 11px;
+    .modal-role {
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: var(--panel);
+
+      color: var(--text);
+
+      font-size: 15px;
+    }
+
+
+    .modal-body {
+      margin-top: 16px;
+    }
+
+
+    .agent-description {
+      color: var(--muted);
+
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+
+    .detail-grid {
+      margin-top: 13px;
 
       display: grid;
 
@@ -1250,272 +820,77 @@
           minmax(0, 1fr)
         );
 
-      gap: 6px;
+      gap: 7px;
     }
 
 
-    .agent-metric {
-      padding: 7px;
+    .detail-box {
+      padding: 9px;
 
-      border:
-        1px solid
-        rgba(23, 34, 50, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 9px;
 
-      border-radius: 8px;
-
-      background:
-        rgba(2, 6, 10, 0.7);
+      background: rgba(2, 6, 10, 0.75);
     }
 
 
-    .agent-metric-label {
+    .detail-label {
       color: var(--muted-2);
 
-      font-size: 6px;
-
+      font-size: 7px;
       text-transform: uppercase;
     }
 
 
-    .agent-metric-value {
-      margin-top: 3px;
+    .detail-value {
+      margin-top: 4px;
 
       font-size: 10px;
       font-weight: 750;
-
-      overflow-wrap: anywhere;
     }
 
 
-    /* =========================================
-       SELECTED AGENT
-    ========================================= */
-
-    .agent-detail-panel {
-      display: grid;
-
-      grid-template-columns:
-        290px
-        minmax(0, 1fr);
-
-      gap: 12px;
-    }
-
-
-    .agent-detail-info {
-      padding: 16px;
-    }
-
-
-    .detail-agent-index {
-      color: var(--muted-2);
-
-      font-size: 8px;
-      font-weight: 800;
-    }
-
-
-    .detail-agent-name {
-      margin-top: 3px;
-
-      font-size: 25px;
-      font-weight: 850;
-    }
-
-
-    .detail-agent-role {
-      margin-top: 2px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-
-    .detail-list {
-      margin-top: 15px;
-
-      display: grid;
-
-      gap: 8px;
-    }
-
-
-    .detail-list-item {
-      display: flex;
-
-      gap: 8px;
-
-      color: var(--muted);
-
-      font-size: 9px;
-    }
-
-
-    .detail-arrow {
-      color: var(--green);
-
-      font-weight: 900;
-    }
-
-
-    .detail-runtime {
-      margin-top: 14px;
+    .modal-note {
+      margin-top: 13px;
 
       padding: 9px;
 
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 8px;
-
-      background:
-        rgba(2, 5, 9, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 9px;
 
       color: var(--muted-2);
 
       font-size: 8px;
-
       line-height: 1.6;
     }
 
 
-    .agent-detail-content {
-      min-width: 0;
+    /* =========================
+       SCOUT INSIDE MODAL
+    ========================= */
 
-      padding: 15px;
-    }
-
-
-    .detail-content-title {
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-
-    .detail-content-sub {
-      margin-top: 3px;
-
-      color: var(--muted-2);
-
-      font-size: 8px;
-    }
-
-
-    /* =========================================
-       SCOUT TABLE
-    ========================================= */
-
-    .scout-toolbar {
-      margin-top: 12px;
+    .scout-action {
+      margin-top: 13px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      gap: 10px;
+      gap: 8px;
     }
 
 
     .scout-status {
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
       color: var(--muted);
 
-      font-size: 9px;
-    }
-
-
-    .spinner {
-      display: none;
-
-      width: 11px;
-      height: 11px;
-
-      border:
-        2px solid
-        rgba(79, 156, 255, 0.2);
-
-      border-top-color:
-        var(--blue);
-
-      border-radius: 50%;
-
-      animation:
-        spin 0.75s
-        linear
-        infinite;
-    }
-
-
-    .spinner.show {
-      display: inline-block;
-    }
-
-
-    @keyframes spin {
-      to {
-        transform:
-          rotate(360deg);
-      }
-    }
-
-
-    .progress {
-      height: 3px;
-
-      margin-top: 10px;
-
-      overflow: hidden;
-
-      border-radius: 999px;
-
-      background:
-        var(--border);
-    }
-
-
-    .progress > div {
-      width: 0%;
-      height: 100%;
-
-      border-radius: inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--blue),
-          var(--green)
-        );
-
-      transition:
-        width 0.2s;
-    }
-
-
-    .scout-table-wrap {
-      margin-top: 11px;
-
-      overflow-x: auto;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 10px;
-
-      background:
-        rgba(3, 7, 12, 0.8);
+      font-size: 8px;
     }
 
 
     .scout-table {
       width: 100%;
-      min-width: 900px;
+
+      margin-top: 10px;
 
       border-collapse: collapse;
 
@@ -1525,13 +900,9 @@
 
     .scout-table th,
     .scout-table td {
-      padding:
-        8px
-        9px;
+      padding: 7px 5px;
 
-      border-bottom:
-        1px solid
-        rgba(23, 34, 50, 0.8);
+      border-bottom: 1px solid var(--border);
 
       text-align: right;
     }
@@ -1539,501 +910,39 @@
 
     .scout-table th {
       color: var(--muted-2);
-
       font-size: 7px;
-
-      text-transform: uppercase;
     }
 
 
     .scout-table th:first-child,
-    .scout-table td:first-child,
-    .scout-table th:nth-child(2),
-    .scout-table td:nth-child(2) {
+    .scout-table td:first-child {
       text-align: left;
     }
 
 
-    .scout-table tbody tr:hover {
-      background:
-        rgba(79, 156, 255, 0.035);
-    }
-
-
-    .score {
-      color: var(--green);
-
-      font-weight: 800;
-    }
-
-
-    .reason-row td {
-      padding-top: 0;
-
-      color: var(--muted-2);
-
-      text-align: left !important;
-    }
-
-
-    .reason-chip {
-      display: inline-flex;
-
-      margin:
-        0
-        4px
-        4px
-        0;
-
-      padding:
-        3px
-        6px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 999px;
-
-      background:
-        var(--bg-soft);
-    }
-
-
-    .empty {
-      padding: 26px;
-
-      color: var(--muted-2);
-
-      text-align: center;
-
-      font-size: 9px;
-    }
-
-
-    /* =========================================
-       STATIC DETAIL GRID
-    ========================================= */
-
-    .info-grid {
-      margin-top: 12px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(0, 1fr)
-        );
-
-      gap: 8px;
-    }
-
-
-    .info-box {
-      padding: 10px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 9px;
-
-      background:
-        rgba(3, 7, 12, 0.8);
-    }
-
-
-    .info-box-label {
-      color: var(--muted-2);
-
-      font-size: 7px;
-
-      text-transform: uppercase;
-    }
-
-
-    .info-box-value {
-      margin-top: 4px;
-
-      font-size: 11px;
-      font-weight: 750;
-    }
-
-
-    /* =========================================
-       PIPELINE
-    ========================================= */
-
-    .pipeline-panel {
-      padding: 16px;
-    }
-
-
-    .pipeline-flow {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          6,
-          minmax(0, 1fr)
-        );
-
-      gap: 8px;
-    }
-
-
-    .pipeline-node {
-      position: relative;
-
-      padding: 11px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 10px;
-
-      background:
-        rgba(3, 7, 12, 0.82);
-
-      text-align: center;
-    }
-
-
-    .pipeline-node::after {
-      content: "→";
-
-      position: absolute;
-
-      right: -8px;
-      top: 50%;
-
-      z-index: 3;
-
-      color: var(--muted-2);
-
-      transform:
-        translateY(-50%);
-    }
-
-
-    .pipeline-node:last-child::after {
-      display: none;
-    }
-
-
-    .pipeline-name {
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-
-    .pipeline-role {
-      margin-top: 3px;
-
-      color: var(--muted-2);
-
-      font-size: 7px;
-    }
-
-
-    .pipeline-state {
-      margin-top: 7px;
-
-      color: var(--green);
-
-      font-size: 7px;
-    }
-
-
-    .pipeline-state.pending {
-      color: var(--yellow);
-    }
-
-
-    .architecture-note {
-      margin-top: 11px;
-
-      padding: 10px;
-
-      border:
-        1px solid
-        rgba(255, 208, 79, 0.14);
-
-      border-radius: 9px;
-
-      background:
-        rgba(255, 208, 79, 0.025);
-
-      color: #c9b67b;
-
-      font-size: 8px;
-
-      line-height: 1.65;
-    }
-
-
-    /* =========================================
-       SYSTEM
-    ========================================= */
-
-    .system-grid {
-      display: grid;
-
-      grid-template-columns:
-        1fr
-        1fr;
-
-      gap: 12px;
-    }
-
-
-    .system-card {
-      padding: 14px;
-    }
-
-
-    .endpoint-list {
-      margin-top: 10px;
-
-      display: grid;
-
-      gap: 6px;
-    }
-
-
-    .endpoint {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 8px;
-
-      padding:
-        8px
-        9px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 7px;
-
-      background:
-        rgba(3, 7, 12, 0.72);
-
-      font-size: 8px;
-    }
-
-
-    .endpoint code {
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-
-
-    .endpoint-state {
-      color: var(--muted-2);
-
-      white-space: nowrap;
-    }
-
-
-    .endpoint-state.ok {
-      color: var(--green);
-    }
-
-
-    .endpoint-state.error {
-      color: var(--red);
-    }
-
-
-    .endpoint-state.pending {
-      color: var(--yellow);
-    }
-
-
-    .log-box {
-      height: 270px;
-
-      margin-top: 10px;
-
-      overflow-y: auto;
-
-      padding: 10px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 8px;
-
-      background:
-        #010305;
-
-      color: var(--muted);
-
-      font:
-        8px/1.7
-        "SFMono-Regular",
-        Consolas,
-        monospace;
-    }
-
-
-    .log-line.success {
-      color: var(--green);
-    }
-
-
-    .log-line.error {
-      color: var(--red);
-    }
-
-
-    .log-line.info {
-      color: var(--blue);
-    }
-
-
-    .log-line.warning {
-      color: var(--yellow);
-    }
-
-
-    /* =========================================
+    /* =========================
        FOOTER
-    ========================================= */
+    ========================= */
 
     footer {
-      padding:
-        24px
-        0
-        36px;
-
-      border-top:
-        1px solid
-        var(--border);
+      padding: 25px 0 35px;
 
       color: var(--muted-2);
 
       text-align: center;
 
-      font-size: 8px;
+      font-size: 7px;
     }
 
 
-    /* =========================================
+    /* =========================
        RESPONSIVE
-    ========================================= */
-
-    @media (
-      max-width: 1080px
-    ) {
-      .market-terminal {
-        grid-template-columns:
-          1fr;
-      }
-
-
-      .market-side {
-        grid-template-columns:
-          repeat(
-            4,
-            minmax(0, 1fr)
-          );
-      }
-
-
-      .agent-detail-panel {
-        grid-template-columns:
-          240px
-          1fr;
-      }
-    }
-
-
-    @media (
-      max-width: 900px
-    ) {
-      .agent-grid {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-
-      .pipeline-flow {
-        grid-template-columns:
-          repeat(
-            3,
-            minmax(0, 1fr)
-          );
-      }
-
-
-      .pipeline-node::after {
-        display: none;
-      }
-
-
-      .system-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
+    ========================= */
 
     @media (
       max-width: 720px
     ) {
-      .container {
-        width:
-          min(
-            100% - 18px,
-            1460px
-          );
-      }
-
-
-      main {
-        padding-top: 10px;
-      }
-
-
-      .github-button {
-        display: none;
-      }
-
-
-      .command-center {
-        padding: 13px;
-      }
-
-
-      .command-top {
-        display: block;
-      }
-
-
-      .development-state {
-        margin-top: 12px;
-
-        min-width: 0;
-
-        width: 100%;
-      }
-
-
-      .command-title {
-        font-size: 21px;
-      }
-
-
-      .market-main-head {
+      .market-head {
         display: block;
       }
 
@@ -2045,12 +954,12 @@
       }
 
 
-      .chart-container {
-        height: 285px;
+      .chart {
+        height: 240px;
       }
 
 
-      .market-side {
+      .market-mini {
         grid-template-columns:
           repeat(
             2,
@@ -2059,31 +968,29 @@
       }
 
 
-      .agent-detail-panel {
-        grid-template-columns: 1fr;
-      }
-
-
-      .info-grid {
+      .agents {
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
           );
+
+        gap: 8px;
+      }
+
+
+      .agent {
+        min-height: 145px;
       }
     }
 
 
     @media (
-      max-width: 500px
+      max-width: 440px
     ) {
-      .navbar {
-        min-height: 60px;
-      }
-
-
-      .header-pill.agents-pill {
-        display: none;
+      .container {
+        width:
+          calc(100% - 18px);
       }
 
 
@@ -2092,105 +999,55 @@
       }
 
 
-      .command-title {
-        font-size: 19px;
+      .system-pill {
+        display: none;
+      }
+
+
+      .market {
+        padding: 11px;
       }
 
 
       .price {
-        font-size: 31px;
+        font-size: 29px;
       }
 
 
-      .agent-floor {
-        padding: 10px;
+      .chart {
+        height: 210px;
       }
 
 
-      .agent-grid {
-        gap: 8px;
+      .alien-wrap {
+        width: 52px;
+        height: 52px;
       }
 
 
-      .agent-card {
-        min-height: 175px;
-
-        padding: 10px;
+      .alien {
+        font-size: 30px;
       }
 
 
-      .agent-icon {
-        width: 30px;
-        height: 30px;
+      .agent {
+        min-height: 137px;
+
+        padding: 11px;
       }
 
 
       .agent-name {
-        font-size: 9px;
+        font-size: 10px;
       }
 
 
-      .agent-role {
-        font-size: 7px;
-      }
-
-
-      .agent-state {
-        padding:
-          3px
-          5px;
-
-        font-size: 6px;
-      }
-
-
-      .agent-big-value {
-        font-size: 13px;
-      }
-
-
-      .agent-metrics {
-        grid-template-columns: 1fr;
-      }
-
-
-      .agent-metric {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        padding:
-          5px
-          6px;
-      }
-
-
-      .agent-metric-value {
-        margin-top: 0;
-      }
-
-
-      .market-side {
-        grid-template-columns: 1fr 1fr;
-      }
-
-
-      .pipeline-flow {
+      .detail-grid {
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
           );
-      }
-
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-
-      .section-title {
-        font-size: 14px;
       }
     }
   </style>
@@ -2199,28 +1056,24 @@
 
 <body>
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
-
   <header>
 
     <div class="container navbar">
 
       <div class="brand">
 
-        <div class="brand-logo">
+        <div class="logo">
           C
         </div>
 
         <div>
 
-          <div class="brand-title">
+          <div class="brand-name">
             CODEX BOT
           </div>
 
           <div class="brand-sub">
-            MULTI-AGENT TRADING SYSTEM
+            AI TRADING TEAM
           </div>
 
         </div>
@@ -2228,13 +1081,13 @@
       </div>
 
 
-      <div class="header-right">
+      <div class="header-status">
 
-        <div class="header-pill">
+        <div class="pill">
 
           <span
             id="connectionDot"
-            class="status-dot"
+            class="dot"
           ></span>
 
           <span
@@ -2246,27 +1099,17 @@
         </div>
 
 
-        <div class="header-pill agents-pill">
+        <div class="pill system-pill">
 
           <span>
-            SYSTEM
+            AGENTS
           </span>
 
-          <strong class="positive">
-            4 / 6
+          <strong>
+            5 / 6
           </strong>
 
         </div>
-
-
-        <a
-          class="header-button github-button"
-          href="https://github.com/stun0019/codex-bot"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
 
       </div>
 
@@ -2277,352 +1120,187 @@
 
   <main class="container">
 
-    <!-- =========================================
-         MARKET COMMAND CENTER
-    ========================================== -->
+    <!-- MARKET -->
 
-    <section class="command-center">
+    <section class="market">
 
-      <div class="command-top">
+      <div class="market-head">
 
         <div>
 
-          <div class="command-kicker">
-            Market Command Center
+          <div
+            id="symbolLabel"
+            class="symbol"
+          >
+            BTC-USDT-SWAP
           </div>
 
-          <div class="command-title">
-            AI TRADING TEAM
+          <div
+            id="lastPrice"
+            class="price"
+          >
+            --
           </div>
 
-          <div class="command-desc">
-            Public market monitoring and six-agent research architecture.
-            Browser SCOUT operates independently for dashboard monitoring.
-            Python agents remain backend-side until the API layer is connected.
+          <div
+            id="priceChange"
+            class="change"
+          >
+            24H --
           </div>
 
         </div>
 
 
-        <div class="development-state">
+        <div class="market-controls">
 
-          <div class="metric-label">
-            System Development
-          </div>
+          <select id="symbolSelect">
 
-          <div class="development-value">
-            4 / 6
-          </div>
+            <option value="BTC-USDT-SWAP">
+              BTC
+            </option>
 
-          <div class="development-sub">
-            SCOUT · NEWS · SENTIMENT · CHARTS
-          </div>
+            <option value="ETH-USDT-SWAP">
+              ETH
+            </option>
+
+            <option value="SOL-USDT-SWAP">
+              SOL
+            </option>
+
+            <option value="XRP-USDT-SWAP">
+              XRP
+            </option>
+
+            <option value="DOGE-USDT-SWAP">
+              DOGE
+            </option>
+
+          </select>
+
+
+          <select id="timeframeSelect">
+
+            <option value="1m">
+              1m
+            </option>
+
+            <option value="5m">
+              5m
+            </option>
+
+            <option
+              value="15m"
+              selected
+            >
+              15m
+            </option>
+
+            <option value="1H">
+              1H
+            </option>
+
+            <option value="4H">
+              4H
+            </option>
+
+            <option value="1Dutc">
+              1D
+            </option>
+
+            <option value="1Wutc">
+              1W
+            </option>
+
+            <option value="1Mutc">
+              1M
+            </option>
+
+          </select>
+
+
+          <button
+            id="refreshButton"
+            class="small-button"
+          >
+            Refresh
+          </button>
 
         </div>
 
       </div>
 
 
-      <div class="market-terminal">
+      <div class="chart">
 
-        <div class="market-main">
+        <canvas
+          id="priceChart"
+        ></canvas>
 
-          <div class="market-main-head">
-
-            <div>
-
-              <div
-                id="chartSymbol"
-                class="symbol"
-              >
-                BTC-USDT-SWAP
-              </div>
-
-              <div
-                id="lastPrice"
-                class="price"
-              >
-                --
-              </div>
-
-              <div class="market-meta">
-
-                <span
-                  id="priceChange"
-                >
-                  24H --
-                </span>
-
-                <span>
-                  ·
-                </span>
-
-                <span
-                  id="chartSub"
-                >
-                  15m · 80 candles
-                </span>
-
-              </div>
-
-            </div>
+      </div>
 
 
-            <div class="market-controls">
+      <div class="market-mini">
 
-              <select
-                id="instrumentSelect"
-                class="select"
-              >
+        <div class="market-stat">
 
-                <option value="BTC-USDT-SWAP">
-                  BTC-USDT-SWAP
-                </option>
-
-                <option value="ETH-USDT-SWAP">
-                  ETH-USDT-SWAP
-                </option>
-
-                <option value="SOL-USDT-SWAP">
-                  SOL-USDT-SWAP
-                </option>
-
-                <option value="XRP-USDT-SWAP">
-                  XRP-USDT-SWAP
-                </option>
-
-                <option value="DOGE-USDT-SWAP">
-                  DOGE-USDT-SWAP
-                </option>
-
-              </select>
-
-
-              <select
-                id="barSelect"
-                class="select"
-              >
-
-                <option value="1m">
-                  1m
-                </option>
-
-                <option value="3m">
-                  3m
-                </option>
-
-                <option value="5m">
-                  5m
-                </option>
-
-                <option
-                  value="15m"
-                  selected
-                >
-                  15m
-                </option>
-
-                <option value="30m">
-                  30m
-                </option>
-
-                <option value="1H">
-                  1H
-                </option>
-
-                <option value="2H">
-                  2H
-                </option>
-
-                <option value="4H">
-                  4H
-                </option>
-
-                <option value="6Hutc">
-                  6H
-                </option>
-
-                <option value="12Hutc">
-                  12H
-                </option>
-
-                <option value="1Dutc">
-                  1D
-                </option>
-
-                <option value="1Wutc">
-                  1W
-                </option>
-
-                <option value="1Mutc">
-                  1M
-                </option>
-
-                <option value="3Mutc">
-                  3M
-                </option>
-
-              </select>
-
-
-              <button
-                id="refreshMarketButton"
-                class="button"
-              >
-                Refresh
-              </button>
-
-            </div>
-
+          <div class="market-stat-label">
+            Funding
           </div>
 
-
-          <div class="chart-container">
-
-            <canvas
-              id="priceChart"
-            ></canvas>
-
+          <div
+            id="funding"
+            class="market-stat-value"
+          >
+            --
           </div>
 
         </div>
 
 
-        <div class="market-side">
+        <div class="market-stat">
 
-          <div class="side-card">
-
-            <div class="metric-label">
-              Funding
-            </div>
-
-            <div
-              id="fundingRate"
-              class="side-value"
-            >
-              --
-            </div>
-
-            <div
-              id="fundingTime"
-              class="side-sub"
-            >
-              Next funding --
-            </div>
-
+          <div class="market-stat-label">
+            Open Interest
           </div>
 
-
-          <div class="side-card">
-
-            <div class="metric-label">
-              Open Interest
-            </div>
-
-            <div
-              id="openInterestUsd"
-              class="side-value"
-            >
-              --
-            </div>
-
-            <div
-              id="openInterestRaw"
-              class="side-sub"
-            >
-              OI --
-            </div>
-
+          <div
+            id="openInterest"
+            class="market-stat-value"
+          >
+            --
           </div>
 
+        </div>
 
-          <div class="side-card">
 
-            <div class="metric-label">
-              24H Volume
-            </div>
+        <div class="market-stat">
 
-            <div
-              id="volume24h"
-              class="side-value"
-            >
-              --
-            </div>
-
-            <div
-              id="range24h"
-              class="side-sub"
-            >
-              Range --
-            </div>
-
+          <div class="market-stat-label">
+            Volume
           </div>
 
+          <div
+            id="volume"
+            class="market-stat-value"
+          >
+            --
+          </div>
 
-          <div class="side-card">
-
-            <div class="metric-label">
-              Order Book
-            </div>
-
-            <div class="bid-ask">
-
-              <div class="book-box">
-
-                <div class="book-label">
-                  Best Ask
-                </div>
-
-                <div
-                  id="bestAsk"
-                  class="book-value negative"
-                >
-                  --
-                </div>
-
-              </div>
+        </div>
 
 
-              <div class="book-box">
+        <div class="market-stat">
 
-                <div class="book-label">
-                  Best Bid
-                </div>
+          <div class="market-stat-label">
+            Spread
+          </div>
 
-                <div
-                  id="bestBid"
-                  class="book-value positive"
-                >
-                  --
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div
-              class="side-sub"
-              style="margin-top: 7px;"
-            >
-
-              Spread
-              <span
-                id="spreadValue"
-              >
-                --
-              </span>
-
-              ·
-
-              <span
-                id="spreadPercent"
-              >
-                --
-              </span>
-
-            </div>
-
+          <div
+            id="spread"
+            class="market-stat-value"
+          >
+            --
           </div>
 
         </div>
@@ -2632,1244 +1310,227 @@
     </section>
 
 
-    <!-- =========================================
-         AGENT FLOOR
-    ========================================== -->
+    <!-- SIX AGENTS -->
 
-    <section class="section">
+    <section class="agents-section">
 
-      <div class="agent-floor">
+      <div class="agents-title">
 
-        <div class="agent-floor-title">
+        <strong>
+          AI TRADING TEAM
+        </strong>
 
-          <strong>
-            SIX-AGENT TRADING FLOOR
-          </strong>
-
-          <span>
-            Select an agent to inspect its role and current runtime state
-          </span>
-
-        </div>
-
-
-        <div class="agent-grid">
-
-          <!-- SCOUT -->
-
-          <div
-            class="agent-card scout active"
-            data-agent="scout"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  01
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    SCOUT
-                  </div>
-
-                  <div class="agent-role">
-                    Opportunity Scanner
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state ready">
-
-                <span class="agent-state-dot"></span>
-
-                LIVE
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Top Opportunity
-              </div>
-
-              <div
-                id="agentScoutSymbol"
-                class="agent-big-value"
-                style="color: var(--scout);"
-              >
-                --
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Markets
-                  </div>
-
-                  <div
-                    id="agentScoutMarkets"
-                    class="agent-metric-value"
-                  >
-                    --
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Pool
-                  </div>
-
-                  <div
-                    id="agentScoutPool"
-                    class="agent-metric-value"
-                  >
-                    --
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Score
-                  </div>
-
-                  <div
-                    id="agentScoutScore"
-                    class="agent-metric-value"
-                  >
-                    --
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- NEWS -->
-
-          <div
-            class="agent-card news"
-            data-agent="news"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  02
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    NEWS
-                  </div>
-
-                  <div class="agent-role">
-                    News Intelligence
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state ready">
-
-                <span class="agent-state-dot"></span>
-
-                V1 READY
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Runtime
-              </div>
-
-              <div
-                class="agent-big-value"
-                style="color: var(--news);"
-              >
-                BACKEND
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Sources
-                  </div>
-
-                  <div class="agent-metric-value">
-                    RSS
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Analyzer
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    LLM
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- SENTIMENT -->
-
-          <div
-            class="agent-card sentiment"
-            data-agent="sentiment"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  03
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    SENTIMENT
-                  </div>
-
-                  <div class="agent-role">
-                    Market Sentiment
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state ready">
-
-                <span class="agent-state-dot"></span>
-
-                V1 READY
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Runtime
-              </div>
-
-              <div
-                class="agent-big-value"
-                style="color: var(--sentiment);"
-              >
-                BACKEND
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Funding
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    OI
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Crowding
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- CHARTS -->
-
-          <div
-            class="agent-card charts"
-            data-agent="charts"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  04
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    CHARTS
-                  </div>
-
-                  <div class="agent-role">
-                    Technical Analyst
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state ready">
-
-                <span class="agent-state-dot"></span>
-
-                V1 READY
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Analysis
-              </div>
-
-              <div
-                class="agent-big-value"
-                style="color: var(--charts);"
-              >
-                MTF
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    EMA
-                  </div>
-
-                  <div class="agent-metric-value">
-                    20/50/200
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Momentum
-                  </div>
-
-                  <div class="agent-metric-value">
-                    RSI/MACD
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Structure
-                  </div>
-
-                  <div class="agent-metric-value">
-                    READY
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- RISK -->
-
-          <div
-            class="agent-card risk"
-            data-agent="risk"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  05
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    RISK
-                  </div>
-
-                  <div class="agent-role">
-                    Risk Manager
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state pending">
-
-                <span class="agent-state-dot"></span>
-
-                SKELETON
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Status
-              </div>
-
-              <div
-                class="agent-big-value"
-                style="color: var(--risk);"
-              >
-                PENDING
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Size
-                  </div>
-
-                  <div class="agent-metric-value">
-                    --
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Exposure
-                  </div>
-
-                  <div class="agent-metric-value">
-                    --
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Approval
-                  </div>
-
-                  <div class="agent-metric-value">
-                    FALSE
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- DECISION -->
-
-          <div
-            class="agent-card decision"
-            data-agent="decision"
-          >
-
-            <div class="agent-head">
-
-              <div class="agent-identity">
-
-                <div class="agent-icon">
-                  06
-                </div>
-
-                <div>
-
-                  <div class="agent-name">
-                    DECISION
-                  </div>
-
-                  <div class="agent-role">
-                    Final Decision Maker
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="agent-state pending">
-
-                <span class="agent-state-dot"></span>
-
-                SKELETON
-
-              </div>
-
-            </div>
-
-
-            <div class="agent-body">
-
-              <div class="agent-big-label">
-                Current Decision
-              </div>
-
-              <div
-                class="agent-big-value"
-                style="color: var(--decision);"
-              >
-                WAIT
-              </div>
-
-
-              <div class="agent-metrics">
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Confidence
-                  </div>
-
-                  <div class="agent-metric-value">
-                    0.00
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Logic
-                  </div>
-
-                  <div class="agent-metric-value">
-                    --
-                  </div>
-
-                </div>
-
-
-                <div class="agent-metric">
-
-                  <div class="agent-metric-label">
-                    Execution
-                  </div>
-
-                  <div class="agent-metric-value">
-                    OFF
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================================
-         SELECTED AGENT
-    ========================================== -->
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <div>
-
-          <div class="section-kicker">
-            Agent Inspection
-          </div>
-
-          <div class="section-title">
-            Selected Agent
-          </div>
-
-          <div class="section-sub">
-            Current responsibilities and available runtime information
-          </div>
-
-        </div>
+        <span>
+          Tap an agent for details
+        </span>
 
       </div>
 
 
-      <div class="agent-detail-panel">
+      <div class="agents">
 
-        <div class="panel agent-detail-info">
+        <article
+          class="agent scout"
+          data-agent="scout"
+        >
 
-          <div
-            id="detailAgentIndex"
-            class="detail-agent-index"
-          >
-            AGENT 01
+          <div class="alien-wrap">
+
+            <span class="alien-glow"></span>
+
+            <span class="alien">
+              👾
+            </span>
+
           </div>
 
-          <div
-            id="detailAgentName"
-            class="detail-agent-name"
-          >
+          <div class="agent-name">
             SCOUT
           </div>
 
-          <div
-            id="detailAgentRole"
-            class="detail-agent-role"
-          >
+          <div class="agent-role">
             Opportunity Scanner
           </div>
 
+          <div class="agent-state">
 
-          <div
-            id="detailList"
-            class="detail-list"
-          ></div>
+            <span class="agent-state-dot"></span>
 
-
-          <div
-            id="detailRuntime"
-            class="detail-runtime"
-          ></div>
-
-        </div>
-
-
-        <div class="panel agent-detail-content">
-
-          <div
-            id="detailContentTitle"
-            class="detail-content-title"
-          >
-            Live Opportunity Scan
-          </div>
-
-          <div
-            id="detailContentSub"
-            class="detail-content-sub"
-          >
-            Browser-side OKX public market scanner
-          </div>
-
-
-          <!-- SCOUT DETAIL -->
-
-          <div
-            id="scoutDetail"
-          >
-
-            <div class="scout-toolbar">
-
-              <div class="scout-status">
-
-                <span
-                  id="scoutSpinner"
-                  class="spinner"
-                ></span>
-
-                <span
-                  id="scoutStatusText"
-                >
-                  Ready
-                </span>
-
-              </div>
-
-
-              <button
-                id="scanScoutButton"
-                class="button primary"
-              >
-                Scan All USDT-SWAP
-              </button>
-
-            </div>
-
-
-            <div class="progress">
-
-              <div
-                id="scoutProgress"
-              ></div>
-
-            </div>
-
-
-            <div class="info-grid">
-
-              <div class="info-box">
-
-                <div class="info-box-label">
-                  Markets
-                </div>
-
-                <div
-                  id="scoutMarkets"
-                  class="info-box-value"
-                >
-                  --
-                </div>
-
-              </div>
-
-
-              <div class="info-box">
-
-                <div class="info-box-label">
-                  Detail Pool
-                </div>
-
-                <div
-                  id="scoutPool"
-                  class="info-box-value"
-                >
-                  --
-                </div>
-
-              </div>
-
-
-              <div class="info-box">
-
-                <div class="info-box-label">
-                  Top Candidate
-                </div>
-
-                <div
-                  id="scoutTopSymbol"
-                  class="info-box-value"
-                >
-                  --
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="scout-table-wrap">
-
-              <table class="scout-table">
-
-                <thead>
-
-                  <tr>
-
-                    <th>#</th>
-
-                    <th>Symbol</th>
-
-                    <th>Score</th>
-
-                    <th>Last</th>
-
-                    <th>24H</th>
-
-                    <th>Range</th>
-
-                    <th>Spread</th>
-
-                    <th>Volume</th>
-
-                    <th>OI USD</th>
-
-                    <th>Funding</th>
-
-                  </tr>
-
-                </thead>
-
-
-                <tbody
-                  id="scoutTableBody"
-                >
-
-                  <tr>
-
-                    <td colspan="10">
-
-                      <div class="empty">
-                        Waiting for SCOUT scan.
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                </tbody>
-
-              </table>
-
-            </div>
+            READY
 
           </div>
 
-
-          <!-- OTHER AGENT DETAIL -->
-
-          <div
-            id="staticAgentDetail"
-            style="display: none;"
-          >
-
-            <div
-              id="staticAgentGrid"
-              class="info-grid"
-            ></div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+        </article>
 
 
-    <!-- =========================================
-         PIPELINE
-    ========================================== -->
+        <article
+          class="agent news"
+          data-agent="news"
+        >
 
-    <section class="section">
+          <div class="alien-wrap">
 
-      <div class="section-head">
+            <span class="alien-glow"></span>
 
-        <div>
-
-          <div class="section-kicker">
-            Architecture
-          </div>
-
-          <div class="section-title">
-            Multi-Agent Pipeline
-          </div>
-
-          <div class="section-sub">
-            Research evidence flows toward risk validation and final synthesis
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="panel pipeline-panel">
-
-        <div class="pipeline-flow">
-
-          <div class="pipeline-node">
-
-            <div class="pipeline-name">
-              SCOUT
-            </div>
-
-            <div class="pipeline-role">
-              Opportunity discovery
-            </div>
-
-            <div class="pipeline-state">
-              READY
-            </div>
+            <span class="alien">
+              👾
+            </span>
 
           </div>
 
+          <div class="agent-name">
+            NEWS
+          </div>
 
-          <div class="pipeline-node">
+          <div class="agent-role">
+            News Analyst
+          </div>
 
-            <div class="pipeline-name">
-              NEWS
-            </div>
+          <div class="agent-state">
 
-            <div class="pipeline-role">
-              Event intelligence
-            </div>
+            <span class="agent-state-dot"></span>
 
-            <div class="pipeline-state">
-              V1 READY
-            </div>
+            V1 READY
 
           </div>
 
-
-          <div class="pipeline-node">
-
-            <div class="pipeline-name">
-              SENTIMENT
-            </div>
-
-            <div class="pipeline-role">
-              Crowd positioning
-            </div>
-
-            <div class="pipeline-state">
-              V1 READY
-            </div>
-
-          </div>
+        </article>
 
 
-          <div class="pipeline-node">
+        <article
+          class="agent sentiment"
+          data-agent="sentiment"
+        >
 
-            <div class="pipeline-name">
-              CHARTS
-            </div>
+          <div class="alien-wrap">
 
-            <div class="pipeline-role">
-              Technical evidence
-            </div>
+            <span class="alien-glow"></span>
 
-            <div class="pipeline-state">
-              V1 READY
-            </div>
+            <span class="alien">
+              👾
+            </span>
 
           </div>
 
+          <div class="agent-name">
+            SENTIMENT
+          </div>
 
-          <div class="pipeline-node">
+          <div class="agent-role">
+            Market Sentiment
+          </div>
 
-            <div class="pipeline-name">
-              RISK
-            </div>
+          <div class="agent-state">
 
-            <div class="pipeline-role">
-              Risk review
-            </div>
+            <span class="agent-state-dot"></span>
 
-            <div class="pipeline-state pending">
-              SKELETON
-            </div>
+            V1 READY
 
           </div>
 
+        </article>
 
-          <div class="pipeline-node">
 
-            <div class="pipeline-name">
-              DECISION
-            </div>
+        <article
+          class="agent charts"
+          data-agent="charts"
+        >
 
-            <div class="pipeline-role">
-              Final synthesis
-            </div>
+          <div class="alien-wrap">
 
-            <div class="pipeline-state pending">
-              SKELETON
-            </div>
+            <span class="alien-glow"></span>
+
+            <span class="alien">
+              👾
+            </span>
 
           </div>
 
-        </div>
-
-
-        <div class="architecture-note">
-          CHARTS bias and SENTIMENT bias are analytical evidence, not direct order instructions.
-          RISK will remain an AI advisor while deterministic hard risk controls must live in a
-          separate non-AI risk engine. DECISION should produce LONG / SHORT / WAIT but should
-          not directly send orders to the exchange. Private OKX credentials must never be stored
-          in this page.
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================================
-         SYSTEM
-    ========================================== -->
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <div>
-
-          <div class="section-kicker">
-            Diagnostics
+          <div class="agent-name">
+            CHARTS
           </div>
 
-          <div class="section-title">
-            System Status
+          <div class="agent-role">
+            Technical Analyst
           </div>
 
-          <div class="section-sub">
-            Browser connectivity and runtime log
-          </div>
+          <div class="agent-state">
 
-        </div>
+            <span class="agent-state-dot"></span>
 
-      </div>
-
-
-      <div class="system-grid">
-
-        <div class="panel system-card">
-
-          <div class="metric-label">
-            Public Endpoints
-          </div>
-
-
-          <div class="endpoint-list">
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/market/ticker
-              </code>
-
-              <span
-                id="tickerStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/market/candles
-              </code>
-
-              <span
-                id="candlesStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/market/books
-              </code>
-
-              <span
-                id="booksStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/public/funding-rate
-              </code>
-
-              <span
-                id="fundingStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/public/open-interest
-              </code>
-
-              <span
-                id="oiStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/public/instruments
-              </code>
-
-              <span
-                id="instrumentsStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/market/tickers
-              </code>
-
-              <span
-                id="tickersStatus"
-                class="endpoint-state"
-              >
-                waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                Codex Backend API
-              </code>
-
-              <span
-                class="endpoint-state pending"
-              >
-                NOT CONNECTED
-              </span>
-
-            </div>
+            V1 READY
 
           </div>
 
-        </div>
+        </article>
 
 
-        <div class="panel system-card">
+        <article
+          class="agent risk"
+          data-agent="risk"
+        >
 
-          <div class="metric-label">
-            System Log
+          <div class="alien-wrap">
+
+            <span class="alien-glow"></span>
+
+            <span class="alien">
+              👾
+            </span>
+
           </div>
 
-          <div
-            id="systemLog"
-            class="log-box"
-          ></div>
+          <div class="agent-name">
+            RISK
+          </div>
 
-        </div>
+          <div class="agent-role">
+            Risk Manager
+          </div>
+
+          <div class="agent-state">
+
+            <span class="agent-state-dot"></span>
+
+            V1 READY
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="agent decision pending"
+          data-agent="decision"
+        >
+
+          <div class="alien-wrap">
+
+            <span class="alien-glow"></span>
+
+            <span class="alien">
+              👾
+            </span>
+
+          </div>
+
+          <div class="agent-name">
+            DECISION
+          </div>
+
+          <div class="agent-role">
+            Final Decision
+          </div>
+
+          <div class="agent-state">
+
+            <span class="agent-state-dot"></span>
+
+            SKELETON
+
+          </div>
+
+        </article>
 
       </div>
 
@@ -3879,66 +1540,161 @@
 
 
   <footer>
+    CODEX BOT · PUBLIC MARKET DATA · PRIVATE CREDENTIALS BACKEND ONLY
+  </footer>
 
-    <div class="container">
-      CODEX BOT · MULTI-AGENT TRADING RESEARCH SYSTEM ·
-      PUBLIC MARKET DATA MODE · PRIVATE CREDENTIALS BACKEND-ONLY
+
+  <!-- AGENT DETAIL MODAL -->
+
+  <div
+    id="agentModal"
+    class="modal"
+  >
+
+    <div class="modal-panel">
+
+      <div class="modal-head">
+
+        <div class="modal-agent">
+
+          <div
+            id="modalIcon"
+            class="modal-icon"
+          >
+            👾
+          </div>
+
+          <div>
+
+            <div
+              id="modalName"
+              class="modal-name"
+            >
+              SCOUT
+            </div>
+
+            <div
+              id="modalRole"
+              class="modal-role"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="modalClose"
+          class="modal-close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div
+          id="modalDescription"
+          class="agent-description"
+        ></div>
+
+
+        <div
+          id="modalDetails"
+          class="detail-grid"
+        ></div>
+
+
+        <div
+          id="scoutControls"
+          style="display: none;"
+        >
+
+          <div class="scout-action">
+
+            <div
+              id="scoutStatus"
+              class="scout-status"
+            >
+              Ready
+            </div>
+
+
+            <button
+              id="scanScoutButton"
+              class="small-button"
+            >
+              Scan Market
+            </button>
+
+          </div>
+
+
+          <table class="scout-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Symbol
+                </th>
+
+                <th>
+                  Score
+                </th>
+
+                <th>
+                  24H
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody
+              id="scoutBody"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div
+          id="modalNote"
+          class="modal-note"
+        ></div>
+
+      </div>
+
     </div>
 
-  </footer>
+  </div>
 
 
   <script>
     "use strict";
 
 
-    /* =========================================
-       CONFIG
-    ========================================== */
-
     const OKX_BASE =
       "https://www.okx.com";
 
 
-    const MARKET_REFRESH_MS =
-      15000;
-
-
-    const SCOUT_REFRESH_MS =
-      300000;
-
-
-    const MARKET_CANDLE_LIMIT =
+    const CANDLE_LIMIT =
       80;
 
 
-    const SCOUT_TOP_N =
-      10;
-
-
-    const SCOUT_DETAIL_POOL =
-      40;
-
-
-    const FUNDING_CONCURRENCY =
-      4;
-
-
-    let marketLoading =
-      false;
+    let candles =
+      [];
 
 
     let scoutLoading =
       false;
 
-
-    let currentCandles =
-      [];
-
-
-    /* =========================================
-       ELEMENTS
-    ========================================== */
 
     const elements = {
 
@@ -3952,19 +1708,24 @@
           "connectionText"
         ),
 
-      instrumentSelect:
+      symbolSelect:
         document.getElementById(
-          "instrumentSelect"
+          "symbolSelect"
         ),
 
-      barSelect:
+      timeframeSelect:
         document.getElementById(
-          "barSelect"
+          "timeframeSelect"
         ),
 
-      refreshMarketButton:
+      refreshButton:
         document.getElementById(
-          "refreshMarketButton"
+          "refreshButton"
+        ),
+
+      symbolLabel:
+        document.getElementById(
+          "symbolLabel"
         ),
 
       lastPrice:
@@ -3977,64 +1738,24 @@
           "priceChange"
         ),
 
-      fundingRate:
+      funding:
         document.getElementById(
-          "fundingRate"
+          "funding"
         ),
 
-      fundingTime:
+      openInterest:
         document.getElementById(
-          "fundingTime"
+          "openInterest"
         ),
 
-      openInterestUsd:
+      volume:
         document.getElementById(
-          "openInterestUsd"
+          "volume"
         ),
 
-      openInterestRaw:
+      spread:
         document.getElementById(
-          "openInterestRaw"
-        ),
-
-      volume24h:
-        document.getElementById(
-          "volume24h"
-        ),
-
-      range24h:
-        document.getElementById(
-          "range24h"
-        ),
-
-      bestAsk:
-        document.getElementById(
-          "bestAsk"
-        ),
-
-      bestBid:
-        document.getElementById(
-          "bestBid"
-        ),
-
-      spreadValue:
-        document.getElementById(
-          "spreadValue"
-        ),
-
-      spreadPercent:
-        document.getElementById(
-          "spreadPercent"
-        ),
-
-      chartSymbol:
-        document.getElementById(
-          "chartSymbol"
-        ),
-
-      chartSub:
-        document.getElementById(
-          "chartSub"
+          "spread"
         ),
 
       priceChart:
@@ -4042,19 +1763,44 @@
           "priceChart"
         ),
 
-      scoutSpinner:
+      agentModal:
         document.getElementById(
-          "scoutSpinner"
+          "agentModal"
         ),
 
-      scoutStatusText:
+      modalName:
         document.getElementById(
-          "scoutStatusText"
+          "modalName"
         ),
 
-      scoutProgress:
+      modalRole:
         document.getElementById(
-          "scoutProgress"
+          "modalRole"
+        ),
+
+      modalDescription:
+        document.getElementById(
+          "modalDescription"
+        ),
+
+      modalDetails:
+        document.getElementById(
+          "modalDetails"
+        ),
+
+      modalNote:
+        document.getElementById(
+          "modalNote"
+        ),
+
+      modalClose:
+        document.getElementById(
+          "modalClose"
+        ),
+
+      scoutControls:
+        document.getElementById(
+          "scoutControls"
         ),
 
       scanScoutButton:
@@ -4062,539 +1808,147 @@
           "scanScoutButton"
         ),
 
-      scoutMarkets:
+      scoutStatus:
         document.getElementById(
-          "scoutMarkets"
+          "scoutStatus"
         ),
 
-      scoutPool:
+      scoutBody:
         document.getElementById(
-          "scoutPool"
-        ),
-
-      scoutTopSymbol:
-        document.getElementById(
-          "scoutTopSymbol"
-        ),
-
-      scoutTableBody:
-        document.getElementById(
-          "scoutTableBody"
-        ),
-
-      agentScoutSymbol:
-        document.getElementById(
-          "agentScoutSymbol"
-        ),
-
-      agentScoutMarkets:
-        document.getElementById(
-          "agentScoutMarkets"
-        ),
-
-      agentScoutPool:
-        document.getElementById(
-          "agentScoutPool"
-        ),
-
-      agentScoutScore:
-        document.getElementById(
-          "agentScoutScore"
-        ),
-
-      detailAgentIndex:
-        document.getElementById(
-          "detailAgentIndex"
-        ),
-
-      detailAgentName:
-        document.getElementById(
-          "detailAgentName"
-        ),
-
-      detailAgentRole:
-        document.getElementById(
-          "detailAgentRole"
-        ),
-
-      detailList:
-        document.getElementById(
-          "detailList"
-        ),
-
-      detailRuntime:
-        document.getElementById(
-          "detailRuntime"
-        ),
-
-      detailContentTitle:
-        document.getElementById(
-          "detailContentTitle"
-        ),
-
-      detailContentSub:
-        document.getElementById(
-          "detailContentSub"
-        ),
-
-      scoutDetail:
-        document.getElementById(
-          "scoutDetail"
-        ),
-
-      staticAgentDetail:
-        document.getElementById(
-          "staticAgentDetail"
-        ),
-
-      staticAgentGrid:
-        document.getElementById(
-          "staticAgentGrid"
-        ),
-
-      tickerStatus:
-        document.getElementById(
-          "tickerStatus"
-        ),
-
-      candlesStatus:
-        document.getElementById(
-          "candlesStatus"
-        ),
-
-      booksStatus:
-        document.getElementById(
-          "booksStatus"
-        ),
-
-      fundingStatus:
-        document.getElementById(
-          "fundingStatus"
-        ),
-
-      oiStatus:
-        document.getElementById(
-          "oiStatus"
-        ),
-
-      instrumentsStatus:
-        document.getElementById(
-          "instrumentsStatus"
-        ),
-
-      tickersStatus:
-        document.getElementById(
-          "tickersStatus"
-        ),
-
-      systemLog:
-        document.getElementById(
-          "systemLog"
+          "scoutBody"
         )
     };
 
 
-    /* =========================================
-       AGENT DATA
-    ========================================== */
-
-    const agentData = {
+    const agentInfo = {
 
       scout: {
-        index:
-          "AGENT 01",
-
         name:
           "SCOUT",
 
         role:
           "Opportunity Scanner",
 
-        title:
-          "Live Opportunity Scan",
+        description:
+          "掃描 OKX USDT 永續市場，找出成交量、流動性、波動率、Open Interest 與價格活動較值得優先研究的標的。",
 
-        subtitle:
-          "Browser-side OKX public market scanner",
-
-        duties: [
-          "掃描成交量與市場活動突然放大的標的",
-          "評估流動性、價差、波動率與 Open Interest",
-          "建立候選池並排序 Top Opportunities",
-          "只提供研究優先級，不直接決定 LONG 或 SHORT"
+        details: [
+          ["Status", "READY"],
+          ["Universe", "USDT-SWAP"],
+          ["Top", "10"]
         ],
 
-        runtime:
-          "Browser SCOUT currently runs directly against OKX public endpoints. "
-          +
-          "The Python ScoutAgent remains the authoritative backend implementation.",
-
-        values: []
+        note:
+          "Browser SCOUT 只做市場機會排序，不代表 LONG / SHORT 訊號。"
       },
 
 
       news: {
-        index:
-          "AGENT 02",
-
         name:
           "NEWS",
 
         role:
-          "News Intelligence",
+          "News Analyst",
 
-        title:
-          "News Intelligence Pipeline",
+        description:
+          "聚合新聞來源，辨識市場事件、相關標的、事件重要度、方向性、時間尺度與 priced-in 風險。",
 
-        subtitle:
-          "Backend-only V1 implementation",
-
-        duties: [
-          "聚合 RSS / Atom 等多來源市場新聞",
-          "辨識公司、政策、宏觀與市場催化事件",
-          "進行事件分類、symbol 關聯與重要度分析",
-          "利用 LLM 分析方向、時間尺度與 priced-in 風險"
+        details: [
+          ["Status", "V1 READY"],
+          ["Sources", "RSS / Atom"],
+          ["LLM", "Backend"]
         ],
 
-        runtime:
-          "NEWS V1 source code is complete. Runtime execution remains backend-only "
-          +
-          "and is not exposed to this dashboard yet.",
-
-        values: [
-          ["Sources", "RSS / Atom"],
-          ["Deterministic", "READY"],
-          ["LLM Analyzer", "READY"],
-          ["Dashboard API", "NOT CONNECTED"],
-          ["Output", "NewsOutput"],
-          ["Runtime", "BACKEND"]
-        ]
+        note:
+          "Python NEWS pipeline 尚未透過 API 接到這個首頁。"
       },
 
 
       sentiment: {
-        index:
-          "AGENT 03",
-
         name:
           "SENTIMENT",
 
         role:
-          "Market Sentiment Analyst",
+          "Market Sentiment",
 
-        title:
-          "Positioning & Crowd Analysis",
+        description:
+          "分析 Funding、Open Interest、crowding、positioning 與市場活動，判斷情緒方向和擁擠風險。",
 
-        subtitle:
-          "Backend-only V1 implementation",
-
-        duties: [
-          "分析 Funding 與 Open Interest 行為",
-          "識別市場擁擠方向與極端 positioning",
-          "整合 market activity、情緒 regime 與 disagreement",
-          "輸出 sentiment bias，但不直接當作交易指令"
+        details: [
+          ["Status", "V1 READY"],
+          ["Funding", "READY"],
+          ["OI", "READY"]
         ],
 
-        runtime:
-          "SENTIMENT V1 is structurally complete with OKX source, analyzer, "
-          +
-          "service and tests. Live output is not connected to this page.",
-
-        values: [
-          ["Funding", "READY"],
-          ["Open Interest", "READY"],
-          ["Crowding", "READY"],
-          ["Regime", "READY"],
-          ["Output", "SentimentOutput"],
-          ["Runtime", "BACKEND"]
-        ]
+        note:
+          "Sentiment bias 是研究證據，不是交易指令。"
       },
 
 
       charts: {
-        index:
-          "AGENT 04",
-
         name:
           "CHARTS",
 
         role:
           "Technical Analyst",
 
-        title:
-          "Multi-Timeframe Technical Engine",
+        description:
+          "執行多時間框架技術分析，包括 EMA、RSI、MACD、ATR、Bollinger、成交量、趨勢結構、支撐壓力與突破。",
 
-        subtitle:
-          "Backend-only deterministic V1",
-
-        duties: [
-          "計算 EMA 20 / 50 / 200、RSI、MACD、ATR 與 Bollinger",
-          "辨識 HH / HL、LH / LL 與趨勢結構",
-          "分析支撐、壓力、突破與成交量確認",
-          "整合多時間框架方向、品質與訊號衝突"
+        details: [
+          ["Status", "V1 READY"],
+          ["EMA", "20 / 50 / 200"],
+          ["MTF", "READY"]
         ],
 
-        runtime:
-          "CHARTS V1 code is structurally complete. Lowercase m means minutes "
-          +
-          "and uppercase M means months. Runtime output is backend-side.",
-
-        values: [
-          ["EMA", "20 / 50 / 200"],
-          ["RSI", "14"],
-          ["MACD", "12 / 26 / 9"],
-          ["ATR", "14"],
-          ["Structure", "READY"],
-          ["MTF", "READY"]
-        ]
+        note:
+          "小寫 m 為分鐘，大寫 M 為月份。CHARTS 不直接決定是否下單。"
       },
 
 
       risk: {
-        index:
-          "AGENT 05",
-
         name:
           "RISK",
 
         role:
-          "AI Risk Manager",
+          "Risk Manager",
 
-        title:
-          "Risk Review",
+        description:
+          "評估新倉位的止損風險、帳戶曝險、槓桿、Risk / Reward、可用保證金、既有持倉與其他 Agent 的市場風險證據。",
 
-        subtitle:
-          "Development pending",
-
-        duties: [
-          "評估候選交易的風險品質與可接受性",
-          "檢查 position sizing、總曝險與風險報酬",
-          "提供 APPROVE / REDUCE / REJECT 類型建議",
-          "硬性風控規則必須由獨立 deterministic risk engine 執行"
+        details: [
+          ["Status", "V1 READY"],
+          ["Verdict", "APPROVE / REDUCE / REJECT"],
+          ["Execution", "ADVISORY"]
         ],
 
-        runtime:
-          "RISK is currently a skeleton. The existing agent returns approved=false "
-          +
-          "and contains no complete risk interpretation logic yet.",
-
-        values: [
-          ["Implementation", "SKELETON"],
-          ["Position Size", "--"],
-          ["Exposure", "--"],
-          ["Trade Review", "--"],
-          ["Approved", "FALSE"],
-          ["Hard Risk", "SEPARATE"]
-        ]
+        note:
+          "RISK 是風險顧問。真正硬性限制仍應由獨立 deterministic risk engine 執行。"
       },
 
 
       decision: {
-        index:
-          "AGENT 06",
-
         name:
           "DECISION",
 
         role:
           "Final Decision Maker",
 
-        title:
-          "Final Decision Synthesis",
+        description:
+          "未來整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，輸出最終 LONG / SHORT / WAIT。",
 
-        subtitle:
-          "Development pending",
-
-        duties: [
-          "整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK 證據",
-          "處理不同 Agent 之間的訊號衝突",
-          "只批准風險與證據合理的交易計畫",
-          "最終輸出 LONG / SHORT / WAIT，但本身不直接下單"
+        details: [
+          ["Status", "SKELETON"],
+          ["Current", "WAIT"],
+          ["Execution", "OFF"]
         ],
 
-        runtime:
-          "DECISION is currently a skeleton and defaults to WAIT with zero confidence. "
-          +
-          "Final synthesis logic has not been implemented yet.",
-
-        values: [
-          ["Current", "WAIT"],
-          ["Confidence", "0.00"],
-          ["Synthesis", "PENDING"],
-          ["Risk Gate", "PENDING"],
-          ["Execution", "OFF"],
-          ["Implementation", "SKELETON"]
-        ]
+        note:
+          "DECISION 尚未完成，目前不應視為有效交易決策。"
       }
 
     };
 
-
-    /* =========================================
-       LOGGING
-    ========================================== */
-
-    function log(
-      message,
-      type = ""
-    ) {
-
-      const line =
-        document.createElement(
-          "div"
-        );
-
-
-      line.className =
-        `log-line ${type}`;
-
-
-      const time =
-        new Date()
-          .toLocaleTimeString();
-
-
-      line.textContent =
-        `[${time}] ${message}`;
-
-
-      elements.systemLog
-        .prepend(
-          line
-        );
-
-
-      while (
-        elements.systemLog
-          .children
-          .length
-        >
-        120
-      ) {
-
-        elements.systemLog
-          .removeChild(
-            elements.systemLog
-              .lastChild
-          );
-
-      }
-
-    }
-
-
-    /* =========================================
-       CONNECTION STATUS
-    ========================================== */
-
-    function setConnection(
-      state
-    ) {
-
-      elements.connectionDot
-        .classList
-        .remove(
-          "online",
-          "offline"
-        );
-
-
-      if (
-        state
-        ===
-        "online"
-      ) {
-
-        elements.connectionDot
-          .classList
-          .add(
-            "online"
-          );
-
-
-        elements.connectionText
-          .textContent =
-            "OKX Online";
-
-
-        return;
-
-      }
-
-
-      if (
-        state
-        ===
-        "offline"
-      ) {
-
-        elements.connectionDot
-          .classList
-          .add(
-            "offline"
-          );
-
-
-        elements.connectionText
-          .textContent =
-            "OKX Offline";
-
-
-        return;
-
-      }
-
-
-      elements.connectionText
-        .textContent =
-          "Connecting";
-
-    }
-
-
-    function setEndpointStatus(
-      element,
-      success
-    ) {
-
-      element.classList
-        .remove(
-          "ok",
-          "error"
-        );
-
-
-      if (
-        success
-      ) {
-
-        element.textContent =
-          "OK";
-
-
-        element.classList
-          .add(
-            "ok"
-          );
-
-      } else {
-
-        element.textContent =
-          "ERROR";
-
-
-        element.classList
-          .add(
-            "error"
-          );
-
-      }
-
-    }
-
-
-    /* =========================================
-       NUMBER HELPERS
-    ========================================== */
 
     function finiteNumber(
       value,
@@ -4602,34 +1956,57 @@
     ) {
 
       const number =
-        Number(
-          value
-        );
+        Number(value);
 
 
-      return Number.isFinite(
-        number
-      )
+      return Number.isFinite(number)
         ? number
         : fallback;
 
     }
 
 
-    function formatPrice(
+    function compact(
       value
     ) {
 
       const number =
-        finiteNumber(
-          value
-        );
+        finiteNumber(value);
 
 
       if (
-        number
-        ===
-        null
+        number === null
+      ) {
+
+        return "--";
+
+      }
+
+
+      return new Intl.NumberFormat(
+        undefined,
+        {
+          notation:
+            "compact",
+
+          maximumFractionDigits:
+            2
+        }
+      ).format(number);
+
+    }
+
+
+    function price(
+      value
+    ) {
+
+      const number =
+        finiteNumber(value);
+
+
+      if (
+        number === null
       ) {
 
         return "--";
@@ -4638,303 +2015,45 @@
 
 
       if (
-        Math.abs(number)
-        >=
-        1000
+        number >= 1000
       ) {
 
-        return number
-          .toLocaleString(
-            undefined,
-            {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            }
-          );
-
-      }
-
-
-      if (
-        Math.abs(number)
-        >=
-        1
-      ) {
-
-        return number
-          .toLocaleString(
-            undefined,
-            {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 5
-            }
-          );
-
-      }
-
-
-      return number
-        .toLocaleString(
+        return number.toLocaleString(
           undefined,
           {
-            minimumFractionDigits: 4,
-            maximumFractionDigits: 8
+            maximumFractionDigits:
+              2
           }
         );
 
-    }
-
-
-    function formatCompact(
-      value
-    ) {
-
-      const number =
-        finiteNumber(
-          value
-        );
-
-
-      if (
-        number
-        ===
-        null
-      ) {
-
-        return "--";
-
       }
 
 
-      return new Intl
-        .NumberFormat(
+      if (
+        number >= 1
+      ) {
+
+        return number.toLocaleString(
           undefined,
           {
-            notation: "compact",
-            maximumFractionDigits: 2
+            maximumFractionDigits:
+              5
           }
-        )
-        .format(
-          number
         );
-
-    }
-
-
-    function formatSignedPercent(
-      value,
-      digits = 2
-    ) {
-
-      const number =
-        finiteNumber(
-          value
-        );
-
-
-      if (
-        number
-        ===
-        null
-      ) {
-
-        return "--";
 
       }
 
 
-      const prefix =
-        number > 0
-          ? "+"
-          : "";
-
-
-      return (
-        prefix
-        +
-        number.toFixed(
-          digits
-        )
-        +
-        "%"
+      return number.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:
+            8
+        }
       );
 
     }
 
-
-    function formatFunding(
-      value
-    ) {
-
-      const number =
-        finiteNumber(
-          value
-        );
-
-
-      if (
-        number
-        ===
-        null
-      ) {
-
-        return "--";
-
-      }
-
-
-      return (
-        (
-          number
-          *
-          100
-        )
-        .toFixed(5)
-        +
-        "%"
-      );
-
-    }
-
-
-    function percentageChange(
-      last,
-      open
-    ) {
-
-      if (
-        !Number.isFinite(last)
-        ||
-        !Number.isFinite(open)
-        ||
-        open === 0
-      ) {
-
-        return 0;
-
-      }
-
-
-      return (
-        (
-          last
-          -
-          open
-        )
-        /
-        open
-      )
-      *
-      100;
-
-    }
-
-
-    function rangePercent(
-      high,
-      low,
-      base
-    ) {
-
-      if (
-        !Number.isFinite(high)
-        ||
-        !Number.isFinite(low)
-        ||
-        !Number.isFinite(base)
-        ||
-        base <= 0
-      ) {
-
-        return 0;
-
-      }
-
-
-      return (
-        (
-          high
-          -
-          low
-        )
-        /
-        base
-      )
-      *
-      100;
-
-    }
-
-
-    function spreadPercent(
-      bid,
-      ask
-    ) {
-
-      if (
-        !Number.isFinite(bid)
-        ||
-        !Number.isFinite(ask)
-        ||
-        bid <= 0
-        ||
-        ask <= 0
-        ||
-        ask < bid
-      ) {
-
-        return Infinity;
-
-      }
-
-
-      const mid =
-        (
-          bid
-          +
-          ask
-        )
-        /
-        2;
-
-
-      return (
-        (
-          ask
-          -
-          bid
-        )
-        /
-        mid
-      )
-      *
-      100;
-
-    }
-
-
-    function selectedTimeframeLabel() {
-
-      const option =
-        elements.barSelect
-          .selectedOptions[0];
-
-
-      return (
-        option
-          ?.textContent
-          ?.trim()
-        ||
-        elements.barSelect
-          .value
-      );
-
-    }
-
-
-    /* =========================================
-       OKX HTTP
-    ========================================== */
 
     async function okxGet(
       path,
@@ -4949,50 +2068,29 @@
         );
 
 
-      Object
-        .entries(
-          params
-        )
-        .forEach(
-          (
-            [
-              key,
-              value
-            ]
-          ) => {
+      Object.entries(
+        params
+      ).forEach(
+        (
+          [
+            key,
+            value
+          ]
+        ) => {
 
-            if (
-              value !== null
-              &&
-              value !== undefined
-              &&
-              value !== ""
-            ) {
+          url.searchParams.set(
+            key,
+            String(value)
+          );
 
-              url.searchParams
-                .set(
-                  key,
-                  String(value)
-                );
-
-            }
-
-          }
-        );
+        }
+      );
 
 
       const response =
         await fetch(
           url.toString(),
           {
-            method:
-              "GET",
-
-            headers: {
-              Accept:
-                "application/json"
-            },
-
             cache:
               "no-store"
           }
@@ -5017,100 +2115,78 @@
       if (
         String(
           payload.code
-        )
-        !==
-        "0"
+        ) !== "0"
       ) {
 
         throw new Error(
-          (
-            `OKX ${payload.code}: `
-            +
-            (
-              payload.msg
-              ||
-              "Unknown error"
-            )
-          )
+          payload.msg
+          ||
+          "OKX error"
         );
 
       }
 
 
-      return Array.isArray(
-        payload.data
-      )
-        ? payload.data
-        : [];
+      return payload.data
+      ||
+      [];
 
     }
 
 
-    /* =========================================
-       MARKET REFRESH
-    ========================================== */
+    function setConnection(
+      online
+    ) {
+
+      elements.connectionDot.classList
+        .remove(
+          "online",
+          "offline"
+        );
+
+
+      elements.connectionDot.classList
+        .add(
+          online
+            ? "online"
+            : "offline"
+        );
+
+
+      elements.connectionText.textContent =
+        online
+          ? "OKX Online"
+          : "OKX Offline";
+
+    }
+
 
     async function refreshMarket() {
 
-      if (
-        marketLoading
-      ) {
-
-        return;
-
-      }
-
-
-      marketLoading =
-        true;
-
-
-      elements.refreshMarketButton
-        .disabled =
-          true;
-
-
-      elements.refreshMarketButton
-        .textContent =
-          "Refreshing...";
-
-
       const symbol =
-        elements.instrumentSelect
-          .value;
+        elements.symbolSelect.value;
 
 
       const bar =
-        elements.barSelect
-          .value;
+        elements.timeframeSelect.value;
 
 
-      const barLabel =
-        selectedTimeframeLabel();
+      elements.symbolLabel.textContent =
+        symbol;
 
 
-      elements.chartSymbol
-        .textContent =
-          symbol;
-
-
-      elements.chartSub
-        .textContent =
-          (
-            `${barLabel}`
-            +
-            ` · ${MARKET_CANDLE_LIMIT} candles`
-          );
+      elements.refreshButton.disabled =
+        true;
 
 
       try {
 
         const [
           tickerResult,
-          candlesResult,
-          booksResult,
+          candleResult,
           fundingResult,
-          oiResult
+          oiResult,
+          bookResult
         ] =
           await Promise.allSettled(
             [
@@ -5132,18 +2208,7 @@
                   bar,
 
                   limit:
-                    MARKET_CANDLE_LIMIT
-                }
-              ),
-
-              okxGet(
-                "/api/v5/market/books",
-                {
-                  instId:
-                    symbol,
-
-                  sz:
-                    5
+                    CANDLE_LIMIT
                 }
               ),
 
@@ -5164,25 +2229,28 @@
                   instId:
                     symbol
                 }
+              ),
+
+              okxGet(
+                "/api/v5/market/books",
+                {
+                  instId:
+                    symbol,
+
+                  sz:
+                    1
+                }
               )
 
             ]
           );
 
 
-        /* TICKER */
-
         if (
           tickerResult.status
           ===
           "fulfilled"
         ) {
-
-          setEndpointStatus(
-            elements.tickerStatus,
-            true
-          );
-
 
           const ticker =
             tickerResult.value[0]
@@ -5196,65 +2264,53 @@
             );
 
 
-          const open24h =
+          const open =
             finiteNumber(
               ticker.open24h
             );
 
 
-          const high24h =
-            finiteNumber(
-              ticker.high24h
-            );
-
-
-          const low24h =
-            finiteNumber(
-              ticker.low24h
-            );
-
-
-          const vol24h =
-            finiteNumber(
-              ticker.vol24h,
-              0
-            );
-
-
-          const volCcy24h =
-            finiteNumber(
-              ticker.volCcy24h,
-              0
-            );
-
-
           const change =
-            percentageChange(
-              last,
-              open24h
+            (
+              Number.isFinite(last)
+              &&
+              Number.isFinite(open)
+              &&
+              open !== 0
+            )
+              ? (
+                  (
+                    last
+                    -
+                    open
+                  )
+                  /
+                  open
+                  *
+                  100
+                )
+              : 0;
+
+
+          elements.lastPrice.textContent =
+            price(last);
+
+
+          elements.priceChange.textContent =
+            (
+              `24H `
+              +
+              (
+                change > 0
+                  ? "+"
+                  : ""
+              )
+              +
+              `${change.toFixed(2)}%`
             );
 
 
-          elements.lastPrice
-            .textContent =
-              formatPrice(
-                last
-              );
-
-
-          elements.priceChange
-            .textContent =
-              (
-                "24H "
-                +
-                formatSignedPercent(
-                  change
-                )
-              );
-
-
-          elements.priceChange
-            .classList
+          elements.priceChange.classList
             .remove(
               "positive",
               "negative"
@@ -5265,8 +2321,7 @@
             change > 0
           ) {
 
-            elements.priceChange
-              .classList
+            elements.priceChange.classList
               .add(
                 "positive"
               );
@@ -5275,8 +2330,7 @@
             change < 0
           ) {
 
-            elements.priceChange
-              .classList
+            elements.priceChange.classList
               .add(
                 "negative"
               );
@@ -5284,198 +2338,151 @@
           }
 
 
-          let approximateVolume =
-            vol24h;
+          let volume =
+            finiteNumber(
+              ticker.vol24h,
+              0
+            );
+
+
+          const volumeCurrency =
+            finiteNumber(
+              ticker.volCcy24h,
+              0
+            );
 
 
           if (
-            volCcy24h > 0
+            volumeCurrency > 0
             &&
             Number.isFinite(last)
           ) {
 
-            approximateVolume =
-              volCcy24h
+            volume =
+              volumeCurrency
               *
               last;
 
           }
 
 
-          elements.volume24h
-            .textContent =
-              (
-                "$"
-                +
-                formatCompact(
-                  approximateVolume
-                )
-              );
-
-
-          const rangeBase =
-            (
-              Number.isFinite(
-                open24h
-              )
-              &&
-              open24h > 0
-            )
-              ? open24h
-              : last;
-
-
-          elements.range24h
-            .textContent =
-              (
-                "Range "
-                +
-                rangePercent(
-                  high24h,
-                  low24h,
-                  rangeBase
-                )
-                .toFixed(2)
-                +
-                "%"
-              );
-
-        } else {
-
-          setEndpointStatus(
-            elements.tickerStatus,
-            false
-          );
+          elements.volume.textContent =
+            "$"
+            +
+            compact(volume);
 
         }
 
 
-        /* CANDLES */
-
         if (
-          candlesResult.status
+          candleResult.status
           ===
           "fulfilled"
         ) {
 
-          setEndpointStatus(
-            elements.candlesStatus,
-            true
-          );
-
-
-          currentCandles =
-            candlesResult.value
-
+          candles =
+            candleResult.value
               .map(
                 row => ({
-                  timestamp:
-                    finiteNumber(
-                      row[0]
-                    ),
-
                   open:
-                    finiteNumber(
-                      row[1]
-                    ),
+                    Number(row[1]),
 
                   high:
-                    finiteNumber(
-                      row[2]
-                    ),
+                    Number(row[2]),
 
                   low:
-                    finiteNumber(
-                      row[3]
-                    ),
+                    Number(row[3]),
 
                   close:
-                    finiteNumber(
-                      row[4]
-                    )
+                    Number(row[4])
                 })
               )
-
-              .filter(
-                candle =>
-                  Number.isFinite(
-                    candle.open
-                  )
-                  &&
-                  Number.isFinite(
-                    candle.high
-                  )
-                  &&
-                  Number.isFinite(
-                    candle.low
-                  )
-                  &&
-                  Number.isFinite(
-                    candle.close
-                  )
-              )
-
               .reverse();
 
 
-          drawCandles(
-            currentCandles
-          );
-
-        } else {
-
-          setEndpointStatus(
-            elements.candlesStatus,
-            false
-          );
+          drawCandles();
 
         }
 
 
-        /* ORDER BOOK */
-
         if (
-          booksResult.status
+          fundingResult.status
           ===
           "fulfilled"
         ) {
 
-          setEndpointStatus(
-            elements.booksStatus,
-            true
-          );
+          const rate =
+            finiteNumber(
+              fundingResult
+                .value[0]
+                ?.fundingRate
+            );
 
+
+          elements.funding.textContent =
+            rate === null
+              ? "--"
+              : (
+                  rate
+                  *
+                  100
+                ).toFixed(5)
+                +
+                "%";
+
+        }
+
+
+        if (
+          oiResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          const oi =
+            finiteNumber(
+              oiResult
+                .value[0]
+                ?.oiUsd
+            );
+
+
+          elements.openInterest.textContent =
+            oi === null
+              ? "--"
+              : "$"
+                +
+                compact(oi);
+
+        }
+
+
+        if (
+          bookResult.status
+          ===
+          "fulfilled"
+        ) {
 
           const book =
-            booksResult.value[0]
+            bookResult.value[0]
             ||
             {};
 
 
           const ask =
             finiteNumber(
-              book.asks?.[0]?.[0]
+              book.asks
+                ?.[0]
+                ?.[0]
             );
 
 
           const bid =
             finiteNumber(
-              book.bids?.[0]?.[0]
+              book.bids
+                ?.[0]
+                ?.[0]
             );
-
-
-          elements.bestAsk
-            .textContent =
-              formatPrice(
-                ask
-              );
-
-
-          elements.bestBid
-            .textContent =
-              formatPrice(
-                bid
-              );
 
 
           if (
@@ -5484,326 +2491,68 @@
             Number.isFinite(bid)
           ) {
 
-            elements.spreadValue
-              .textContent =
-                formatPrice(
-                  ask
-                  -
-                  bid
-                );
+            const mid =
+              (
+                ask
+                +
+                bid
+              )
+              /
+              2;
 
 
             const spread =
-              spreadPercent(
-                bid,
+              (
                 ask
-              );
+                -
+                bid
+              )
+              /
+              mid
+              *
+              100;
 
 
-            elements.spreadPercent
-              .textContent =
-                Number.isFinite(
-                  spread
-                )
-                  ? (
-                      spread
-                        .toFixed(5)
-                      +
-                      "%"
-                    )
-                  : "--";
-
-          } else {
-
-            elements.spreadValue
-              .textContent =
-                "--";
-
-
-            elements.spreadPercent
-              .textContent =
-                "--";
+            elements.spread.textContent =
+              spread.toFixed(5)
+              +
+              "%";
 
           }
 
-        } else {
-
-          setEndpointStatus(
-            elements.booksStatus,
-            false
-          );
-
         }
-
-
-        /* FUNDING */
-
-        if (
-          fundingResult.status
-          ===
-          "fulfilled"
-        ) {
-
-          setEndpointStatus(
-            elements.fundingStatus,
-            true
-          );
-
-
-          const funding =
-            fundingResult.value[0]
-            ||
-            {};
-
-
-          const rate =
-            finiteNumber(
-              funding.fundingRate
-            );
-
-
-          const nextFunding =
-            finiteNumber(
-              funding.nextFundingTime
-            );
-
-
-          elements.fundingRate
-            .textContent =
-              formatFunding(
-                rate
-              );
-
-
-          elements.fundingRate
-            .classList
-            .remove(
-              "positive",
-              "negative"
-            );
-
-
-          if (
-            rate > 0
-          ) {
-
-            elements.fundingRate
-              .classList
-              .add(
-                "positive"
-              );
-
-          } else if (
-            rate < 0
-          ) {
-
-            elements.fundingRate
-              .classList
-              .add(
-                "negative"
-              );
-
-          }
-
-
-          elements.fundingTime
-            .textContent =
-              Number.isFinite(
-                nextFunding
-              )
-                ? (
-                    "Next "
-                    +
-                    new Date(
-                      nextFunding
-                    )
-                    .toLocaleString()
-                  )
-                : "Next funding --";
-
-        } else {
-
-          setEndpointStatus(
-            elements.fundingStatus,
-            false
-          );
-
-        }
-
-
-        /* OPEN INTEREST */
-
-        if (
-          oiResult.status
-          ===
-          "fulfilled"
-        ) {
-
-          setEndpointStatus(
-            elements.oiStatus,
-            true
-          );
-
-
-          const oi =
-            oiResult.value[0]
-            ||
-            {};
-
-
-          const oiUsd =
-            finiteNumber(
-              oi.oiUsd
-            );
-
-
-          const oiRaw =
-            finiteNumber(
-              oi.oi
-            );
-
-
-          elements.openInterestUsd
-            .textContent =
-              Number.isFinite(
-                oiUsd
-              )
-                ? (
-                    "$"
-                    +
-                    formatCompact(
-                      oiUsd
-                    )
-                  )
-                : "--";
-
-
-          elements.openInterestRaw
-            .textContent =
-              Number.isFinite(
-                oiRaw
-              )
-                ? (
-                    "OI "
-                    +
-                    formatCompact(
-                      oiRaw
-                    )
-                  )
-                : "OI --";
-
-        } else {
-
-          setEndpointStatus(
-            elements.oiStatus,
-            false
-          );
-
-        }
-
-
-        const anySuccess =
-          [
-            tickerResult,
-            candlesResult,
-            booksResult,
-            fundingResult,
-            oiResult
-          ]
-          .some(
-            result =>
-              result.status
-              ===
-              "fulfilled"
-          );
 
 
         setConnection(
-          anySuccess
-            ? "online"
-            : "offline"
+          true
         );
-
-
-        if (
-          anySuccess
-        ) {
-
-          log(
-            (
-              `Market refreshed: `
-              +
-              `${symbol} ${barLabel}`
-            ),
-            "success"
-          );
-
-        } else {
-
-          log(
-            (
-              `Market refresh failed: `
-              +
-              `${symbol} ${barLabel}`
-            ),
-            "error"
-          );
-
-        }
 
       } catch (
         error
       ) {
 
         setConnection(
-          "offline"
-        );
-
-
-        log(
-          (
-            "Market refresh error: "
-            +
-            error.message
-          ),
-          "error"
+          false
         );
 
       } finally {
 
-        marketLoading =
+        elements.refreshButton.disabled =
           false;
-
-
-        elements.refreshMarketButton
-          .disabled =
-            false;
-
-
-        elements.refreshMarketButton
-          .textContent =
-            "Refresh";
 
       }
 
     }
 
 
-    /* =========================================
-       CANDLE CHART
-    ========================================== */
-
-    function drawCandles(
-      candles
-    ) {
+    function drawCandles() {
 
       const canvas =
         elements.priceChart;
 
 
       const rect =
-        canvas
-          .getBoundingClientRect();
+        canvas.getBoundingClientRect();
 
 
       const ratio =
@@ -5813,25 +2562,15 @@
 
 
       canvas.width =
-        Math.max(
-          1,
-          Math.floor(
-            rect.width
-            *
-            ratio
-          )
-        );
+        rect.width
+        *
+        ratio;
 
 
       canvas.height =
-        Math.max(
-          1,
-          Math.floor(
-            rect.height
-            *
-            ratio
-          )
-        );
+        rect.height
+        *
+        ratio;
 
 
       const ctx =
@@ -5867,31 +2606,27 @@
       }
 
 
-      const padding = {
-        top: 16,
-        right: 18,
-        bottom: 18,
-        left: 18
-      };
+      const padding =
+        12;
 
 
       const width =
         rect.width
         -
-        padding.left
-        -
-        padding.right;
+        padding
+        *
+        2;
 
 
       const height =
         rect.height
         -
-        padding.top
-        -
-        padding.bottom;
+        padding
+        *
+        2;
 
 
-      const highest =
+      const high =
         Math.max(
           ...candles.map(
             candle =>
@@ -5900,7 +2635,7 @@
         );
 
 
-      const lowest =
+      const low =
         Math.min(
           ...candles.map(
             candle =>
@@ -5910,42 +2645,42 @@
 
 
       const range =
-        highest
+        high
         -
-        lowest
+        low
         ||
         1;
 
 
-      const slotWidth =
+      const slot =
         width
         /
         candles.length;
 
 
-      const bodyWidth =
+      const body =
         Math.max(
           2,
           Math.min(
-            8,
-            slotWidth
+            7,
+            slot
             *
-            0.62
+            0.6
           )
         );
 
 
       function y(
-        price
+        value
       ) {
 
         return (
-          padding.top
+          padding
           +
           (
-            highest
+            high
             -
-            price
+            value
           )
           /
           range
@@ -5956,93 +2691,44 @@
       }
 
 
-      /* GRID */
-
       ctx.strokeStyle =
-        "rgba(95,109,126,0.10)";
-
-
-      ctx.lineWidth =
-        1;
+        "rgba(90,103,119,0.12)";
 
 
       for (
         let index = 1;
-        index < 6;
+        index < 5;
         index += 1
       ) {
 
         const gridY =
-          padding.top
-          +
           height
           *
           index
           /
-          6;
+          5
+          +
+          padding;
 
 
         ctx.beginPath();
 
-
         ctx.moveTo(
-          padding.left,
+          padding,
           gridY
         );
-
 
         ctx.lineTo(
-          padding.left
-          +
-          width,
+          rect.width
+          -
+          padding,
           gridY
         );
-
 
         ctx.stroke();
 
       }
 
-
-      for (
-        let index = 1;
-        index < 8;
-        index += 1
-      ) {
-
-        const gridX =
-          padding.left
-          +
-          width
-          *
-          index
-          /
-          8;
-
-
-        ctx.beginPath();
-
-
-        ctx.moveTo(
-          gridX,
-          padding.top
-        );
-
-
-        ctx.lineTo(
-          gridX,
-          padding.top
-          +
-          height
-        );
-
-
-        ctx.stroke();
-
-      }
-
-
-      /* CANDLES */
 
       candles.forEach(
         (
@@ -6051,27 +2737,27 @@
         ) => {
 
           const x =
-            padding.left
+            padding
             +
-            slotWidth
+            slot
             *
             index
             +
-            slotWidth
+            slot
             /
             2;
 
 
-          const isUp =
+          const up =
             candle.close
             >=
             candle.open;
 
 
           const color =
-            isUp
-              ? "#3de58f"
-              : "#ff5f72";
+            up
+              ? "#42e58d"
+              : "#ff5e70";
 
 
           ctx.strokeStyle =
@@ -6084,7 +2770,6 @@
 
           ctx.beginPath();
 
-
           ctx.moveTo(
             x,
             y(
@@ -6092,14 +2777,12 @@
             )
           );
 
-
           ctx.lineTo(
             x,
             y(
               candle.low
             )
           );
-
 
           ctx.stroke();
 
@@ -6116,14 +2799,20 @@
             );
 
 
-          const top =
+          ctx.fillRect(
+            x
+            -
+            body
+            /
+            2,
+
             Math.min(
               openY,
               closeY
-            );
+            ),
 
+            body,
 
-          const bodyHeight =
             Math.max(
               1,
               Math.abs(
@@ -6131,21 +2820,7 @@
                 -
                 openY
               )
-            );
-
-
-          ctx.fillRect(
-            x
-            -
-            bodyWidth
-            /
-            2,
-
-            top,
-
-            bodyWidth,
-
-            bodyHeight
+            )
           );
 
         }
@@ -6154,799 +2829,93 @@
     }
 
 
-    /* =========================================
-       SCOUT RANKING
-    ========================================== */
-
-    function rankScores(
-      rows,
-      valueGetter,
-      higherIsBetter = true
+    function openAgent(
+      key
     ) {
 
-      const values =
-        rows
-
-          .map(
-            (
-              row,
-              index
-            ) => ({
-              index,
-
-              value:
-                valueGetter(
-                  row
-                )
-            })
-          )
-
-          .filter(
-            item =>
-              Number.isFinite(
-                item.value
-              )
-          )
-
-          .sort(
-            (
-              a,
-              b
-            ) =>
-              a.value
-              -
-              b.value
-          );
-
-
-      const scores =
-        Array(
-          rows.length
-        )
-        .fill(
-          null
-        );
+      const agent =
+        agentInfo[key];
 
 
       if (
-        values.length
-        ===
-        0
+        !agent
       ) {
-
-        return scores;
-
-      }
-
-
-      if (
-        values.length
-        ===
-        1
-      ) {
-
-        scores[
-          values[0].index
-        ] =
-          1;
-
-
-        return scores;
-
-      }
-
-
-      values.forEach(
-        (
-          item,
-          rank
-        ) => {
-
-          let score =
-            rank
-            /
-            (
-              values.length
-              -
-              1
-            );
-
-
-          if (
-            !higherIsBetter
-          ) {
-
-            score =
-              1
-              -
-              score;
-
-          }
-
-
-          scores[
-            item.index
-          ] =
-            score;
-
-        }
-      );
-
-
-      return scores;
-
-    }
-
-
-    function applyPreliminaryScores(
-      rows
-    ) {
-
-      const volumeScores =
-        rankScores(
-          rows,
-          row =>
-            row.approxQuoteVolume
-        );
-
-
-      const volatilityScores =
-        rankScores(
-          rows,
-          row =>
-            row.rangePct
-        );
-
-
-      const activityScores =
-        rankScores(
-          rows,
-          row =>
-            row.absChangePct
-        );
-
-
-      rows.forEach(
-        (
-          row,
-          index
-        ) => {
-
-          row.volumeScore =
-            volumeScores[index]
-            ??
-            0;
-
-
-          row.volatilityScore =
-            volatilityScores[index]
-            ??
-            0;
-
-
-          row.activityScore =
-            activityScores[index]
-            ??
-            0;
-
-
-          row.preliminaryScore =
-            (
-              row.volumeScore
-              *
-              0.50
-            )
-            +
-            (
-              row.volatilityScore
-              *
-              0.30
-            )
-            +
-            (
-              row.activityScore
-              *
-              0.20
-            );
-
-        }
-      );
-
-    }
-
-
-    function applyFinalScores(
-      rows
-    ) {
-
-      const volumeScores =
-        rankScores(
-          rows,
-          row =>
-            row.approxQuoteVolume
-        );
-
-
-      const liquidityScores =
-        rankScores(
-          rows,
-          row =>
-            row.spreadPct,
-          false
-        );
-
-
-      const volatilityScores =
-        rankScores(
-          rows,
-          row =>
-            row.rangePct
-        );
-
-
-      const oiScores =
-        rankScores(
-          rows,
-          row =>
-            row.openInterestUsd
-        );
-
-
-      const activityScores =
-        rankScores(
-          rows,
-          row =>
-            row.absChangePct
-        );
-
-
-      rows.forEach(
-        (
-          row,
-          index
-        ) => {
-
-          row.volumeScore =
-            volumeScores[index];
-
-
-          row.liquidityScore =
-            liquidityScores[index];
-
-
-          row.volatilityScore =
-            volatilityScores[index];
-
-
-          row.openInterestScore =
-            oiScores[index];
-
-
-          row.activityScore =
-            activityScores[index];
-
-
-          const components =
-            [
-
-              [
-                row.volumeScore,
-                0.30
-              ],
-
-              [
-                row.liquidityScore,
-                0.25
-              ],
-
-              [
-                row.volatilityScore,
-                0.20
-              ],
-
-              [
-                row.openInterestScore,
-                0.15
-              ],
-
-              [
-                row.activityScore,
-                0.10
-              ]
-
-            ]
-            .filter(
-              (
-                [
-                  value
-                ]
-              ) =>
-                Number.isFinite(
-                  value
-                )
-            );
-
-
-          const totalWeight =
-            components
-              .reduce(
-                (
-                  total,
-                  [
-                    ,
-                    weight
-                  ]
-                ) =>
-                  total
-                  +
-                  weight,
-                0
-              );
-
-
-          row.finalScore =
-            totalWeight > 0
-              ? (
-                  components
-                    .reduce(
-                      (
-                        total,
-                        [
-                          score,
-                          weight
-                        ]
-                      ) =>
-                        total
-                        +
-                        (
-                          score
-                          *
-                          weight
-                        ),
-                      0
-                    )
-                  /
-                  totalWeight
-                )
-              : 0;
-
-        }
-      );
-
-    }
-
-
-    /* =========================================
-       FUNDING
-    ========================================== */
-
-    async function attachFunding(
-      rows
-    ) {
-
-      let nextIndex =
-        0;
-
-
-      let successCount =
-        0;
-
-
-      async function worker() {
-
-        while (
-          true
-        ) {
-
-          const index =
-            nextIndex++;
-
-
-          if (
-            index
-            >=
-            rows.length
-          ) {
-
-            return;
-
-          }
-
-
-          const row =
-            rows[index];
-
-
-          try {
-
-            const data =
-              await okxGet(
-                "/api/v5/public/funding-rate",
-                {
-                  instId:
-                    row.symbol
-                }
-              );
-
-
-            row.fundingRate =
-              finiteNumber(
-                data[0]
-                  ?.fundingRate
-              );
-
-
-            successCount += 1;
-
-          } catch (
-            error
-          ) {
-
-            row.fundingRate =
-              null;
-
-          }
-
-        }
-
-      }
-
-
-      const workerCount =
-        Math.min(
-          FUNDING_CONCURRENCY,
-          rows.length
-        );
-
-
-      await Promise.all(
-        Array.from(
-          {
-            length:
-              workerCount
-          },
-          () =>
-            worker()
-        )
-      );
-
-
-      return successCount;
-
-    }
-
-
-    /* =========================================
-       SCOUT REASONS
-    ========================================== */
-
-    function buildReasons(
-      row
-    ) {
-
-      const reasons =
-        [];
-
-
-      if (
-        row.volumeScore
-        >=
-        0.80
-      ) {
-
-        reasons.push(
-          "High relative volume"
-        );
-
-      }
-
-
-      if (
-        row.liquidityScore
-        >=
-        0.80
-      ) {
-
-        reasons.push(
-          "Strong liquidity"
-        );
-
-      }
-
-
-      if (
-        row.volatilityScore
-        >=
-        0.80
-      ) {
-
-        reasons.push(
-          "High volatility"
-        );
-
-      }
-
-
-      if (
-        row.openInterestScore
-        >=
-        0.80
-      ) {
-
-        reasons.push(
-          "High open interest"
-        );
-
-      }
-
-
-      if (
-        row.activityScore
-        >=
-        0.80
-      ) {
-
-        reasons.push(
-          "Strong price activity"
-        );
-
-      }
-
-
-      if (
-        !reasons.length
-      ) {
-
-        reasons.push(
-          "Balanced market quality"
-        );
-
-      }
-
-
-      return reasons;
-
-    }
-
-
-    /* =========================================
-       SCOUT RENDER
-    ========================================== */
-
-    function renderScout(
-      rows
-    ) {
-
-      elements.scoutTableBody
-        .innerHTML =
-          "";
-
-
-      if (
-        !rows.length
-      ) {
-
-        elements.scoutTableBody
-          .innerHTML =
-            `
-              <tr>
-                <td colspan="10">
-                  <div class="empty">
-                    No candidates returned.
-                  </div>
-                </td>
-              </tr>
-            `;
-
 
         return;
 
       }
 
 
-      rows.forEach(
+      elements.modalName.textContent =
+        agent.name;
+
+
+      elements.modalRole.textContent =
+        agent.role;
+
+
+      elements.modalDescription.textContent =
+        agent.description;
+
+
+      elements.modalNote.textContent =
+        agent.note;
+
+
+      elements.modalDetails.innerHTML =
+        "";
+
+
+      agent.details.forEach(
         (
-          row,
-          index
+          [
+            label,
+            value
+          ]
         ) => {
 
-          const changeClass =
-            row.changePct > 0
-              ? "positive"
-              : row.changePct < 0
-                ? "negative"
-                : "";
-
-
-          const fundingClass =
-            row.fundingRate > 0
-              ? "positive"
-              : row.fundingRate < 0
-                ? "negative"
-                : "";
-
-
-          const tr =
+          const box =
             document.createElement(
-              "tr"
+              "div"
             );
 
 
-          tr.innerHTML =
+          box.className =
+            "detail-box";
+
+
+          box.innerHTML =
             `
-              <td>
-                ${index + 1}
-              </td>
+              <div class="detail-label">
+                ${label}
+              </div>
 
-              <td>
-                <strong>
-                  ${row.symbol}
-                </strong>
-              </td>
-
-              <td class="score">
-                ${row.finalScore.toFixed(4)}
-              </td>
-
-              <td>
-                ${formatPrice(row.last)}
-              </td>
-
-              <td class="${changeClass}">
-                ${formatSignedPercent(
-                  row.changePct
-                )}
-              </td>
-
-              <td>
-                ${row.rangePct.toFixed(2)}%
-              </td>
-
-              <td>
-                ${
-                  Number.isFinite(
-                    row.spreadPct
-                  )
-                    ? (
-                        row.spreadPct
-                          .toFixed(5)
-                        +
-                        "%"
-                      )
-                    : "--"
-                }
-              </td>
-
-              <td>
-                $${formatCompact(
-                  row.approxQuoteVolume
-                )}
-              </td>
-
-              <td>
-                ${
-                  Number.isFinite(
-                    row.openInterestUsd
-                  )
-                    ? (
-                        "$"
-                        +
-                        formatCompact(
-                          row.openInterestUsd
-                        )
-                      )
-                    : "--"
-                }
-              </td>
-
-              <td class="${fundingClass}">
-                ${formatFunding(
-                  row.fundingRate
-                )}
-              </td>
+              <div class="detail-value">
+                ${value}
+              </div>
             `;
 
 
-          elements.scoutTableBody
-            .appendChild(
-              tr
-            );
-
-
-          const reasonRow =
-            document.createElement(
-              "tr"
-            );
-
-
-          reasonRow.className =
-            "reason-row";
-
-
-          const td =
-            document.createElement(
-              "td"
-            );
-
-
-          td.colSpan =
-            10;
-
-
-          row.reasons
-            .forEach(
-              reason => {
-
-                const chip =
-                  document.createElement(
-                    "span"
-                  );
-
-
-                chip.className =
-                  "reason-chip";
-
-
-                chip.textContent =
-                  reason;
-
-
-                td.appendChild(
-                  chip
-                );
-
-              }
-            );
-
-
-          const metrics =
-            document.createElement(
-              "span"
-            );
-
-
-          metrics.className =
-            "reason-chip";
-
-
-          metrics.textContent =
-            (
-              `VOL ${(row.volumeScore ?? 0).toFixed(2)}`
-              +
-              ` · LIQ ${(row.liquidityScore ?? 0).toFixed(2)}`
-              +
-              ` · RNG ${(row.volatilityScore ?? 0).toFixed(2)}`
-              +
-              ` · OI ${(row.openInterestScore ?? 0).toFixed(2)}`
-              +
-              ` · ACT ${(row.activityScore ?? 0).toFixed(2)}`
-            );
-
-
-          td.appendChild(
-            metrics
+          elements.modalDetails.appendChild(
+            box
           );
-
-
-          reasonRow.appendChild(
-            td
-          );
-
-
-          elements.scoutTableBody
-            .appendChild(
-              reasonRow
-            );
 
         }
       );
 
+
+      elements.scoutControls.style.display =
+        key === "scout"
+          ? ""
+          : "none";
+
+
+      elements.agentModal.classList.add(
+        "show"
+      );
+
     }
 
-
-    /* =========================================
-       RUN SCOUT
-    ========================================== */
 
     async function runScout() {
 
@@ -6963,47 +2932,22 @@
         true;
 
 
-      elements.scanScoutButton
-        .disabled =
-          true;
+      elements.scanScoutButton.disabled =
+        true;
 
 
-      elements.scanScoutButton
-        .textContent =
-          "Scanning...";
-
-
-      elements.scoutSpinner
-        .classList
-        .add(
-          "show"
-        );
-
-
-      elements.scoutStatusText
-        .textContent =
-          "Loading market universe...";
-
-
-      elements.scoutProgress
-        .style.width =
-          "8%";
-
-
-      log(
-        "Browser SCOUT scan started.",
-        "info"
-      );
+      elements.scoutStatus.textContent =
+        "Scanning...";
 
 
       try {
 
         const [
-          instrumentsResult,
-          tickersResult,
-          oiResult
+          instruments,
+          tickers,
+          oiData
         ] =
-          await Promise.allSettled(
+          await Promise.all(
             [
 
               okxGet(
@@ -7034,116 +2978,9 @@
           );
 
 
-        if (
-          instrumentsResult.status
-          !==
-          "fulfilled"
-        ) {
-
-          setEndpointStatus(
-            elements.instrumentsStatus,
-            false
-          );
-
-
-          throw (
-            instrumentsResult.reason
-            ||
-            new Error(
-              "Instrument request failed."
-            )
-          );
-
-        }
-
-
-        setEndpointStatus(
-          elements.instrumentsStatus,
-          true
-        );
-
-
-        if (
-          tickersResult.status
-          !==
-          "fulfilled"
-        ) {
-
-          setEndpointStatus(
-            elements.tickersStatus,
-            false
-          );
-
-
-          throw (
-            tickersResult.reason
-            ||
-            new Error(
-              "Ticker request failed."
-            )
-          );
-
-        }
-
-
-        setEndpointStatus(
-          elements.tickersStatus,
-          true
-        );
-
-
-        const instruments =
-          instrumentsResult.value;
-
-
-        const tickers =
-          tickersResult.value;
-
-
-        let openInterest =
-          [];
-
-
-        if (
-          oiResult.status
-          ===
-          "fulfilled"
-        ) {
-
-          setEndpointStatus(
-            elements.oiStatus,
-            true
-          );
-
-
-          openInterest =
-            oiResult.value;
-
-        } else {
-
-          setEndpointStatus(
-            elements.oiStatus,
-            false
-          );
-
-        }
-
-
-        elements.scoutProgress
-          .style.width =
-            "25%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            "Filtering USDT perpetual markets...";
-
-
-        const liveSymbols =
+        const live =
           new Set(
-
             instruments
-
               .filter(
                 item =>
                   item.state
@@ -7154,16 +2991,7 @@
                     ?.endsWith(
                       "-USDT-SWAP"
                     )
-                  &&
-                  (
-                    !item.settleCcy
-                    ||
-                    item.settleCcy
-                    ===
-                    "USDT"
-                  )
               )
-
               .map(
                 item =>
                   item.instId
@@ -7172,293 +3000,211 @@
 
 
         const oiMap =
-          new Map();
-
-
-        openInterest
-          .forEach(
-            item => {
-
-              oiMap.set(
+          new Map(
+            oiData.map(
+              item => [
                 item.instId,
-                {
-                  oi:
-                    finiteNumber(
-                      item.oi
-                    ),
-
-                  oiUsd:
-                    finiteNumber(
-                      item.oiUsd
-                    ),
-
-                  oiCcy:
-                    finiteNumber(
-                      item.oiCcy
-                    )
-                }
-              );
-
-            }
+                finiteNumber(
+                  item.oiUsd,
+                  0
+                )
+              ]
+            )
           );
 
 
         const rows =
-          [];
+          tickers
+
+            .filter(
+              ticker =>
+                live.has(
+                  ticker.instId
+                )
+            )
+
+            .map(
+              ticker => {
+
+                const last =
+                  finiteNumber(
+                    ticker.last,
+                    0
+                  );
 
 
-        for (
-          const ticker
-          of tickers
+                const open =
+                  finiteNumber(
+                    ticker.open24h,
+                    last
+                  );
+
+
+                const high =
+                  finiteNumber(
+                    ticker.high24h,
+                    last
+                  );
+
+
+                const low =
+                  finiteNumber(
+                    ticker.low24h,
+                    last
+                  );
+
+
+                const vol =
+                  finiteNumber(
+                    ticker.volCcy24h,
+                    0
+                  )
+                  *
+                  last;
+
+
+                const change =
+                  open > 0
+                    ? Math.abs(
+                        (
+                          last
+                          -
+                          open
+                        )
+                        /
+                        open
+                      )
+                    : 0;
+
+
+                const range =
+                  open > 0
+                    ? (
+                        high
+                        -
+                        low
+                      )
+                      /
+                      open
+                    : 0;
+
+
+                const oi =
+                  oiMap.get(
+                    ticker.instId
+                  )
+                  ||
+                  0;
+
+
+                return {
+                  symbol:
+                    ticker.instId,
+
+                  last,
+
+                  open,
+
+                  volume:
+                    vol,
+
+                  activity:
+                    change,
+
+                  range,
+
+                  oi
+                };
+
+              }
+            );
+
+
+        function normalized(
+          value,
+          max
         ) {
 
-          const symbol =
-            ticker.instId;
+          return max > 0
+            ? value / max
+            : 0;
+
+        }
 
 
-          if (
-            !liveSymbols.has(
-              symbol
-            )
-          ) {
-
-            continue;
-
-          }
-
-
-          const last =
-            finiteNumber(
-              ticker.last
-            );
+        const maxVolume =
+          Math.max(
+            ...rows.map(
+              row =>
+                row.volume
+            ),
+            1
+          );
 
 
-          if (
-            !Number.isFinite(last)
-            ||
-            last <= 0
-          ) {
-
-            continue;
-
-          }
-
-
-          const open24h =
-            finiteNumber(
-              ticker.open24h
-            );
+        const maxActivity =
+          Math.max(
+            ...rows.map(
+              row =>
+                row.activity
+            ),
+            1
+          );
 
 
-          const high24h =
-            finiteNumber(
-              ticker.high24h
-            );
+        const maxRange =
+          Math.max(
+            ...rows.map(
+              row =>
+                row.range
+            ),
+            1
+          );
 
 
-          const low24h =
-            finiteNumber(
-              ticker.low24h
-            );
+        const maxOi =
+          Math.max(
+            ...rows.map(
+              row =>
+                row.oi
+            ),
+            1
+          );
 
 
-          const bid =
-            finiteNumber(
-              ticker.bidPx
-            );
+        rows.forEach(
+          row => {
 
-
-          const ask =
-            finiteNumber(
-              ticker.askPx
-            );
-
-
-          const vol24h =
-            finiteNumber(
-              ticker.vol24h,
-              0
-            );
-
-
-          const volCcy24h =
-            finiteNumber(
-              ticker.volCcy24h,
-              0
-            );
-
-
-          let approximateQuoteVolume =
-            vol24h;
-
-
-          if (
-            volCcy24h > 0
-            &&
-            Number.isFinite(last)
-          ) {
-
-            approximateQuoteVolume =
-              volCcy24h
-              *
-              last;
-
-          }
-
-
-          const changePct =
-            percentageChange(
-              last,
-              open24h
-            );
-
-
-          const rangeBase =
-            (
-              Number.isFinite(
-                open24h
+            row.score =
+              normalized(
+                row.volume,
+                maxVolume
               )
-              &&
-              open24h > 0
-            )
-              ? open24h
-              : last;
-
-
-          const rangePct =
-            rangePercent(
-              high24h,
-              low24h,
-              rangeBase
-            );
-
-
-          const oi =
-            oiMap.get(
-              symbol
-            );
-
-
-          let oiUsd =
-            oi?.oiUsd
-            ??
-            null;
-
-
-          if (
-            !Number.isFinite(
-              oiUsd
-            )
-            &&
-            Number.isFinite(
-              oi?.oiCcy
-            )
-          ) {
-
-            oiUsd =
-              oi.oiCcy
               *
-              last;
+              0.35
+              +
+              normalized(
+                row.range,
+                maxRange
+              )
+              *
+              0.25
+              +
+              normalized(
+                row.oi,
+                maxOi
+              )
+              *
+              0.20
+              +
+              normalized(
+                row.activity,
+                maxActivity
+              )
+              *
+              0.20;
 
           }
-
-
-          rows.push(
-            {
-              symbol,
-
-              last,
-
-              changePct,
-
-              absChangePct:
-                Math.abs(
-                  changePct
-                ),
-
-              rangePct,
-
-              spreadPct:
-                spreadPercent(
-                  bid,
-                  ask
-                ),
-
-              approxQuoteVolume:
-                approximateQuoteVolume,
-
-              openInterestUsd:
-                oiUsd,
-
-              fundingRate:
-                null,
-
-              volumeScore:
-                0,
-
-              liquidityScore:
-                0,
-
-              volatilityScore:
-                0,
-
-              openInterestScore:
-                0,
-
-              activityScore:
-                0,
-
-              preliminaryScore:
-                0,
-
-              finalScore:
-                0,
-
-              reasons:
-                []
-            }
-          );
-
-        }
-
-
-        if (
-          !rows.length
-        ) {
-
-          throw new Error(
-            "No live USDT-SWAP markets."
-          );
-
-        }
-
-
-        elements.scoutMarkets
-          .textContent =
-            String(
-              rows.length
-            );
-
-
-        elements.agentScoutMarkets
-          .textContent =
-            String(
-              rows.length
-            );
-
-
-        elements.scoutProgress
-          .style.width =
-            "45%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            "Calculating preliminary scores...";
-
-
-        applyPreliminaryScores(
-          rows
         );
 
 
@@ -7467,204 +3213,87 @@
             a,
             b
           ) =>
-            b.preliminaryScore
+            b.score
             -
-            a.preliminaryScore
+            a.score
         );
 
 
-        const detailRows =
+        const top =
           rows.slice(
             0,
-            Math.min(
-              SCOUT_DETAIL_POOL,
-              rows.length
-            )
+            10
           );
 
 
-        elements.scoutPool
-          .textContent =
-            String(
-              detailRows.length
-            );
+        elements.scoutBody.innerHTML =
+          "";
 
 
-        elements.agentScoutPool
-          .textContent =
-            String(
-              detailRows.length
-            );
-
-
-        elements.scoutProgress
-          .style.width =
-            "65%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            "Calculating final market quality...";
-
-
-        applyFinalScores(
-          detailRows
-        );
-
-
-        detailRows.sort(
-          (
-            a,
-            b
-          ) =>
-            b.finalScore
-            -
-            a.finalScore
-        );
-
-
-        const topRows =
-          detailRows.slice(
-            0,
-            SCOUT_TOP_N
-          );
-
-
-        elements.scoutProgress
-          .style.width =
-            "82%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            "Loading funding rates...";
-
-
-        const fundingSuccess =
-          await attachFunding(
-            topRows
-          );
-
-
-        topRows.forEach(
+        top.forEach(
           row => {
 
-            row.reasons =
-              buildReasons(
-                row
+            const tr =
+              document.createElement(
+                "tr"
               );
+
+
+            const change =
+              row.open > 0
+                ? (
+                    row.last
+                    -
+                    row.open
+                  )
+                  /
+                  row.open
+                  *
+                  100
+                : 0;
+
+
+            tr.innerHTML =
+              `
+                <td>
+                  ${row.symbol}
+                </td>
+
+                <td>
+                  ${row.score.toFixed(3)}
+                </td>
+
+                <td class="${
+                  change >= 0
+                    ? "positive"
+                    : "negative"
+                }">
+                  ${
+                    change > 0
+                      ? "+"
+                      : ""
+                  }${change.toFixed(2)}%
+                </td>
+              `;
+
+
+            elements.scoutBody.appendChild(
+              tr
+            );
 
           }
         );
 
 
-        renderScout(
-          topRows
-        );
-
-
-        const top =
-          topRows[0];
-
-
-        elements.scoutTopSymbol
-          .textContent =
-            top?.symbol
-            ??
-            "--";
-
-
-        elements.agentScoutSymbol
-          .textContent =
-            top?.symbol
-            ??
-            "--";
-
-
-        elements.agentScoutScore
-          .textContent =
-            top
-              ? top.finalScore
-                  .toFixed(3)
-              : "--";
-
-
-        elements.scoutProgress
-          .style.width =
-            "100%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            (
-              `Complete · `
-              +
-              `${topRows.length} candidates`
-              +
-              ` · funding `
-              +
-              `${fundingSuccess}/${topRows.length}`
-            );
-
-
-        setConnection(
-          "online"
-        );
-
-
-        log(
-          (
-            `SCOUT completed: `
-            +
-            `${rows.length} markets → `
-            +
-            `${detailRows.length} pool → `
-            +
-            `${topRows.length} candidates`
-          ),
-          "success"
-        );
+        elements.scoutStatus.textContent =
+          `${rows.length} markets · Top ${top.length}`;
 
       } catch (
         error
       ) {
 
-        elements.scoutProgress
-          .style.width =
-            "0%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            (
-              "SCOUT failed: "
-              +
-              error.message
-            );
-
-
-        elements.scoutTableBody
-          .innerHTML =
-            `
-              <tr>
-                <td colspan="10">
-                  <div class="empty">
-                    Browser SCOUT failed.
-                    Check System Log.
-                  </div>
-                </td>
-              </tr>
-            `;
-
-
-        log(
-          (
-            "SCOUT error: "
-            +
-            error.message
-          ),
-          "error"
-        );
+        elements.scoutStatus.textContent =
+          `Error: ${error.message}`;
 
       } finally {
 
@@ -7672,403 +3301,103 @@
           false;
 
 
-        elements.scanScoutButton
-          .disabled =
-            false;
+        elements.scanScoutButton.disabled =
+          false;
+
+      }
+
+    }
 
 
-        elements.scanScoutButton
-          .textContent =
-            "Scan All USDT-SWAP";
+    document.querySelectorAll(
+      ".agent"
+    ).forEach(
+      card => {
+
+        card.addEventListener(
+          "click",
+          () => {
+
+            openAgent(
+              card.dataset.agent
+            );
+
+          }
+        );
+
+      }
+    );
 
 
-        elements.scoutSpinner
-          .classList
-          .remove(
+    elements.modalClose.addEventListener(
+      "click",
+      () => {
+
+        elements.agentModal.classList.remove(
+          "show"
+        );
+
+      }
+    );
+
+
+    elements.agentModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target
+          ===
+          elements.agentModal
+        ) {
+
+          elements.agentModal.classList.remove(
             "show"
           );
 
-      }
-
-    }
-
-
-    /* =========================================
-       AGENT DETAIL
-    ========================================== */
-
-    function renderAgentDetail(
-      agentKey
-    ) {
-
-      const data =
-        agentData[
-          agentKey
-        ];
-
-
-      if (
-        !data
-      ) {
-
-        return;
-
-      }
-
-
-      document
-        .querySelectorAll(
-          ".agent-card"
-        )
-        .forEach(
-          card => {
-
-            card.classList
-              .toggle(
-                "active",
-                card.dataset.agent
-                ===
-                agentKey
-              );
-
-          }
-        );
-
-
-      elements.detailAgentIndex
-        .textContent =
-          data.index;
-
-
-      elements.detailAgentName
-        .textContent =
-          data.name;
-
-
-      elements.detailAgentRole
-        .textContent =
-          data.role;
-
-
-      elements.detailContentTitle
-        .textContent =
-          data.title;
-
-
-      elements.detailContentSub
-        .textContent =
-          data.subtitle;
-
-
-      elements.detailList
-        .innerHTML =
-          "";
-
-
-      data.duties
-        .forEach(
-          duty => {
-
-            const item =
-              document.createElement(
-                "div"
-              );
-
-
-            item.className =
-              "detail-list-item";
-
-
-            item.innerHTML =
-              `
-                <span class="detail-arrow">
-                  →
-                </span>
-
-                <span>
-                  ${duty}
-                </span>
-              `;
-
-
-            elements.detailList
-              .appendChild(
-                item
-              );
-
-          }
-        );
-
-
-      elements.detailRuntime
-        .textContent =
-          data.runtime;
-
-
-      if (
-        agentKey
-        ===
-        "scout"
-      ) {
-
-        elements.scoutDetail
-          .style.display =
-            "";
-
-
-        elements.staticAgentDetail
-          .style.display =
-            "none";
-
-
-        return;
-
-      }
-
-
-      elements.scoutDetail
-        .style.display =
-          "none";
-
-
-      elements.staticAgentDetail
-        .style.display =
-          "";
-
-
-      elements.staticAgentGrid
-        .innerHTML =
-          "";
-
-
-      data.values
-        .forEach(
-          (
-            [
-              label,
-              value
-            ]
-          ) => {
-
-            const box =
-              document.createElement(
-                "div"
-              );
-
-
-            box.className =
-              "info-box";
-
-
-            box.innerHTML =
-              `
-                <div class="info-box-label">
-                  ${label}
-                </div>
-
-                <div class="info-box-value">
-                  ${value}
-                </div>
-              `;
-
-
-            elements.staticAgentGrid
-              .appendChild(
-                box
-              );
-
-          }
-        );
-
-    }
-
-
-    /* =========================================
-       EVENTS
-    ========================================== */
-
-    elements.refreshMarketButton
-      .addEventListener(
-        "click",
-        refreshMarket
-      );
-
-
-    elements.instrumentSelect
-      .addEventListener(
-        "change",
-        refreshMarket
-      );
-
-
-    elements.barSelect
-      .addEventListener(
-        "change",
-        refreshMarket
-      );
-
-
-    elements.scanScoutButton
-      .addEventListener(
-        "click",
-        runScout
-      );
-
-
-    document
-      .querySelectorAll(
-        ".agent-card"
-      )
-      .forEach(
-        card => {
-
-          card.addEventListener(
-            "click",
-            () => {
-
-              renderAgentDetail(
-                card.dataset.agent
-              );
-
-            }
-          );
-
         }
-      );
+
+      }
+    );
+
+
+    elements.scanScoutButton.addEventListener(
+      "click",
+      runScout
+    );
+
+
+    elements.refreshButton.addEventListener(
+      "click",
+      refreshMarket
+    );
+
+
+    elements.symbolSelect.addEventListener(
+      "change",
+      refreshMarket
+    );
+
+
+    elements.timeframeSelect.addEventListener(
+      "change",
+      refreshMarket
+    );
 
 
     window.addEventListener(
       "resize",
-      () => {
-
-        if (
-          currentCandles.length
-        ) {
-
-          drawCandles(
-            currentCandles
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       STARTUP
-    ========================================== */
-
-    renderAgentDetail(
-      "scout"
-    );
-
-
-    log(
-      "Codex Bot Market Command Center initialized.",
-      "info"
-    );
-
-
-    log(
-      "Development status: 4 / 6 agents implemented.",
-      "info"
-    );
-
-
-    log(
-      "SCOUT implemented.",
-      "success"
-    );
-
-
-    log(
-      "NEWS V1 code complete.",
-      "success"
-    );
-
-
-    log(
-      "SENTIMENT V1 code complete.",
-      "success"
-    );
-
-
-    log(
-      "CHARTS V1 code complete.",
-      "success"
-    );
-
-
-    log(
-      "RISK remains skeleton.",
-      "warning"
-    );
-
-
-    log(
-      "DECISION remains skeleton.",
-      "warning"
-    );
-
-
-    log(
-      "Backend API not connected to dashboard.",
-      "warning"
-    );
-
-
-    log(
-      "Public market-data mode. No private OKX credentials loaded.",
-      "info"
+      drawCandles
     );
 
 
     refreshMarket();
 
 
-    runScout();
-
-
-    /* =========================================
-       AUTO REFRESH
-    ========================================== */
-
     setInterval(
-      () => {
-
-        if (
-          document.visibilityState
-          ===
-          "visible"
-        ) {
-
-          refreshMarket();
-
-        }
-
-      },
-      MARKET_REFRESH_MS
+      refreshMarket,
+      15000
     );
-
-
-    setInterval(
-      () => {
-
-        if (
-          document.visibilityState
-          ===
-          "visible"
-        ) {
-
-          runScout();
-
-        }
-
-      },
-      SCOUT_REFRESH_MS
-    );
-
   </script>
 
 </body>
