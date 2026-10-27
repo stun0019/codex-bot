@@ -1,1 +1,2659 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Codex Bot - Multi-Agent Crypto Trading System"
+    >
+
+    <title>Codex Bot | AI Trading System</title>
+
+    <style>
+        :root {
+            --bg: #07090d;
+            --bg-secondary: #0c1017;
+            --panel: #11161f;
+            --panel-hover: #151c27;
+
+            --border: #222b38;
+            --border-light: #2d3746;
+
+            --text: #f3f6fa;
+            --text-secondary: #9aa7b6;
+            --text-muted: #647183;
+
+            --green: #39d98a;
+            --green-dark: #123a2a;
+
+            --red: #ff5d6c;
+            --red-dark: #3b171d;
+
+            --yellow: #f6c453;
+            --yellow-dark: #392e13;
+
+            --blue: #63a4ff;
+            --blue-dark: #152a48;
+
+            --purple: #b58cff;
+
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(99, 164, 255, 0.08),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at top left,
+                    rgba(57, 217, 138, 0.05),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            line-height: 1.5;
+        }
+
+        button,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1440px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =========================
+           Header
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            background: rgba(7, 9, 13, 0.86);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            min-height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #2d3746;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(99, 164, 255, 0.15),
+                    rgba(57, 217, 138, 0.08)
+                );
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .brand-text h1 {
+            font-size: 16px;
+            letter-spacing: 0.4px;
+        }
+
+        .brand-text p {
+            margin-top: 1px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 11px;
+
+            background: var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            color: var(--text-secondary);
+
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: var(--yellow);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px rgba(246, 196, 83, 0.6);
+        }
+
+        .status-dot.online {
+            background: var(--green);
+
+            box-shadow:
+                0 0 10px rgba(57, 217, 138, 0.65);
+        }
+
+        .status-dot.offline {
+            background: var(--red);
+
+            box-shadow:
+                0 0 10px rgba(255, 93, 108, 0.65);
+        }
+
+        .github-link {
+            padding: 8px 13px;
+
+            color: var(--text);
+
+            background: var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .github-link:hover {
+            background: var(--panel-hover);
+            border-color: var(--border-light);
+        }
+
+        /* =========================
+           Main
+        ========================= */
+
+        main {
+            padding: 34px 0 60px;
+        }
+
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .hero h2 {
+            font-size: clamp(
+                24px,
+                4vw,
+                38px
+            );
+
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            max-width: 760px;
+
+            margin-top: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+        }
+
+        .warning {
+            margin-top: 18px;
+
+            padding: 12px 14px;
+
+            background: rgba(246, 196, 83, 0.06);
+
+            border: 1px solid rgba(246, 196, 83, 0.22);
+            border-radius: 10px;
+
+            color: #d9c28c;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           Sections
+        ========================= */
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-header {
+            margin-bottom: 13px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .section-header h3 {
+            font-size: 15px;
+            font-weight: 650;
+
+            letter-spacing: 0.2px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           Market controls
+        ========================= */
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+        }
+
+        .select-control {
+            min-width: 190px;
+
+            padding: 9px 12px;
+
+            color: var(--text);
+
+            background: var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .select-control:focus {
+            border-color: var(--blue);
+        }
+
+        .button {
+            padding: 9px 14px;
+
+            color: var(--text);
+
+            background: var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: var(--panel-hover);
+        }
+
+        .button.primary {
+            color: #07140e;
+
+            background: var(--green);
+
+            border-color: var(--green);
+
+            font-weight: 700;
+        }
+
+        .button.primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           Cards
+        ========================= */
+
+        .market-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .card {
+            position: relative;
+
+            min-width: 0;
+
+            padding: 18px;
+
+            background: rgba(17, 22, 31, 0.88);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.09),
+                    transparent
+                );
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+
+            font-size: 11px;
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+        .metric-value {
+            margin-top: 8px;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .metric-sub {
+            margin-top: 5px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        .positive {
+            color: var(--green);
+        }
+
+        .negative {
+            color: var(--red);
+        }
+
+        .neutral {
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           Price / candles
+        ========================= */
+
+        .data-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(300px, 1fr);
+
+            gap: 12px;
+        }
+
+        .price-panel {
+            min-height: 310px;
+        }
+
+        .price-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+        .price-title {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .price-title strong {
+            font-size: 18px;
+        }
+
+        .price-title span {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        .chart {
+            height: 220px;
+
+            display: flex;
+            align-items: flex-end;
+
+            gap: 3px;
+
+            padding-top: 20px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .candle {
+            position: relative;
+
+            flex: 1;
+
+            min-width: 2px;
+            max-width: 16px;
+
+            border-radius: 2px 2px 0 0;
+
+            opacity: 0.88;
+        }
+
+        .candle.up {
+            background: var(--green);
+        }
+
+        .candle.down {
+            background: var(--red);
+        }
+
+        .chart-empty {
+            width: 100%;
+            height: 100%;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           Agent grid
+        ========================= */
+
+        .agent-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .agent-card {
+            padding: 17px;
+
+            background: rgba(17, 22, 31, 0.8);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.2s,
+                border-color 0.2s,
+                background 0.2s;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-2px);
+
+            border-color: var(--border-light);
+
+            background: var(--panel-hover);
+        }
+
+        .agent-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .agent-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .agent-status {
+            padding: 4px 8px;
+
+            background: var(--blue-dark);
+
+            border-radius: 999px;
+
+            color: var(--blue);
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .agent-role {
+            margin-top: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 12px;
+        }
+
+        .agent-detail {
+            margin-top: 12px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           System pipeline
+        ========================= */
+
+        .pipeline {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            overflow-x: auto;
+
+            padding-bottom: 5px;
+        }
+
+        .pipeline-node {
+            min-width: 112px;
+
+            padding: 11px 13px;
+
+            text-align: center;
+
+            background: var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 11px;
+        }
+
+        .pipeline-arrow {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* =========================
+           API / logs
+        ========================= */
+
+        .system-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 12px;
+        }
+
+        .endpoint-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .endpoint {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 10px 12px;
+
+            background: var(--bg-secondary);
+
+            border: 1px solid var(--border);
+            border-radius: 8px;
+
+            font-size: 11px;
+        }
+
+        .endpoint code {
+            color: var(--text-secondary);
+
+            overflow-wrap: anywhere;
+        }
+
+        .endpoint-state {
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .endpoint-state.ok {
+            color: var(--green);
+        }
+
+        .endpoint-state.error {
+            color: var(--red);
+        }
+
+        .log-box {
+            height: 220px;
+
+            overflow-y: auto;
+
+            padding: 12px;
+
+            background: #07090d;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            color: #8c9aad;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .log-line.success {
+            color: var(--green);
+        }
+
+        .log-line.error {
+            color: var(--red);
+        }
+
+        .log-line.info {
+            color: var(--blue);
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            padding: 25px 0 40px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--text-muted);
+
+            text-align: center;
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           Responsive
+        ========================= */
+
+        @media (max-width: 1050px) {
+            .market-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .agent-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                width: min(
+                    100% - 24px,
+                    1440px
+                );
+            }
+
+            .github-link {
+                display: none;
+            }
+
+            .data-grid,
+            .system-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            main {
+                padding-top: 24px;
+            }
+
+            .market-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-pill span:last-child {
+                display: none;
+            }
+
+            .controls {
+                display: grid;
+            }
+
+            .select-control,
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container navbar">
+
+        <div class="brand">
+            <div class="brand-logo">
+                C
+            </div>
+
+            <div class="brand-text">
+                <h1>CODEX BOT</h1>
+                <p>Multi-Agent Trading System</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+
+            <div class="status-pill">
+                <span
+                    id="connectionDot"
+                    class="status-dot"
+                ></span>
+
+                <span id="connectionText">
+                    Connecting
+                </span>
+            </div>
+
+            <a
+                class="github-link"
+                href="https://github.com/stun0019/codex-bot"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+        </div>
+    </div>
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+        <h2>
+            AI Crypto Trading Infrastructure
+        </h2>
+
+        <p>
+            Multi-agent cryptocurrency market analysis system.
+            Market data is currently provided through OKX public APIs.
+            AI analysis and automated execution are not enabled yet.
+        </p>
+
+        <div class="warning">
+            Current mode: MARKET DATA ONLY.
+            No API keys are used by this page and no orders can be placed.
+        </div>
+    </section>
+
+
+    <!-- Market -->
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h3>Market Monitor</h3>
+                <p>OKX Public Market Data</p>
+            </div>
+
+            <p id="lastUpdate">
+                Last update: -
+            </p>
+        </div>
+
+        <div class="controls">
+
+            <select
+                id="instrumentSelect"
+                class="select-control"
+            >
+                <option value="BTC-USDT-SWAP">
+                    BTC-USDT-SWAP
+                </option>
+
+                <option value="ETH-USDT-SWAP">
+                    ETH-USDT-SWAP
+                </option>
+
+                <option value="SOL-USDT-SWAP">
+                    SOL-USDT-SWAP
+                </option>
+
+                <option value="XRP-USDT-SWAP">
+                    XRP-USDT-SWAP
+                </option>
+
+                <option value="DOGE-USDT-SWAP">
+                    DOGE-USDT-SWAP
+                </option>
+            </select>
+
+            <select
+                id="barSelect"
+                class="select-control"
+            >
+                <option value="1m">
+                    1 Minute
+                </option>
+
+                <option value="5m" selected>
+                    5 Minutes
+                </option>
+
+                <option value="15m">
+                    15 Minutes
+                </option>
+
+                <option value="1H">
+                    1 Hour
+                </option>
+
+                <option value="4H">
+                    4 Hours
+                </option>
+
+                <option value="1Dutc">
+                    1 Day UTC
+                </option>
+            </select>
+
+            <button
+                id="refreshButton"
+                class="button primary"
+            >
+                Refresh Market
+            </button>
+
+        </div>
+
+
+        <div class="market-grid">
+
+            <div class="card">
+                <div class="metric-label">
+                    Last Price
+                </div>
+
+                <div
+                    id="lastPrice"
+                    class="metric-value"
+                >
+                    --
+                </div>
+
+                <div
+                    id="priceChange"
+                    class="metric-sub"
+                >
+                    24H Change --
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="metric-label">
+                    Funding Rate
+                </div>
+
+                <div
+                    id="fundingRate"
+                    class="metric-value"
+                >
+                    --
+                </div>
+
+                <div
+                    id="fundingTime"
+                    class="metric-sub"
+                >
+                    Next funding --
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="metric-label">
+                    Open Interest
+                </div>
+
+                <div
+                    id="openInterest"
+                    class="metric-value"
+                >
+                    --
+                </div>
+
+                <div class="metric-sub">
+                    Contract open interest
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="metric-label">
+                    24H Volume
+                </div>
+
+                <div
+                    id="volume24h"
+                    class="metric-value"
+                >
+                    --
+                </div>
+
+                <div
+                    id="highLow"
+                    class="metric-sub"
+                >
+                    High -- / Low --
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Chart -->
+
+    <section class="section">
+
+        <div class="data-grid">
+
+            <div class="card price-panel">
+
+                <div class="price-header">
+
+                    <div class="price-title">
+                        <strong id="chartSymbol">
+                            BTC-USDT-SWAP
+                        </strong>
+
+                        <span id="chartTimeframe">
+                            5m
+                        </span>
+                    </div>
+
+                    <span
+                        id="candleCount"
+                        class="metric-sub"
+                    >
+                        0 candles
+                    </span>
+
+                </div>
+
+                <div
+                    id="chart"
+                    class="chart"
+                >
+                    <div class="chart-empty">
+                        Loading market data...
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Order Book</h3>
+                        <p>Best bid / ask</p>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        display:grid;
+                        gap:14px;
+                        margin-top:18px;
+                    "
+                >
+
+                    <div>
+                        <div class="metric-label">
+                            Best Ask
+                        </div>
+
+                        <div
+                            id="bestAsk"
+                            class="metric-value negative"
+                        >
+                            --
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="metric-label">
+                            Best Bid
+                        </div>
+
+                        <div
+                            id="bestBid"
+                            class="metric-value positive"
+                        >
+                            --
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="metric-label">
+                            Spread
+                        </div>
+
+                        <div
+                            id="spread"
+                            class="metric-value"
+                        >
+                            --
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Agents -->
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h3>AI Agent Team</h3>
+                <p>
+                    Six-agent architecture
+                </p>
+            </div>
+        </div>
+
+        <div class="agent-grid">
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        SCOUT
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    Market Opportunity Scanner
+                </div>
+
+                <div class="agent-detail">
+                    Scans price, volume, volatility,
+                    liquidity and market opportunities.
+                </div>
+
+            </div>
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        NEWS
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    News Analyst
+                </div>
+
+                <div class="agent-detail">
+                    Evaluates market events, announcements
+                    and potentially market-moving information.
+                </div>
+
+            </div>
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        SENTIMENT
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    Market Sentiment Analyst
+                </div>
+
+                <div class="agent-detail">
+                    Analyzes funding, positioning,
+                    crowding and market sentiment.
+                </div>
+
+            </div>
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        CHARTS
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    Technical Analyst
+                </div>
+
+                <div class="agent-detail">
+                    Multi-timeframe market structure,
+                    technical signals and price behavior.
+                </div>
+
+            </div>
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        RISK
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    Risk Analyst
+                </div>
+
+                <div class="agent-detail">
+                    Evaluates proposed positions,
+                    potential loss, exposure and trade risk.
+                </div>
+
+            </div>
+
+
+            <div class="agent-card">
+
+                <div class="agent-top">
+                    <div class="agent-name">
+                        DECISION
+                    </div>
+
+                    <span class="agent-status">
+                        SKELETON
+                    </span>
+                </div>
+
+                <div class="agent-role">
+                    Final Decision Agent
+                </div>
+
+                <div class="agent-detail">
+                    Combines outputs from all agents
+                    into a final trading decision.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Pipeline -->
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h3>System Pipeline</h3>
+                <p>Current architecture</p>
+            </div>
+        </div>
+
+        <div class="pipeline">
+
+            <div class="pipeline-node">
+                OKX
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                SCOUT
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                NEWS
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                SENTIMENT
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                CHARTS
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                RISK
+            </div>
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+            <div class="pipeline-node">
+                DECISION
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- System -->
+
+    <section class="section">
+
+        <div class="system-grid">
+
+            <div class="card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>OKX API Status</h3>
+                        <p>
+                            Public endpoints
+                        </p>
+                    </div>
+                </div>
+
+                <div class="endpoint-list">
+
+                    <div class="endpoint">
+                        <code>
+                            /api/v5/market/ticker
+                        </code>
+
+                        <span
+                            id="tickerStatus"
+                            class="endpoint-state"
+                        >
+                            Waiting
+                        </span>
+                    </div>
+
+
+                    <div class="endpoint">
+                        <code>
+                            /api/v5/market/candles
+                        </code>
+
+                        <span
+                            id="candlesStatus"
+                            class="endpoint-state"
+                        >
+                            Waiting
+                        </span>
+                    </div>
+
+
+                    <div class="endpoint">
+                        <code>
+                            /api/v5/public/funding-rate
+                        </code>
+
+                        <span
+                            id="fundingStatus"
+                            class="endpoint-state"
+                        >
+                            Waiting
+                        </span>
+                    </div>
+
+
+                    <div class="endpoint">
+                        <code>
+                            /api/v5/public/open-interest
+                        </code>
+
+                        <span
+                            id="oiStatus"
+                            class="endpoint-state"
+                        >
+                            Waiting
+                        </span>
+                    </div>
+
+
+                    <div class="endpoint">
+                        <code>
+                            /api/v5/market/books
+                        </code>
+
+                        <span
+                            id="bookStatus"
+                            class="endpoint-state"
+                        >
+                            Waiting
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="section-header">
+                    <div>
+                        <h3>System Log</h3>
+                        <p>
+                            Browser session
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    id="logBox"
+                    class="log-box"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <div class="container">
+        Codex Bot — Development Dashboard —
+        Market Data Mode Only
+    </div>
+</footer>
+
+
+<script>
+    "use strict";
+
+
+    /*
+     * ==============================
+     * Configuration
+     * ==============================
+     */
+
+    const API_BASES = [
+        "https://www.okx.com",
+        "https://openapi.okx.com"
+    ];
+
+    const AUTO_REFRESH_MS = 15000;
+
+
+    /*
+     * ==============================
+     * DOM
+     * ==============================
+     */
+
+    const elements = {
+        instrumentSelect:
+            document.getElementById(
+                "instrumentSelect"
+            ),
+
+        barSelect:
+            document.getElementById(
+                "barSelect"
+            ),
+
+        refreshButton:
+            document.getElementById(
+                "refreshButton"
+            ),
+
+        connectionDot:
+            document.getElementById(
+                "connectionDot"
+            ),
+
+        connectionText:
+            document.getElementById(
+                "connectionText"
+            ),
+
+        lastUpdate:
+            document.getElementById(
+                "lastUpdate"
+            ),
+
+        lastPrice:
+            document.getElementById(
+                "lastPrice"
+            ),
+
+        priceChange:
+            document.getElementById(
+                "priceChange"
+            ),
+
+        fundingRate:
+            document.getElementById(
+                "fundingRate"
+            ),
+
+        fundingTime:
+            document.getElementById(
+                "fundingTime"
+            ),
+
+        openInterest:
+            document.getElementById(
+                "openInterest"
+            ),
+
+        volume24h:
+            document.getElementById(
+                "volume24h"
+            ),
+
+        highLow:
+            document.getElementById(
+                "highLow"
+            ),
+
+        bestAsk:
+            document.getElementById(
+                "bestAsk"
+            ),
+
+        bestBid:
+            document.getElementById(
+                "bestBid"
+            ),
+
+        spread:
+            document.getElementById(
+                "spread"
+            ),
+
+        chart:
+            document.getElementById(
+                "chart"
+            ),
+
+        chartSymbol:
+            document.getElementById(
+                "chartSymbol"
+            ),
+
+        chartTimeframe:
+            document.getElementById(
+                "chartTimeframe"
+            ),
+
+        candleCount:
+            document.getElementById(
+                "candleCount"
+            ),
+
+        tickerStatus:
+            document.getElementById(
+                "tickerStatus"
+            ),
+
+        candlesStatus:
+            document.getElementById(
+                "candlesStatus"
+            ),
+
+        fundingStatus:
+            document.getElementById(
+                "fundingStatus"
+            ),
+
+        oiStatus:
+            document.getElementById(
+                "oiStatus"
+            ),
+
+        bookStatus:
+            document.getElementById(
+                "bookStatus"
+            ),
+
+        logBox:
+            document.getElementById(
+                "logBox"
+            )
+    };
+
+
+    /*
+     * ==============================
+     * Logging
+     * ==============================
+     */
+
+    function log(
+        message,
+        type = ""
+    ) {
+        const line =
+            document.createElement(
+                "div"
+            );
+
+        const time =
+            new Date()
+                .toLocaleTimeString();
+
+        line.className =
+            `log-line ${type}`;
+
+        line.textContent =
+            `[${time}] ${message}`;
+
+        elements.logBox
+            .appendChild(line);
+
+        elements.logBox.scrollTop =
+            elements.logBox.scrollHeight;
+    }
+
+
+    /*
+     * ==============================
+     * Formatting
+     * ==============================
+     */
+
+    function formatNumber(
+        value,
+        maximumFractionDigits = 2
+    ) {
+        const number =
+            Number(value);
+
+        if (!Number.isFinite(number)) {
+            return "--";
+        }
+
+        return new Intl.NumberFormat(
+            "en-US",
+            {
+                maximumFractionDigits
+            }
+        ).format(number);
+    }
+
+
+    function formatCompact(
+        value
+    ) {
+        const number =
+            Number(value);
+
+        if (!Number.isFinite(number)) {
+            return "--";
+        }
+
+        return new Intl.NumberFormat(
+            "en-US",
+            {
+                notation: "compact",
+                maximumFractionDigits: 2
+            }
+        ).format(number);
+    }
+
+
+    function formatPercent(
+        value,
+        decimals = 4
+    ) {
+        const number =
+            Number(value);
+
+        if (!Number.isFinite(number)) {
+            return "--";
+        }
+
+        return (
+            number * 100
+        ).toFixed(decimals) + "%";
+    }
+
+
+    function formatDate(
+        timestamp
+    ) {
+        if (!timestamp) {
+            return "--";
+        }
+
+        return new Date(
+            Number(timestamp)
+        ).toLocaleString();
+    }
+
+
+    /*
+     * ==============================
+     * API
+     * ==============================
+     */
+
+    async function okxGet(
+        path,
+        params = {}
+    ) {
+        const query =
+            new URLSearchParams();
+
+        for (
+            const [
+                key,
+                value
+            ] of Object.entries(params)
+        ) {
+            if (
+                value !== null &&
+                value !== undefined &&
+                value !== ""
+            ) {
+                query.set(
+                    key,
+                    value
+                );
+            }
+        }
+
+        let lastError = null;
+
+        for (
+            const base of API_BASES
+        ) {
+            try {
+                const url =
+                    `${base}${path}?${query.toString()}`;
+
+                const response =
+                    await fetch(
+                        url,
+                        {
+                            method: "GET",
+                            headers: {
+                                Accept:
+                                    "application/json"
+                            },
+                            cache: "no-store"
+                        }
+                    );
+
+                if (!response.ok) {
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+                }
+
+                const json =
+                    await response.json();
+
+                if (
+                    String(json.code) !== "0"
+                ) {
+                    throw new Error(
+                        json.msg ||
+                        `OKX code ${json.code}`
+                    );
+                }
+
+                if (
+                    !Array.isArray(
+                        json.data
+                    )
+                ) {
+                    throw new Error(
+                        "Invalid OKX response"
+                    );
+                }
+
+                return json.data;
+
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        throw lastError ||
+            new Error(
+                "OKX request failed"
+            );
+    }
+
+
+    /*
+     * ==============================
+     * Endpoint status
+     * ==============================
+     */
+
+    function setEndpointStatus(
+        element,
+        success
+    ) {
+        element.textContent =
+            success
+                ? "Online"
+                : "Error";
+
+        element.classList.remove(
+            "ok",
+            "error"
+        );
+
+        element.classList.add(
+            success
+                ? "ok"
+                : "error"
+        );
+    }
+
+
+    /*
+     * ==============================
+     * Ticker
+     * ==============================
+     */
+
+    async function loadTicker(
+        instId
+    ) {
+        try {
+            const data =
+                await okxGet(
+                    "/api/v5/market/ticker",
+                    {
+                        instId
+                    }
+                );
+
+            const ticker =
+                data[0];
+
+            if (!ticker) {
+                throw new Error(
+                    "Ticker data empty"
+                );
+            }
+
+            const last =
+                Number(ticker.last);
+
+            const open =
+                Number(ticker.open24h);
+
+            let change = 0;
+
+            if (
+                Number.isFinite(last) &&
+                Number.isFinite(open) &&
+                open !== 0
+            ) {
+                change =
+                    (
+                        (
+                            last - open
+                        ) / open
+                    ) * 100;
+            }
+
+            elements.lastPrice.textContent =
+                "$" +
+                formatNumber(
+                    ticker.last,
+                    8
+                );
+
+            elements.priceChange.textContent =
+                `24H ${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
+
+            elements.priceChange.className =
+                "metric-sub " +
+                (
+                    change > 0
+                        ? "positive"
+                        : change < 0
+                            ? "negative"
+                            : "neutral"
+                );
+
+            elements.volume24h.textContent =
+                formatCompact(
+                    ticker.volCcy24h
+                );
+
+            elements.highLow.textContent =
+                `High ${formatNumber(
+                    ticker.high24h,
+                    8
+                )} / Low ${formatNumber(
+                    ticker.low24h,
+                    8
+                )}`;
+
+            setEndpointStatus(
+                elements.tickerStatus,
+                true
+            );
+
+            return true;
+
+        } catch (error) {
+            setEndpointStatus(
+                elements.tickerStatus,
+                false
+            );
+
+            log(
+                `Ticker error: ${error.message}`,
+                "error"
+            );
+
+            return false;
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Funding
+     * ==============================
+     */
+
+    async function loadFunding(
+        instId
+    ) {
+        try {
+            const data =
+                await okxGet(
+                    "/api/v5/public/funding-rate",
+                    {
+                        instId
+                    }
+                );
+
+            const item =
+                data[0];
+
+            if (!item) {
+                throw new Error(
+                    "Funding data empty"
+                );
+            }
+
+            const rate =
+                Number(
+                    item.fundingRate
+                );
+
+            elements.fundingRate.textContent =
+                formatPercent(
+                    rate,
+                    4
+                );
+
+            elements.fundingRate.className =
+                "metric-value " +
+                (
+                    rate > 0
+                        ? "positive"
+                        : rate < 0
+                            ? "negative"
+                            : ""
+                );
+
+            elements.fundingTime.textContent =
+                "Next funding: " +
+                formatDate(
+                    item.nextFundingTime
+                );
+
+            setEndpointStatus(
+                elements.fundingStatus,
+                true
+            );
+
+            return true;
+
+        } catch (error) {
+            setEndpointStatus(
+                elements.fundingStatus,
+                false
+            );
+
+            log(
+                `Funding error: ${error.message}`,
+                "error"
+            );
+
+            return false;
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Open Interest
+     * ==============================
+     */
+
+    async function loadOpenInterest(
+        instId
+    ) {
+        try {
+            const data =
+                await okxGet(
+                    "/api/v5/public/open-interest",
+                    {
+                        instType: "SWAP",
+                        instId
+                    }
+                );
+
+            const item =
+                data[0];
+
+            if (!item) {
+                throw new Error(
+                    "Open interest data empty"
+                );
+            }
+
+            elements.openInterest.textContent =
+                formatCompact(
+                    item.oi
+                );
+
+            setEndpointStatus(
+                elements.oiStatus,
+                true
+            );
+
+            return true;
+
+        } catch (error) {
+            setEndpointStatus(
+                elements.oiStatus,
+                false
+            );
+
+            log(
+                `Open interest error: ${error.message}`,
+                "error"
+            );
+
+            return false;
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Order Book
+     * ==============================
+     */
+
+    async function loadOrderBook(
+        instId
+    ) {
+        try {
+            const data =
+                await okxGet(
+                    "/api/v5/market/books",
+                    {
+                        instId,
+                        sz: "5"
+                    }
+                );
+
+            const book =
+                data[0];
+
+            if (!book) {
+                throw new Error(
+                    "Order book data empty"
+                );
+            }
+
+            const bestAsk =
+                Number(
+                    book.asks?.[0]?.[0]
+                );
+
+            const bestBid =
+                Number(
+                    book.bids?.[0]?.[0]
+                );
+
+            elements.bestAsk.textContent =
+                Number.isFinite(bestAsk)
+                    ? "$" +
+                      formatNumber(
+                          bestAsk,
+                          8
+                      )
+                    : "--";
+
+            elements.bestBid.textContent =
+                Number.isFinite(bestBid)
+                    ? "$" +
+                      formatNumber(
+                          bestBid,
+                          8
+                      )
+                    : "--";
+
+            if (
+                Number.isFinite(bestAsk) &&
+                Number.isFinite(bestBid)
+            ) {
+                const spread =
+                    bestAsk - bestBid;
+
+                const spreadPercent =
+                    bestBid !== 0
+                        ? (
+                            spread /
+                            bestBid
+                        ) * 100
+                        : 0;
+
+                elements.spread.textContent =
+                    `${formatNumber(
+                        spread,
+                        8
+                    )} (${spreadPercent.toFixed(4)}%)`;
+            } else {
+                elements.spread.textContent =
+                    "--";
+            }
+
+            setEndpointStatus(
+                elements.bookStatus,
+                true
+            );
+
+            return true;
+
+        } catch (error) {
+            setEndpointStatus(
+                elements.bookStatus,
+                false
+            );
+
+            log(
+                `Order book error: ${error.message}`,
+                "error"
+            );
+
+            return false;
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Candles
+     * ==============================
+     */
+
+    async function loadCandles(
+        instId,
+        bar
+    ) {
+        try {
+            const data =
+                await okxGet(
+                    "/api/v5/market/candles",
+                    {
+                        instId,
+                        bar,
+                        limit: "60"
+                    }
+                );
+
+            const candles =
+                data
+                    .map(item => ({
+                        timestamp:
+                            Number(
+                                item[0]
+                            ),
+
+                        open:
+                            Number(
+                                item[1]
+                            ),
+
+                        high:
+                            Number(
+                                item[2]
+                            ),
+
+                        low:
+                            Number(
+                                item[3]
+                            ),
+
+                        close:
+                            Number(
+                                item[4]
+                            ),
+
+                        volume:
+                            Number(
+                                item[5]
+                            ),
+
+                        confirmed:
+                            String(
+                                item[8]
+                            ) === "1"
+                    }))
+                    .sort(
+                        (
+                            a,
+                            b
+                        ) =>
+                            a.timestamp -
+                            b.timestamp
+                    );
+
+            drawCandles(
+                candles
+            );
+
+            elements.candleCount.textContent =
+                `${candles.length} candles`;
+
+            setEndpointStatus(
+                elements.candlesStatus,
+                true
+            );
+
+            return true;
+
+        } catch (error) {
+            setEndpointStatus(
+                elements.candlesStatus,
+                false
+            );
+
+            elements.chart.innerHTML =
+                `<div class="chart-empty">
+                    Candle data unavailable
+                </div>`;
+
+            log(
+                `Candles error: ${error.message}`,
+                "error"
+            );
+
+            return false;
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Simple candle visualization
+     * ==============================
+     */
+
+    function drawCandles(
+        candles
+    ) {
+        elements.chart.innerHTML =
+            "";
+
+        if (!candles.length) {
+            elements.chart.innerHTML =
+                `<div class="chart-empty">
+                    No candle data
+                </div>`;
+
+            return;
+        }
+
+        const highs =
+            candles.map(
+                item => item.high
+            );
+
+        const lows =
+            candles.map(
+                item => item.low
+            );
+
+        const max =
+            Math.max(...highs);
+
+        const min =
+            Math.min(...lows);
+
+        const range =
+            max - min || 1;
+
+        for (
+            const candle of candles
+        ) {
+            const bar =
+                document.createElement(
+                    "div"
+                );
+
+            const height =
+                Math.max(
+                    4,
+                    (
+                        (
+                            candle.close -
+                            min
+                        ) /
+                        range
+                    ) * 100
+                );
+
+            bar.className =
+                "candle " +
+                (
+                    candle.close >=
+                    candle.open
+                        ? "up"
+                        : "down"
+                );
+
+            bar.style.height =
+                `${height}%`;
+
+            bar.title =
+                [
+                    new Date(
+                        candle.timestamp
+                    ).toLocaleString(),
+
+                    `Open: ${candle.open}`,
+
+                    `High: ${candle.high}`,
+
+                    `Low: ${candle.low}`,
+
+                    `Close: ${candle.close}`,
+
+                    `Volume: ${candle.volume}`,
+
+                    `Confirmed: ${candle.confirmed}`
+                ].join("\n");
+
+            elements.chart
+                .appendChild(bar);
+        }
+    }
+
+
+    /*
+     * ==============================
+     * Full market refresh
+     * ==============================
+     */
+
+    let loading = false;
+
+
+    async function refreshMarket() {
+        if (loading) {
+            return;
+        }
+
+        loading = true;
+
+        elements.refreshButton.disabled =
+            true;
+
+        elements.refreshButton.textContent =
+            "Loading...";
+
+        const instId =
+            elements.instrumentSelect.value;
+
+        const bar =
+            elements.barSelect.value;
+
+        elements.chartSymbol.textContent =
+            instId;
+
+        elements.chartTimeframe.textContent =
+            bar;
+
+        log(
+            `Refreshing ${instId} / ${bar}`,
+            "info"
+        );
+
+        const results =
+            await Promise.all([
+                loadTicker(
+                    instId
+                ),
+
+                loadFunding(
+                    instId
+                ),
+
+                loadOpenInterest(
+                    instId
+                ),
+
+                loadOrderBook(
+                    instId
+                ),
+
+                loadCandles(
+                    instId,
+                    bar
+                )
+            ]);
+
+        const successCount =
+            results.filter(
+                Boolean
+            ).length;
+
+        if (
+            successCount ===
+            results.length
+        ) {
+            elements.connectionDot
+                .className =
+                    "status-dot online";
+
+            elements.connectionText
+                .textContent =
+                    "OKX Online";
+
+            log(
+                `Market refresh complete (${successCount}/${results.length})`,
+                "success"
+            );
+        } else {
+            elements.connectionDot
+                .className =
+                    successCount > 0
+                        ? "status-dot"
+                        : "status-dot offline";
+
+            elements.connectionText
+                .textContent =
+                    successCount > 0
+                        ? "Partial Connection"
+                        : "Offline";
+
+            log(
+                `Market refresh partial (${successCount}/${results.length})`,
+                "error"
+            );
+        }
+
+        elements.lastUpdate.textContent =
+            "Last update: " +
+            new Date()
+                .toLocaleTimeString();
+
+        elements.refreshButton.disabled =
+            false;
+
+        elements.refreshButton.textContent =
+            "Refresh Market";
+
+        loading = false;
+    }
+
+
+    /*
+     * ==============================
+     * Events
+     * ==============================
+     */
+
+    elements.refreshButton
+        .addEventListener(
+            "click",
+            refreshMarket
+        );
+
+
+    elements.instrumentSelect
+        .addEventListener(
+            "change",
+            refreshMarket
+        );
+
+
+    elements.barSelect
+        .addEventListener(
+            "change",
+            refreshMarket
+        );
+
+
+    /*
+     * ==============================
+     * Startup
+     * ==============================
+     */
+
+    log(
+        "Codex Bot dashboard initialized.",
+        "info"
+    );
+
+    log(
+        "No API key loaded. Public market data mode.",
+        "info"
+    );
+
+    refreshMarket();
+
+
+    /*
+     * ==============================
+     * Automatic refresh
+     * ==============================
+     */
+
+    setInterval(
+        () => {
+            if (
+                document.visibilityState ===
+                "visible"
+            ) {
+                refreshMarket();
+            }
+        },
+        AUTO_REFRESH_MS
+    );
+
+</script>
+
+</body>
+</html>
