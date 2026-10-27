@@ -70,15 +70,10 @@ class NewsAgent(
     - Stop Loss
     - Take Profit
 
-    最終交易決策由：
-
-        DECISION Agent
-
-    負責。
+    最終交易決策由 DECISION Agent 負責。
     """
 
     name = AgentName.NEWS
-
 
     def __init__(
         self,
@@ -103,7 +98,6 @@ class NewsAgent(
             enable_llm
         )
 
-
     async def analyze(
         self,
         context: MarketContext,
@@ -122,19 +116,15 @@ class NewsAgent(
                     payload=payload,
                 )
 
-
-            /*
-             * ==============================
-             * Deterministic pre-analysis
-             * ==============================
-             */
+            # ==============================
+            # Deterministic pre-analysis
+            # ==============================
 
             events = (
                 self.analyzer.analyze(
                     payload
                 )
             )
-
 
             if not events:
 
@@ -181,22 +171,17 @@ class NewsAgent(
                     },
                 )
 
-
-            /*
-             * ==============================
-             * Default deterministic result
-             * ==============================
-             */
+            # ==============================
+            # Default deterministic result
+            # ==============================
 
             output_events = (
                 events
             )
 
-
             overall_bias = (
                 TradeBias.NEUTRAL
             )
-
 
             overall_confidence = (
                 self._average_confidence(
@@ -204,11 +189,9 @@ class NewsAgent(
                 )
             )
 
-
             top_event = (
                 events[0]
             )
-
 
             summary = (
                 f"News analysis completed. "
@@ -219,19 +202,15 @@ class NewsAgent(
                 f"{top_event.title}"
             )
 
-
             llm_used = False
 
             llm_error: str | None = (
                 None
             )
 
-
-            /*
-             * ==============================
-             * AI semantic analysis
-             * ==============================
-             */
+            # ==============================
+            # AI semantic analysis
+            # ==============================
 
             if self._should_use_llm():
 
@@ -245,7 +224,6 @@ class NewsAgent(
                         )
                     )
 
-
                     output_events = (
                         self._apply_llm_result(
                             events=events,
@@ -253,48 +231,36 @@ class NewsAgent(
                         )
                     )
 
-
                     overall_bias = (
                         llm_result.bias
                     )
-
 
                     overall_confidence = (
                         llm_result.confidence
                     )
 
-
-                    if (
-                        llm_result.summary
-                    ):
+                    if llm_result.summary:
 
                         summary = (
                             llm_result.summary
                         )
 
-
                     llm_used = True
-
 
                 except Exception as exc:
 
-                    /*
-                     * LLM failure 不應讓
-                     * deterministic NEWS
-                     * 完全失效。
-                     */
+                    # LLM failure 不應讓
+                    # deterministic NEWS
+                    # 整體失效。
 
                     llm_error = (
                         f"{type(exc).__name__}: "
                         f"{exc}"
                     )
 
-
-            /*
-             * ==============================
-             * Evidence
-             * ==============================
-             */
+            # ==============================
+            # Evidence
+            # ==============================
 
             evidence = (
                 self._build_evidence(
@@ -303,21 +269,15 @@ class NewsAgent(
                 )
             )
 
+            # ==============================
+            # Statistics
+            # ==============================
 
-            /*
-             * ==============================
-             * Statistics
-             * ==============================
-             */
-
-            highest_impact = (
-                max(
-                    event.impact_score
-                    for event
-                    in output_events
-                )
+            highest_impact = max(
+                event.impact_score
+                for event
+                in output_events
             )
-
 
             relevant_events = (
                 self._relevant_events(
@@ -328,19 +288,15 @@ class NewsAgent(
                 )
             )
 
-
             top_event = max(
                 output_events,
                 key=lambda event:
                     event.impact_score,
             )
 
-
-            /*
-             * ==============================
-             * Final output
-             * ==============================
-             */
+            # ==============================
+            # Final output
+            # ==============================
 
             data = {
                 "articles_received":
@@ -385,13 +341,11 @@ class NewsAgent(
                     llm_used,
             }
 
-
             if llm_error:
 
                 data[
                     "llm_error"
                 ] = llm_error
-
 
             return NewsOutput(
                 agent=self.name,
@@ -418,7 +372,6 @@ class NewsAgent(
 
                 data=data,
             )
-
 
         except Exception as exc:
 
@@ -467,12 +420,9 @@ class NewsAgent(
                 ],
             )
 
-
-    /*
-     * ==============================
-     * LLM
-     * ==============================
-     */
+    # ==============================
+    # LLM
+    # ==============================
 
     def _should_use_llm(
         self,
@@ -490,7 +440,6 @@ class NewsAgent(
 
             return False
 
-
         if (
             self.llm_analyzer
             is not None
@@ -498,19 +447,16 @@ class NewsAgent(
 
             return True
 
-
         api_key = (
             os.getenv(
                 "OPENAI_API_KEY"
             )
         )
 
-
         return bool(
             api_key
             and api_key.strip()
         )
-
 
     async def _run_llm(
         self,
@@ -543,7 +489,6 @@ class NewsAgent(
                 )
             )
 
-
         async with (
             NewsLLMAnalyzer()
             as analyzer
@@ -557,12 +502,9 @@ class NewsAgent(
                 )
             )
 
-
-    /*
-     * ==============================
-     * Apply AI result
-     * ==============================
-     */
+    # ==============================
+    # Apply AI result
+    # ==============================
 
     def _apply_llm_result(
         self,
@@ -585,11 +527,9 @@ class NewsAgent(
             in result.event_analyses
         }
 
-
         updated_events: list[
             NewsEvent
         ] = []
-
 
         for (
             index,
@@ -604,7 +544,6 @@ class NewsAgent(
                 )
             )
 
-
             if analysis is None:
 
                 updated_events.append(
@@ -613,11 +552,9 @@ class NewsAgent(
 
                 continue
 
-
             metadata = dict(
                 event.metadata
             )
-
 
             metadata.update(
                 {
@@ -646,12 +583,10 @@ class NewsAgent(
                 }
             )
 
-
             description = (
                 analysis.summary
                 or event.description
             )
-
 
             updated = (
                 event.model_copy(
@@ -680,11 +615,9 @@ class NewsAgent(
                 )
             )
 
-
             updated_events.append(
                 updated
             )
-
 
         updated_events.sort(
             key=lambda event: (
@@ -694,15 +627,11 @@ class NewsAgent(
             reverse=True,
         )
 
-
         return updated_events
 
-
-    /*
-     * ==============================
-     * Evidence
-     * ==============================
-     */
+    # ==============================
+    # Evidence
+    # ==============================
 
     def _build_evidence(
         self,
@@ -718,7 +647,6 @@ class NewsAgent(
             EvidenceItem
         ] = []
 
-
         for event in events:
 
             source = (
@@ -728,7 +656,6 @@ class NewsAgent(
                 if event.source_names
                 else "unknown"
             )
-
 
             value = {
                 "category":
@@ -747,13 +674,11 @@ class NewsAgent(
                     event.affected_symbols,
             }
 
-
             priced_in_risk = (
                 event.metadata.get(
                     "priced_in_risk"
                 )
             )
-
 
             if (
                 priced_in_risk
@@ -764,13 +689,11 @@ class NewsAgent(
                     "priced_in_risk"
                 ] = priced_in_risk
 
-
             horizon = (
                 event.metadata.get(
                     "horizon"
                 )
             )
-
 
             if horizon:
 
@@ -778,6 +701,17 @@ class NewsAgent(
                     "horizon"
                 ] = horizon
 
+            reasoning = (
+                event.metadata.get(
+                    "llm_reasoning"
+                )
+            )
+
+            if reasoning:
+
+                value[
+                    "reasoning"
+                ] = reasoning
 
             evidence.append(
                 EvidenceItem(
@@ -800,15 +734,11 @@ class NewsAgent(
                 )
             )
 
-
         return evidence
 
-
-    /*
-     * ==============================
-     * Helpers
-     * ==============================
-     */
+    # ==============================
+    # Helpers
+    # ==============================
 
     def _empty_output(
         self,
@@ -858,7 +788,6 @@ class NewsAgent(
             },
         )
 
-
     @staticmethod
     def _average_confidence(
         events: list[NewsEvent],
@@ -871,7 +800,6 @@ class NewsAgent(
 
             return 0.0
 
-
         return (
             sum(
                 event.confidence
@@ -882,9 +810,9 @@ class NewsAgent(
             len(events)
         )
 
-
-    @staticmethod
+    @classmethod
     def _relevant_events(
+        cls,
         events: list[NewsEvent],
         focus_symbols: list[str],
     ) -> list[NewsEvent]:
@@ -892,19 +820,18 @@ class NewsAgent(
         找出與 focus symbols
         有直接關聯的事件。
 
-        若沒有 focus symbols，
-        所有事件皆視為 relevant。
+        BTC 與 BTC-USDT-SWAP
+        會視為同一個 underlying。
         """
 
         if not focus_symbols:
 
             return events
 
-
         normalized_focus = {
-            symbol
-            .strip()
-            .upper()
+            cls._symbol_key(
+                symbol
+            )
 
             for symbol
             in focus_symbols
@@ -912,6 +839,9 @@ class NewsAgent(
             if symbol
         }
 
+        normalized_focus.discard(
+            ""
+        )
 
         return [
             event
@@ -920,16 +850,50 @@ class NewsAgent(
             in events
 
             if any(
-                symbol
-                .strip()
-                .upper()
+                cls._symbol_key(
+                    symbol
+                )
                 in normalized_focus
 
                 for symbol
                 in event.affected_symbols
+
+                if symbol
             )
         ]
 
+    @staticmethod
+    def _symbol_key(
+        symbol: str,
+    ) -> str:
+        """
+        將：
+
+            BTC
+            BTC-USDT
+            BTC-USDT-SWAP
+
+        都轉成：
+
+            BTC
+
+        用於 symbol 關聯比較。
+        """
+
+        if not symbol:
+
+            return ""
+
+        normalized = (
+            symbol
+            .strip()
+            .upper()
+        )
+
+        return (
+            normalized
+            .split("-")[0]
+        )
 
     @staticmethod
     def _clamp_score(
