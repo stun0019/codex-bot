@@ -1,1 +1,3 @@
-
+"""
+codex-bot application package.
+"""
