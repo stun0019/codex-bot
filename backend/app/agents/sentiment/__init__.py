@@ -18,10 +18,25 @@ from .models import (
     SentimentSource,
 )
 
+from .service import (
+    SentimentService,
+    SentimentServiceConfig,
+)
+
+from .sources import (
+    BaseSentimentSource,
+    OKXSentimentSource,
+    OKXSentimentSourceConfig,
+    SentimentSourceConfig,
+    SentimentSourceResult,
+)
+
 __all__ = [
     "SentimentAgent",
     "SentimentAnalyzer",
     "SentimentAnalyzerConfig",
+    "SentimentService",
+    "SentimentServiceConfig",
     "SentimentSource",
     "SentimentRegime",
     "CrowdingSide",
@@ -30,4 +45,9 @@ __all__ = [
     "SentimentMetrics",
     "SentimentSnapshot",
     "SentimentOutput",
+    "BaseSentimentSource",
+    "SentimentSourceConfig",
+    "SentimentSourceResult",
+    "OKXSentimentSource",
+    "OKXSentimentSourceConfig",
 ]
