@@ -13,24 +13,7 @@ from ..models import NewsArticle
 @dataclass(slots=True)
 class NewsSourceConfig:
     """
-    新聞來源共用設定。
-
-    name:
-        Source 顯示名稱。
-
-    default_limit:
-        fetch() 未指定 limit 時，
-        預設最多抓多少篇。
-
-    max_limit:
-        單次 fetch 最大文章數。
-
-    timeout_seconds:
-        HTTP 類型 source 可使用的
-        request timeout。
-
-    enabled:
-        是否啟用此新聞來源。
+    所有新聞來源共用設定。
     """
 
     name: str
@@ -46,31 +29,11 @@ class NewsSourceConfig:
 
 class BaseNewsSource(ABC):
     """
-    所有 NEWS Source 的共用介面。
+    所有 NEWS Source 的抽象基底。
 
-    未來任何新聞來源都應繼承：
-
-        BaseNewsSource
-
-    並實作：
-
-        async def fetch(...)
-
-    不管來源是：
-
-    - REST API
-    - RSS
-    - Exchange announcements
-    - SEC / regulator feed
-    - Macro feed
-    - 自建 crawler
-    - 第三方 crypto news API
-
-    最終都必須輸出：
+    所有來源最終都必須輸出：
 
         list[NewsArticle]
-
-    NEWS Agent 不需要知道資料來源細節。
     """
 
     def __init__(
@@ -86,9 +49,6 @@ class BaseNewsSource(ABC):
     def name(
         self,
     ) -> str:
-        """
-        Source 名稱。
-        """
 
         return self.config.name
 
@@ -96,9 +56,6 @@ class BaseNewsSource(ABC):
     def enabled(
         self,
     ) -> bool:
-        """
-        Source 是否啟用。
-        """
 
         return self.config.enabled
 
@@ -106,21 +63,12 @@ class BaseNewsSource(ABC):
     def closed(
         self,
     ) -> bool:
-        """
-        Source 是否已關閉。
-        """
 
         return self._closed
 
     async def __aenter__(
         self,
     ) -> "BaseNewsSource":
-        """
-        支援：
-
-            async with SomeNewsSource() as source:
-                ...
-        """
 
         self._closed = False
 
@@ -141,61 +89,12 @@ class BaseNewsSource(ABC):
         symbols: list[str] | None = None,
         limit: int | None = None,
     ) -> list[NewsArticle]:
-        """
-        抓取新聞。
-
-        symbols:
-            想優先關注的市場。
-
-            例如：
-
-            [
-                "BTC-USDT-SWAP",
-                "ETH-USDT-SWAP",
-            ]
-
-            Source 可以：
-
-            - 直接用 symbol 查詢
-            - 只取 base asset
-            - 忽略 symbols
-            - 抓全市場新聞
-
-            由各 Source 自行決定。
-
-        limit:
-            最多回傳幾篇新聞。
-
-        回傳：
-
-            list[NewsArticle]
-
-        Source 必須盡量保證：
-
-        - title 有值
-        - source 有值
-        - published_at 若有則提供
-        - url 若有則提供
-        - content 若有則提供
-        - symbols 若能判斷則提供
-        """
 
         raise NotImplementedError
 
     async def close(
         self,
     ) -> None:
-        """
-        關閉 Source。
-
-        沒有 HTTP client 的 Source
-        可以直接使用此預設實作。
-
-        有 httpx.AsyncClient 等資源的
-        Source 應 override 並在最後呼叫：
-
-            await super().close()
-        """
 
         self._closed = True
 
@@ -203,9 +102,6 @@ class BaseNewsSource(ABC):
         self,
         limit: int | None,
     ) -> int:
-        """
-        統一處理文章數量限制。
-        """
 
         if limit is None:
 
@@ -215,13 +111,15 @@ class BaseNewsSource(ABC):
 
         else:
 
-            resolved = int(limit)
+            resolved = int(
+                limit
+            )
 
         if resolved < 1:
 
             raise ValueError(
-                "News source limit must be "
-                "greater than 0."
+                "News source limit must "
+                "be greater than 0."
             )
 
         return min(
@@ -233,24 +131,6 @@ class BaseNewsSource(ABC):
     def normalize_symbols(
         symbols: list[str] | None,
     ) -> list[str]:
-        """
-        正規化交易對。
-
-        輸入：
-
-            [
-                "btc-usdt-swap",
-                " BTC-USDT-SWAP ",
-                "ETH-USDT-SWAP",
-            ]
-
-        輸出：
-
-            [
-                "BTC-USDT-SWAP",
-                "ETH-USDT-SWAP",
-            ]
-        """
 
         if not symbols:
 
@@ -295,21 +175,6 @@ class BaseNewsSource(ABC):
         cls,
         symbols: list[str] | None,
     ) -> list[str]:
-        """
-        從交易對取出 base asset。
-
-        例如：
-
-            BTC-USDT-SWAP
-            ETH-USDT-SWAP
-            SOL-USDT
-
-        轉成：
-
-            BTC
-            ETH
-            SOL
-        """
 
         normalized_symbols = (
             cls.normalize_symbols(
@@ -352,33 +217,34 @@ class BaseNewsSource(ABC):
         articles: list[NewsArticle],
     ) -> list[NewsArticle]:
         """
-        Source 層的簡單去重。
+        Source 層的「明確重複」去重。
 
-        這不是 NewsAnalyzer 的完整事件去重。
+        去除：
 
-        這裡只處理最明顯的：
+        1. 完全相同 URL
+        2. 同一來源 + 完全相同 title
 
-        - 相同 URL
-        - 相同 title
+        不會去除：
 
-        真正的語意事件合併仍由：
+        CoinDesk:
+            Bitcoin ETF approved
 
-            NewsAnalyzer
+        Reuters:
+            Bitcoin ETF approved
 
-        負責。
+        因為 NewsAnalyzer 需要保留
+        多來源確認能力。
         """
 
         result: list[
             NewsArticle
         ] = []
 
-        seen_urls: set[str] = (
-            set()
-        )
+        seen_urls: set[str] = set()
 
-        seen_titles: set[str] = (
-            set()
-        )
+        seen_source_titles: set[
+            tuple[str, str]
+        ] = set()
 
         for article in articles:
 
@@ -392,24 +258,34 @@ class BaseNewsSource(ABC):
                     .lower()
                 )
 
+            source_key = (
+                article.source
+                .strip()
+                .lower()
+            )
+
             title_key = (
                 article.title
                 .strip()
                 .lower()
             )
 
+            source_title_key = (
+                source_key,
+                title_key,
+            )
+
             if (
                 url_key
-                and url_key
-                in seen_urls
+                and url_key in seen_urls
             ):
 
                 continue
 
             if (
                 title_key
-                and title_key
-                in seen_titles
+                and source_title_key
+                in seen_source_titles
             ):
 
                 continue
@@ -422,8 +298,8 @@ class BaseNewsSource(ABC):
 
             if title_key:
 
-                seen_titles.add(
-                    title_key
+                seen_source_titles.add(
+                    source_title_key
                 )
 
             result.append(
@@ -435,13 +311,6 @@ class BaseNewsSource(ABC):
     def ensure_available(
         self,
     ) -> None:
-        """
-        在 fetch 前確認 Source 狀態。
-
-        各 Source 可以在 fetch() 開頭：
-
-            self.ensure_available()
-        """
 
         if self._closed:
 
