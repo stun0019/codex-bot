@@ -32,8 +32,7 @@ class RiskAgent(
     ]
 ):
     """
-    AI / deterministic advisory
-    risk analyst.
+    Advisory risk analyst.
 
     RISK 不直接：
 
@@ -69,6 +68,10 @@ class RiskAgent(
         context: MarketContext,
         payload: RiskInput,
     ) -> RiskOutput:
+
+        # =================================
+        # No proposed trade
+        # =================================
 
         if (
             payload.proposed_trade
@@ -118,15 +121,150 @@ class RiskAgent(
                     )
                 ],
 
+                data={
+                    "reason":
+                        "no_proposed_trade",
+
+                    "hard_risk_engine":
+                        False,
+
+                    "advisory_analysis":
+                        True,
+                },
+
                 errors=[],
             )
+
+        trade = (
+            payload.proposed_trade
+        )
+
+        # =================================
+        # Symbol consistency guard
+        # =================================
+        #
+        # MarketContext 是這次分析的
+        # canonical market scope。
+        #
+        # 如果：
+        #
+        # context.symbol
+        #     !=
+        # proposed_trade.symbol
+        #
+        # 就不能繼續進 RiskAnalyzer。
+        #
+        # 否則可能出現：
+        #
+        # 分析 UNI position
+        # 卻輸出 BTC symbol
+        #
+        # 這屬於 input consistency error，
+        # 不是正常的 risk REJECT。
+        # =================================
+
+        context_symbol = (
+            self._normalize_symbol(
+                context.symbol
+            )
+        )
+
+        trade_symbol = (
+            self._normalize_symbol(
+                trade.symbol
+            )
+        )
+
+        if (
+            context_symbol
+            !=
+            trade_symbol
+        ):
+
+            message = (
+                "Risk symbol mismatch: "
+                f"context.symbol={context_symbol!r}, "
+                "proposed_trade.symbol="
+                f"{trade_symbol!r}."
+            )
+
+            return RiskOutput(
+                agent=self.name,
+
+                status=(
+                    AgentStatus.ERROR
+                ),
+
+                symbol=(
+                    context_symbol
+                ),
+
+                bias=(
+                    TradeBias.NEUTRAL
+                ),
+
+                confidence=0.0,
+
+                summary=(
+                    "Risk analysis rejected "
+                    "because MarketContext "
+                    "and ProposedTrade refer "
+                    "to different symbols."
+                ),
+
+                approved=False,
+
+                verdict=(
+                    RiskVerdict.REVIEW
+                ),
+
+                checks=[],
+
+                metrics=(
+                    RiskMetrics()
+                ),
+
+                recommendations=[
+                    (
+                        "Use the same symbol "
+                        "for MarketContext and "
+                        "ProposedTrade before "
+                        "running RISK."
+                    )
+                ],
+
+                data={
+                    "reason":
+                        "symbol_mismatch",
+
+                    "context_symbol":
+                        context_symbol,
+
+                    "proposed_trade_symbol":
+                        trade_symbol,
+
+                    "hard_risk_engine":
+                        False,
+
+                    "advisory_analysis":
+                        True,
+                },
+
+                errors=[
+                    message
+                ],
+            )
+
+        # =================================
+        # Risk analysis
+        # =================================
 
         try:
 
             snapshot = (
                 self.analyzer.analyze(
                     symbol=(
-                        context.symbol
+                        context_symbol
                     ),
                     payload=payload,
                 )
@@ -152,7 +290,7 @@ class RiskAgent(
                 ),
 
                 symbol=(
-                    context.symbol
+                    context_symbol
                 ),
 
                 bias=(
@@ -238,6 +376,12 @@ class RiskAgent(
                         if not check.passed
                     ],
 
+                    "context_symbol":
+                        context_symbol,
+
+                    "proposed_trade_symbol":
+                        trade_symbol,
+
                     "hard_risk_engine":
                         False,
 
@@ -258,7 +402,7 @@ class RiskAgent(
                 ),
 
                 symbol=(
-                    context.symbol
+                    context_symbol
                 ),
 
                 bias=(
@@ -285,6 +429,23 @@ class RiskAgent(
 
                 recommendations=[],
 
+                data={
+                    "reason":
+                        "analysis_error",
+
+                    "context_symbol":
+                        context_symbol,
+
+                    "proposed_trade_symbol":
+                        trade_symbol,
+
+                    "hard_risk_engine":
+                        False,
+
+                    "advisory_analysis":
+                        True,
+                },
+
                 errors=[
                     (
                         f"{type(exc).__name__}: "
@@ -292,6 +453,43 @@ class RiskAgent(
                     )
                 ],
             )
+
+    # =================================
+    # Symbol
+    # =================================
+
+    @staticmethod
+    def _normalize_symbol(
+        symbol: str,
+    ) -> str:
+        """
+        RISK 內部統一 symbol。
+
+        Example:
+
+            " uni-usdt-swap "
+                ↓
+            "UNI-USDT-SWAP"
+        """
+
+        normalized = (
+            symbol
+            .strip()
+            .upper()
+        )
+
+        if not normalized:
+
+            raise ValueError(
+                "Risk symbol cannot "
+                "be empty."
+            )
+
+        return normalized
+
+    # =================================
+    # Evidence
+    # =================================
 
     @staticmethod
     def _build_evidence(
@@ -339,6 +537,10 @@ class RiskAgent(
             for check
             in snapshot.checks
         ]
+
+    # =================================
+    # Summary
+    # =================================
 
     @staticmethod
     def _build_summary(
