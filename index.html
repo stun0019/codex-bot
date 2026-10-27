@@ -1,1546 +1,2476 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Codex Bot - Multi-Agent Crypto Trading System"
-    >
-
-    <title>Codex Bot | AI Trading System</title>
-
-    <style>
-        :root {
-            --bg: #07090d;
-            --bg-secondary: #0c1017;
-            --panel: #11161f;
-            --panel-hover: #151c27;
-
-            --border: #222b38;
-            --border-light: #2d3746;
-
-            --text: #f3f6fa;
-            --text-secondary: #9aa7b6;
-            --text-muted: #647183;
-
-            --green: #39d98a;
-            --green-dark: #123a2a;
-
-            --red: #ff5d6c;
-            --red-dark: #3b171d;
-
-            --yellow: #f6c453;
-            --yellow-dark: #392e13;
-
-            --blue: #63a4ff;
-            --blue-dark: #152a48;
-
-            --purple: #b58cff;
-
-            --radius: 14px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(99, 164, 255, 0.08),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at top left,
-                    rgba(57, 217, 138, 0.05),
-                    transparent 30%
-                ),
-                var(--bg);
-
-            color: var(--text);
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-
-            line-height: 1.5;
-        }
-
-        button,
-        select {
-            font: inherit;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Codex Bot - Multi-Agent Crypto Trading System"
+  >
+
+  <title>Codex Bot | AI Trading System</title>
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --bg-2: #0b1017;
+
+      --panel: #111720;
+      --panel-2: #151d28;
+
+      --border: #222c39;
+      --border-2: #303c4d;
+
+      --text: #f2f5f8;
+      --muted: #8c99aa;
+      --muted-2: #606d7d;
+
+      --green: #39d98a;
+      --red: #ff6675;
+      --yellow: #f6c453;
+      --blue: #66a6ff;
+      --purple: #b493ff;
+
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(102, 166, 255, 0.08),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 0% 10%,
+          rgba(57, 217, 138, 0.05),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      line-height: 1.5;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    code,
+    .mono {
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    }
+
+    .container {
+      width: min(
+        1440px,
+        calc(100% - 36px)
+      );
+
+      margin: 0 auto;
+    }
+
+    /*
+     * ==============================
+     * Header
+     * ==============================
+     */
 
-        button {
-            cursor: pointer;
-        }
+    header {
+      position: sticky;
 
-        .container {
-            width: min(1440px, calc(100% - 40px));
-            margin: 0 auto;
-        }
+      top: 0;
 
-        /* =========================
-           Header
-        ========================= */
+      z-index: 50;
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
+      background:
+        rgba(
+          7,
+          9,
+          13,
+          0.88
+        );
 
-            background: rgba(7, 9, 13, 0.86);
+      backdrop-filter:
+        blur(18px);
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+      border-bottom:
+        1px solid var(--border);
+    }
 
-            border-bottom: 1px solid var(--border);
-        }
+    .navbar {
+      min-height: 68px;
 
-        .navbar {
-            min-height: 70px;
+      display: flex;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+      align-items: center;
 
-            gap: 20px;
-        }
+      justify-content:
+        space-between;
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+      gap: 20px;
+    }
 
-        .brand-logo {
-            width: 38px;
-            height: 38px;
+    .brand {
+      display: flex;
 
-            display: grid;
-            place-items: center;
+      align-items: center;
 
-            border: 1px solid #2d3746;
-            border-radius: 10px;
+      gap: 11px;
+    }
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(99, 164, 255, 0.15),
-                    rgba(57, 217, 138, 0.08)
-                );
+    .brand-logo {
+      width: 38px;
 
-            font-size: 18px;
-            font-weight: 800;
-        }
+      height: 38px;
 
-        .brand-text h1 {
-            font-size: 16px;
-            letter-spacing: 0.4px;
-        }
+      display: grid;
 
-        .brand-text p {
-            margin-top: 1px;
+      place-items: center;
 
-            color: var(--text-muted);
+      border:
+        1px solid
+        var(--border-2);
 
-            font-size: 11px;
-        }
+      border-radius: 10px;
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+      background:
+        linear-gradient(
+          135deg,
+          rgba(
+            102,
+            166,
+            255,
+            0.15
+          ),
+          rgba(
+            57,
+            217,
+            138,
+            0.08
+          )
+        );
 
-        .status-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+      font-weight: 800;
+    }
 
-            padding: 7px 11px;
+    .brand h1 {
+      font-size: 16px;
 
-            background: var(--panel);
+      letter-spacing:
+        0.4px;
+    }
 
-            border: 1px solid var(--border);
-            border-radius: 999px;
+    .brand p {
+      margin-top: 1px;
 
-            color: var(--text-secondary);
+      color:
+        var(--muted-2);
 
-            font-size: 12px;
-        }
+      font-size: 11px;
+    }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
+    .header-actions {
+      display: flex;
 
-            background: var(--yellow);
+      align-items: center;
 
-            border-radius: 50%;
+      gap: 10px;
+    }
 
-            box-shadow:
-                0 0 10px rgba(246, 196, 83, 0.6);
-        }
+    .pill,
+    .link-button {
+      min-height: 34px;
 
-        .status-dot.online {
-            background: var(--green);
+      display: inline-flex;
 
-            box-shadow:
-                0 0 10px rgba(57, 217, 138, 0.65);
-        }
+      align-items: center;
 
-        .status-dot.offline {
-            background: var(--red);
+      gap: 8px;
 
-            box-shadow:
-                0 0 10px rgba(255, 93, 108, 0.65);
-        }
+      padding:
+        7px 11px;
 
-        .github-link {
-            padding: 8px 13px;
+      border:
+        1px solid
+        var(--border);
 
-            color: var(--text);
+      border-radius:
+        999px;
 
-            background: var(--panel);
+      background:
+        var(--panel);
 
-            border: 1px solid var(--border);
-            border-radius: 9px;
+      color:
+        var(--muted);
 
-            text-decoration: none;
+      font-size: 12px;
 
-            font-size: 12px;
+      text-decoration:
+        none;
+    }
 
-            transition: 0.2s;
-        }
+    .link-button {
+      border-radius: 9px;
 
-        .github-link:hover {
-            background: var(--panel-hover);
-            border-color: var(--border-light);
-        }
+      color:
+        var(--text);
+    }
 
-        /* =========================
-           Main
-        ========================= */
+    .status-dot {
+      width: 8px;
 
-        main {
-            padding: 34px 0 60px;
-        }
+      height: 8px;
 
-        .hero {
-            margin-bottom: 30px;
-        }
+      border-radius:
+        50%;
 
-        .hero h2 {
-            font-size: clamp(
-                24px,
-                4vw,
-                38px
-            );
+      background:
+        var(--yellow);
 
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
+      box-shadow:
+        0 0 10px
+        rgba(
+          246,
+          196,
+          83,
+          0.55
+        );
+    }
 
-        .hero p {
-            max-width: 760px;
+    .status-dot.online {
+      background:
+        var(--green);
 
-            margin-top: 9px;
+      box-shadow:
+        0 0 10px
+        rgba(
+          57,
+          217,
+          138,
+          0.6
+        );
+    }
 
-            color: var(--text-secondary);
+    .status-dot.offline {
+      background:
+        var(--red);
 
-            font-size: 14px;
-        }
+      box-shadow:
+        0 0 10px
+        rgba(
+          255,
+          102,
+          117,
+          0.6
+        );
+    }
 
-        .warning {
-            margin-top: 18px;
+    /*
+     * ==============================
+     * Main
+     * ==============================
+     */
 
-            padding: 12px 14px;
+    main {
+      padding:
+        34px 0 60px;
+    }
 
-            background: rgba(246, 196, 83, 0.06);
+    .hero {
+      margin-bottom:
+        28px;
+    }
 
-            border: 1px solid rgba(246, 196, 83, 0.22);
-            border-radius: 10px;
+    .hero h2 {
+      font-size:
+        clamp(
+          26px,
+          4vw,
+          40px
+        );
 
-            color: #d9c28c;
+      letter-spacing:
+        -1px;
+    }
 
-            font-size: 12px;
-        }
+    .hero p {
+      max-width:
+        800px;
 
-        /* =========================
-           Sections
-        ========================= */
+      margin-top:
+        9px;
 
-        .section {
-            margin-top: 28px;
-        }
+      color:
+        var(--muted);
 
-        .section-header {
-            margin-bottom: 13px;
+      font-size:
+        14px;
+    }
 
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
+    .notice {
+      margin-top:
+        16px;
 
-            gap: 15px;
-        }
+      padding:
+        12px 14px;
 
-        .section-header h3 {
-            font-size: 15px;
-            font-weight: 650;
+      border:
+        1px solid
+        rgba(
+          246,
+          196,
+          83,
+          0.22
+        );
 
-            letter-spacing: 0.2px;
-        }
+      border-radius:
+        10px;
 
-        .section-header p {
-            color: var(--text-muted);
+      background:
+        rgba(
+          246,
+          196,
+          83,
+          0.06
+        );
 
-            font-size: 11px;
-        }
+      color:
+        #d9c28c;
 
-        /* =========================
-           Market controls
-        ========================= */
+      font-size:
+        12px;
+    }
 
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
+    /*
+     * ==============================
+     * Section
+     * ==============================
+     */
 
-            gap: 10px;
+    .section {
+      margin-top:
+        30px;
+    }
 
-            margin-bottom: 14px;
-        }
+    .section-header {
+      margin-bottom:
+        13px;
 
-        .select-control {
-            min-width: 190px;
+      display: flex;
 
-            padding: 9px 12px;
+      align-items:
+        flex-end;
 
-            color: var(--text);
+      justify-content:
+        space-between;
 
-            background: var(--panel);
+      gap: 14px;
+    }
 
-            border: 1px solid var(--border);
-            border-radius: 9px;
+    .section-header h3 {
+      font-size:
+        16px;
+    }
 
-            outline: none;
-        }
+    .section-header p {
+      margin-top:
+        2px;
 
-        .select-control:focus {
-            border-color: var(--blue);
-        }
+      color:
+        var(--muted-2);
 
-        .button {
-            padding: 9px 14px;
+      font-size:
+        11px;
+    }
 
-            color: var(--text);
+    /*
+     * ==============================
+     * Controls
+     * ==============================
+     */
 
-            background: var(--panel);
+    .controls {
+      display: flex;
 
-            border: 1px solid var(--border);
-            border-radius: 9px;
+      flex-wrap: wrap;
 
-            transition: 0.2s;
-        }
+      gap: 10px;
 
-        .button:hover {
-            background: var(--panel-hover);
-        }
+      margin-bottom:
+        14px;
+    }
+
+    .select,
+    .button {
+      min-height:
+        39px;
 
-        .button.primary {
-            color: #07140e;
+      padding:
+        8px 12px;
 
-            background: var(--green);
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        9px;
+
+      background:
+        var(--panel);
+
+      color:
+        var(--text);
+
+      outline: none;
+    }
+
+    .select {
+      min-width:
+        185px;
+    }
+
+    .select:focus {
+      border-color:
+        var(--blue);
+    }
+
+    .button:hover {
+      background:
+        var(--panel-2);
+    }
+
+    .button.primary {
+      border-color:
+        var(--green);
+
+      background:
+        var(--green);
+
+      color:
+        #07140e;
+
+      font-weight:
+        750;
+    }
+
+    .button.secondary {
+      border-color:
+        rgba(
+          102,
+          166,
+          255,
+          0.35
+        );
+
+      background:
+        rgba(
+          102,
+          166,
+          255,
+          0.09
+        );
+
+      color:
+        #bcd7ff;
+    }
+
+    .button:disabled {
+      cursor:
+        not-allowed;
+
+      opacity:
+        0.55;
+    }
+
+    /*
+     * ==============================
+     * Grids
+     * ==============================
+     */
 
-            border-color: var(--green);
+    .grid-4 {
+      display: grid;
 
-            font-weight: 700;
-        }
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(
+            0,
+            1fr
+          )
+        );
 
-        .button.primary:hover {
-            filter: brightness(1.05);
-        }
+      gap: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+
+      grid-template-columns:
+        minmax(
+          0,
+          2fr
+        )
+        minmax(
+          300px,
+          1fr
+        );
+
+      gap: 12px;
+    }
+
+    /*
+     * ==============================
+     * Cards
+     * ==============================
+     */
+
+    .card {
+      min-width: 0;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius);
 
-        .button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+      background:
+        rgba(
+          17,
+          23,
+          32,
+          0.9
+        );
+    }
+
+    .metric-label {
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
 
-        /* =========================
-           Cards
-        ========================= */
+      letter-spacing:
+        0.7px;
+
+      text-transform:
+        uppercase;
+    }
+
+    .metric-value {
+      margin-top:
+        7px;
 
-        .market-grid {
-            display: grid;
+      overflow:
+        hidden;
+
+      color:
+        var(--text);
+
+      font-size:
+        24px;
 
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
+      font-weight:
+        750;
 
-            gap: 12px;
-        }
+      text-overflow:
+        ellipsis;
 
-        .card {
-            position: relative;
+      white-space:
+        nowrap;
+    }
+
+    .metric-sub {
+      margin-top:
+        5px;
+
+      color:
+        var(--muted-2);
 
-            min-width: 0;
+      font-size:
+        11px;
+    }
 
-            padding: 18px;
+    .positive {
+      color:
+        var(--green) !important;
+    }
+
+    .negative {
+      color:
+        var(--red) !important;
+    }
 
-            background: rgba(17, 22, 31, 0.88);
+    .warning-text {
+      color:
+        var(--yellow) !important;
+    }
 
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+    .blue {
+      color:
+        var(--blue) !important;
+    }
 
-            overflow: hidden;
-        }
+    /*
+     * ==============================
+     * Chart
+     * ==============================
+     */
 
-        .card::before {
-            content: "";
+    .chart-card {
+      min-height:
+        330px;
+    }
 
-            position: absolute;
-            top: 0;
-            left: 0;
+    .chart-head {
+      display: flex;
 
-            width: 100%;
-            height: 1px;
+      align-items:
+        center;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.09),
-                    transparent
-                );
-        }
+      justify-content:
+        space-between;
 
-        .metric-label {
-            color: var(--text-secondary);
+      gap: 10px;
 
-            font-size: 11px;
-            text-transform: uppercase;
+      margin-bottom:
+        14px;
+    }
 
-            letter-spacing: 0.7px;
-        }
+    .chart-symbol {
+      font-size:
+        17px;
 
-        .metric-value {
-            margin-top: 8px;
+      font-weight:
+        700;
+    }
 
-            font-size: 24px;
-            font-weight: 700;
+    .chart-sub {
+      color:
+        var(--muted-2);
 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+      font-size:
+        11px;
+    }
 
-        .metric-sub {
-            margin-top: 5px;
+    .chart-wrap {
+      position:
+        relative;
 
-            color: var(--text-muted);
+      height:
+        245px;
 
-            font-size: 11px;
-        }
+      width:
+        100%;
+    }
 
-        .positive {
-            color: var(--green);
-        }
+    #priceChart {
+      width:
+        100%;
 
-        .negative {
-            color: var(--red);
-        }
+      height:
+        100%;
 
-        .neutral {
-            color: var(--text-secondary);
-        }
+      display:
+        block;
+    }
 
-        /* =========================
-           Price / candles
-        ========================= */
+    /*
+     * ==============================
+     * Order Book
+     * ==============================
+     */
 
-        .data-grid {
-            display: grid;
+    .book-list {
+      display: grid;
 
-            grid-template-columns:
-                minmax(0, 2fr)
-                minmax(300px, 1fr);
+      gap: 18px;
 
-            gap: 12px;
-        }
+      margin-top:
+        16px;
+    }
 
-        .price-panel {
-            min-height: 310px;
-        }
+    /*
+     * ==============================
+     * SCOUT
+     * ==============================
+     */
 
-        .price-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    .scout-toolbar {
+      display: flex;
 
-            margin-bottom: 18px;
-        }
+      flex-wrap: wrap;
 
-        .price-title {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-        }
+      align-items:
+        center;
 
-        .price-title strong {
-            font-size: 18px;
-        }
+      justify-content:
+        space-between;
 
-        .price-title span {
-            color: var(--text-muted);
-            font-size: 11px;
-        }
+      gap: 12px;
 
-        .chart {
-            height: 220px;
+      margin-bottom:
+        14px;
+    }
 
-            display: flex;
-            align-items: flex-end;
+    .scout-status {
+      display: flex;
 
-            gap: 3px;
+      align-items:
+        center;
 
-            padding-top: 20px;
+      gap: 9px;
 
-            border-bottom: 1px solid var(--border);
-        }
+      color:
+        var(--muted);
 
-        .candle {
-            position: relative;
+      font-size:
+        12px;
+    }
 
-            flex: 1;
+    .spinner {
+      width:
+        14px;
 
-            min-width: 2px;
-            max-width: 16px;
+      height:
+        14px;
 
-            border-radius: 2px 2px 0 0;
+      display:
+        none;
 
-            opacity: 0.88;
-        }
+      border:
+        2px solid
+        var(--border-2);
 
-        .candle.up {
-            background: var(--green);
-        }
+      border-top-color:
+        var(--green);
 
-        .candle.down {
-            background: var(--red);
-        }
+      border-radius:
+        50%;
 
-        .chart-empty {
-            width: 100%;
-            height: 100%;
+      animation:
+        spin 0.7s
+        linear infinite;
+    }
 
-            display: grid;
-            place-items: center;
+    .spinner.show {
+      display:
+        inline-block;
+    }
 
-            color: var(--text-muted);
+    @keyframes spin {
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
 
-            font-size: 12px;
-        }
+    .scout-summary {
+      display: grid;
 
-        /* =========================
-           Agent grid
-        ========================= */
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(
+            0,
+            1fr
+          )
+        );
 
-        .agent-grid {
-            display: grid;
+      gap: 10px;
 
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
+      margin-bottom:
+        12px;
+    }
 
-            gap: 12px;
-        }
+    .scout-table-wrap {
+      overflow-x:
+        auto;
 
-        .agent-card {
-            padding: 17px;
+      border:
+        1px solid
+        var(--border);
 
-            background: rgba(17, 22, 31, 0.8);
+      border-radius:
+        var(--radius);
 
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+      background:
+        rgba(
+          17,
+          23,
+          32,
+          0.9
+        );
+    }
 
-            transition:
-                transform 0.2s,
-                border-color 0.2s,
-                background 0.2s;
-        }
+    .scout-table {
+      width:
+        100%;
 
-        .agent-card:hover {
-            transform: translateY(-2px);
+      min-width:
+        980px;
 
-            border-color: var(--border-light);
+      border-collapse:
+        collapse;
+    }
 
-            background: var(--panel-hover);
-        }
+    .scout-table th,
+    .scout-table td {
+      padding:
+        12px 11px;
 
-        .agent-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+      border-bottom:
+        1px solid
+        var(--border);
 
-            gap: 10px;
-        }
+      text-align:
+        right;
 
-        .agent-name {
-            font-size: 14px;
-            font-weight: 700;
-        }
+      font-size:
+        12px;
 
-        .agent-status {
-            padding: 4px 8px;
+      white-space:
+        nowrap;
+    }
 
-            background: var(--blue-dark);
+    .scout-table th {
+      position:
+        sticky;
+
+      top:
+        68px;
+
+      z-index:
+        4;
+
+      background:
+        #0f151e;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      font-weight:
+        650;
+
+      letter-spacing:
+        0.5px;
 
-            border-radius: 999px;
+      text-transform:
+        uppercase;
+    }
 
-            color: var(--blue);
+    .scout-table th:first-child,
+    .scout-table td:first-child,
+    .scout-table th:nth-child(2),
+    .scout-table td:nth-child(2) {
+      text-align:
+        left;
+    }
 
-            font-size: 10px;
-            font-weight: 600;
-        }
+    .scout-table tbody tr {
+      transition:
+        background
+        0.16s;
+    }
 
-        .agent-role {
-            margin-top: 9px;
+    .scout-table tbody tr:hover {
+      background:
+        rgba(
+          102,
+          166,
+          255,
+          0.045
+        );
+    }
 
-            color: var(--text-secondary);
+    .scout-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
 
-            font-size: 12px;
-        }
+    .rank {
+      width:
+        36px;
 
-        .agent-detail {
-            margin-top: 12px;
+      color:
+        var(--muted-2);
 
-            color: var(--text-muted);
+      font-weight:
+        700;
+    }
 
-            font-size: 11px;
-        }
+    .symbol-cell {
+      font-weight:
+        700;
+    }
 
-        /* =========================
-           System pipeline
-        ========================= */
+    .score-badge {
+      display:
+        inline-flex;
 
-        .pipeline {
-            display: flex;
-            align-items: center;
+      min-width:
+        58px;
 
-            gap: 8px;
+      justify-content:
+        center;
 
-            overflow-x: auto;
+      padding:
+        4px 8px;
 
-            padding-bottom: 5px;
-        }
+      border:
+        1px solid
+        rgba(
+          57,
+          217,
+          138,
+          0.22
+        );
 
-        .pipeline-node {
-            min-width: 112px;
+      border-radius:
+        999px;
 
-            padding: 11px 13px;
+      background:
+        rgba(
+          57,
+          217,
+          138,
+          0.08
+        );
 
-            text-align: center;
+      color:
+        var(--green);
 
-            background: var(--panel);
+      font-weight:
+        750;
+    }
 
-            border: 1px solid var(--border);
-            border-radius: 9px;
+    .reasons-row td {
+      padding-top:
+        0;
 
-            color: var(--text-secondary);
+      color:
+        var(--muted-2);
 
-            font-size: 11px;
-        }
+      font-size:
+        10px;
 
-        .pipeline-arrow {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+      text-align:
+        left !important;
+    }
 
-        /* =========================
-           API / logs
-        ========================= */
+    .reason-chip {
+      display:
+        inline-flex;
 
-        .system-grid {
-            display: grid;
+      margin:
+        0 5px 5px 0;
 
-            grid-template-columns:
-                minmax(0, 1fr)
-                minmax(0, 1fr);
+      padding:
+        3px 7px;
 
-            gap: 12px;
-        }
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        999px;
+
+      background:
+        var(--bg-2);
+
+      color:
+        var(--muted);
+    }
+
+    .empty-state {
+      padding:
+        34px 18px;
+
+      color:
+        var(--muted-2);
+
+      text-align:
+        center;
 
-        .endpoint-list {
-            display: grid;
-            gap: 8px;
-        }
+      font-size:
+        12px;
+    }
 
-        .endpoint {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    .progress {
+      height:
+        4px;
 
-            gap: 10px;
+      overflow:
+        hidden;
 
-            padding: 10px 12px;
+      border-radius:
+        999px;
+
+      background:
+        var(--border);
+    }
+
+    .progress > div {
+      width:
+        0%;
+
+      height:
+        100%;
+
+      border-radius:
+        inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--blue),
+          var(--green)
+        );
+
+      transition:
+        width 0.2s;
+    }
+
+    /*
+     * ==============================
+     * Agents
+     * ==============================
+     */
+
+    .agent-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap:
+        12px;
+    }
+
+    .agent-card {
+      padding:
+        17px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        rgba(
+          17,
+          23,
+          32,
+          0.8
+        );
+    }
+
+    .agent-top {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+    }
+
+    .agent-name {
+      font-size:
+        14px;
+
+      font-weight:
+        750;
+    }
+
+    .agent-tag {
+      padding:
+        4px 8px;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(
+          102,
+          166,
+          255,
+          0.1
+        );
 
-            background: var(--bg-secondary);
+      color:
+        var(--blue);
+
+      font-size:
+        10px;
 
-            border: 1px solid var(--border);
-            border-radius: 8px;
+      font-weight:
+        700;
+    }
 
-            font-size: 11px;
-        }
+    .agent-tag.live {
+      background:
+        rgba(
+          57,
+          217,
+          138,
+          0.1
+        );
+
+      color:
+        var(--green);
+    }
+
+    .agent-role {
+      margin-top:
+        9px;
+
+      color:
+        var(--muted);
 
-        .endpoint code {
-            color: var(--text-secondary);
+      font-size:
+        12px;
+    }
 
-            overflow-wrap: anywhere;
-        }
+    .agent-detail {
+      margin-top:
+        10px;
 
-        .endpoint-state {
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
+      color:
+        var(--muted-2);
 
-        .endpoint-state.ok {
-            color: var(--green);
-        }
+      font-size:
+        11px;
+    }
 
-        .endpoint-state.error {
-            color: var(--red);
-        }
+    /*
+     * ==============================
+     * System
+     * ==============================
+     */
 
-        .log-box {
-            height: 220px;
+    .system-grid {
+      display: grid;
 
-            overflow-y: auto;
+      grid-template-columns:
+        1fr 1fr;
 
-            padding: 12px;
+      gap:
+        12px;
+    }
 
-            background: #07090d;
-
-            border: 1px solid var(--border);
-            border-radius: 9px;
-
-            color: #8c9aad;
-
-            font-family:
-                "SFMono-Regular",
-                Consolas,
-                "Liberation Mono",
-                monospace;
-
-            font-size: 11px;
-            line-height: 1.7;
-        }
-
-        .log-line.success {
-            color: var(--green);
-        }
-
-        .log-line.error {
-            color: var(--red);
-        }
-
-        .log-line.info {
-            color: var(--blue);
-        }
-
-        /* =========================
-           Footer
-        ========================= */
-
-        footer {
-            padding: 25px 0 40px;
-
-            border-top: 1px solid var(--border);
-
-            color: var(--text-muted);
-
-            text-align: center;
-
-            font-size: 11px;
-        }
-
-        /* =========================
-           Responsive
-        ========================= */
-
-        @media (max-width: 1050px) {
-            .market-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-            }
-
-            .agent-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 760px) {
-            .container {
-                width: min(
-                    100% - 24px,
-                    1440px
-                );
-            }
-
-            .github-link {
-                display: none;
-            }
-
-            .data-grid,
-            .system-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .agent-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 520px) {
-            main {
-                padding-top: 24px;
-            }
-
-            .market-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .status-pill span:last-child {
-                display: none;
-            }
-
-            .controls {
-                display: grid;
-            }
-
-            .select-control,
-            .button {
-                width: 100%;
-            }
-        }
-    </style>
+    .endpoint-list {
+      display:
+        grid;
+
+      gap:
+        8px;
+    }
+
+    .endpoint {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      padding:
+        10px 12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        8px;
+
+      background:
+        var(--bg-2);
+
+      font-size:
+        11px;
+    }
+
+    .endpoint code {
+      overflow-wrap:
+        anywhere;
+
+      color:
+        var(--muted);
+    }
+
+    .endpoint-state {
+      color:
+        var(--muted-2);
+
+      white-space:
+        nowrap;
+    }
+
+    .endpoint-state.ok {
+      color:
+        var(--green);
+    }
+
+    .endpoint-state.error {
+      color:
+        var(--red);
+    }
+
+    .log-box {
+      height:
+        245px;
+
+      overflow-y:
+        auto;
+
+      padding:
+        12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        9px;
+
+      background:
+        #07090d;
+
+      color:
+        var(--muted);
+
+      font:
+        11px/1.7
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+    }
+
+    .log-line.success {
+      color:
+        var(--green);
+    }
+
+    .log-line.error {
+      color:
+        var(--red);
+    }
+
+    .log-line.info {
+      color:
+        var(--blue);
+    }
+
+    /*
+     * ==============================
+     * Footer
+     * ==============================
+     */
+
+    footer {
+      padding:
+        24px 0 38px;
+
+      border-top:
+        1px solid
+        var(--border);
+
+      color:
+        var(--muted-2);
+
+      text-align:
+        center;
+
+      font-size:
+        11px;
+    }
+
+    /*
+     * ==============================
+     * Responsive
+     * ==============================
+     */
+
+    @media (
+      max-width:
+      1050px
+    ) {
+      .grid-4,
+      .scout-summary {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
+      }
+
+      .agent-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
+      }
+    }
+
+    @media (
+      max-width:
+      760px
+    ) {
+      .container {
+        width:
+          min(
+            100% - 22px,
+            1440px
+          );
+      }
+
+      .github-link {
+        display:
+          none;
+      }
+
+      .grid-2,
+      .system-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .agent-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .section-header {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+    }
+
+    @media (
+      max-width:
+      520px
+    ) {
+      .grid-4,
+      .scout-summary {
+        grid-template-columns:
+          1fr;
+      }
+
+      .controls {
+        display:
+          grid;
+      }
+
+      .select,
+      .button {
+        width:
+          100%;
+      }
+
+      .header-actions
+      .pill
+      span:last-child {
+        display:
+          none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
     <div class="container navbar">
 
-        <div class="brand">
-            <div class="brand-logo">
-                C
-            </div>
+      <div class="brand">
 
-            <div class="brand-text">
-                <h1>CODEX BOT</h1>
-                <p>Multi-Agent Trading System</p>
-            </div>
+        <div class="brand-logo">
+          C
         </div>
 
-        <div class="header-right">
+        <div>
+          <h1>
+            CODEX BOT
+          </h1>
 
-            <div class="status-pill">
-                <span
-                    id="connectionDot"
-                    class="status-dot"
-                ></span>
+          <p>
+            Multi-Agent Trading System
+          </p>
+        </div>
 
-                <span id="connectionText">
-                    Connecting
-                </span>
-            </div>
+      </div>
 
-            <a
-                class="github-link"
-                href="https://github.com/stun0019/codex-bot"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                GitHub
-            </a>
+      <div class="header-actions">
+
+        <div class="pill">
+
+          <span
+            id="connectionDot"
+            class="status-dot"
+          ></span>
+
+          <span id="connectionText">
+            Connecting
+          </span>
 
         </div>
+
+        <a
+          class="link-button github-link"
+          href="https://github.com/stun0019/codex-bot"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+
+      </div>
+
     </div>
-</header>
+  </header>
 
 
-<main class="container">
+  <main class="container">
+
+    <!-- =========================
+         Hero
+    ========================== -->
 
     <section class="hero">
-        <h2>
-            AI Crypto Trading Infrastructure
-        </h2>
 
-        <p>
-            Multi-agent cryptocurrency market analysis system.
-            Market data is currently provided through OKX public APIs.
-            AI analysis and automated execution are not enabled yet.
+      <h2>
+        AI Crypto Trading Infrastructure
+      </h2>
+
+      <p>
+        OKX public market dashboard with a
+        browser-side SCOUT opportunity scanner.
+        NEWS, SENTIMENT, CHARTS, RISK and DECISION
+        remain backend agent skeletons.
+      </p>
+
+      <div class="notice">
+        PUBLIC MARKET DATA ONLY.
+        This page does not load API keys and cannot
+        place orders. The SCOUT results shown here
+        are calculated in JavaScript inside the
+        browser; GitHub Pages does not execute the
+        Python backend.
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         Market Monitor
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+          <h3>
+            Market Monitor
+          </h3>
+
+          <p>
+            Selected OKX USDT perpetual market
+          </p>
+        </div>
+
+        <p id="lastUpdate">
+          Last update: -
         </p>
 
-        <div class="warning">
-            Current mode: MARKET DATA ONLY.
-            No API keys are used by this page and no orders can be placed.
+      </div>
+
+
+      <div class="controls">
+
+        <select
+          id="instrumentSelect"
+          class="select"
+        >
+
+          <option value="BTC-USDT-SWAP">
+            BTC-USDT-SWAP
+          </option>
+
+          <option value="ETH-USDT-SWAP">
+            ETH-USDT-SWAP
+          </option>
+
+          <option value="SOL-USDT-SWAP">
+            SOL-USDT-SWAP
+          </option>
+
+          <option value="XRP-USDT-SWAP">
+            XRP-USDT-SWAP
+          </option>
+
+          <option value="DOGE-USDT-SWAP">
+            DOGE-USDT-SWAP
+          </option>
+
+        </select>
+
+
+        <select
+          id="barSelect"
+          class="select"
+        >
+
+          <option value="1m">
+            1 Minute
+          </option>
+
+          <option
+            value="5m"
+            selected
+          >
+            5 Minutes
+          </option>
+
+          <option value="15m">
+            15 Minutes
+          </option>
+
+          <option value="1H">
+            1 Hour
+          </option>
+
+          <option value="4H">
+            4 Hours
+          </option>
+
+          <option value="1Dutc">
+            1 Day UTC
+          </option>
+
+        </select>
+
+
+        <button
+          id="refreshMarketButton"
+          class="button primary"
+        >
+          Refresh Market
+        </button>
+
+      </div>
+
+
+      <div class="grid-4">
+
+        <div class="card">
+
+          <div class="metric-label">
+            Last Price
+          </div>
+
+          <div
+            id="lastPrice"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div
+            id="priceChange"
+            class="metric-sub"
+          >
+            24H Change --
+          </div>
+
         </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Funding Rate
+          </div>
+
+          <div
+            id="fundingRate"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div
+            id="fundingTime"
+            class="metric-sub"
+          >
+            Next funding --
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Open Interest
+          </div>
+
+          <div
+            id="openInterest"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div class="metric-sub">
+            USD when available
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            24H Volume
+          </div>
+
+          <div
+            id="volume24h"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div
+            id="highLow"
+            class="metric-sub"
+          >
+            High -- / Low --
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
 
-    <!-- Market -->
+    <!-- =========================
+         Chart + Order Book
+    ========================== -->
 
     <section class="section">
 
-        <div class="section-header">
+      <div class="grid-2">
+
+        <div class="card chart-card">
+
+          <div class="chart-head">
+
             <div>
-                <h3>Market Monitor</h3>
-                <p>OKX Public Market Data</p>
+
+              <div
+                id="chartSymbol"
+                class="chart-symbol"
+              >
+                BTC-USDT-SWAP
+              </div>
+
+              <div
+                id="chartTimeframe"
+                class="chart-sub"
+              >
+                5m · 60 candles
+              </div>
+
             </div>
 
-            <p id="lastUpdate">
-                Last update: -
-            </p>
-        </div>
-
-        <div class="controls">
-
-            <select
-                id="instrumentSelect"
-                class="select-control"
+            <div
+              id="candleStatus"
+              class="chart-sub"
             >
-                <option value="BTC-USDT-SWAP">
-                    BTC-USDT-SWAP
-                </option>
+              Waiting
+            </div>
 
-                <option value="ETH-USDT-SWAP">
-                    ETH-USDT-SWAP
-                </option>
+          </div>
 
-                <option value="SOL-USDT-SWAP">
-                    SOL-USDT-SWAP
-                </option>
+          <div class="chart-wrap">
 
-                <option value="XRP-USDT-SWAP">
-                    XRP-USDT-SWAP
-                </option>
+            <canvas
+              id="priceChart"
+            ></canvas>
 
-                <option value="DOGE-USDT-SWAP">
-                    DOGE-USDT-SWAP
-                </option>
-            </select>
-
-            <select
-                id="barSelect"
-                class="select-control"
-            >
-                <option value="1m">
-                    1 Minute
-                </option>
-
-                <option value="5m" selected>
-                    5 Minutes
-                </option>
-
-                <option value="15m">
-                    15 Minutes
-                </option>
-
-                <option value="1H">
-                    1 Hour
-                </option>
-
-                <option value="4H">
-                    4 Hours
-                </option>
-
-                <option value="1Dutc">
-                    1 Day UTC
-                </option>
-            </select>
-
-            <button
-                id="refreshButton"
-                class="button primary"
-            >
-                Refresh Market
-            </button>
+          </div>
 
         </div>
 
 
-        <div class="market-grid">
+        <div class="card">
 
-            <div class="card">
-                <div class="metric-label">
-                    Last Price
-                </div>
+          <div class="section-header">
 
-                <div
-                    id="lastPrice"
-                    class="metric-value"
-                >
-                    --
-                </div>
-
-                <div
-                    id="priceChange"
-                    class="metric-sub"
-                >
-                    24H Change --
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="metric-label">
-                    Funding Rate
-                </div>
-
-                <div
-                    id="fundingRate"
-                    class="metric-value"
-                >
-                    --
-                </div>
-
-                <div
-                    id="fundingTime"
-                    class="metric-sub"
-                >
-                    Next funding --
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="metric-label">
-                    Open Interest
-                </div>
-
-                <div
-                    id="openInterest"
-                    class="metric-value"
-                >
-                    --
-                </div>
-
-                <div class="metric-sub">
-                    Contract open interest
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="metric-label">
-                    24H Volume
-                </div>
-
-                <div
-                    id="volume24h"
-                    class="metric-value"
-                >
-                    --
-                </div>
-
-                <div
-                    id="highLow"
-                    class="metric-sub"
-                >
-                    High -- / Low --
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- Chart -->
-
-    <section class="section">
-
-        <div class="data-grid">
-
-            <div class="card price-panel">
-
-                <div class="price-header">
-
-                    <div class="price-title">
-                        <strong id="chartSymbol">
-                            BTC-USDT-SWAP
-                        </strong>
-
-                        <span id="chartTimeframe">
-                            5m
-                        </span>
-                    </div>
-
-                    <span
-                        id="candleCount"
-                        class="metric-sub"
-                    >
-                        0 candles
-                    </span>
-
-                </div>
-
-                <div
-                    id="chart"
-                    class="chart"
-                >
-                    <div class="chart-empty">
-                        Loading market data...
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="section-header">
-                    <div>
-                        <h3>Order Book</h3>
-                        <p>Best bid / ask</p>
-                    </div>
-                </div>
-
-                <div
-                    style="
-                        display:grid;
-                        gap:14px;
-                        margin-top:18px;
-                    "
-                >
-
-                    <div>
-                        <div class="metric-label">
-                            Best Ask
-                        </div>
-
-                        <div
-                            id="bestAsk"
-                            class="metric-value negative"
-                        >
-                            --
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="metric-label">
-                            Best Bid
-                        </div>
-
-                        <div
-                            id="bestBid"
-                            class="metric-value positive"
-                        >
-                            --
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="metric-label">
-                            Spread
-                        </div>
-
-                        <div
-                            id="spread"
-                            class="metric-value"
-                        >
-                            --
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Agents -->
-
-    <section class="section">
-
-        <div class="section-header">
             <div>
-                <h3>AI Agent Team</h3>
-                <p>
-                    Six-agent architecture
-                </p>
-            </div>
-        </div>
 
-        <div class="agent-grid">
+              <h3>
+                Order Book
+              </h3>
 
-
-            <div class="agent-card">
-
-                <div class="agent-top">
-                    <div class="agent-name">
-                        SCOUT
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    Market Opportunity Scanner
-                </div>
-
-                <div class="agent-detail">
-                    Scans price, volume, volatility,
-                    liquidity and market opportunities.
-                </div>
+              <p>
+                Best bid / ask
+              </p>
 
             </div>
 
-
-            <div class="agent-card">
-
-                <div class="agent-top">
-                    <div class="agent-name">
-                        NEWS
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    News Analyst
-                </div>
-
-                <div class="agent-detail">
-                    Evaluates market events, announcements
-                    and potentially market-moving information.
-                </div>
-
-            </div>
+          </div>
 
 
-            <div class="agent-card">
+          <div class="book-list">
 
-                <div class="agent-top">
-                    <div class="agent-name">
-                        SENTIMENT
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    Market Sentiment Analyst
-                </div>
-
-                <div class="agent-detail">
-                    Analyzes funding, positioning,
-                    crowding and market sentiment.
-                </div>
-
-            </div>
-
-
-            <div class="agent-card">
-
-                <div class="agent-top">
-                    <div class="agent-name">
-                        CHARTS
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    Technical Analyst
-                </div>
-
-                <div class="agent-detail">
-                    Multi-timeframe market structure,
-                    technical signals and price behavior.
-                </div>
-
-            </div>
-
-
-            <div class="agent-card">
-
-                <div class="agent-top">
-                    <div class="agent-name">
-                        RISK
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    Risk Analyst
-                </div>
-
-                <div class="agent-detail">
-                    Evaluates proposed positions,
-                    potential loss, exposure and trade risk.
-                </div>
-
-            </div>
-
-
-            <div class="agent-card">
-
-                <div class="agent-top">
-                    <div class="agent-name">
-                        DECISION
-                    </div>
-
-                    <span class="agent-status">
-                        SKELETON
-                    </span>
-                </div>
-
-                <div class="agent-role">
-                    Final Decision Agent
-                </div>
-
-                <div class="agent-detail">
-                    Combines outputs from all agents
-                    into a final trading decision.
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Pipeline -->
-
-    <section class="section">
-
-        <div class="section-header">
             <div>
-                <h3>System Pipeline</h3>
-                <p>Current architecture</p>
+
+              <div class="metric-label">
+                Best Ask
+              </div>
+
+              <div
+                id="bestAsk"
+                class="metric-value negative"
+              >
+                --
+              </div>
+
             </div>
+
+
+            <div>
+
+              <div class="metric-label">
+                Best Bid
+              </div>
+
+              <div
+                id="bestBid"
+                class="metric-value positive"
+              >
+                --
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <div class="metric-label">
+                Spread
+              </div>
+
+              <div
+                id="spread"
+                class="metric-value"
+              >
+                --
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="pipeline">
-
-            <div class="pipeline-node">
-                OKX
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                SCOUT
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                NEWS
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                SENTIMENT
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                CHARTS
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                RISK
-            </div>
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-            <div class="pipeline-node">
-                DECISION
-            </div>
-
-        </div>
+      </div>
 
     </section>
 
 
-    <!-- System -->
+    <!-- =========================
+         SCOUT
+    ========================== -->
 
     <section class="section">
 
-        <div class="system-grid">
+      <div class="section-header">
 
-            <div class="card">
+        <div>
 
-                <div class="section-header">
-                    <div>
-                        <h3>OKX API Status</h3>
-                        <p>
-                            Public endpoints
-                        </p>
-                    </div>
-                </div>
+          <h3>
+            SCOUT Top Opportunities
+          </h3>
 
-                <div class="endpoint-list">
-
-                    <div class="endpoint">
-                        <code>
-                            /api/v5/market/ticker
-                        </code>
-
-                        <span
-                            id="tickerStatus"
-                            class="endpoint-state"
-                        >
-                            Waiting
-                        </span>
-                    </div>
-
-
-                    <div class="endpoint">
-                        <code>
-                            /api/v5/market/candles
-                        </code>
-
-                        <span
-                            id="candlesStatus"
-                            class="endpoint-state"
-                        >
-                            Waiting
-                        </span>
-                    </div>
-
-
-                    <div class="endpoint">
-                        <code>
-                            /api/v5/public/funding-rate
-                        </code>
-
-                        <span
-                            id="fundingStatus"
-                            class="endpoint-state"
-                        >
-                            Waiting
-                        </span>
-                    </div>
-
-
-                    <div class="endpoint">
-                        <code>
-                            /api/v5/public/open-interest
-                        </code>
-
-                        <span
-                            id="oiStatus"
-                            class="endpoint-state"
-                        >
-                            Waiting
-                        </span>
-                    </div>
-
-
-                    <div class="endpoint">
-                        <code>
-                            /api/v5/market/books
-                        </code>
-
-                        <span
-                            id="bookStatus"
-                            class="endpoint-state"
-                        >
-                            Waiting
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="section-header">
-                    <div>
-                        <h3>System Log</h3>
-                        <p>
-                            Browser session
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    id="logBox"
-                    class="log-box"
-                ></div>
-
-            </div>
+          <p>
+            Browser-side scanner · all live OKX
+            USDT-SWAP · Score represents relative
+            market opportunity / quality, not LONG
+            or SHORT probability
+          </p>
 
         </div>
 
+        <p id="scoutUpdated">
+          Scout update: -
+        </p>
+
+      </div>
+
+
+      <div class="scout-toolbar">
+
+        <div class="scout-status">
+
+          <span
+            id="scoutSpinner"
+            class="spinner"
+          ></span>
+
+          <span id="scoutStatusText">
+            Waiting for scan
+          </span>
+
+        </div>
+
+
+        <div
+          class="controls"
+          style="margin-bottom: 0;"
+        >
+
+          <button
+            id="scanScoutButton"
+            class="button secondary"
+          >
+            Scan All USDT-SWAP
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress">
+
+        <div
+          id="scoutProgress"
+        ></div>
+
+      </div>
+
+
+      <div
+        class="scout-summary"
+        style="margin-top: 12px;"
+      >
+
+        <div class="card">
+
+          <div class="metric-label">
+            Markets Scanned
+          </div>
+
+          <div
+            id="scoutMarkets"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div class="metric-sub">
+            Live USDT perpetuals
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Detail Pool
+          </div>
+
+          <div
+            id="scoutPool"
+            class="metric-value"
+          >
+            --
+          </div>
+
+          <div class="metric-sub">
+            Preliminary Top 40
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Top Candidate
+          </div>
+
+          <div
+            id="scoutTopSymbol"
+            class="metric-value"
+            style="font-size: 18px;"
+          >
+            --
+          </div>
+
+          <div
+            id="scoutTopScore"
+            class="metric-sub"
+          >
+            Score --
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            SCOUT Mode
+          </div>
+
+          <div
+            class="metric-value blue"
+            style="font-size: 18px;"
+          >
+            BROWSER
+          </div>
+
+          <div class="metric-sub">
+            Public API · no API key
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="scout-table-wrap">
+
+        <table class="scout-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                #
+              </th>
+
+              <th>
+                Symbol
+              </th>
+
+              <th>
+                Score
+              </th>
+
+              <th>
+                Last
+              </th>
+
+              <th>
+                24H
+              </th>
+
+              <th>
+                Range
+              </th>
+
+              <th>
+                Spread
+              </th>
+
+              <th>
+                Volume ≈ USD
+              </th>
+
+              <th>
+                OI USD
+              </th>
+
+              <th>
+                Funding
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="scoutTableBody">
+
+            <tr>
+
+              <td colspan="10">
+
+                <div class="empty-state">
+                  SCOUT has not run yet.
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
     </section>
 
-</main>
+
+    <!-- =========================
+         Agents
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            Agent Team
+          </h3>
+
+          <p>
+            Current project state
+          </p>
+
+        </div>
+
+      </div>
 
 
-<footer>
+      <div class="agent-grid">
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              SCOUT
+            </div>
+
+            <span class="agent-tag live">
+              LIVE IN BROWSER
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            Market Opportunity Scanner
+          </div>
+
+          <div class="agent-detail">
+            This page mirrors the current
+            SCOUT ranking concept in
+            JavaScript so GitHub Pages can
+            display results without a
+            Python server.
+          </div>
+
+        </div>
+
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              NEWS
+            </div>
+
+            <span class="agent-tag">
+              SKELETON
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            News Analyst
+          </div>
+
+          <div class="agent-detail">
+            Backend model exists;
+            live news analysis is not
+            connected yet.
+          </div>
+
+        </div>
+
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              SENTIMENT
+            </div>
+
+            <span class="agent-tag">
+              SKELETON
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            Sentiment Analyst
+          </div>
+
+          <div class="agent-detail">
+            Backend model exists;
+            full sentiment analysis is not
+            connected yet.
+          </div>
+
+        </div>
+
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              CHARTS
+            </div>
+
+            <span class="agent-tag">
+              SKELETON
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            Technical Analyst
+          </div>
+
+          <div class="agent-detail">
+            Backend model exists;
+            multi-timeframe analysis is not
+            connected yet.
+          </div>
+
+        </div>
+
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              RISK
+            </div>
+
+            <span class="agent-tag">
+              SKELETON
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            AI Risk Analyst
+          </div>
+
+          <div class="agent-detail">
+            Advisory risk agent only;
+            deterministic hard risk engine
+            is not implemented yet.
+          </div>
+
+        </div>
+
+
+        <div class="agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-name">
+              DECISION
+            </div>
+
+            <span class="agent-tag">
+              SKELETON
+            </span>
+
+          </div>
+
+          <div class="agent-role">
+            Final Decision Agent
+          </div>
+
+          <div class="agent-detail">
+            Backend currently returns WAIT;
+            execution is intentionally not
+            connected.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         API / Log
+    ========================== -->
+
+    <section class="section">
+
+      <div class="system-grid">
+
+        <div class="card">
+
+          <div class="section-header">
+
+            <div>
+
+              <h3>
+                OKX API Status
+              </h3>
+
+              <p>
+                Public endpoints used by
+                this page
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="endpoint-list">
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/public/instruments
+              </code>
+
+              <span
+                id="instrumentsStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/tickers
+              </code>
+
+              <span
+                id="tickersStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/ticker
+              </code>
+
+              <span
+                id="tickerStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/candles
+              </code>
+
+              <span
+                id="candlesStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/public/funding-rate
+              </code>
+
+              <span
+                id="fundingStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/public/open-interest
+              </code>
+
+              <span
+                id="oiStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/books
+              </code>
+
+              <span
+                id="bookStatus"
+                class="endpoint-state"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="section-header">
+
+            <div>
+
+              <h3>
+                System Log
+              </h3>
+
+              <p>
+                Current browser session
+              </p>
+
+            </div>
+
+          </div>
+
+          <div
+            id="logBox"
+            class="log-box"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
     <div class="container">
-        Codex Bot — Development Dashboard —
-        Market Data Mode Only
+      Codex Bot · Public Market Data /
+      Browser SCOUT · No trading permissions
     </div>
-</footer>
+
+  </footer>
 
 
-<script>
+  <script>
     "use strict";
 
 
@@ -1551,11 +2481,24 @@
      */
 
     const API_BASES = [
-        "https://www.okx.com",
-        "https://openapi.okx.com"
+      "https://www.okx.com",
+      "https://openapi.okx.com"
     ];
 
-    const AUTO_REFRESH_MS = 15000;
+    const MARKET_REFRESH_MS =
+      15000;
+
+    const SCOUT_REFRESH_MS =
+      300000;
+
+    const SCOUT_TOP_N =
+      10;
+
+    const SCOUT_DETAIL_POOL =
+      40;
+
+    const FUNDING_CONCURRENCY =
+      4;
 
 
     /*
@@ -1564,137 +2507,144 @@
      * ==============================
      */
 
+    const $ = (
+      id
+    ) => document.getElementById(
+      id
+    );
+
+
     const elements = {
-        instrumentSelect:
-            document.getElementById(
-                "instrumentSelect"
-            ),
+      connectionDot:
+        $("connectionDot"),
 
-        barSelect:
-            document.getElementById(
-                "barSelect"
-            ),
+      connectionText:
+        $("connectionText"),
 
-        refreshButton:
-            document.getElementById(
-                "refreshButton"
-            ),
+      instrumentSelect:
+        $("instrumentSelect"),
 
-        connectionDot:
-            document.getElementById(
-                "connectionDot"
-            ),
+      barSelect:
+        $("barSelect"),
 
-        connectionText:
-            document.getElementById(
-                "connectionText"
-            ),
+      refreshMarketButton:
+        $("refreshMarketButton"),
 
-        lastUpdate:
-            document.getElementById(
-                "lastUpdate"
-            ),
+      lastUpdate:
+        $("lastUpdate"),
 
-        lastPrice:
-            document.getElementById(
-                "lastPrice"
-            ),
+      lastPrice:
+        $("lastPrice"),
 
-        priceChange:
-            document.getElementById(
-                "priceChange"
-            ),
+      priceChange:
+        $("priceChange"),
 
-        fundingRate:
-            document.getElementById(
-                "fundingRate"
-            ),
+      fundingRate:
+        $("fundingRate"),
 
-        fundingTime:
-            document.getElementById(
-                "fundingTime"
-            ),
+      fundingTime:
+        $("fundingTime"),
 
-        openInterest:
-            document.getElementById(
-                "openInterest"
-            ),
+      openInterest:
+        $("openInterest"),
 
-        volume24h:
-            document.getElementById(
-                "volume24h"
-            ),
+      volume24h:
+        $("volume24h"),
 
-        highLow:
-            document.getElementById(
-                "highLow"
-            ),
+      highLow:
+        $("highLow"),
 
-        bestAsk:
-            document.getElementById(
-                "bestAsk"
-            ),
+      chartSymbol:
+        $("chartSymbol"),
 
-        bestBid:
-            document.getElementById(
-                "bestBid"
-            ),
+      chartTimeframe:
+        $("chartTimeframe"),
 
-        spread:
-            document.getElementById(
-                "spread"
-            ),
+      candleStatus:
+        $("candleStatus"),
 
-        chart:
-            document.getElementById(
-                "chart"
-            ),
+      priceChart:
+        $("priceChart"),
 
-        chartSymbol:
-            document.getElementById(
-                "chartSymbol"
-            ),
+      bestAsk:
+        $("bestAsk"),
 
-        chartTimeframe:
-            document.getElementById(
-                "chartTimeframe"
-            ),
+      bestBid:
+        $("bestBid"),
 
-        candleCount:
-            document.getElementById(
-                "candleCount"
-            ),
+      spread:
+        $("spread"),
 
-        tickerStatus:
-            document.getElementById(
-                "tickerStatus"
-            ),
+      scanScoutButton:
+        $("scanScoutButton"),
 
-        candlesStatus:
-            document.getElementById(
-                "candlesStatus"
-            ),
+      scoutSpinner:
+        $("scoutSpinner"),
 
-        fundingStatus:
-            document.getElementById(
-                "fundingStatus"
-            ),
+      scoutStatusText:
+        $("scoutStatusText"),
 
-        oiStatus:
-            document.getElementById(
-                "oiStatus"
-            ),
+      scoutProgress:
+        $("scoutProgress"),
 
-        bookStatus:
-            document.getElementById(
-                "bookStatus"
-            ),
+      scoutUpdated:
+        $("scoutUpdated"),
 
-        logBox:
-            document.getElementById(
-                "logBox"
-            )
+      scoutMarkets:
+        $("scoutMarkets"),
+
+      scoutPool:
+        $("scoutPool"),
+
+      scoutTopSymbol:
+        $("scoutTopSymbol"),
+
+      scoutTopScore:
+        $("scoutTopScore"),
+
+      scoutTableBody:
+        $("scoutTableBody"),
+
+      instrumentsStatus:
+        $("instrumentsStatus"),
+
+      tickersStatus:
+        $("tickersStatus"),
+
+      tickerStatus:
+        $("tickerStatus"),
+
+      candlesStatus:
+        $("candlesStatus"),
+
+      fundingStatus:
+        $("fundingStatus"),
+
+      oiStatus:
+        $("oiStatus"),
+
+      bookStatus:
+        $("bookStatus"),
+
+      logBox:
+        $("logBox")
     };
+
+
+    /*
+     * ==============================
+     * State
+     * ==============================
+     */
+
+    let marketLoading =
+      false;
+
+    let scoutLoading =
+      false;
+
+    let currentCandles =
+      [];
 
 
     /*
@@ -1704,200 +2654,40 @@
      */
 
     function log(
-        message,
-        type = ""
+      message,
+      type = ""
     ) {
-        const line =
-            document.createElement(
-                "div"
-            );
 
-        const time =
-            new Date()
-                .toLocaleTimeString();
+      const line =
+        document.createElement(
+          "div"
+        );
 
-        line.className =
-            `log-line ${type}`;
+      line.className =
+        `log-line ${type}`;
 
-        line.textContent =
-            `[${time}] ${message}`;
+      line.textContent =
+        `[${new Date().toLocaleTimeString()}] ${message}`;
 
-        elements.logBox
-            .appendChild(line);
+      elements.logBox
+        .appendChild(
+          line
+        );
 
-        elements.logBox.scrollTop =
-            elements.logBox.scrollHeight;
-    }
+      elements.logBox.scrollTop =
+        elements.logBox.scrollHeight;
 
+      while (
+        elements.logBox.children.length
+        > 150
+      ) {
 
-    /*
-     * ==============================
-     * Formatting
-     * ==============================
-     */
+        elements.logBox.removeChild(
+          elements.logBox.firstChild
+        );
 
-    function formatNumber(
-        value,
-        maximumFractionDigits = 2
-    ) {
-        const number =
-            Number(value);
+      }
 
-        if (!Number.isFinite(number)) {
-            return "--";
-        }
-
-        return new Intl.NumberFormat(
-            "en-US",
-            {
-                maximumFractionDigits
-            }
-        ).format(number);
-    }
-
-
-    function formatCompact(
-        value
-    ) {
-        const number =
-            Number(value);
-
-        if (!Number.isFinite(number)) {
-            return "--";
-        }
-
-        return new Intl.NumberFormat(
-            "en-US",
-            {
-                notation: "compact",
-                maximumFractionDigits: 2
-            }
-        ).format(number);
-    }
-
-
-    function formatPercent(
-        value,
-        decimals = 4
-    ) {
-        const number =
-            Number(value);
-
-        if (!Number.isFinite(number)) {
-            return "--";
-        }
-
-        return (
-            number * 100
-        ).toFixed(decimals) + "%";
-    }
-
-
-    function formatDate(
-        timestamp
-    ) {
-        if (!timestamp) {
-            return "--";
-        }
-
-        return new Date(
-            Number(timestamp)
-        ).toLocaleString();
-    }
-
-
-    /*
-     * ==============================
-     * API
-     * ==============================
-     */
-
-    async function okxGet(
-        path,
-        params = {}
-    ) {
-        const query =
-            new URLSearchParams();
-
-        for (
-            const [
-                key,
-                value
-            ] of Object.entries(params)
-        ) {
-            if (
-                value !== null &&
-                value !== undefined &&
-                value !== ""
-            ) {
-                query.set(
-                    key,
-                    value
-                );
-            }
-        }
-
-        let lastError = null;
-
-        for (
-            const base of API_BASES
-        ) {
-            try {
-                const url =
-                    `${base}${path}?${query.toString()}`;
-
-                const response =
-                    await fetch(
-                        url,
-                        {
-                            method: "GET",
-                            headers: {
-                                Accept:
-                                    "application/json"
-                            },
-                            cache: "no-store"
-                        }
-                    );
-
-                if (!response.ok) {
-                    throw new Error(
-                        `HTTP ${response.status}`
-                    );
-                }
-
-                const json =
-                    await response.json();
-
-                if (
-                    String(json.code) !== "0"
-                ) {
-                    throw new Error(
-                        json.msg ||
-                        `OKX code ${json.code}`
-                    );
-                }
-
-                if (
-                    !Array.isArray(
-                        json.data
-                    )
-                ) {
-                    throw new Error(
-                        "Invalid OKX response"
-                    );
-                }
-
-                return json.data;
-
-            } catch (error) {
-                lastError = error;
-            }
-        }
-
-        throw lastError ||
-            new Error(
-                "OKX request failed"
-            );
     }
 
 
@@ -1908,684 +2698,3785 @@
      */
 
     function setEndpointStatus(
-        element,
-        success
+      element,
+      state
     ) {
-        element.textContent =
-            success
-                ? "Online"
-                : "Error";
 
-        element.classList.remove(
-            "ok",
-            "error"
-        );
+      element.classList.remove(
+        "ok",
+        "error"
+      );
+
+      if (
+        state === true
+      ) {
+
+        element.textContent =
+          "Online";
 
         element.classList.add(
-            success
-                ? "ok"
-                : "error"
+          "ok"
         );
+
+        return;
+
+      }
+
+      if (
+        state === false
+      ) {
+
+        element.textContent =
+          "Error";
+
+        element.classList.add(
+          "error"
+        );
+
+        return;
+
+      }
+
+      element.textContent =
+        "Waiting";
+
+    }
+
+
+    function setConnection(
+      mode
+    ) {
+
+      elements.connectionDot
+        .className =
+          "status-dot";
+
+      if (
+        mode === "online"
+      ) {
+
+        elements.connectionDot
+          .classList.add(
+            "online"
+          );
+
+        elements.connectionText
+          .textContent =
+            "OKX Online";
+
+      } else if (
+        mode === "offline"
+      ) {
+
+        elements.connectionDot
+          .classList.add(
+            "offline"
+          );
+
+        elements.connectionText
+          .textContent =
+            "Offline";
+
+      } else {
+
+        elements.connectionText
+          .textContent =
+            "Partial";
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Ticker
+     * Formatting
+     * ==============================
+     */
+
+    function formatNumber(
+      value,
+      digits = 2
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          maximumFractionDigits:
+            digits
+        }
+      ).format(
+        number
+      );
+
+    }
+
+
+    function formatPrice(
+      value
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      let digits =
+        2;
+
+      if (
+        number < 100
+      ) {
+
+        digits =
+          4;
+
+      }
+
+      if (
+        number < 1
+      ) {
+
+        digits =
+          6;
+
+      }
+
+      if (
+        number < 0.01
+      ) {
+
+        digits =
+          8;
+
+      }
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          maximumFractionDigits:
+            digits
+        }
+      ).format(
+        number
+      );
+
+    }
+
+
+    function formatCompact(
+      value
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          notation:
+            "compact",
+
+          maximumFractionDigits:
+            2
+        }
+      ).format(
+        number
+      );
+
+    }
+
+
+    function formatSignedPercent(
+      value,
+      digits = 2
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      const sign =
+        number > 0
+          ? "+"
+          : "";
+
+      return (
+        `${sign}${number.toFixed(digits)}%`
+      );
+
+    }
+
+
+    function formatFunding(
+      value
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      if (
+        !Number.isFinite(
+          number
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      return (
+        `${(
+          number * 100
+        ).toFixed(5)}%`
+      );
+
+    }
+
+
+    function formatDate(
+      timestamp
+    ) {
+
+      if (
+        !timestamp
+      ) {
+
+        return "--";
+
+      }
+
+      const date =
+        new Date(
+          Number(
+            timestamp
+          )
+        );
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "--";
+
+      }
+
+      return date
+        .toLocaleString();
+
+    }
+
+
+    function finiteNumber(
+      value,
+      fallback = null
+    ) {
+
+      const number =
+        Number(
+          value
+        );
+
+      return Number.isFinite(
+        number
+      )
+        ? number
+        : fallback;
+
+    }
+
+
+    /*
+     * ==============================
+     * OKX API
+     * ==============================
+     */
+
+    async function okxGet(
+      path,
+      params = {}
+    ) {
+
+      const query =
+        new URLSearchParams();
+
+      for (
+        const [
+          key,
+          value
+        ]
+        of Object.entries(
+          params
+        )
+      ) {
+
+        if (
+          value !== null
+          &&
+          value !== undefined
+          &&
+          value !== ""
+        ) {
+
+          query.set(
+            key,
+            String(
+              value
+            )
+          );
+
+        }
+
+      }
+
+      let lastError =
+        null;
+
+      for (
+        const base
+        of API_BASES
+      ) {
+
+        try {
+
+          const suffix =
+            query.toString()
+              ? `?${query.toString()}`
+              : "";
+
+          const response =
+            await fetch(
+              `${base}${path}${suffix}`,
+              {
+                method:
+                  "GET",
+
+                headers: {
+                  Accept:
+                    "application/json"
+                },
+
+                cache:
+                  "no-store"
+              }
+            );
+
+          if (
+            !response.ok
+          ) {
+
+            throw new Error(
+              `HTTP ${response.status}`
+            );
+
+          }
+
+          const payload =
+            await response.json();
+
+          if (
+            String(
+              payload.code
+            ) !== "0"
+          ) {
+
+            throw new Error(
+              payload.msg
+              ||
+              `OKX code ${payload.code}`
+            );
+
+          }
+
+          if (
+            !Array.isArray(
+              payload.data
+            )
+          ) {
+
+            throw new Error(
+              "Invalid OKX response: data is not an array"
+            );
+
+          }
+
+          return payload.data;
+
+        } catch (
+          error
+        ) {
+
+          lastError =
+            error;
+
+        }
+
+      }
+
+      throw (
+        lastError
+        ||
+        new Error(
+          "OKX request failed"
+        )
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * Market Monitor - Ticker
      * ==============================
      */
 
     async function loadTicker(
-        instId
+      instId
     ) {
-        try {
-            const data =
-                await okxGet(
-                    "/api/v5/market/ticker",
-                    {
-                        instId
-                    }
-                );
 
-            const ticker =
-                data[0];
+      try {
 
-            if (!ticker) {
-                throw new Error(
-                    "Ticker data empty"
-                );
+        const data =
+          await okxGet(
+            "/api/v5/market/ticker",
+            {
+              instId
             }
+          );
 
-            const last =
-                Number(ticker.last);
+        const ticker =
+          data[0];
 
-            const open =
-                Number(ticker.open24h);
+        if (
+          !ticker
+        ) {
 
-            let change = 0;
+          throw new Error(
+            "Ticker data empty"
+          );
 
-            if (
-                Number.isFinite(last) &&
-                Number.isFinite(open) &&
-                open !== 0
-            ) {
-                change =
-                    (
-                        (
-                            last - open
-                        ) / open
-                    ) * 100;
-            }
-
-            elements.lastPrice.textContent =
-                "$" +
-                formatNumber(
-                    ticker.last,
-                    8
-                );
-
-            elements.priceChange.textContent =
-                `24H ${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
-
-            elements.priceChange.className =
-                "metric-sub " +
-                (
-                    change > 0
-                        ? "positive"
-                        : change < 0
-                            ? "negative"
-                            : "neutral"
-                );
-
-            elements.volume24h.textContent =
-                formatCompact(
-                    ticker.volCcy24h
-                );
-
-            elements.highLow.textContent =
-                `High ${formatNumber(
-                    ticker.high24h,
-                    8
-                )} / Low ${formatNumber(
-                    ticker.low24h,
-                    8
-                )}`;
-
-            setEndpointStatus(
-                elements.tickerStatus,
-                true
-            );
-
-            return true;
-
-        } catch (error) {
-            setEndpointStatus(
-                elements.tickerStatus,
-                false
-            );
-
-            log(
-                `Ticker error: ${error.message}`,
-                "error"
-            );
-
-            return false;
         }
+
+        const last =
+          finiteNumber(
+            ticker.last
+          );
+
+        const open =
+          finiteNumber(
+            ticker.open24h
+          );
+
+        const change =
+          last !== null
+          &&
+          open !== null
+          &&
+          open > 0
+
+            ? (
+                (
+                  last - open
+                )
+                / open
+              )
+              * 100
+
+            : 0;
+
+
+        elements.lastPrice
+          .textContent =
+
+            last !== null
+
+              ? `$${formatPrice(last)}`
+
+              : "--";
+
+
+        elements.priceChange
+          .textContent =
+
+            `24H ${
+              formatSignedPercent(
+                change
+              )
+            }`;
+
+
+        elements.priceChange
+          .className =
+
+            `metric-sub ${
+              change > 0
+
+                ? "positive"
+
+                : change < 0
+
+                  ? "negative"
+
+                  : ""
+            }`;
+
+
+        const volCcy =
+          finiteNumber(
+            ticker.volCcy24h
+          );
+
+
+        const approxQuoteVolume =
+
+          volCcy !== null
+          &&
+          last !== null
+
+            ? volCcy
+              * last
+
+            : finiteNumber(
+                ticker.vol24h
+              );
+
+
+        elements.volume24h
+          .textContent =
+
+            formatCompact(
+              approxQuoteVolume
+            );
+
+
+        elements.highLow
+          .textContent =
+
+            `High ${
+              formatPrice(
+                ticker.high24h
+              )
+            } / Low ${
+              formatPrice(
+                ticker.low24h
+              )
+            }`;
+
+
+        setEndpointStatus(
+          elements.tickerStatus,
+          true
+        );
+
+        return true;
+
+      } catch (
+        error
+      ) {
+
+        setEndpointStatus(
+          elements.tickerStatus,
+          false
+        );
+
+        log(
+          `Ticker error: ${error.message}`,
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Funding
+     * Market Monitor - Funding
      * ==============================
      */
 
     async function loadFunding(
-        instId
+      instId
     ) {
-        try {
-            const data =
-                await okxGet(
-                    "/api/v5/public/funding-rate",
-                    {
-                        instId
-                    }
-                );
 
-            const item =
-                data[0];
+      try {
 
-            if (!item) {
-                throw new Error(
-                    "Funding data empty"
-                );
+        const data =
+          await okxGet(
+            "/api/v5/public/funding-rate",
+            {
+              instId
             }
+          );
 
-            const rate =
-                Number(
-                    item.fundingRate
-                );
 
-            elements.fundingRate.textContent =
-                formatPercent(
-                    rate,
-                    4
-                );
+        const item =
+          data[0];
 
-            elements.fundingRate.className =
-                "metric-value " +
-                (
-                    rate > 0
-                        ? "positive"
-                        : rate < 0
-                            ? "negative"
-                            : ""
-                );
 
-            elements.fundingTime.textContent =
-                "Next funding: " +
-                formatDate(
-                    item.nextFundingTime
-                );
+        if (
+          !item
+        ) {
 
-            setEndpointStatus(
-                elements.fundingStatus,
-                true
-            );
+          throw new Error(
+            "Funding data empty"
+          );
 
-            return true;
-
-        } catch (error) {
-            setEndpointStatus(
-                elements.fundingStatus,
-                false
-            );
-
-            log(
-                `Funding error: ${error.message}`,
-                "error"
-            );
-
-            return false;
         }
+
+
+        const rate =
+          finiteNumber(
+            item.fundingRate
+          );
+
+
+        elements.fundingRate
+          .textContent =
+
+            formatFunding(
+              rate
+            );
+
+
+        elements.fundingRate
+          .className =
+
+            `metric-value ${
+              rate > 0
+
+                ? "positive"
+
+                : rate < 0
+
+                  ? "negative"
+
+                  : ""
+            }`;
+
+
+        elements.fundingTime
+          .textContent =
+
+            `Next funding: ${
+              formatDate(
+                item.nextFundingTime
+              )
+            }`;
+
+
+        setEndpointStatus(
+          elements.fundingStatus,
+          true
+        );
+
+        return true;
+
+      } catch (
+        error
+      ) {
+
+        elements.fundingRate
+          .textContent =
+            "--";
+
+
+        elements.fundingTime
+          .textContent =
+            "Funding unavailable";
+
+
+        setEndpointStatus(
+          elements.fundingStatus,
+          false
+        );
+
+
+        log(
+          `Funding error: ${error.message}`,
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Open Interest
+     * Market Monitor - OI
      * ==============================
      */
 
     async function loadOpenInterest(
-        instId
+      instId
     ) {
-        try {
-            const data =
-                await okxGet(
-                    "/api/v5/public/open-interest",
-                    {
-                        instType: "SWAP",
-                        instId
-                    }
-                );
 
-            const item =
-                data[0];
+      try {
 
-            if (!item) {
-                throw new Error(
-                    "Open interest data empty"
-                );
+        const data =
+          await okxGet(
+            "/api/v5/public/open-interest",
+            {
+              instType:
+                "SWAP",
+
+              instId
             }
+          );
 
-            elements.openInterest.textContent =
-                formatCompact(
-                    item.oi
-                );
 
-            setEndpointStatus(
-                elements.oiStatus,
-                true
-            );
+        const item =
+          data[0];
 
-            return true;
 
-        } catch (error) {
-            setEndpointStatus(
-                elements.oiStatus,
-                false
-            );
+        if (
+          !item
+        ) {
 
-            log(
-                `Open interest error: ${error.message}`,
-                "error"
-            );
+          throw new Error(
+            "Open interest data empty"
+          );
 
-            return false;
         }
+
+
+        const oiUsd =
+          finiteNumber(
+            item.oiUsd
+          );
+
+
+        const oiCcy =
+          finiteNumber(
+            item.oiCcy
+          );
+
+
+        const oi =
+          finiteNumber(
+            item.oi
+          );
+
+
+        elements.openInterest
+          .textContent =
+
+            oiUsd !== null
+
+              ? `$${formatCompact(oiUsd)}`
+
+              : oiCcy !== null
+
+                ? formatCompact(
+                    oiCcy
+                  )
+
+                : formatCompact(
+                    oi
+                  );
+
+
+        setEndpointStatus(
+          elements.oiStatus,
+          true
+        );
+
+        return true;
+
+      } catch (
+        error
+      ) {
+
+        elements.openInterest
+          .textContent =
+            "--";
+
+
+        setEndpointStatus(
+          elements.oiStatus,
+          false
+        );
+
+
+        log(
+          `Open interest error: ${error.message}`,
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Order Book
+     * Market Monitor - Order Book
      * ==============================
      */
 
     async function loadOrderBook(
-        instId
+      instId
     ) {
-        try {
-            const data =
-                await okxGet(
-                    "/api/v5/market/books",
-                    {
-                        instId,
-                        sz: "5"
-                    }
-                );
 
-            const book =
-                data[0];
+      try {
 
-            if (!book) {
-                throw new Error(
-                    "Order book data empty"
-                );
+        const data =
+          await okxGet(
+            "/api/v5/market/books",
+            {
+              instId,
+              sz: "5"
             }
+          );
 
-            const bestAsk =
-                Number(
-                    book.asks?.[0]?.[0]
-                );
 
-            const bestBid =
-                Number(
-                    book.bids?.[0]?.[0]
-                );
+        const book =
+          data[0];
 
-            elements.bestAsk.textContent =
-                Number.isFinite(bestAsk)
-                    ? "$" +
-                      formatNumber(
-                          bestAsk,
-                          8
-                      )
-                    : "--";
 
-            elements.bestBid.textContent =
-                Number.isFinite(bestBid)
-                    ? "$" +
-                      formatNumber(
-                          bestBid,
-                          8
-                      )
-                    : "--";
+        if (
+          !book
+        ) {
 
-            if (
-                Number.isFinite(bestAsk) &&
-                Number.isFinite(bestBid)
-            ) {
-                const spread =
-                    bestAsk - bestBid;
+          throw new Error(
+            "Order book data empty"
+          );
 
-                const spreadPercent =
-                    bestBid !== 0
-                        ? (
-                            spread /
-                            bestBid
-                        ) * 100
-                        : 0;
-
-                elements.spread.textContent =
-                    `${formatNumber(
-                        spread,
-                        8
-                    )} (${spreadPercent.toFixed(4)}%)`;
-            } else {
-                elements.spread.textContent =
-                    "--";
-            }
-
-            setEndpointStatus(
-                elements.bookStatus,
-                true
-            );
-
-            return true;
-
-        } catch (error) {
-            setEndpointStatus(
-                elements.bookStatus,
-                false
-            );
-
-            log(
-                `Order book error: ${error.message}`,
-                "error"
-            );
-
-            return false;
         }
+
+
+        const ask =
+          finiteNumber(
+            book.asks?.[0]?.[0]
+          );
+
+
+        const bid =
+          finiteNumber(
+            book.bids?.[0]?.[0]
+          );
+
+
+        elements.bestAsk
+          .textContent =
+
+            ask !== null
+
+              ? `$${formatPrice(ask)}`
+
+              : "--";
+
+
+        elements.bestBid
+          .textContent =
+
+            bid !== null
+
+              ? `$${formatPrice(bid)}`
+
+              : "--";
+
+
+        const spread =
+          spreadPercent(
+            bid,
+            ask
+          );
+
+
+        elements.spread
+          .textContent =
+
+            spread !== null
+
+              ? `${spread.toFixed(5)}%`
+
+              : "--";
+
+
+        setEndpointStatus(
+          elements.bookStatus,
+          true
+        );
+
+        return true;
+
+      } catch (
+        error
+      ) {
+
+        setEndpointStatus(
+          elements.bookStatus,
+          false
+        );
+
+
+        log(
+          `Order book error: ${error.message}`,
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Candles
+     * Market Monitor - Candles
      * ==============================
      */
 
     async function loadCandles(
-        instId,
-        bar
+      instId,
+      bar
     ) {
-        try {
-            const data =
-                await okxGet(
-                    "/api/v5/market/candles",
-                    {
-                        instId,
-                        bar,
-                        limit: "60"
-                    }
-                );
 
-            const candles =
-                data
-                    .map(item => ({
-                        timestamp:
-                            Number(
-                                item[0]
-                            ),
+      try {
 
-                        open:
-                            Number(
-                                item[1]
-                            ),
+        const data =
+          await okxGet(
+            "/api/v5/market/candles",
+            {
+              instId,
+              bar,
+              limit:
+                60
+            }
+          );
 
-                        high:
-                            Number(
-                                item[2]
-                            ),
 
-                        low:
-                            Number(
-                                item[3]
-                            ),
+        currentCandles =
+          data
 
-                        close:
-                            Number(
-                                item[4]
-                            ),
+            .map(
+              (
+                item
+              ) => ({
+                timestamp:
+                  finiteNumber(
+                    item[0]
+                  ),
 
-                        volume:
-                            Number(
-                                item[5]
-                            ),
+                open:
+                  finiteNumber(
+                    item[1]
+                  ),
 
-                        confirmed:
-                            String(
-                                item[8]
-                            ) === "1"
-                    }))
-                    .sort(
-                        (
-                            a,
-                            b
-                        ) =>
-                            a.timestamp -
-                            b.timestamp
-                    );
+                high:
+                  finiteNumber(
+                    item[2]
+                  ),
 
-            drawCandles(
-                candles
+                low:
+                  finiteNumber(
+                    item[3]
+                  ),
+
+                close:
+                  finiteNumber(
+                    item[4]
+                  ),
+
+                volume:
+                  finiteNumber(
+                    item[5]
+                  ),
+
+                confirmed:
+                  String(
+                    item[8]
+                  ) === "1"
+              })
+            )
+
+            .filter(
+              (
+                item
+              ) =>
+
+                item.timestamp
+                  !== null
+
+                &&
+                item.open
+                  !== null
+
+                &&
+                item.high
+                  !== null
+
+                &&
+                item.low
+                  !== null
+
+                &&
+                item.close
+                  !== null
+            )
+
+            .sort(
+              (
+                a,
+                b
+              ) =>
+                a.timestamp
+                -
+                b.timestamp
             );
 
-            elements.candleCount.textContent =
-                `${candles.length} candles`;
 
-            setEndpointStatus(
-                elements.candlesStatus,
-                true
-            );
+        drawCandles(
+          currentCandles
+        );
 
-            return true;
 
-        } catch (error) {
-            setEndpointStatus(
-                elements.candlesStatus,
-                false
-            );
+        elements.candleStatus
+          .textContent =
 
-            elements.chart.innerHTML =
-                `<div class="chart-empty">
-                    Candle data unavailable
-                </div>`;
+            `${currentCandles.length} candles`;
 
-            log(
-                `Candles error: ${error.message}`,
-                "error"
-            );
 
-            return false;
-        }
+        setEndpointStatus(
+          elements.candlesStatus,
+          true
+        );
+
+        return true;
+
+      } catch (
+        error
+      ) {
+
+        currentCandles =
+          [];
+
+
+        drawCandles(
+          []
+        );
+
+
+        elements.candleStatus
+          .textContent =
+            "Unavailable";
+
+
+        setEndpointStatus(
+          elements.candlesStatus,
+          false
+        );
+
+
+        log(
+          `Candles error: ${error.message}`,
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
     /*
      * ==============================
-     * Simple candle visualization
+     * Chart drawing
      * ==============================
      */
 
     function drawCandles(
-        candles
+      candles
     ) {
-        elements.chart.innerHTML =
-            "";
 
-        if (!candles.length) {
-            elements.chart.innerHTML =
-                `<div class="chart-empty">
-                    No candle data
-                </div>`;
+      const canvas =
+        elements.priceChart;
 
-            return;
-        }
 
-        const highs =
-            candles.map(
-                item => item.high
+      const rect =
+        canvas.getBoundingClientRect();
+
+
+      const dpr =
+        window.devicePixelRatio
+        ||
+        1;
+
+
+      canvas.width =
+        Math.max(
+          1,
+          Math.floor(
+            rect.width
+            *
+            dpr
+          )
+        );
+
+
+      canvas.height =
+        Math.max(
+          1,
+          Math.floor(
+            rect.height
+            *
+            dpr
+          )
+        );
+
+
+      const ctx =
+        canvas.getContext(
+          "2d"
+        );
+
+
+      ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+      );
+
+
+      const width =
+        rect.width;
+
+
+      const height =
+        rect.height;
+
+
+      ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      if (
+        !candles.length
+      ) {
+
+        ctx.fillStyle =
+          "#606d7d";
+
+
+        ctx.font =
+          "12px sans-serif";
+
+
+        ctx.textAlign =
+          "center";
+
+
+        ctx.fillText(
+          "No candle data",
+          width / 2,
+          height / 2
+        );
+
+        return;
+
+      }
+
+
+      const pad = {
+        top:
+          12,
+
+        right:
+          12,
+
+        bottom:
+          20,
+
+        left:
+          12
+      };
+
+
+      const usableWidth =
+        width
+        -
+        pad.left
+        -
+        pad.right;
+
+
+      const usableHeight =
+        height
+        -
+        pad.top
+        -
+        pad.bottom;
+
+
+      const maxPrice =
+        Math.max(
+          ...candles.map(
+            (
+              candle
+            ) =>
+              candle.high
+          )
+        );
+
+
+      const minPrice =
+        Math.min(
+          ...candles.map(
+            (
+              candle
+            ) =>
+              candle.low
+          )
+        );
+
+
+      const range =
+        maxPrice
+        -
+        minPrice
+        ||
+        1;
+
+
+      const rootStyle =
+        getComputedStyle(
+          document.documentElement
+        );
+
+
+      const upColor =
+        rootStyle
+
+          .getPropertyValue(
+            "--green"
+          )
+
+          .trim();
+
+
+      const downColor =
+        rootStyle
+
+          .getPropertyValue(
+            "--red"
+          )
+
+          .trim();
+
+
+      ctx.strokeStyle =
+        "#1d2632";
+
+
+      ctx.lineWidth =
+        1;
+
+
+      for (
+        let i = 1;
+        i <= 3;
+        i += 1
+      ) {
+
+        const y =
+          pad.top
+          +
+          (
+            usableHeight
+            *
+            i
+          )
+          /
+          4;
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+          pad.left,
+          y
+        );
+
+
+        ctx.lineTo(
+          width
+          -
+          pad.right,
+          y
+        );
+
+
+        ctx.stroke();
+
+      }
+
+
+      const slot =
+        usableWidth
+        /
+        candles.length;
+
+
+      const bodyWidth =
+        Math.max(
+          2,
+          Math.min(
+            8,
+            slot
+            *
+            0.56
+          )
+        );
+
+
+      const priceToY =
+        (
+          price
+        ) =>
+
+          pad.top
+          +
+          (
+            (
+              maxPrice
+              -
+              price
+            )
+            /
+            range
+          )
+          *
+          usableHeight;
+
+
+      candles.forEach(
+        (
+          candle,
+          index
+        ) => {
+
+          const x =
+            pad.left
+            +
+            slot
+            *
+            index
+            +
+            slot
+            /
+            2;
+
+
+          const openY =
+            priceToY(
+              candle.open
             );
 
-        const lows =
-            candles.map(
-                item => item.low
+
+          const closeY =
+            priceToY(
+              candle.close
             );
 
-        const max =
-            Math.max(...highs);
 
-        const min =
-            Math.min(...lows);
+          const highY =
+            priceToY(
+              candle.high
+            );
 
-        const range =
-            max - min || 1;
 
-        for (
-            const candle of candles
-        ) {
-            const bar =
-                document.createElement(
-                    "div"
-                );
+          const lowY =
+            priceToY(
+              candle.low
+            );
 
-            const height =
-                Math.max(
-                    4,
-                    (
-                        (
-                            candle.close -
-                            min
-                        ) /
-                        range
-                    ) * 100
-                );
 
-            bar.className =
-                "candle " +
-                (
-                    candle.close >=
-                    candle.open
-                        ? "up"
-                        : "down"
-                );
+          const color =
+            candle.close
+            >=
+            candle.open
 
-            bar.style.height =
-                `${height}%`;
+              ? upColor
 
-            bar.title =
-                [
-                    new Date(
-                        candle.timestamp
-                    ).toLocaleString(),
+              : downColor;
 
-                    `Open: ${candle.open}`,
 
-                    `High: ${candle.high}`,
+          ctx.strokeStyle =
+            color;
 
-                    `Low: ${candle.low}`,
 
-                    `Close: ${candle.close}`,
+          ctx.fillStyle =
+            color;
 
-                    `Volume: ${candle.volume}`,
 
-                    `Confirmed: ${candle.confirmed}`
-                ].join("\n");
+          ctx.beginPath();
 
-            elements.chart
-                .appendChild(bar);
+
+          ctx.moveTo(
+            x,
+            highY
+          );
+
+
+          ctx.lineTo(
+            x,
+            lowY
+          );
+
+
+          ctx.stroke();
+
+
+          const bodyTop =
+            Math.min(
+              openY,
+              closeY
+            );
+
+
+          const bodyHeight =
+            Math.max(
+              1,
+              Math.abs(
+                closeY
+                -
+                openY
+              )
+            );
+
+
+          ctx.fillRect(
+            x
+            -
+            bodyWidth
+            /
+            2,
+
+            bodyTop,
+
+            bodyWidth,
+
+            bodyHeight
+          );
+
         }
+      );
+
     }
 
 
     /*
      * ==============================
-     * Full market refresh
+     * Refresh selected market
      * ==============================
      */
 
-    let loading = false;
-
-
     async function refreshMarket() {
-        if (loading) {
-            return;
-        }
 
-        loading = true;
+      if (
+        marketLoading
+      ) {
 
-        elements.refreshButton.disabled =
-            true;
+        return;
 
-        elements.refreshButton.textContent =
-            "Loading...";
+      }
 
-        const instId =
-            elements.instrumentSelect.value;
 
-        const bar =
-            elements.barSelect.value;
+      marketLoading =
+        true;
 
-        elements.chartSymbol.textContent =
-            instId;
 
-        elements.chartTimeframe.textContent =
-            bar;
+      elements.refreshMarketButton
+        .disabled =
+          true;
 
-        log(
-            `Refreshing ${instId} / ${bar}`,
-            "info"
+
+      elements.refreshMarketButton
+        .textContent =
+          "Loading...";
+
+
+      const instId =
+        elements.instrumentSelect
+          .value;
+
+
+      const bar =
+        elements.barSelect
+          .value;
+
+
+      elements.chartSymbol
+        .textContent =
+          instId;
+
+
+      elements.chartTimeframe
+        .textContent =
+
+          `${bar} · 60 candles`;
+
+
+      log(
+        `Refreshing ${instId} / ${bar}`,
+        "info"
+      );
+
+
+      const results =
+        await Promise.all(
+          [
+            loadTicker(
+              instId
+            ),
+
+            loadFunding(
+              instId
+            ),
+
+            loadOpenInterest(
+              instId
+            ),
+
+            loadOrderBook(
+              instId
+            ),
+
+            loadCandles(
+              instId,
+              bar
+            )
+          ]
         );
 
-        const results =
-            await Promise.all([
-                loadTicker(
-                    instId
-                ),
 
-                loadFunding(
-                    instId
-                ),
+      const successCount =
+        results.filter(
+          Boolean
+        ).length;
 
-                loadOpenInterest(
-                    instId
-                ),
 
-                loadOrderBook(
-                    instId
-                ),
+      if (
+        successCount
+        ===
+        results.length
+      ) {
 
-                loadCandles(
-                    instId,
-                    bar
+        setConnection(
+          "online"
+        );
+
+
+        log(
+          `Market refresh complete (${successCount}/${results.length})`,
+          "success"
+        );
+
+      } else if (
+        successCount
+        >
+        0
+      ) {
+
+        setConnection(
+          "partial"
+        );
+
+
+        log(
+          `Market refresh partial (${successCount}/${results.length})`,
+          "error"
+        );
+
+      } else {
+
+        setConnection(
+          "offline"
+        );
+
+
+        log(
+          "Market refresh failed",
+          "error"
+        );
+
+      }
+
+
+      elements.lastUpdate
+        .textContent =
+
+          `Last update: ${
+            new Date()
+              .toLocaleTimeString()
+          }`;
+
+
+      elements.refreshMarketButton
+        .disabled =
+          false;
+
+
+      elements.refreshMarketButton
+        .textContent =
+          "Refresh Market";
+
+
+      marketLoading =
+        false;
+
+    }
+
+
+    /*
+     * ==============================
+     * SCOUT Math
+     * ==============================
+     */
+
+    function percentageChange(
+      current,
+      reference
+    ) {
+
+      if (
+        !Number.isFinite(
+          current
+        )
+        ||
+        !Number.isFinite(
+          reference
+        )
+        ||
+        reference <= 0
+      ) {
+
+        return 0;
+
+      }
+
+
+      return (
+        (
+          current
+          -
+          reference
+        )
+        /
+        reference
+      )
+      *
+      100;
+
+    }
+
+
+    function rangePercent(
+      high,
+      low,
+      reference
+    ) {
+
+      if (
+        !Number.isFinite(
+          high
+        )
+        ||
+        !Number.isFinite(
+          low
+        )
+        ||
+        !Number.isFinite(
+          reference
+        )
+        ||
+        reference <= 0
+        ||
+        high < low
+      ) {
+
+        return 0;
+
+      }
+
+
+      return (
+        (
+          high
+          -
+          low
+        )
+        /
+        reference
+      )
+      *
+      100;
+
+    }
+
+
+    function spreadPercent(
+      bid,
+      ask
+    ) {
+
+      if (
+        !Number.isFinite(
+          bid
+        )
+        ||
+        !Number.isFinite(
+          ask
+        )
+        ||
+        bid <= 0
+        ||
+        ask <= 0
+        ||
+        ask < bid
+      ) {
+
+        return null;
+
+      }
+
+
+      const midpoint =
+        (
+          bid
+          +
+          ask
+        )
+        /
+        2;
+
+
+      if (
+        midpoint <= 0
+      ) {
+
+        return null;
+
+      }
+
+
+      return (
+        (
+          ask
+          -
+          bid
+        )
+        /
+        midpoint
+      )
+      *
+      100;
+
+    }
+
+
+    function logValue(
+      value
+    ) {
+
+      if (
+        !Number.isFinite(
+          value
+        )
+        ||
+        value <= 0
+      ) {
+
+        return 0;
+
+      }
+
+
+      return Math.log10(
+        1
+        +
+        value
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * Relative rank scoring
+     * ==============================
+     */
+
+    function rankScores(
+      rows,
+      valueGetter,
+      higherIsBetter = true
+    ) {
+
+      const values =
+        rows
+
+          .map(
+            (
+              row
+            ) => ({
+              symbol:
+                row.symbol,
+
+              value:
+                valueGetter(
+                  row
                 )
-            ]);
+            })
+          )
 
-        const successCount =
-            results.filter(
-                Boolean
-            ).length;
+          .filter(
+            (
+              item
+            ) =>
+              Number.isFinite(
+                item.value
+              )
+          );
 
-        if (
-            successCount ===
-            results.length
+
+      if (
+        !values.length
+      ) {
+
+        return new Map();
+
+      }
+
+
+      const unique =
+        [
+          ...new Set(
+            values.map(
+              (
+                item
+              ) =>
+                item.value
+            )
+          )
+        ]
+
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              a - b
+          );
+
+
+      if (
+        unique.length
+        ===
+        1
+      ) {
+
+        return new Map(
+          values.map(
+            (
+              item
+            ) => [
+              item.symbol,
+              0.5
+            ]
+          )
+        );
+
+      }
+
+
+      const lookup =
+        new Map();
+
+
+      unique.forEach(
+        (
+          value,
+          index
+        ) => {
+
+          let score =
+            index
+            /
+            (
+              unique.length
+              -
+              1
+            );
+
+
+          if (
+            !higherIsBetter
+          ) {
+
+            score =
+              1
+              -
+              score;
+
+          }
+
+
+          lookup.set(
+            value,
+            score
+          );
+
+        }
+      );
+
+
+      return new Map(
+        values.map(
+          (
+            item
+          ) => [
+            item.symbol,
+
+            lookup.get(
+              item.value
+            )
+            ??
+            0
+          ]
+        )
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * Preliminary SCOUT score
+     * ==============================
+     */
+
+    function applyPreliminaryScores(
+      rows
+    ) {
+
+      const volumeScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            logValue(
+              row.approxQuoteVolume
+            )
+        );
+
+
+      const volatilityScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            row.rangePct
+        );
+
+
+      const activityScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            row.absChangePct
+        );
+
+
+      rows.forEach(
+        (
+          row
+        ) => {
+
+          row.volumeScore =
+            volumeScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.volatilityScore =
+            volatilityScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.activityScore =
+            activityScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.preliminaryScore =
+            row.volumeScore
+            *
+            0.50
+            +
+            row.volatilityScore
+            *
+            0.30
+            +
+            row.activityScore
+            *
+            0.20;
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * Final SCOUT score
+     * ==============================
+     */
+
+    function applyFinalScores(
+      rows
+    ) {
+
+      const volumeScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            logValue(
+              row.approxQuoteVolume
+            )
+        );
+
+
+      const volatilityScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            row.rangePct
+        );
+
+
+      const activityScores =
+        rankScores(
+          rows,
+          (
+            row
+          ) =>
+            row.absChangePct
+        );
+
+
+      const liquidityRows =
+        rows.filter(
+          (
+            row
+          ) =>
+            Number.isFinite(
+              row.spreadPct
+            )
+            &&
+            row.spreadPct
+            >=
+            0
+        );
+
+
+      const liquidityScores =
+        rankScores(
+          liquidityRows,
+          (
+            row
+          ) =>
+            row.spreadPct,
+          false
+        );
+
+
+      const oiRows =
+        rows.filter(
+          (
+            row
+          ) =>
+            Number.isFinite(
+              row.openInterestUsd
+            )
+            &&
+            row.openInterestUsd
+            >
+            0
+        );
+
+
+      const oiScores =
+        rankScores(
+          oiRows,
+          (
+            row
+          ) =>
+            logValue(
+              row.openInterestUsd
+            )
+        );
+
+
+      rows.forEach(
+        (
+          row
+        ) => {
+
+          row.volumeScore =
+            volumeScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.volatilityScore =
+            volatilityScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.activityScore =
+            activityScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.liquidityScore =
+            liquidityScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          row.openInterestScore =
+            oiScores.get(
+              row.symbol
+            )
+            ??
+            0;
+
+
+          const components = [
+            [
+              row.volumeScore,
+              0.30
+            ],
+
+            [
+              row.volatilityScore,
+              0.20
+            ],
+
+            [
+              row.activityScore,
+              0.10
+            ]
+          ];
+
+
+          if (
+            Number.isFinite(
+              row.spreadPct
+            )
+          ) {
+
+            components.push(
+              [
+                row.liquidityScore,
+                0.25
+              ]
+            );
+
+          }
+
+
+          if (
+            Number.isFinite(
+              row.openInterestUsd
+            )
+            &&
+            row.openInterestUsd
+            >
+            0
+          ) {
+
+            components.push(
+              [
+                row.openInterestScore,
+                0.15
+              ]
+            );
+
+          }
+
+
+          const totalWeight =
+            components.reduce(
+              (
+                sum,
+                [
+                  ,
+                  weight
+                ]
+              ) =>
+                sum
+                +
+                weight,
+              0
+            );
+
+
+          const weighted =
+            components.reduce(
+              (
+                sum,
+                [
+                  score,
+                  weight
+                ]
+              ) =>
+                sum
+                +
+                score
+                *
+                weight,
+              0
+            );
+
+
+          row.finalScore =
+
+            totalWeight > 0
+
+              ? Math.max(
+                  0,
+                  Math.min(
+                    1,
+                    weighted
+                    /
+                    totalWeight
+                  )
+                )
+
+              : 0;
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * SCOUT reasons
+     * ==============================
+     */
+
+    function buildReasons(
+      row
+    ) {
+
+      const reasons =
+        [];
+
+
+      if (
+        row.volumeScore
+        >=
+        0.75
+      ) {
+
+        reasons.push(
+          "High relative 24H trading volume"
+        );
+
+      }
+
+
+      if (
+        row.liquidityScore
+        >=
+        0.75
+      ) {
+
+        reasons.push(
+          "Tight bid/ask spread"
+        );
+
+      }
+
+
+      if (
+        row.volatilityScore
+        >=
+        0.75
+      ) {
+
+        reasons.push(
+          "Elevated 24H price range"
+        );
+
+      }
+
+
+      if (
+        row.activityScore
+        >=
+        0.75
+      ) {
+
+        reasons.push(
+          "Strong 24H price activity"
+        );
+
+      }
+
+
+      if (
+        row.openInterestScore
+        >=
+        0.75
+      ) {
+
+        reasons.push(
+          "High derivatives open interest"
+        );
+
+      }
+
+
+      if (
+        Number.isFinite(
+          row.fundingRate
+        )
+        &&
+        Math.abs(
+          row.fundingRate
+        )
+        >=
+        0.0005
+      ) {
+
+        reasons.push(
+          "Notable funding-rate imbalance"
+        );
+
+      }
+
+
+      if (
+        !reasons.length
+      ) {
+
+        reasons.push(
+          "Balanced market activity across scanner metrics"
+        );
+
+      }
+
+
+      return reasons;
+
+    }
+
+
+    /*
+     * ==============================
+     * Concurrency helper
+     * ==============================
+     */
+
+    async function mapLimit(
+      items,
+      limit,
+      mapper
+    ) {
+
+      const results =
+        new Array(
+          items.length
+        );
+
+
+      let cursor =
+        0;
+
+
+      async function worker() {
+
+        while (
+          true
         ) {
-            elements.connectionDot
-                .className =
-                    "status-dot online";
 
-            elements.connectionText
-                .textContent =
-                    "OKX Online";
+          const index =
+            cursor;
 
-            log(
-                `Market refresh complete (${successCount}/${results.length})`,
-                "success"
-            );
-        } else {
-            elements.connectionDot
-                .className =
-                    successCount > 0
-                        ? "status-dot"
-                        : "status-dot offline";
 
-            elements.connectionText
-                .textContent =
-                    successCount > 0
-                        ? "Partial Connection"
-                        : "Offline";
+          cursor +=
+            1;
 
-            log(
-                `Market refresh partial (${successCount}/${results.length})`,
-                "error"
-            );
+
+          if (
+            index
+            >=
+            items.length
+          ) {
+
+            return;
+
+          }
+
+
+          try {
+
+            results[index] =
+              await mapper(
+                items[index],
+                index
+              );
+
+          } catch (
+            error
+          ) {
+
+            results[index] = {
+              ok:
+                false,
+
+              error
+            };
+
+          }
+
         }
 
-        elements.lastUpdate.textContent =
-            "Last update: " +
-            new Date()
-                .toLocaleTimeString();
+      }
 
-        elements.refreshButton.disabled =
+
+      const workers =
+        Array.from(
+          {
+            length:
+              Math.min(
+                limit,
+                items.length
+              )
+          },
+
+          () =>
+            worker()
+        );
+
+
+      await Promise.all(
+        workers
+      );
+
+
+      return results;
+
+    }
+
+
+    /*
+     * ==============================
+     * Funding for Top 10 only
+     * ==============================
+     */
+
+    async function attachFunding(
+      rows
+    ) {
+
+      const results =
+        await mapLimit(
+          rows,
+          FUNDING_CONCURRENCY,
+
+          async (
+            row
+          ) => {
+
+            const data =
+              await okxGet(
+                "/api/v5/public/funding-rate",
+                {
+                  instId:
+                    row.symbol
+                }
+              );
+
+
+            return {
+              ok:
+                true,
+
+              rate:
+                finiteNumber(
+                  data[0]
+                    ?.fundingRate
+                )
+            };
+
+          }
+        );
+
+
+      let successes =
+        0;
+
+
+      results.forEach(
+        (
+          result,
+          index
+        ) => {
+
+          if (
+            result?.ok
+          ) {
+
+            rows[index]
+              .fundingRate =
+                result.rate;
+
+
+            successes +=
+              1;
+
+          } else {
+
+            rows[index]
+              .fundingRate =
+                null;
+
+          }
+
+        }
+      );
+
+
+      setEndpointStatus(
+        elements.fundingStatus,
+        successes > 0
+      );
+
+
+      return successes;
+
+    }
+
+
+    /*
+     * ==============================
+     * Render SCOUT
+     * ==============================
+     */
+
+    function renderScout(
+      rows
+    ) {
+
+      elements.scoutTableBody
+        .innerHTML =
+          "";
+
+
+      if (
+        !rows.length
+      ) {
+
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+
+        const td =
+          document.createElement(
+            "td"
+          );
+
+
+        td.colSpan =
+          10;
+
+
+        td.innerHTML =
+          `
+            <div class="empty-state">
+              No SCOUT candidates returned.
+            </div>
+          `;
+
+
+        tr.appendChild(
+          td
+        );
+
+
+        elements.scoutTableBody
+          .appendChild(
+            tr
+          );
+
+
+        return;
+
+      }
+
+
+      rows.forEach(
+        (
+          row,
+          index
+        ) => {
+
+          const tr =
+            document.createElement(
+              "tr"
+            );
+
+
+          const changeClass =
+
+            row.changePct > 0
+
+              ? "positive"
+
+              : row.changePct < 0
+
+                ? "negative"
+
+                : "";
+
+
+          const fundingClass =
+
+            row.fundingRate > 0
+
+              ? "positive"
+
+              : row.fundingRate < 0
+
+                ? "negative"
+
+                : "";
+
+
+          tr.innerHTML =
+            `
+              <td class="rank">
+                ${index + 1}
+              </td>
+
+              <td class="symbol-cell">
+                ${row.symbol}
+              </td>
+
+              <td>
+                <span class="score-badge">
+                  ${row.finalScore.toFixed(4)}
+                </span>
+              </td>
+
+              <td>
+                ${formatPrice(row.last)}
+              </td>
+
+              <td class="${changeClass}">
+                ${formatSignedPercent(
+                  row.changePct,
+                  2
+                )}
+              </td>
+
+              <td>
+                ${row.rangePct.toFixed(2)}%
+              </td>
+
+              <td>
+                ${
+                  Number.isFinite(
+                    row.spreadPct
+                  )
+
+                    ? `${row.spreadPct.toFixed(5)}%`
+
+                    : "--"
+                }
+              </td>
+
+              <td>
+                ${formatCompact(
+                  row.approxQuoteVolume
+                )}
+              </td>
+
+              <td>
+                ${
+                  Number.isFinite(
+                    row.openInterestUsd
+                  )
+
+                    ? `$${formatCompact(
+                        row.openInterestUsd
+                      )}`
+
+                    : "--"
+                }
+              </td>
+
+              <td class="${fundingClass}">
+                ${formatFunding(
+                  row.fundingRate
+                )}
+              </td>
+            `;
+
+
+          elements.scoutTableBody
+            .appendChild(
+              tr
+            );
+
+
+          const reasonsTr =
+            document.createElement(
+              "tr"
+            );
+
+
+          reasonsTr.className =
+            "reasons-row";
+
+
+          const reasonsTd =
+            document.createElement(
+              "td"
+            );
+
+
+          reasonsTd.colSpan =
+            10;
+
+
+          row.reasons.forEach(
+            (
+              reason
+            ) => {
+
+              const chip =
+                document.createElement(
+                  "span"
+                );
+
+
+              chip.className =
+                "reason-chip";
+
+
+              chip.textContent =
+                reason;
+
+
+              reasonsTd.appendChild(
+                chip
+              );
+
+            }
+          );
+
+
+          const scoreChip =
+            document.createElement(
+              "span"
+            );
+
+
+          scoreChip.className =
+            "reason-chip";
+
+
+          scoreChip.textContent =
+
+            `V ${row.volumeScore.toFixed(2)}`
+            +
+            ` · L ${row.liquidityScore.toFixed(2)}`
+            +
+            ` · Vol ${row.volatilityScore.toFixed(2)}`
+            +
+            ` · OI ${row.openInterestScore.toFixed(2)}`
+            +
+            ` · Act ${row.activityScore.toFixed(2)}`;
+
+
+          reasonsTd.appendChild(
+            scoreChip
+          );
+
+
+          reasonsTr.appendChild(
+            reasonsTd
+          );
+
+
+          elements.scoutTableBody
+            .appendChild(
+              reasonsTr
+            );
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ==============================
+     * Run SCOUT
+     * ==============================
+     */
+
+    async function runScout() {
+
+      if (
+        scoutLoading
+      ) {
+
+        return;
+
+      }
+
+
+      scoutLoading =
+        true;
+
+
+      elements.scanScoutButton
+        .disabled =
+          true;
+
+
+      elements.scanScoutButton
+        .textContent =
+          "Scanning...";
+
+
+      elements.scoutSpinner
+        .classList.add(
+          "show"
+        );
+
+
+      elements.scoutStatusText
+        .textContent =
+          "Loading market universe...";
+
+
+      elements.scoutProgress
+        .style.width =
+          "8%";
+
+
+      log(
+        "SCOUT scan started.",
+        "info"
+      );
+
+
+      try {
+
+        const [
+          instruments,
+          tickers,
+          openInterest
+        ] =
+          await Promise.all(
+            [
+
+              okxGet(
+                "/api/v5/public/instruments",
+                {
+                  instType:
+                    "SWAP"
+                }
+              )
+
+                .then(
+                  (
+                    data
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.instrumentsStatus,
+                      true
+                    );
+
+
+                    return data;
+
+                  }
+                )
+
+                .catch(
+                  (
+                    error
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.instrumentsStatus,
+                      false
+                    );
+
+
+                    throw error;
+
+                  }
+                ),
+
+
+              okxGet(
+                "/api/v5/market/tickers",
+                {
+                  instType:
+                    "SWAP"
+                }
+              )
+
+                .then(
+                  (
+                    data
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.tickersStatus,
+                      true
+                    );
+
+
+                    return data;
+
+                  }
+                )
+
+                .catch(
+                  (
+                    error
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.tickersStatus,
+                      false
+                    );
+
+
+                    throw error;
+
+                  }
+                ),
+
+
+              okxGet(
+                "/api/v5/public/open-interest",
+                {
+                  instType:
+                    "SWAP"
+                }
+              )
+
+                .then(
+                  (
+                    data
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.oiStatus,
+                      true
+                    );
+
+
+                    return data;
+
+                  }
+                )
+
+                .catch(
+                  (
+                    error
+                  ) => {
+
+                    setEndpointStatus(
+                      elements.oiStatus,
+                      false
+                    );
+
+
+                    log(
+                      `SCOUT bulk OI unavailable: ${error.message}`,
+                      "error"
+                    );
+
+
+                    return [];
+
+                  }
+                )
+
+            ]
+          );
+
+
+        /*
+         * --------------------------
+         * Filter live USDT-SWAP
+         * --------------------------
+         */
+
+        elements.scoutProgress
+          .style.width =
+            "30%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            "Filtering live USDT perpetuals...";
+
+
+        const liveSymbols =
+          new Set(
+
+            instruments
+
+              .filter(
+                (
+                  item
+                ) =>
+
+                  item.state
+                  ===
+                  "live"
+
+                  &&
+
+                  item.instId
+                    ?.endsWith(
+                      "-USDT-SWAP"
+                    )
+
+                  &&
+
+                  (
+                    !item.settleCcy
+
+                    ||
+
+                    item.settleCcy
+                    ===
+                    "USDT"
+                  )
+              )
+
+              .map(
+                (
+                  item
+                ) =>
+                  item.instId
+              )
+          );
+
+
+        /*
+         * --------------------------
+         * OI map
+         * --------------------------
+         */
+
+        const oiMap =
+          new Map();
+
+
+        openInterest.forEach(
+          (
+            item
+          ) => {
+
+            const oiUsd =
+              finiteNumber(
+                item.oiUsd
+              );
+
+
+            const oiCcy =
+              finiteNumber(
+                item.oiCcy
+              );
+
+
+            oiMap.set(
+              item.instId,
+              {
+                oi:
+                  finiteNumber(
+                    item.oi
+                  ),
+
+                oiUsd,
+
+                oiCcy
+              }
+            );
+
+          }
+        );
+
+
+        /*
+         * --------------------------
+         * Build market rows
+         * --------------------------
+         */
+
+        const rows =
+          [];
+
+
+        for (
+          const ticker
+          of tickers
+        ) {
+
+          const symbol =
+            ticker.instId;
+
+
+          if (
+            !liveSymbols.has(
+              symbol
+            )
+          ) {
+
+            continue;
+
+          }
+
+
+          const last =
+            finiteNumber(
+              ticker.last
+            );
+
+
+          if (
+            last === null
+            ||
+            last <= 0
+          ) {
+
+            continue;
+
+          }
+
+
+          const open24h =
+            finiteNumber(
+              ticker.open24h
+            );
+
+
+          const high24h =
+            finiteNumber(
+              ticker.high24h
+            );
+
+
+          const low24h =
+            finiteNumber(
+              ticker.low24h
+            );
+
+
+          const bid =
+            finiteNumber(
+              ticker.bidPx
+            );
+
+
+          const ask =
+            finiteNumber(
+              ticker.askPx
+            );
+
+
+          const vol24h =
+            finiteNumber(
+              ticker.vol24h,
+              0
+            );
+
+
+          const volCcy24h =
+            finiteNumber(
+              ticker.volCcy24h,
+              0
+            );
+
+
+          /*
+           * Approximate quote volume.
+           *
+           * For ranking only.
+           */
+
+          let approxQuoteVolume =
+
+            volCcy24h > 0
+
+              ? volCcy24h
+                *
+                last
+
+              : vol24h;
+
+
+          if (
+            !Number.isFinite(
+              approxQuoteVolume
+            )
+            ||
+            approxQuoteVolume < 0
+          ) {
+
+            approxQuoteVolume =
+              0;
+
+          }
+
+
+          const changePct =
+            percentageChange(
+              last,
+              open24h
+            );
+
+
+          const rangePctValue =
+            rangePercent(
+              high24h,
+              low24h,
+
+              open24h > 0
+
+                ? open24h
+
+                : last
+            );
+
+
+          const oi =
+            oiMap.get(
+              symbol
+            );
+
+
+          let openInterestUsd =
+            oi?.oiUsd
+            ??
+            null;
+
+
+          if (
+            !Number.isFinite(
+              openInterestUsd
+            )
+            &&
+            Number.isFinite(
+              oi?.oiCcy
+            )
+          ) {
+
+            openInterestUsd =
+              oi.oiCcy
+              *
+              last;
+
+          }
+
+
+          rows.push(
+            {
+              symbol,
+
+              last,
+
+              open24h,
+
+              high24h,
+
+              low24h,
+
+              bid,
+
+              ask,
+
+              spreadPct:
+                spreadPercent(
+                  bid,
+                  ask
+                ),
+
+              volume24h:
+                vol24h,
+
+              approxQuoteVolume,
+
+              changePct,
+
+              absChangePct:
+                Math.abs(
+                  changePct
+                ),
+
+              rangePct:
+                rangePctValue,
+
+              openInterest:
+                oi?.oi
+                ??
+                null,
+
+              openInterestUsd,
+
+              fundingRate:
+                null,
+
+              volumeScore:
+                0,
+
+              volatilityScore:
+                0,
+
+              activityScore:
+                0,
+
+              liquidityScore:
+                0,
+
+              openInterestScore:
+                0,
+
+              preliminaryScore:
+                0,
+
+              finalScore:
+                0,
+
+              reasons:
+                []
+            }
+          );
+
+        }
+
+
+        if (
+          !rows.length
+        ) {
+
+          throw new Error(
+            "No live USDT-SWAP markets were returned."
+          );
+
+        }
+
+
+        elements.scoutMarkets
+          .textContent =
+            String(
+              rows.length
+            );
+
+
+        /*
+         * --------------------------
+         * Preliminary score
+         * --------------------------
+         */
+
+        elements.scoutProgress
+          .style.width =
+            "48%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            "Calculating preliminary scores...";
+
+
+        applyPreliminaryScores(
+          rows
+        );
+
+
+        rows.sort(
+          (
+            a,
+            b
+          ) =>
+            b.preliminaryScore
+            -
+            a.preliminaryScore
+        );
+
+
+        /*
+         * --------------------------
+         * Top 40 pool
+         * --------------------------
+         */
+
+        const detailRows =
+          rows.slice(
+            0,
+            Math.min(
+              SCOUT_DETAIL_POOL,
+              rows.length
+            )
+          );
+
+
+        elements.scoutPool
+          .textContent =
+            String(
+              detailRows.length
+            );
+
+
+        /*
+         * --------------------------
+         * Final score
+         * --------------------------
+         */
+
+        elements.scoutProgress
+          .style.width =
+            "65%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            "Calculating final market-quality scores...";
+
+
+        applyFinalScores(
+          detailRows
+        );
+
+
+        detailRows.sort(
+          (
+            a,
+            b
+          ) =>
+            b.finalScore
+            -
+            a.finalScore
+        );
+
+
+        /*
+         * --------------------------
+         * Top 10
+         * --------------------------
+         */
+
+        const topRows =
+          detailRows.slice(
+            0,
+            SCOUT_TOP_N
+          );
+
+
+        /*
+         * --------------------------
+         * Funding for Top 10
+         * --------------------------
+         */
+
+        elements.scoutProgress
+          .style.width =
+            "78%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            "Loading funding for Top 10...";
+
+
+        const fundingSuccess =
+          await attachFunding(
+            topRows
+          );
+
+
+        topRows.forEach(
+          (
+            row
+          ) => {
+
+            row.reasons =
+              buildReasons(
+                row
+              );
+
+          }
+        );
+
+
+        /*
+         * --------------------------
+         * Render
+         * --------------------------
+         */
+
+        elements.scoutProgress
+          .style.width =
+            "94%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            "Rendering SCOUT results...";
+
+
+        renderScout(
+          topRows
+        );
+
+
+        const top =
+          topRows[0];
+
+
+        elements.scoutTopSymbol
+          .textContent =
+
+            top?.symbol
+            ??
+            "--";
+
+
+        elements.scoutTopScore
+          .textContent =
+
+            top
+
+              ? `Score ${
+                  top.finalScore
+                    .toFixed(
+                      4
+                    )
+                }`
+
+              : "Score --";
+
+
+        elements.scoutUpdated
+          .textContent =
+
+            `Scout update: ${
+              new Date()
+                .toLocaleTimeString()
+            }`;
+
+
+        elements.scoutProgress
+          .style.width =
+            "100%";
+
+
+        elements.scoutStatusText
+          .textContent =
+
+            `Complete · ${
+              topRows.length
+            } candidates · funding ${
+              fundingSuccess
+            }/${
+              topRows.length
+            }`;
+
+
+        log(
+          `SCOUT completed: ${
+            rows.length
+          } markets → ${
+            detailRows.length
+          } detail pool → ${
+            topRows.length
+          } candidates.`,
+          "success"
+        );
+
+
+        setConnection(
+          "online"
+        );
+
+      } catch (
+        error
+      ) {
+
+        elements.scoutStatusText
+          .textContent =
+
+            `SCOUT failed: ${
+              error.message
+            }`;
+
+
+        elements.scoutProgress
+          .style.width =
+            "0%";
+
+
+        elements.scoutTableBody
+          .innerHTML =
+            `
+              <tr>
+                <td colspan="10">
+                  <div class="empty-state">
+                    SCOUT scan failed.
+                    Check System Log /
+                    browser console.
+                  </div>
+                </td>
+              </tr>
+            `;
+
+
+        log(
+          `SCOUT error: ${error.message}`,
+          "error"
+        );
+
+      } finally {
+
+        scoutLoading =
+          false;
+
+
+        elements.scanScoutButton
+          .disabled =
             false;
 
-        elements.refreshButton.textContent =
-            "Refresh Market";
 
-        loading = false;
+        elements.scanScoutButton
+          .textContent =
+            "Scan All USDT-SWAP";
+
+
+        elements.scoutSpinner
+          .classList.remove(
+            "show"
+          );
+
+      }
+
     }
 
 
@@ -2595,25 +6486,50 @@
      * ==============================
      */
 
-    elements.refreshButton
-        .addEventListener(
-            "click",
-            refreshMarket
-        );
+    elements.refreshMarketButton
+      .addEventListener(
+        "click",
+        refreshMarket
+      );
 
 
     elements.instrumentSelect
-        .addEventListener(
-            "change",
-            refreshMarket
-        );
+      .addEventListener(
+        "change",
+        refreshMarket
+      );
 
 
     elements.barSelect
-        .addEventListener(
-            "change",
-            refreshMarket
-        );
+      .addEventListener(
+        "change",
+        refreshMarket
+      );
+
+
+    elements.scanScoutButton
+      .addEventListener(
+        "click",
+        runScout
+      );
+
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        if (
+          currentCandles.length
+        ) {
+
+          drawCandles(
+            currentCandles
+          );
+
+        }
+
+      }
+    );
 
 
     /*
@@ -2623,16 +6539,27 @@
      */
 
     log(
-        "Codex Bot dashboard initialized.",
-        "info"
+      "Codex Bot dashboard initialized.",
+      "info"
     );
+
 
     log(
-        "No API key loaded. Public market data mode.",
-        "info"
+      "Public market data mode. No API key is loaded.",
+      "info"
     );
 
+
+    log(
+      "Browser SCOUT uses market ranking only; it does not decide LONG/SHORT.",
+      "info"
+    );
+
+
     refreshMarket();
+
+
+    runScout();
 
 
     /*
@@ -2642,18 +6569,41 @@
      */
 
     setInterval(
-        () => {
-            if (
-                document.visibilityState ===
-                "visible"
-            ) {
-                refreshMarket();
-            }
-        },
-        AUTO_REFRESH_MS
+      () => {
+
+        if (
+          document.visibilityState
+          ===
+          "visible"
+        ) {
+
+          refreshMarket();
+
+        }
+
+      },
+      MARKET_REFRESH_MS
     );
 
-</script>
+
+    setInterval(
+      () => {
+
+        if (
+          document.visibilityState
+          ===
+          "visible"
+        ) {
+
+          runScout();
+
+        }
+
+      },
+      SCOUT_REFRESH_MS
+    );
+
+  </script>
 
 </body>
 </html>
