@@ -17,12 +17,11 @@ from app.agents.risk import (
 
 
 def context(
+    symbol: str = "UNI-USDT-SWAP",
 ) -> MarketContext:
 
     return MarketContext(
-        symbol=(
-            "UNI-USDT-SWAP"
-        ),
+        symbol=symbol,
 
         exchange="OKX",
 
@@ -276,10 +275,185 @@ async def test_empty(
         )
     )
 
+    print(
+        "EMPTY:",
+        output.status,
+    )
+
     return (
         output.status
         ==
         AgentStatus.SKIPPED
+    )
+
+
+async def test_symbol_case_normalization(
+) -> bool:
+    """
+    大小寫和前後空白不同，
+    但實際 symbol 相同，
+    應正常進入分析。
+    """
+
+    output = (
+        await RiskAgent()
+        .analyze(
+            context=(
+                context(
+                    " uni-usdt-swap "
+                )
+            ),
+
+            payload=RiskInput(
+                account_equity=10000.0,
+
+                available_balance=8000.0,
+
+                proposed_trade=(
+                    ProposedTrade(
+                        symbol=(
+                            "UNI-USDT-SWAP"
+                        ),
+
+                        side=(
+                            TradeBias.LONG
+                        ),
+
+                        entry_price=10.0,
+
+                        stop_loss=9.8,
+
+                        take_profit=10.4,
+
+                        leverage=3.0,
+
+                        notional_usdt=(
+                            1000.0
+                        ),
+                    )
+                ),
+            ),
+        )
+    )
+
+    print(
+        "SYMBOL NORMALIZATION:",
+        output.status,
+        output.symbol,
+    )
+
+    return (
+        output.status
+        ==
+        AgentStatus.SUCCESS
+        and
+        output.symbol
+        ==
+        "UNI-USDT-SWAP"
+        and
+        output.data.get(
+            "context_symbol"
+        )
+        ==
+        "UNI-USDT-SWAP"
+        and
+        output.data.get(
+            "proposed_trade_symbol"
+        )
+        ==
+        "UNI-USDT-SWAP"
+    )
+
+
+async def test_symbol_mismatch(
+) -> bool:
+    """
+    MarketContext 和 ProposedTrade
+    指向不同市場時必須直接 ERROR。
+
+    不允許進 RiskAnalyzer。
+    """
+
+    output = (
+        await RiskAgent()
+        .analyze(
+            context=(
+                context(
+                    "BTC-USDT-SWAP"
+                )
+            ),
+
+            payload=RiskInput(
+                account_equity=10000.0,
+
+                available_balance=8000.0,
+
+                proposed_trade=(
+                    ProposedTrade(
+                        symbol=(
+                            "UNI-USDT-SWAP"
+                        ),
+
+                        side=(
+                            TradeBias.SHORT
+                        ),
+
+                        entry_price=8.0,
+
+                        stop_loss=8.2,
+
+                        take_profit=7.4,
+
+                        leverage=3.0,
+
+                        notional_usdt=(
+                            1000.0
+                        ),
+                    )
+                ),
+            ),
+        )
+    )
+
+    print(
+        "SYMBOL MISMATCH:",
+        output.status,
+        output.verdict,
+        output.errors,
+    )
+
+    return (
+        output.status
+        ==
+        AgentStatus.ERROR
+        and
+        output.verdict
+        ==
+        RiskVerdict.REVIEW
+        and
+        not output.approved
+        and
+        output.data.get(
+            "reason"
+        )
+        ==
+        "symbol_mismatch"
+        and
+        output.data.get(
+            "context_symbol"
+        )
+        ==
+        "BTC-USDT-SWAP"
+        and
+        output.data.get(
+            "proposed_trade_symbol"
+        )
+        ==
+        "UNI-USDT-SWAP"
+        and
+        bool(
+            output.errors
+        )
     )
 
 
@@ -292,6 +466,8 @@ async def main(
         await test_reduce_rr(),
         await test_charts_opposition(),
         await test_empty(),
+        await test_symbol_case_normalization(),
+        await test_symbol_mismatch(),
     ]
 
     passed = sum(
