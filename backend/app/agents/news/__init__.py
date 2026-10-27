@@ -20,6 +20,24 @@ from .models import (
     NewsOutput,
 )
 
+from .service import (
+    NewsService,
+    NewsServiceConfig,
+)
+
+from .sources import (
+    BaseNewsSource,
+    NewsSourceBatch,
+    NewsSourceConfig,
+    NewsSourceManager,
+    RSSFeed,
+    RSSNewsSource,
+    RSSNewsSourceConfig,
+    build_default_news_source_manager,
+    build_default_rss_feeds,
+    build_default_rss_source,
+)
+
 __all__ = [
     "NewsAgent",
     "NewsAnalyzer",
@@ -33,4 +51,16 @@ __all__ = [
     "NewsEvent",
     "NewsInput",
     "NewsOutput",
+    "NewsService",
+    "NewsServiceConfig",
+    "BaseNewsSource",
+    "NewsSourceBatch",
+    "NewsSourceConfig",
+    "NewsSourceManager",
+    "RSSFeed",
+    "RSSNewsSource",
+    "RSSNewsSourceConfig",
+    "build_default_news_source_manager",
+    "build_default_rss_feeds",
+    "build_default_rss_source",
 ]
