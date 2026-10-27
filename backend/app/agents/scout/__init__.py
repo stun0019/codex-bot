@@ -4,10 +4,16 @@ from .models import (
     ScoutInput,
     ScoutOutput,
 )
+from .scanner import (
+    ScoutScanConfig,
+    ScoutScanner,
+)
 
 __all__ = [
     "ScoutAgent",
     "ScoutCandidate",
     "ScoutInput",
     "ScoutOutput",
+    "ScoutScanConfig",
+    "ScoutScanner",
 ]
