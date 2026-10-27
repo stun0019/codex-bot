@@ -218,13 +218,23 @@ class BaseChartsSource(
         self,
     ) -> bool:
 
-        return self._closed
+        return (
+            self._closed
+        )
 
     async def __aenter__(
         self,
     ) -> "BaseChartsSource":
 
-        self._closed = False
+        if self._closed:
+
+            raise RuntimeError(
+                (
+                    f"Charts source "
+                    f"'{self.name}' "
+                    f"is already closed."
+                )
+            )
 
         return self
 
@@ -244,6 +254,8 @@ class BaseChartsSource(
     ) -> ChartsSourceResult:
         """
         抓取 chart data。
+
+        每個實際 source 必須實作。
         """
 
         raise NotImplementedError
@@ -251,12 +263,30 @@ class BaseChartsSource(
     async def close(
         self,
     ) -> None:
+        """
+        Base source 沒有 external client，
+        所以只標記 closed。
+
+        子類別如果擁有：
+
+            httpx client
+            websocket
+            database connection
+
+        應 override close()，
+        並最後呼叫：
+
+            await super().close()
+        """
 
         self._closed = True
 
     def ensure_available(
         self,
     ) -> None:
+        """
+        fetch 前檢查 source 狀態。
+        """
 
         if not self.enabled:
 
@@ -278,10 +308,21 @@ class BaseChartsSource(
                 )
             )
 
+    # =================================
+    # Symbol
+    # =================================
+
     @staticmethod
     def normalize_symbol(
         symbol: str,
     ) -> str:
+        """
+        Symbol 統一：
+
+            btc-usdt-swap
+                ↓
+            BTC-USDT-SWAP
+        """
 
         normalized = (
             symbol
@@ -298,10 +339,57 @@ class BaseChartsSource(
 
         return normalized
 
+    # =================================
+    # Timeframe
+    # =================================
+
     @staticmethod
     def normalize_timeframe(
         timeframe: str,
     ) -> str:
+        """
+        統一 CHARTS timeframe。
+
+        核心規則：
+
+            小寫 m = minute
+            大寫 M = month
+
+        所以：
+
+            1m  = 1 minute
+            3m  = 3 minutes
+            5m  = 5 minutes
+            15m = 15 minutes
+            30m = 30 minutes
+
+            1H  = 1 hour
+            2H  = 2 hours
+            4H  = 4 hours
+            6H  = 6 hours
+            12H = 12 hours
+
+            1D  = 1 day
+            2D  = 2 days
+            3D  = 3 days
+
+            1W  = 1 week
+
+            1M  = 1 month
+            3M  = 3 months
+
+        注意：
+
+            不可以直接 timeframe.upper()
+
+        因為：
+
+            "1m".upper()
+                ==
+            "1M"
+
+        會造成 minute / month collision。
+        """
 
         value = (
             timeframe
@@ -315,64 +403,203 @@ class BaseChartsSource(
                 "be empty."
             )
 
-        aliases = {
-            "1M":
-                "1m",
+        # =============================
+        # Minutes
+        # =============================
+        #
+        # m 必須是小寫。
+        #
+        # 1m
+        # 3m
+        # 5m
+        # 15m
+        # 30m
+        #
 
-            "3M":
-                "3m",
+        if value.endswith(
+            "m"
+        ):
 
-            "5M":
-                "5m",
+            number = (
+                value[:-1]
+            )
 
-            "15M":
-                "15m",
+            if number.isdigit():
 
-            "30M":
-                "30m",
+                normalized = (
+                    f"{int(number)}m"
+                )
 
-            "1H":
-                "1H",
+                supported = {
+                    "1m",
+                    "3m",
+                    "5m",
+                    "15m",
+                    "30m",
+                }
 
-            "2H":
-                "2H",
+                if (
+                    normalized
+                    in supported
+                ):
 
-            "4H":
-                "4H",
+                    return normalized
 
-            "6H":
-                "6H",
+        # =============================
+        # Months
+        # =============================
+        #
+        # M 必須是大寫。
+        #
+        # 1M
+        # 3M
+        #
 
-            "12H":
-                "12H",
+        if value.endswith(
+            "M"
+        ):
 
-            "1D":
-                "1D",
+            number = (
+                value[:-1]
+            )
 
-            "2D":
-                "2D",
+            if number.isdigit():
 
-            "3D":
-                "3D",
+                normalized = (
+                    f"{int(number)}M"
+                )
 
-            "1W":
-                "1W",
+                supported = {
+                    "1M",
+                    "3M",
+                }
 
-            "1MO":
-                "1M",
+                if (
+                    normalized
+                    in supported
+                ):
 
-            "3MO":
-                "3M",
-        }
+                    return normalized
 
-        upper = (
-            value.upper()
-        )
+        # =============================
+        # Hours
+        # =============================
+        #
+        # 接受：
+        #
+        # 1H
+        # 1h
+        #
+        # 統一輸出：
+        #
+        # 1H
+        #
 
-        return (
-            aliases.get(
-                upper,
-                value,
+        if (
+            value.endswith("H")
+            or value.endswith("h")
+        ):
+
+            number = (
+                value[:-1]
+            )
+
+            if number.isdigit():
+
+                normalized = (
+                    f"{int(number)}H"
+                )
+
+                supported = {
+                    "1H",
+                    "2H",
+                    "4H",
+                    "6H",
+                    "12H",
+                }
+
+                if (
+                    normalized
+                    in supported
+                ):
+
+                    return normalized
+
+        # =============================
+        # Days
+        # =============================
+
+        if (
+            value.endswith("D")
+            or value.endswith("d")
+        ):
+
+            number = (
+                value[:-1]
+            )
+
+            if number.isdigit():
+
+                normalized = (
+                    f"{int(number)}D"
+                )
+
+                supported = {
+                    "1D",
+                    "2D",
+                    "3D",
+                }
+
+                if (
+                    normalized
+                    in supported
+                ):
+
+                    return normalized
+
+        # =============================
+        # Weeks
+        # =============================
+
+        if (
+            value.endswith("W")
+            or value.endswith("w")
+        ):
+
+            number = (
+                value[:-1]
+            )
+
+            if number.isdigit():
+
+                normalized = (
+                    f"{int(number)}W"
+                )
+
+                supported = {
+                    "1W",
+                }
+
+                if (
+                    normalized
+                    in supported
+                ):
+
+                    return normalized
+
+        raise ValueError(
+            (
+                "Unsupported timeframe: "
+                f"{timeframe!r}. "
+                "Supported formats: "
+                "1m, 3m, 5m, 15m, 30m, "
+                "1H, 2H, 4H, 6H, 12H, "
+                "1D, 2D, 3D, "
+                "1W, "
+                "1M, 3M. "
+                "Lowercase 'm' means "
+                "minutes; uppercase 'M' "
+                "means months."
             )
         )
 
@@ -386,8 +613,28 @@ class BaseChartsSource(
         str
     ]:
         """
-        Normalize + 去重，
+        Normalize + 去重。
+
         保留原始順序。
+
+        Example：
+
+            [
+                "15m",
+                "1h",
+                "4H",
+                "15m",
+                "1M",
+            ]
+
+                ↓
+
+            [
+                "15m",
+                "1H",
+                "4H",
+                "1M",
+            ]
         """
 
         result: list[
@@ -406,7 +653,10 @@ class BaseChartsSource(
                 )
             )
 
-            if normalized in seen:
+            if (
+                normalized
+                in seen
+            ):
 
                 continue
 
