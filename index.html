@@ -2,65 +2,123 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <meta
     name="description"
     content="Codex Bot - Multi-Agent Crypto Trading System"
   >
 
-  <title>Codex Bot | AI Trading System</title>
+  <title>
+    Codex Bot | AI Trading System
+  </title>
 
   <style>
     :root {
-      --bg: #07090d;
-      --bg-2: #0b1017;
+      --bg:
+        #07090d;
 
-      --panel: #111720;
-      --panel-2: #151d28;
+      --bg-2:
+        #0b1017;
 
-      --border: #222c39;
-      --border-2: #303c4d;
+      --panel:
+        #111720;
 
-      --text: #f2f5f8;
-      --muted: #8c99aa;
-      --muted-2: #606d7d;
+      --panel-2:
+        #151d28;
 
-      --green: #39d98a;
-      --red: #ff6675;
-      --yellow: #f6c453;
-      --blue: #66a6ff;
-      --purple: #b493ff;
+      --panel-3:
+        #0d131c;
 
-      --radius: 14px;
+      --border:
+        #222c39;
+
+      --border-2:
+        #303c4d;
+
+      --text:
+        #f2f5f8;
+
+      --muted:
+        #8c99aa;
+
+      --muted-2:
+        #606d7d;
+
+      --green:
+        #39d98a;
+
+      --red:
+        #ff6675;
+
+      --yellow:
+        #f6c453;
+
+      --blue:
+        #66a6ff;
+
+      --purple:
+        #b493ff;
+
+      --cyan:
+        #65d7e8;
+
+      --radius:
+        14px;
     }
+
 
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      box-sizing:
+        border-box;
+
+      margin:
+        0;
+
+      padding:
+        0;
     }
+
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior:
+        smooth;
     }
 
+
     body {
-      min-height: 100vh;
+      min-height:
+        100vh;
 
       background:
         radial-gradient(
           circle at 90% 0%,
-          rgba(102, 166, 255, 0.08),
+          rgba(
+            102,
+            166,
+            255,
+            0.08
+          ),
           transparent 32%
         ),
         radial-gradient(
           circle at 0% 10%,
-          rgba(57, 217, 138, 0.05),
+          rgba(
+            57,
+            217,
+            138,
+            0.05
+          ),
           transparent 28%
         ),
         var(--bg);
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-family:
         Inter,
@@ -72,17 +130,23 @@
         Arial,
         sans-serif;
 
-      line-height: 1.5;
+      line-height:
+        1.5;
     }
+
 
     button,
     select {
-      font: inherit;
+      font:
+        inherit;
     }
 
+
     button {
-      cursor: pointer;
+      cursor:
+        pointer;
     }
+
 
     code,
     .mono {
@@ -93,14 +157,26 @@
         monospace;
     }
 
-    .container {
-      width: min(
-        1440px,
-        calc(100% - 36px)
-      );
 
-      margin: 0 auto;
+    a {
+      color:
+        inherit;
     }
+
+
+    .container {
+      width:
+        min(
+          1440px,
+          calc(
+            100% - 36px
+          )
+        );
+
+      margin:
+        0 auto;
+    }
+
 
     /*
      * ==============================
@@ -109,11 +185,14 @@
      */
 
     header {
-      position: sticky;
+      position:
+        sticky;
 
-      top: 0;
+      top:
+        0;
 
-      z-index: 50;
+      z-index:
+        50;
 
       background:
         rgba(
@@ -127,44 +206,60 @@
         blur(18px);
 
       border-bottom:
-        1px solid var(--border);
+        1px solid
+        var(--border);
     }
 
+
     .navbar {
-      min-height: 68px;
+      min-height:
+        68px;
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
       justify-content:
         space-between;
 
-      gap: 20px;
+      gap:
+        20px;
     }
+
 
     .brand {
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 11px;
+      gap:
+        11px;
     }
 
+
     .brand-logo {
-      width: 38px;
+      width:
+        38px;
 
-      height: 38px;
+      height:
+        38px;
 
-      display: grid;
+      display:
+        grid;
 
-      place-items: center;
+      place-items:
+        center;
 
       border:
         1px solid
         var(--border-2);
 
-      border-radius: 10px;
+      border-radius:
+        10px;
 
       background:
         linear-gradient(
@@ -183,42 +278,57 @@
           )
         );
 
-      font-weight: 800;
+      font-weight:
+        800;
     }
 
+
     .brand h1 {
-      font-size: 16px;
+      font-size:
+        16px;
 
       letter-spacing:
         0.4px;
     }
 
+
     .brand p {
-      margin-top: 1px;
+      margin-top:
+        1px;
 
       color:
         var(--muted-2);
 
-      font-size: 11px;
+      font-size:
+        11px;
     }
+
 
     .header-actions {
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 10px;
+      gap:
+        10px;
     }
+
 
     .pill,
     .link-button {
-      min-height: 34px;
+      min-height:
+        34px;
 
-      display: inline-flex;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 8px;
+      gap:
+        8px;
 
       padding:
         7px 11px;
@@ -236,23 +346,29 @@
       color:
         var(--muted);
 
-      font-size: 12px;
+      font-size:
+        12px;
 
       text-decoration:
         none;
     }
 
+
     .link-button {
-      border-radius: 9px;
+      border-radius:
+        9px;
 
       color:
         var(--text);
     }
 
-    .status-dot {
-      width: 8px;
 
-      height: 8px;
+    .status-dot {
+      width:
+        8px;
+
+      height:
+        8px;
 
       border-radius:
         50%;
@@ -270,6 +386,7 @@
         );
     }
 
+
     .status-dot.online {
       background:
         var(--green);
@@ -283,6 +400,7 @@
           0.6
         );
     }
+
 
     .status-dot.offline {
       background:
@@ -298,6 +416,7 @@
         );
     }
 
+
     /*
      * ==============================
      * Main
@@ -309,10 +428,27 @@
         34px 0 60px;
     }
 
+
     .hero {
       margin-bottom:
         28px;
     }
+
+
+    .hero-row {
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+    }
+
 
     .hero h2 {
       font-size:
@@ -325,6 +461,7 @@
       letter-spacing:
         -1px;
     }
+
 
     .hero p {
       max-width:
@@ -339,6 +476,78 @@
       font-size:
         14px;
     }
+
+
+    .hero-progress {
+      min-width:
+        190px;
+
+      padding:
+        13px 15px;
+
+      border:
+        1px solid
+        rgba(
+          57,
+          217,
+          138,
+          0.18
+        );
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(
+          57,
+          217,
+          138,
+          0.05
+        );
+    }
+
+
+    .hero-progress-label {
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.7px;
+    }
+
+
+    .hero-progress-value {
+      margin-top:
+        4px;
+
+      color:
+        var(--green);
+
+      font-size:
+        21px;
+
+      font-weight:
+        800;
+    }
+
+
+    .hero-progress-sub {
+      margin-top:
+        2px;
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        10px;
+    }
+
 
     .notice {
       margin-top:
@@ -374,6 +583,7 @@
         12px;
     }
 
+
     /*
      * ==============================
      * Section
@@ -385,11 +595,13 @@
         30px;
     }
 
+
     .section-header {
       margin-bottom:
         13px;
 
-      display: flex;
+      display:
+        flex;
 
       align-items:
         flex-end;
@@ -397,13 +609,16 @@
       justify-content:
         space-between;
 
-      gap: 14px;
+      gap:
+        14px;
     }
+
 
     .section-header h3 {
       font-size:
         16px;
     }
+
 
     .section-header p {
       margin-top:
@@ -416,6 +631,7 @@
         11px;
     }
 
+
     /*
      * ==============================
      * Controls
@@ -423,15 +639,19 @@
      */
 
     .controls {
-      display: flex;
+      display:
+        flex;
 
-      flex-wrap: wrap;
+      flex-wrap:
+        wrap;
 
-      gap: 10px;
+      gap:
+        10px;
 
       margin-bottom:
         14px;
     }
+
 
     .select,
     .button {
@@ -454,23 +674,28 @@
       color:
         var(--text);
 
-      outline: none;
+      outline:
+        none;
     }
+
 
     .select {
       min-width:
         185px;
     }
 
+
     .select:focus {
       border-color:
         var(--blue);
     }
 
+
     .button:hover {
       background:
         var(--panel-2);
     }
+
 
     .button.primary {
       border-color:
@@ -485,6 +710,7 @@
       font-weight:
         750;
     }
+
 
     .button.secondary {
       border-color:
@@ -507,6 +733,7 @@
         #bcd7ff;
     }
 
+
     .button:disabled {
       cursor:
         not-allowed;
@@ -515,6 +742,7 @@
         0.55;
     }
 
+
     /*
      * ==============================
      * Grids
@@ -522,7 +750,8 @@
      */
 
     .grid-4 {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -533,11 +762,32 @@
           )
         );
 
-      gap: 12px;
+      gap:
+        12px;
     }
 
+
+    .grid-3 {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap:
+        12px;
+    }
+
+
     .grid-2 {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         minmax(
@@ -549,8 +799,10 @@
           1fr
         );
 
-      gap: 12px;
+      gap:
+        12px;
     }
+
 
     /*
      * ==============================
@@ -559,9 +811,11 @@
      */
 
     .card {
-      min-width: 0;
+      min-width:
+        0;
 
-      padding: 18px;
+      padding:
+        18px;
 
       border:
         1px solid
@@ -579,6 +833,7 @@
         );
     }
 
+
     .metric-label {
       color:
         var(--muted);
@@ -592,6 +847,7 @@
       text-transform:
         uppercase;
     }
+
 
     .metric-value {
       margin-top:
@@ -616,6 +872,7 @@
         nowrap;
     }
 
+
     .metric-sub {
       margin-top:
         5px;
@@ -627,25 +884,36 @@
         11px;
     }
 
+
     .positive {
       color:
         var(--green) !important;
     }
+
 
     .negative {
       color:
         var(--red) !important;
     }
 
+
     .warning-text {
       color:
         var(--yellow) !important;
     }
 
+
     .blue {
       color:
         var(--blue) !important;
     }
+
+
+    .purple {
+      color:
+        var(--purple) !important;
+    }
+
 
     /*
      * ==============================
@@ -658,8 +926,10 @@
         330px;
     }
 
+
     .chart-head {
-      display: flex;
+      display:
+        flex;
 
       align-items:
         center;
@@ -667,11 +937,13 @@
       justify-content:
         space-between;
 
-      gap: 10px;
+      gap:
+        10px;
 
       margin-bottom:
         14px;
     }
+
 
     .chart-symbol {
       font-size:
@@ -681,6 +953,7 @@
         700;
     }
 
+
     .chart-sub {
       color:
         var(--muted-2);
@@ -689,27 +962,30 @@
         11px;
     }
 
+
     .chart-wrap {
       position:
         relative;
 
+      width:
+        100%;
+
       height:
         245px;
-
-      width:
-        100%;
     }
 
+
     #priceChart {
+      display:
+        block;
+
       width:
         100%;
 
       height:
         100%;
-
-      display:
-        block;
     }
+
 
     /*
      * ==============================
@@ -718,13 +994,16 @@
      */
 
     .book-list {
-      display: grid;
+      display:
+        grid;
 
-      gap: 18px;
+      gap:
+        18px;
 
       margin-top:
         16px;
     }
+
 
     /*
      * ==============================
@@ -733,9 +1012,11 @@
      */
 
     .scout-toolbar {
-      display: flex;
+      display:
+        flex;
 
-      flex-wrap: wrap;
+      flex-wrap:
+        wrap;
 
       align-items:
         center;
@@ -743,19 +1024,23 @@
       justify-content:
         space-between;
 
-      gap: 12px;
+      gap:
+        12px;
 
       margin-bottom:
         14px;
     }
 
+
     .scout-status {
-      display: flex;
+      display:
+        flex;
 
       align-items:
         center;
 
-      gap: 9px;
+      gap:
+        9px;
 
       color:
         var(--muted);
@@ -763,6 +1048,7 @@
       font-size:
         12px;
     }
+
 
     .spinner {
       width:
@@ -785,24 +1071,32 @@
         50%;
 
       animation:
-        spin 0.7s
-        linear infinite;
+        spin
+        0.7s
+        linear
+        infinite;
     }
+
 
     .spinner.show {
       display:
         inline-block;
     }
 
+
     @keyframes spin {
       to {
         transform:
-          rotate(360deg);
+          rotate(
+            360deg
+          );
       }
     }
 
+
     .scout-summary {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -813,11 +1107,13 @@
           )
         );
 
-      gap: 10px;
+      gap:
+        10px;
 
       margin-bottom:
         12px;
     }
+
 
     .scout-table-wrap {
       overflow-x:
@@ -839,6 +1135,7 @@
         );
     }
 
+
     .scout-table {
       width:
         100%;
@@ -849,6 +1146,7 @@
       border-collapse:
         collapse;
     }
+
 
     .scout-table th,
     .scout-table td {
@@ -868,6 +1166,7 @@
       white-space:
         nowrap;
     }
+
 
     .scout-table th {
       position:
@@ -898,6 +1197,7 @@
         uppercase;
     }
 
+
     .scout-table th:first-child,
     .scout-table td:first-child,
     .scout-table th:nth-child(2),
@@ -906,11 +1206,13 @@
         left;
     }
 
+
     .scout-table tbody tr {
       transition:
         background
         0.16s;
     }
+
 
     .scout-table tbody tr:hover {
       background:
@@ -922,9 +1224,12 @@
         );
     }
 
+
     .scout-table tbody tr:last-child td {
-      border-bottom: 0;
+      border-bottom:
+        0;
     }
+
 
     .rank {
       width:
@@ -937,10 +1242,12 @@
         700;
     }
 
+
     .symbol-cell {
       font-weight:
         700;
     }
+
 
     .score-badge {
       display:
@@ -982,6 +1289,7 @@
         750;
     }
 
+
     .reasons-row td {
       padding-top:
         0;
@@ -995,6 +1303,7 @@
       text-align:
         left !important;
     }
+
 
     .reason-chip {
       display:
@@ -1020,6 +1329,7 @@
         var(--muted);
     }
 
+
     .empty-state {
       padding:
         34px 18px;
@@ -1034,6 +1344,7 @@
         12px;
     }
 
+
     .progress {
       height:
         4px;
@@ -1047,6 +1358,7 @@
       background:
         var(--border);
     }
+
 
     .progress > div {
       width:
@@ -1066,8 +1378,290 @@
         );
 
       transition:
-        width 0.2s;
+        width
+        0.2s;
     }
+
+
+    /*
+     * ==============================
+     * NEWS
+     * ==============================
+     */
+
+    .news-overview {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap:
+        10px;
+    }
+
+
+    .news-pipeline {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          5,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap:
+        10px;
+
+      margin-top:
+        12px;
+    }
+
+
+    .pipeline-node {
+      position:
+        relative;
+
+      min-width:
+        0;
+
+      padding:
+        14px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        11px;
+
+      background:
+        var(--bg-2);
+    }
+
+
+    .pipeline-node:not(
+      :last-child
+    )::after {
+      content:
+        "→";
+
+      position:
+        absolute;
+
+      top:
+        50%;
+
+      right:
+        -9px;
+
+      z-index:
+        2;
+
+      color:
+        var(--muted-2);
+
+      transform:
+        translateY(
+          -50%
+        );
+    }
+
+
+    .pipeline-node strong {
+      display:
+        block;
+
+      color:
+        var(--text);
+
+      font-size:
+        12px;
+    }
+
+
+    .pipeline-node span {
+      display:
+        block;
+
+      margin-top:
+        5px;
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+    }
+
+
+    .news-components {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap:
+        10px;
+
+      margin-top:
+        12px;
+    }
+
+
+    .component {
+      padding:
+        13px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        10px;
+
+      background:
+        var(--panel-3);
+    }
+
+
+    .component-top {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+    }
+
+
+    .component-name {
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+    }
+
+
+    .component-status {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      padding:
+        3px 7px;
+
+      border:
+        1px solid
+        rgba(
+          57,
+          217,
+          138,
+          0.22
+        );
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(
+          57,
+          217,
+          138,
+          0.07
+        );
+
+      color:
+        var(--green);
+
+      font-size:
+        9px;
+
+      font-weight:
+        750;
+
+      letter-spacing:
+        0.3px;
+    }
+
+
+    .component-detail {
+      margin-top:
+        6px;
+
+      color:
+        var(--muted-2);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.55;
+    }
+
+
+    .news-runtime {
+      margin-top:
+        12px;
+
+      padding:
+        13px 14px;
+
+      border:
+        1px solid
+        rgba(
+          246,
+          196,
+          83,
+          0.18
+        );
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(
+          246,
+          196,
+          83,
+          0.04
+        );
+
+      color:
+        #c8b57e;
+
+      font-size:
+        11px;
+    }
+
 
     /*
      * ==============================
@@ -1076,7 +1670,8 @@
      */
 
     .agent-grid {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -1090,6 +1685,7 @@
       gap:
         12px;
     }
+
 
     .agent-card {
       padding:
@@ -1111,6 +1707,7 @@
         );
     }
 
+
     .agent-top {
       display:
         flex;
@@ -1125,6 +1722,7 @@
         10px;
     }
 
+
     .agent-name {
       font-size:
         14px;
@@ -1132,6 +1730,7 @@
       font-weight:
         750;
     }
+
 
     .agent-tag {
       padding:
@@ -1158,6 +1757,7 @@
         700;
     }
 
+
     .agent-tag.live {
       background:
         rgba(
@@ -1171,6 +1771,35 @@
         var(--green);
     }
 
+
+    .agent-tag.code-complete {
+      background:
+        rgba(
+          180,
+          147,
+          255,
+          0.1
+        );
+
+      color:
+        var(--purple);
+    }
+
+
+    .agent-tag.pending {
+      background:
+        rgba(
+          246,
+          196,
+          83,
+          0.08
+        );
+
+      color:
+        var(--yellow);
+    }
+
+
     .agent-role {
       margin-top:
         9px;
@@ -1181,6 +1810,7 @@
       font-size:
         12px;
     }
+
 
     .agent-detail {
       margin-top:
@@ -1193,6 +1823,7 @@
         11px;
     }
 
+
     /*
      * ==============================
      * System
@@ -1200,14 +1831,17 @@
      */
 
     .system-grid {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
-        1fr 1fr;
+        1fr
+        1fr;
 
       gap:
         12px;
     }
+
 
     .endpoint-list {
       display:
@@ -1216,6 +1850,7 @@
       gap:
         8px;
     }
+
 
     .endpoint {
       display:
@@ -1247,6 +1882,7 @@
         11px;
     }
 
+
     .endpoint code {
       overflow-wrap:
         anywhere;
@@ -1254,6 +1890,7 @@
       color:
         var(--muted);
     }
+
 
     .endpoint-state {
       color:
@@ -1263,15 +1900,18 @@
         nowrap;
     }
 
+
     .endpoint-state.ok {
       color:
         var(--green);
     }
 
+
     .endpoint-state.error {
       color:
         var(--red);
     }
+
 
     .log-box {
       height:
@@ -1303,20 +1943,24 @@
         monospace;
     }
 
+
     .log-line.success {
       color:
         var(--green);
     }
+
 
     .log-line.error {
       color:
         var(--red);
     }
 
+
     .log-line.info {
       color:
         var(--blue);
     }
+
 
     /*
      * ==============================
@@ -1342,6 +1986,7 @@
         11px;
     }
 
+
     /*
      * ==============================
      * Responsive
@@ -1350,10 +1995,9 @@
 
     @media (
       max-width:
-      1050px
+      1150px
     ) {
-      .grid-4,
-      .scout-summary {
+      .news-pipeline {
         grid-template-columns:
           repeat(
             2,
@@ -1363,6 +2007,44 @@
             )
           );
       }
+
+
+      .pipeline-node::after {
+        display:
+          none;
+      }
+
+
+      .news-components {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
+      }
+    }
+
+
+    @media (
+      max-width:
+      1050px
+    ) {
+      .grid-4,
+      .scout-summary,
+      .news-overview {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
+      }
+
 
       .agent-grid {
         grid-template-columns:
@@ -1375,6 +2057,7 @@
           );
       }
     }
+
 
     @media (
       max-width:
@@ -1388,10 +2071,12 @@
           );
       }
 
+
       .github-link {
         display:
           none;
       }
+
 
       .grid-2,
       .system-grid {
@@ -1399,40 +2084,56 @@
           1fr;
       }
 
-      .agent-grid {
+
+      .agent-grid,
+      .news-components,
+      .news-pipeline {
         grid-template-columns:
           1fr;
       }
 
-      .section-header {
+
+      .section-header,
+      .hero-row {
         align-items:
           flex-start;
 
         flex-direction:
           column;
       }
+
+
+      .hero-progress {
+        width:
+          100%;
+      }
     }
+
 
     @media (
       max-width:
       520px
     ) {
       .grid-4,
-      .scout-summary {
+      .scout-summary,
+      .news-overview {
         grid-template-columns:
           1fr;
       }
+
 
       .controls {
         display:
           grid;
       }
 
+
       .select,
       .button {
         width:
           100%;
       }
+
 
       .header-actions
       .pill
@@ -1444,9 +2145,11 @@
   </style>
 </head>
 
+
 <body>
 
   <header>
+
     <div class="container navbar">
 
       <div class="brand">
@@ -1456,6 +2159,7 @@
         </div>
 
         <div>
+
           <h1>
             CODEX BOT
           </h1>
@@ -1463,9 +2167,11 @@
           <p>
             Multi-Agent Trading System
           </p>
+
         </div>
 
       </div>
+
 
       <div class="header-actions">
 
@@ -1476,11 +2182,29 @@
             class="status-dot"
           ></span>
 
-          <span id="connectionText">
+          <span
+            id="connectionText"
+          >
             Connecting
           </span>
 
         </div>
+
+
+        <div class="pill">
+
+          <span>
+            Agents
+          </span>
+
+          <strong
+            class="positive"
+          >
+            2 / 6
+          </strong>
+
+        </div>
+
 
         <a
           class="link-button github-link"
@@ -1494,6 +2218,7 @@
       </div>
 
     </div>
+
   </header>
 
 
@@ -1505,24 +2230,47 @@
 
     <section class="hero">
 
-      <h2>
-        AI Crypto Trading Infrastructure
-      </h2>
+      <div class="hero-row">
 
-      <p>
-        OKX public market dashboard with a
-        browser-side SCOUT opportunity scanner.
-        NEWS, SENTIMENT, CHARTS, RISK and DECISION
-        remain backend agent skeletons.
-      </p>
+        <div>
+
+          <h2>
+            AI Crypto Trading Infrastructure
+          </h2>
+
+          <p>
+            Multi-agent crypto research architecture
+            combining market discovery, news analysis,
+            sentiment, technical analysis, risk assessment
+            and final decision synthesis.
+          </p>
+
+        </div>
+
+
+        <div class="hero-progress">
+
+          <div class="hero-progress-label">
+            Agent Development
+          </div>
+
+          <div class="hero-progress-value">
+            2 / 6
+          </div>
+
+          <div class="hero-progress-sub">
+            SCOUT + NEWS implemented
+          </div>
+
+        </div>
+
+      </div>
+
 
       <div class="notice">
-        PUBLIC MARKET DATA ONLY.
-        This page does not load API keys and cannot
-        place orders. The SCOUT results shown here
-        are calculated in JavaScript inside the
-        browser; GitHub Pages does not execute the
-        Python backend.
+        Browser mode only uses OKX public market endpoints.
+        No OKX private credentials or OpenAI API key are stored
+        in this page. Python NEWS / LLM execution remains backend-only.
       </div>
 
     </section>
@@ -1537,18 +2285,16 @@
       <div class="section-header">
 
         <div>
+
           <h3>
             Market Monitor
           </h3>
 
           <p>
-            Selected OKX USDT perpetual market
+            OKX public market data
           </p>
-        </div>
 
-        <p id="lastUpdate">
-          Last update: -
-        </p>
+        </div>
 
       </div>
 
@@ -1560,23 +2306,33 @@
           class="select"
         >
 
-          <option value="BTC-USDT-SWAP">
+          <option
+            value="BTC-USDT-SWAP"
+          >
             BTC-USDT-SWAP
           </option>
 
-          <option value="ETH-USDT-SWAP">
+          <option
+            value="ETH-USDT-SWAP"
+          >
             ETH-USDT-SWAP
           </option>
 
-          <option value="SOL-USDT-SWAP">
+          <option
+            value="SOL-USDT-SWAP"
+          >
             SOL-USDT-SWAP
           </option>
 
-          <option value="XRP-USDT-SWAP">
+          <option
+            value="XRP-USDT-SWAP"
+          >
             XRP-USDT-SWAP
           </option>
 
-          <option value="DOGE-USDT-SWAP">
+          <option
+            value="DOGE-USDT-SWAP"
+          >
             DOGE-USDT-SWAP
           </option>
 
@@ -1589,30 +2345,30 @@
         >
 
           <option value="1m">
-            1 Minute
+            1m
+          </option>
+
+          <option value="5m">
+            5m
           </option>
 
           <option
-            value="5m"
+            value="15m"
             selected
           >
-            5 Minutes
-          </option>
-
-          <option value="15m">
-            15 Minutes
+            15m
           </option>
 
           <option value="1H">
-            1 Hour
+            1H
           </option>
 
           <option value="4H">
-            4 Hours
+            4H
           </option>
 
           <option value="1Dutc">
-            1 Day UTC
+            1D
           </option>
 
         </select>
@@ -1620,7 +2376,7 @@
 
         <button
           id="refreshMarketButton"
-          class="button primary"
+          class="button secondary"
         >
           Refresh Market
         </button>
@@ -1647,7 +2403,7 @@
             id="priceChange"
             class="metric-sub"
           >
-            24H Change --
+            24H --
           </div>
 
         </div>
@@ -1656,7 +2412,7 @@
         <div class="card">
 
           <div class="metric-label">
-            Funding Rate
+            Funding
           </div>
 
           <div
@@ -1683,14 +2439,17 @@
           </div>
 
           <div
-            id="openInterest"
+            id="openInterestUsd"
             class="metric-value"
           >
             --
           </div>
 
-          <div class="metric-sub">
-            USD when available
+          <div
+            id="openInterestRaw"
+            class="metric-sub"
+          >
+            OI --
           </div>
 
         </div>
@@ -1710,26 +2469,21 @@
           </div>
 
           <div
-            id="highLow"
+            id="range24h"
             class="metric-sub"
           >
-            High -- / Low --
+            Range --
           </div>
 
         </div>
 
       </div>
 
-    </section>
 
-
-    <!-- =========================
-         Chart + Order Book
-    ========================== -->
-
-    <section class="section">
-
-      <div class="grid-2">
+      <div
+        class="grid-2"
+        style="margin-top: 12px;"
+      >
 
         <div class="card chart-card">
 
@@ -1745,22 +2499,16 @@
               </div>
 
               <div
-                id="chartTimeframe"
+                id="chartSub"
                 class="chart-sub"
               >
-                5m · 60 candles
+                15m · 60 candles
               </div>
 
             </div>
 
-            <div
-              id="candleStatus"
-              class="chart-sub"
-            >
-              Waiting
-            </div>
-
           </div>
+
 
           <div class="chart-wrap">
 
@@ -1775,22 +2523,9 @@
 
         <div class="card">
 
-          <div class="section-header">
-
-            <div>
-
-              <h3>
-                Order Book
-              </h3>
-
-              <p>
-                Best bid / ask
-              </p>
-
-            </div>
-
+          <div class="metric-label">
+            Order Book
           </div>
-
 
           <div class="book-list">
 
@@ -1833,8 +2568,15 @@
               </div>
 
               <div
-                id="spread"
+                id="spreadValue"
                 class="metric-value"
+              >
+                --
+              </div>
+
+              <div
+                id="spreadPercent"
+                class="metric-sub"
               >
                 --
               </div>
@@ -1861,21 +2603,14 @@
         <div>
 
           <h3>
-            SCOUT Top Opportunities
+            SCOUT
           </h3>
 
           <p>
-            Browser-side scanner · all live OKX
-            USDT-SWAP · Score represents relative
-            market opportunity / quality, not LONG
-            or SHORT probability
+            Opportunity discovery across live OKX USDT perpetual markets
           </p>
 
         </div>
-
-        <p id="scoutUpdated">
-          Scout update: -
-        </p>
 
       </div>
 
@@ -1889,48 +2624,31 @@
             class="spinner"
           ></span>
 
-          <span id="scoutStatusText">
-            Waiting for scan
+          <span
+            id="scoutStatusText"
+          >
+            Ready
           </span>
 
         </div>
 
 
-        <div
-          class="controls"
-          style="margin-bottom: 0;"
+        <button
+          id="scanScoutButton"
+          class="button primary"
         >
-
-          <button
-            id="scanScoutButton"
-            class="button secondary"
-          >
-            Scan All USDT-SWAP
-          </button>
-
-        </div>
+          Scan All USDT-SWAP
+        </button>
 
       </div>
 
 
-      <div class="progress">
-
-        <div
-          id="scoutProgress"
-        ></div>
-
-      </div>
-
-
-      <div
-        class="scout-summary"
-        style="margin-top: 12px;"
-      >
+      <div class="scout-summary">
 
         <div class="card">
 
           <div class="metric-label">
-            Markets Scanned
+            Markets
           </div>
 
           <div
@@ -1941,7 +2659,7 @@
           </div>
 
           <div class="metric-sub">
-            Live USDT perpetuals
+            live USDT-SWAP
           </div>
 
         </div>
@@ -1961,7 +2679,7 @@
           </div>
 
           <div class="metric-sub">
-            Preliminary Top 40
+            preliminary Top 40
           </div>
 
         </div>
@@ -1976,7 +2694,6 @@
           <div
             id="scoutTopSymbol"
             class="metric-value"
-            style="font-size: 18px;"
           >
             --
           </div>
@@ -1994,21 +2711,35 @@
         <div class="card">
 
           <div class="metric-label">
-            SCOUT Mode
+            Mode
           </div>
 
           <div
             class="metric-value blue"
-            style="font-size: 18px;"
           >
-            BROWSER
+            Browser
           </div>
 
-          <div class="metric-sub">
-            Public API · no API key
+          <div
+            id="scoutUpdated"
+            class="metric-sub"
+          >
+            --
           </div>
 
         </div>
+
+      </div>
+
+
+      <div
+        class="progress"
+        style="margin-bottom: 12px;"
+      >
+
+        <div
+          id="scoutProgress"
+        ></div>
 
       </div>
 
@@ -2050,7 +2781,7 @@
               </th>
 
               <th>
-                Volume ≈ USD
+                Volume
               </th>
 
               <th>
@@ -2066,14 +2797,16 @@
           </thead>
 
 
-          <tbody id="scoutTableBody">
+          <tbody
+            id="scoutTableBody"
+          >
 
             <tr>
 
               <td colspan="10">
 
                 <div class="empty-state">
-                  SCOUT has not run yet.
+                  SCOUT has not completed yet.
                 </div>
 
               </td>
@@ -2083,6 +2816,341 @@
           </tbody>
 
         </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEWS V1
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            NEWS Agent
+          </h3>
+
+          <p>
+            Multi-source crypto news ingestion and AI semantic analysis
+          </p>
+
+        </div>
+
+        <div
+          class="agent-tag code-complete"
+        >
+          V1 CODE COMPLETE
+        </div>
+
+      </div>
+
+
+      <div class="news-overview">
+
+        <div class="card">
+
+          <div class="metric-label">
+            Source Layer
+          </div>
+
+          <div
+            class="metric-value positive"
+          >
+            READY
+          </div>
+
+          <div class="metric-sub">
+            RSS / Atom + source manager
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Deterministic
+          </div>
+
+          <div
+            class="metric-value positive"
+          >
+            READY
+          </div>
+
+          <div class="metric-sub">
+            dedupe · category · impact
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            LLM Layer
+          </div>
+
+          <div
+            class="metric-value positive"
+          >
+            READY
+          </div>
+
+          <div class="metric-sub">
+            bias · horizon · priced-in risk
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric-label">
+            Runtime
+          </div>
+
+          <div
+            class="metric-value warning-text"
+          >
+            PENDING
+          </div>
+
+          <div class="metric-sub">
+            local tests not yet confirmed here
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card"
+           style="margin-top: 12px;"
+      >
+
+        <div class="metric-label">
+          NEWS Pipeline
+        </div>
+
+
+        <div class="news-pipeline">
+
+          <div class="pipeline-node">
+
+            <strong>
+              Sources
+            </strong>
+
+            <span>
+              RSS 2.0 / Atom / future APIs
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              Source Manager
+            </strong>
+
+            <span>
+              concurrent fetch · partial failure · dedupe
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              NewsAnalyzer
+            </strong>
+
+            <span>
+              clustering · symbols · category · impact
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              NewsLLMAnalyzer
+            </strong>
+
+            <span>
+              LONG / SHORT / NEUTRAL · confidence · priced-in
+            </span>
+
+          </div>
+
+
+          <div class="pipeline-node">
+
+            <strong>
+              NewsOutput
+            </strong>
+
+            <span>
+              structured events for DECISION
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="news-components">
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                models.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              NewsArticle, NewsInput,
+              NewsEvent and NewsOutput.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                analyzer.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Event clustering, stale filtering,
+              classification, symbols and deterministic scoring.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                llm.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Structured AI event analysis,
+              direction, confidence, horizon and priced-in risk.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                rss.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Async RSS 2.0 / Atom parser,
+              symbol detection and feed isolation.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                manager.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              Source aggregation, concurrent fetch,
+              partial failures and cross-source evidence.
+            </div>
+
+          </div>
+
+
+          <div class="component">
+
+            <div class="component-top">
+
+              <div class="component-name">
+                service.py
+              </div>
+
+              <div class="component-status">
+                READY
+              </div>
+
+            </div>
+
+            <div class="component-detail">
+              End-to-end orchestration,
+              source metadata and duplicate LLM-call cache.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="news-runtime">
+          GitHub Pages cannot execute the Python NEWS pipeline.
+          Live NEWS output will be exposed to this dashboard later
+          through the backend API layer. OpenAI credentials must remain
+          server-side only.
+        </div>
 
       </div>
 
@@ -2100,11 +3168,11 @@
         <div>
 
           <h3>
-            Agent Team
+            Agent System
           </h3>
 
           <p>
-            Current project state
+            Six-agent architecture
           </p>
 
         </div>
@@ -2119,25 +3187,23 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              SCOUT
+              01 · SCOUT
             </div>
 
-            <span class="agent-tag live">
-              LIVE IN BROWSER
-            </span>
+            <div class="agent-tag live">
+              IMPLEMENTED
+            </div>
 
           </div>
 
           <div class="agent-role">
-            Market Opportunity Scanner
+            Opportunity scanner
           </div>
 
           <div class="agent-detail">
-            This page mirrors the current
-            SCOUT ranking concept in
-            JavaScript so GitHub Pages can
-            display results without a
-            Python server.
+            Market universe scanning,
+            liquidity, volume, volatility,
+            open interest and activity ranking.
           </div>
 
         </div>
@@ -2148,23 +3214,23 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              NEWS
+              02 · NEWS
             </div>
 
-            <span class="agent-tag">
-              SKELETON
-            </span>
+            <div class="agent-tag code-complete">
+              V1 COMPLETE
+            </div>
 
           </div>
 
           <div class="agent-role">
-            News Analyst
+            News intelligence
           </div>
 
           <div class="agent-detail">
-            Backend model exists;
-            live news analysis is not
-            connected yet.
+            RSS ingestion, source manager,
+            deterministic event extraction,
+            LLM semantic analysis and caching.
           </div>
 
         </div>
@@ -2175,23 +3241,23 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              SENTIMENT
+              03 · SENTIMENT
             </div>
 
-            <span class="agent-tag">
-              SKELETON
-            </span>
+            <div class="agent-tag pending">
+              NEXT
+            </div>
 
           </div>
 
           <div class="agent-role">
-            Sentiment Analyst
+            Crowd and positioning analysis
           </div>
 
           <div class="agent-detail">
-            Backend model exists;
-            full sentiment analysis is not
-            connected yet.
+            Funding, open interest,
+            long-short ratios, crowding,
+            extremes and social sentiment.
           </div>
 
         </div>
@@ -2202,23 +3268,22 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              CHARTS
+              04 · CHARTS
             </div>
 
-            <span class="agent-tag">
+            <div class="agent-tag">
               SKELETON
-            </span>
+            </div>
 
           </div>
 
           <div class="agent-role">
-            Technical Analyst
+            Technical analysis
           </div>
 
           <div class="agent-detail">
-            Backend model exists;
-            multi-timeframe analysis is not
-            connected yet.
+            Structure, trend, momentum,
+            volatility, volume and multi-timeframe analysis.
           </div>
 
         </div>
@@ -2229,23 +3294,22 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              RISK
+              05 · RISK
             </div>
 
-            <span class="agent-tag">
+            <div class="agent-tag">
               SKELETON
-            </span>
+            </div>
 
           </div>
 
           <div class="agent-role">
-            AI Risk Analyst
+            AI risk advisor
           </div>
 
           <div class="agent-detail">
-            Advisory risk agent only;
-            deterministic hard risk engine
-            is not implemented yet.
+            Risk interpretation and trade-quality assessment.
+            Deterministic hard risk controls remain separate.
           </div>
 
         </div>
@@ -2256,23 +3320,22 @@
           <div class="agent-top">
 
             <div class="agent-name">
-              DECISION
+              06 · DECISION
             </div>
 
-            <span class="agent-tag">
+            <div class="agent-tag">
               SKELETON
-            </span>
+            </div>
 
           </div>
 
           <div class="agent-role">
-            Final Decision Agent
+            Final synthesis
           </div>
 
           <div class="agent-detail">
-            Backend currently returns WAIT;
-            execution is intentionally not
-            connected.
+            Combines agent outputs into a final
+            LONG, SHORT or WAIT decision.
           </div>
 
         </div>
@@ -2283,66 +3346,41 @@
 
 
     <!-- =========================
-         API / Log
+         System
     ========================== -->
 
     <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h3>
+            System
+          </h3>
+
+          <p>
+            Browser connectivity and diagnostics
+          </p>
+
+        </div>
+
+      </div>
+
 
       <div class="system-grid">
 
         <div class="card">
 
-          <div class="section-header">
-
-            <div>
-
-              <h3>
-                OKX API Status
-              </h3>
-
-              <p>
-                Public endpoints used by
-                this page
-              </p>
-
-            </div>
-
+          <div
+            class="metric-label"
+            style="margin-bottom: 12px;"
+          >
+            OKX Public Endpoints
           </div>
 
 
           <div class="endpoint-list">
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/public/instruments
-              </code>
-
-              <span
-                id="instrumentsStatus"
-                class="endpoint-state"
-              >
-                Waiting
-              </span>
-
-            </div>
-
-
-            <div class="endpoint">
-
-              <code>
-                /api/v5/market/tickers
-              </code>
-
-              <span
-                id="tickersStatus"
-                class="endpoint-state"
-              >
-                Waiting
-              </span>
-
-            </div>
-
 
             <div class="endpoint">
 
@@ -2354,7 +3392,7 @@
                 id="tickerStatus"
                 class="endpoint-state"
               >
-                Waiting
+                waiting
               </span>
 
             </div>
@@ -2370,7 +3408,23 @@
                 id="candlesStatus"
                 class="endpoint-state"
               >
-                Waiting
+                waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/books
+              </code>
+
+              <span
+                id="booksStatus"
+                class="endpoint-state"
+              >
+                waiting
               </span>
 
             </div>
@@ -2386,7 +3440,7 @@
                 id="fundingStatus"
                 class="endpoint-state"
               >
-                Waiting
+                waiting
               </span>
 
             </div>
@@ -2402,7 +3456,7 @@
                 id="oiStatus"
                 class="endpoint-state"
               >
-                Waiting
+                waiting
               </span>
 
             </div>
@@ -2411,14 +3465,30 @@
             <div class="endpoint">
 
               <code>
-                /api/v5/market/books
+                /api/v5/public/instruments
               </code>
 
               <span
-                id="bookStatus"
+                id="instrumentsStatus"
                 class="endpoint-state"
               >
-                Waiting
+                waiting
+              </span>
+
+            </div>
+
+
+            <div class="endpoint">
+
+              <code>
+                /api/v5/market/tickers
+              </code>
+
+              <span
+                id="tickersStatus"
+                class="endpoint-state"
+              >
+                waiting
               </span>
 
             </div>
@@ -2430,24 +3500,15 @@
 
         <div class="card">
 
-          <div class="section-header">
-
-            <div>
-
-              <h3>
-                System Log
-              </h3>
-
-              <p>
-                Current browser session
-              </p>
-
-            </div>
-
+          <div
+            class="metric-label"
+            style="margin-bottom: 12px;"
+          >
+            System Log
           </div>
 
           <div
-            id="logBox"
+            id="systemLog"
             class="log-box"
           ></div>
 
@@ -2463,8 +3524,8 @@
   <footer>
 
     <div class="container">
-      Codex Bot · Public Market Data /
-      Browser SCOUT · No trading permissions
+      Codex Bot · Research & development dashboard ·
+      public market data only
     </div>
 
   </footer>
@@ -2476,175 +3537,244 @@
 
     /*
      * ==============================
-     * Configuration
+     * Config
      * ==============================
      */
 
-    const API_BASES = [
-      "https://www.okx.com",
-      "https://openapi.okx.com"
-    ];
+    const OKX_BASE =
+      "https://www.okx.com";
+
 
     const MARKET_REFRESH_MS =
       15000;
 
+
     const SCOUT_REFRESH_MS =
       300000;
+
 
     const SCOUT_TOP_N =
       10;
 
+
     const SCOUT_DETAIL_POOL =
       40;
+
 
     const FUNDING_CONCURRENCY =
       4;
 
 
-    /*
-     * ==============================
-     * DOM
-     * ==============================
-     */
-
-    const $ = (
-      id
-    ) => document.getElementById(
-      id
-    );
-
-
-    const elements = {
-      connectionDot:
-        $("connectionDot"),
-
-      connectionText:
-        $("connectionText"),
-
-      instrumentSelect:
-        $("instrumentSelect"),
-
-      barSelect:
-        $("barSelect"),
-
-      refreshMarketButton:
-        $("refreshMarketButton"),
-
-      lastUpdate:
-        $("lastUpdate"),
-
-      lastPrice:
-        $("lastPrice"),
-
-      priceChange:
-        $("priceChange"),
-
-      fundingRate:
-        $("fundingRate"),
-
-      fundingTime:
-        $("fundingTime"),
-
-      openInterest:
-        $("openInterest"),
-
-      volume24h:
-        $("volume24h"),
-
-      highLow:
-        $("highLow"),
-
-      chartSymbol:
-        $("chartSymbol"),
-
-      chartTimeframe:
-        $("chartTimeframe"),
-
-      candleStatus:
-        $("candleStatus"),
-
-      priceChart:
-        $("priceChart"),
-
-      bestAsk:
-        $("bestAsk"),
-
-      bestBid:
-        $("bestBid"),
-
-      spread:
-        $("spread"),
-
-      scanScoutButton:
-        $("scanScoutButton"),
-
-      scoutSpinner:
-        $("scoutSpinner"),
-
-      scoutStatusText:
-        $("scoutStatusText"),
-
-      scoutProgress:
-        $("scoutProgress"),
-
-      scoutUpdated:
-        $("scoutUpdated"),
-
-      scoutMarkets:
-        $("scoutMarkets"),
-
-      scoutPool:
-        $("scoutPool"),
-
-      scoutTopSymbol:
-        $("scoutTopSymbol"),
-
-      scoutTopScore:
-        $("scoutTopScore"),
-
-      scoutTableBody:
-        $("scoutTableBody"),
-
-      instrumentsStatus:
-        $("instrumentsStatus"),
-
-      tickersStatus:
-        $("tickersStatus"),
-
-      tickerStatus:
-        $("tickerStatus"),
-
-      candlesStatus:
-        $("candlesStatus"),
-
-      fundingStatus:
-        $("fundingStatus"),
-
-      oiStatus:
-        $("oiStatus"),
-
-      bookStatus:
-        $("bookStatus"),
-
-      logBox:
-        $("logBox")
-    };
-
-
-    /*
-     * ==============================
-     * State
-     * ==============================
-     */
-
     let marketLoading =
       false;
+
 
     let scoutLoading =
       false;
 
+
     let currentCandles =
       [];
+
+
+    /*
+     * ==============================
+     * Elements
+     * ==============================
+     */
+
+    const elements = {
+
+      connectionDot:
+        document.getElementById(
+          "connectionDot"
+        ),
+
+      connectionText:
+        document.getElementById(
+          "connectionText"
+        ),
+
+      instrumentSelect:
+        document.getElementById(
+          "instrumentSelect"
+        ),
+
+      barSelect:
+        document.getElementById(
+          "barSelect"
+        ),
+
+      refreshMarketButton:
+        document.getElementById(
+          "refreshMarketButton"
+        ),
+
+      lastPrice:
+        document.getElementById(
+          "lastPrice"
+        ),
+
+      priceChange:
+        document.getElementById(
+          "priceChange"
+        ),
+
+      fundingRate:
+        document.getElementById(
+          "fundingRate"
+        ),
+
+      fundingTime:
+        document.getElementById(
+          "fundingTime"
+        ),
+
+      openInterestUsd:
+        document.getElementById(
+          "openInterestUsd"
+        ),
+
+      openInterestRaw:
+        document.getElementById(
+          "openInterestRaw"
+        ),
+
+      volume24h:
+        document.getElementById(
+          "volume24h"
+        ),
+
+      range24h:
+        document.getElementById(
+          "range24h"
+        ),
+
+      bestAsk:
+        document.getElementById(
+          "bestAsk"
+        ),
+
+      bestBid:
+        document.getElementById(
+          "bestBid"
+        ),
+
+      spreadValue:
+        document.getElementById(
+          "spreadValue"
+        ),
+
+      spreadPercent:
+        document.getElementById(
+          "spreadPercent"
+        ),
+
+      chartSymbol:
+        document.getElementById(
+          "chartSymbol"
+        ),
+
+      chartSub:
+        document.getElementById(
+          "chartSub"
+        ),
+
+      priceChart:
+        document.getElementById(
+          "priceChart"
+        ),
+
+      scanScoutButton:
+        document.getElementById(
+          "scanScoutButton"
+        ),
+
+      scoutSpinner:
+        document.getElementById(
+          "scoutSpinner"
+        ),
+
+      scoutStatusText:
+        document.getElementById(
+          "scoutStatusText"
+        ),
+
+      scoutProgress:
+        document.getElementById(
+          "scoutProgress"
+        ),
+
+      scoutMarkets:
+        document.getElementById(
+          "scoutMarkets"
+        ),
+
+      scoutPool:
+        document.getElementById(
+          "scoutPool"
+        ),
+
+      scoutTopSymbol:
+        document.getElementById(
+          "scoutTopSymbol"
+        ),
+
+      scoutTopScore:
+        document.getElementById(
+          "scoutTopScore"
+        ),
+
+      scoutUpdated:
+        document.getElementById(
+          "scoutUpdated"
+        ),
+
+      scoutTableBody:
+        document.getElementById(
+          "scoutTableBody"
+        ),
+
+      tickerStatus:
+        document.getElementById(
+          "tickerStatus"
+        ),
+
+      candlesStatus:
+        document.getElementById(
+          "candlesStatus"
+        ),
+
+      booksStatus:
+        document.getElementById(
+          "booksStatus"
+        ),
+
+      fundingStatus:
+        document.getElementById(
+          "fundingStatus"
+        ),
+
+      oiStatus:
+        document.getElementById(
+          "oiStatus"
+        ),
+
+      instrumentsStatus:
+        document.getElementById(
+          "instrumentsStatus"
+        ),
+
+      tickersStatus:
+        document.getElementById(
+          "tickersStatus"
+        ),
+
+      systemLog:
+        document.getElementById(
+          "systemLog"
+        )
+    };
 
 
     /*
@@ -2663,28 +3793,37 @@
           "div"
         );
 
+
       line.className =
         `log-line ${type}`;
 
-      line.textContent =
-        `[${new Date().toLocaleTimeString()}] ${message}`;
 
-      elements.logBox
-        .appendChild(
+      const time =
+        new Date()
+          .toLocaleTimeString();
+
+
+      line.textContent =
+        `[${time}] ${message}`;
+
+
+      elements.systemLog
+        .prepend(
           line
         );
 
-      elements.logBox.scrollTop =
-        elements.logBox.scrollHeight;
 
       while (
-        elements.logBox.children.length
-        > 150
+        elements.systemLog
+          .children
+          .length > 100
       ) {
 
-        elements.logBox.removeChild(
-          elements.logBox.firstChild
-        );
+        elements.systemLog
+          .removeChild(
+            elements.systemLog
+              .lastChild
+          );
 
       }
 
@@ -2693,66 +3832,24 @@
 
     /*
      * ==============================
-     * Endpoint status
+     * Status helpers
      * ==============================
      */
 
-    function setEndpointStatus(
-      element,
-      state
-    ) {
-
-      element.classList.remove(
-        "ok",
-        "error"
-      );
-
-      if (
-        state === true
-      ) {
-
-        element.textContent =
-          "Online";
-
-        element.classList.add(
-          "ok"
-        );
-
-        return;
-
-      }
-
-      if (
-        state === false
-      ) {
-
-        element.textContent =
-          "Error";
-
-        element.classList.add(
-          "error"
-        );
-
-        return;
-
-      }
-
-      element.textContent =
-        "Waiting";
-
-    }
-
-
     function setConnection(
-      mode
+      status
     ) {
 
       elements.connectionDot
-        .className =
-          "status-dot";
+        .classList.remove(
+          "online",
+          "offline"
+        );
+
 
       if (
-        mode === "online"
+        status ===
+        "online"
       ) {
 
         elements.connectionDot
@@ -2760,12 +3857,14 @@
             "online"
           );
 
+
         elements.connectionText
           .textContent =
             "OKX Online";
 
       } else if (
-        mode === "offline"
+        status ===
+        "offline"
       ) {
 
         elements.connectionDot
@@ -2773,15 +3872,57 @@
             "offline"
           );
 
+
         elements.connectionText
           .textContent =
-            "Offline";
+            "OKX Offline";
 
       } else {
 
         elements.connectionText
           .textContent =
-            "Partial";
+            "Connecting";
+
+      }
+
+    }
+
+
+    function setEndpointStatus(
+      element,
+      success
+    ) {
+
+      element.classList
+        .remove(
+          "ok",
+          "error"
+        );
+
+
+      if (
+        success
+      ) {
+
+        element.textContent =
+          "OK";
+
+
+        element.classList
+          .add(
+            "ok"
+          );
+
+      } else {
+
+        element.textContent =
+          "ERROR";
+
+
+        element.classList
+          .add(
+            "error"
+          );
 
       }
 
@@ -2790,234 +3931,9 @@
 
     /*
      * ==============================
-     * Formatting
+     * Number helpers
      * ==============================
      */
-
-    function formatNumber(
-      value,
-      digits = 2
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      return new Intl.NumberFormat(
-        "en-US",
-        {
-          maximumFractionDigits:
-            digits
-        }
-      ).format(
-        number
-      );
-
-    }
-
-
-    function formatPrice(
-      value
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      let digits =
-        2;
-
-      if (
-        number < 100
-      ) {
-
-        digits =
-          4;
-
-      }
-
-      if (
-        number < 1
-      ) {
-
-        digits =
-          6;
-
-      }
-
-      if (
-        number < 0.01
-      ) {
-
-        digits =
-          8;
-
-      }
-
-      return new Intl.NumberFormat(
-        "en-US",
-        {
-          maximumFractionDigits:
-            digits
-        }
-      ).format(
-        number
-      );
-
-    }
-
-
-    function formatCompact(
-      value
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      return new Intl.NumberFormat(
-        "en-US",
-        {
-          notation:
-            "compact",
-
-          maximumFractionDigits:
-            2
-        }
-      ).format(
-        number
-      );
-
-    }
-
-
-    function formatSignedPercent(
-      value,
-      digits = 2
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      const sign =
-        number > 0
-          ? "+"
-          : "";
-
-      return (
-        `${sign}${number.toFixed(digits)}%`
-      );
-
-    }
-
-
-    function formatFunding(
-      value
-    ) {
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        !Number.isFinite(
-          number
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      return (
-        `${(
-          number * 100
-        ).toFixed(5)}%`
-      );
-
-    }
-
-
-    function formatDate(
-      timestamp
-    ) {
-
-      if (
-        !timestamp
-      ) {
-
-        return "--";
-
-      }
-
-      const date =
-        new Date(
-          Number(
-            timestamp
-          )
-        );
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return "--";
-
-      }
-
-      return date
-        .toLocaleString();
-
-    }
-
 
     function finiteNumber(
       value,
@@ -3029,6 +3945,7 @@
           value
         );
 
+
       return Number.isFinite(
         number
       )
@@ -3038,1387 +3955,201 @@
     }
 
 
-    /*
-     * ==============================
-     * OKX API
-     * ==============================
-     */
-
-    async function okxGet(
-      path,
-      params = {}
+    function formatPrice(
+      value
     ) {
 
-      const query =
-        new URLSearchParams();
-
-      for (
-        const [
-          key,
+      const number =
+        finiteNumber(
           value
-        ]
-        of Object.entries(
-          params
+        );
+
+
+      if (
+        number === null
+      ) {
+
+        return "--";
+
+      }
+
+
+      if (
+        Math.abs(
+          number
+        ) >= 1000
+      ) {
+
+        return number
+          .toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits:
+                2,
+
+              maximumFractionDigits:
+                2
+            }
+          );
+
+      }
+
+
+      if (
+        Math.abs(
+          number
+        ) >= 1
+      ) {
+
+        return number
+          .toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits:
+                2,
+
+              maximumFractionDigits:
+                5
+            }
+          );
+
+      }
+
+
+      return number
+        .toLocaleString(
+          undefined,
+          {
+            minimumFractionDigits:
+              4,
+
+            maximumFractionDigits:
+              8
+          }
+        );
+
+    }
+
+
+    function formatCompact(
+      value
+    ) {
+
+      const number =
+        finiteNumber(
+          value
+        );
+
+
+      if (
+        number === null
+      ) {
+
+        return "--";
+
+      }
+
+
+      return new Intl
+        .NumberFormat(
+          undefined,
+          {
+            notation:
+              "compact",
+
+            maximumFractionDigits:
+              2
+          }
         )
-      ) {
-
-        if (
-          value !== null
-          &&
-          value !== undefined
-          &&
-          value !== ""
-        ) {
-
-          query.set(
-            key,
-            String(
-              value
-            )
-          );
-
-        }
-
-      }
-
-      let lastError =
-        null;
-
-      for (
-        const base
-        of API_BASES
-      ) {
-
-        try {
-
-          const suffix =
-            query.toString()
-              ? `?${query.toString()}`
-              : "";
-
-          const response =
-            await fetch(
-              `${base}${path}${suffix}`,
-              {
-                method:
-                  "GET",
-
-                headers: {
-                  Accept:
-                    "application/json"
-                },
-
-                cache:
-                  "no-store"
-              }
-            );
-
-          if (
-            !response.ok
-          ) {
-
-            throw new Error(
-              `HTTP ${response.status}`
-            );
-
-          }
-
-          const payload =
-            await response.json();
-
-          if (
-            String(
-              payload.code
-            ) !== "0"
-          ) {
-
-            throw new Error(
-              payload.msg
-              ||
-              `OKX code ${payload.code}`
-            );
-
-          }
-
-          if (
-            !Array.isArray(
-              payload.data
-            )
-          ) {
-
-            throw new Error(
-              "Invalid OKX response: data is not an array"
-            );
-
-          }
-
-          return payload.data;
-
-        } catch (
-          error
-        ) {
-
-          lastError =
-            error;
-
-        }
-
-      }
-
-      throw (
-        lastError
-        ||
-        new Error(
-          "OKX request failed"
-        )
-      );
+        .format(
+          number
+        );
 
     }
 
 
-    /*
-     * ==============================
-     * Market Monitor - Ticker
-     * ==============================
-     */
-
-    async function loadTicker(
-      instId
+    function formatSignedPercent(
+      value,
+      digits = 2
     ) {
 
-      try {
-
-        const data =
-          await okxGet(
-            "/api/v5/market/ticker",
-            {
-              instId
-            }
-          );
-
-        const ticker =
-          data[0];
-
-        if (
-          !ticker
-        ) {
-
-          throw new Error(
-            "Ticker data empty"
-          );
-
-        }
-
-        const last =
-          finiteNumber(
-            ticker.last
-          );
-
-        const open =
-          finiteNumber(
-            ticker.open24h
-          );
-
-        const change =
-          last !== null
-          &&
-          open !== null
-          &&
-          open > 0
-
-            ? (
-                (
-                  last - open
-                )
-                / open
-              )
-              * 100
-
-            : 0;
-
-
-        elements.lastPrice
-          .textContent =
-
-            last !== null
-
-              ? `$${formatPrice(last)}`
-
-              : "--";
-
-
-        elements.priceChange
-          .textContent =
-
-            `24H ${
-              formatSignedPercent(
-                change
-              )
-            }`;
-
-
-        elements.priceChange
-          .className =
-
-            `metric-sub ${
-              change > 0
-
-                ? "positive"
-
-                : change < 0
-
-                  ? "negative"
-
-                  : ""
-            }`;
-
-
-        const volCcy =
-          finiteNumber(
-            ticker.volCcy24h
-          );
-
-
-        const approxQuoteVolume =
-
-          volCcy !== null
-          &&
-          last !== null
-
-            ? volCcy
-              * last
-
-            : finiteNumber(
-                ticker.vol24h
-              );
-
-
-        elements.volume24h
-          .textContent =
-
-            formatCompact(
-              approxQuoteVolume
-            );
-
-
-        elements.highLow
-          .textContent =
-
-            `High ${
-              formatPrice(
-                ticker.high24h
-              )
-            } / Low ${
-              formatPrice(
-                ticker.low24h
-              )
-            }`;
-
-
-        setEndpointStatus(
-          elements.tickerStatus,
-          true
+      const number =
+        finiteNumber(
+          value
         );
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        setEndpointStatus(
-          elements.tickerStatus,
-          false
-        );
-
-        log(
-          `Ticker error: ${error.message}`,
-          "error"
-        );
-
-        return false;
-
-      }
-
-    }
-
-
-    /*
-     * ==============================
-     * Market Monitor - Funding
-     * ==============================
-     */
-
-    async function loadFunding(
-      instId
-    ) {
-
-      try {
-
-        const data =
-          await okxGet(
-            "/api/v5/public/funding-rate",
-            {
-              instId
-            }
-          );
-
-
-        const item =
-          data[0];
-
-
-        if (
-          !item
-        ) {
-
-          throw new Error(
-            "Funding data empty"
-          );
-
-        }
-
-
-        const rate =
-          finiteNumber(
-            item.fundingRate
-          );
-
-
-        elements.fundingRate
-          .textContent =
-
-            formatFunding(
-              rate
-            );
-
-
-        elements.fundingRate
-          .className =
-
-            `metric-value ${
-              rate > 0
-
-                ? "positive"
-
-                : rate < 0
-
-                  ? "negative"
-
-                  : ""
-            }`;
-
-
-        elements.fundingTime
-          .textContent =
-
-            `Next funding: ${
-              formatDate(
-                item.nextFundingTime
-              )
-            }`;
-
-
-        setEndpointStatus(
-          elements.fundingStatus,
-          true
-        );
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        elements.fundingRate
-          .textContent =
-            "--";
-
-
-        elements.fundingTime
-          .textContent =
-            "Funding unavailable";
-
-
-        setEndpointStatus(
-          elements.fundingStatus,
-          false
-        );
-
-
-        log(
-          `Funding error: ${error.message}`,
-          "error"
-        );
-
-        return false;
-
-      }
-
-    }
-
-
-    /*
-     * ==============================
-     * Market Monitor - OI
-     * ==============================
-     */
-
-    async function loadOpenInterest(
-      instId
-    ) {
-
-      try {
-
-        const data =
-          await okxGet(
-            "/api/v5/public/open-interest",
-            {
-              instType:
-                "SWAP",
-
-              instId
-            }
-          );
-
-
-        const item =
-          data[0];
-
-
-        if (
-          !item
-        ) {
-
-          throw new Error(
-            "Open interest data empty"
-          );
-
-        }
-
-
-        const oiUsd =
-          finiteNumber(
-            item.oiUsd
-          );
-
-
-        const oiCcy =
-          finiteNumber(
-            item.oiCcy
-          );
-
-
-        const oi =
-          finiteNumber(
-            item.oi
-          );
-
-
-        elements.openInterest
-          .textContent =
-
-            oiUsd !== null
-
-              ? `$${formatCompact(oiUsd)}`
-
-              : oiCcy !== null
-
-                ? formatCompact(
-                    oiCcy
-                  )
-
-                : formatCompact(
-                    oi
-                  );
-
-
-        setEndpointStatus(
-          elements.oiStatus,
-          true
-        );
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        elements.openInterest
-          .textContent =
-            "--";
-
-
-        setEndpointStatus(
-          elements.oiStatus,
-          false
-        );
-
-
-        log(
-          `Open interest error: ${error.message}`,
-          "error"
-        );
-
-        return false;
-
-      }
-
-    }
-
-
-    /*
-     * ==============================
-     * Market Monitor - Order Book
-     * ==============================
-     */
-
-    async function loadOrderBook(
-      instId
-    ) {
-
-      try {
-
-        const data =
-          await okxGet(
-            "/api/v5/market/books",
-            {
-              instId,
-              sz: "5"
-            }
-          );
-
-
-        const book =
-          data[0];
-
-
-        if (
-          !book
-        ) {
-
-          throw new Error(
-            "Order book data empty"
-          );
-
-        }
-
-
-        const ask =
-          finiteNumber(
-            book.asks?.[0]?.[0]
-          );
-
-
-        const bid =
-          finiteNumber(
-            book.bids?.[0]?.[0]
-          );
-
-
-        elements.bestAsk
-          .textContent =
-
-            ask !== null
-
-              ? `$${formatPrice(ask)}`
-
-              : "--";
-
-
-        elements.bestBid
-          .textContent =
-
-            bid !== null
-
-              ? `$${formatPrice(bid)}`
-
-              : "--";
-
-
-        const spread =
-          spreadPercent(
-            bid,
-            ask
-          );
-
-
-        elements.spread
-          .textContent =
-
-            spread !== null
-
-              ? `${spread.toFixed(5)}%`
-
-              : "--";
-
-
-        setEndpointStatus(
-          elements.bookStatus,
-          true
-        );
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        setEndpointStatus(
-          elements.bookStatus,
-          false
-        );
-
-
-        log(
-          `Order book error: ${error.message}`,
-          "error"
-        );
-
-        return false;
-
-      }
-
-    }
-
-
-    /*
-     * ==============================
-     * Market Monitor - Candles
-     * ==============================
-     */
-
-    async function loadCandles(
-      instId,
-      bar
-    ) {
-
-      try {
-
-        const data =
-          await okxGet(
-            "/api/v5/market/candles",
-            {
-              instId,
-              bar,
-              limit:
-                60
-            }
-          );
-
-
-        currentCandles =
-          data
-
-            .map(
-              (
-                item
-              ) => ({
-                timestamp:
-                  finiteNumber(
-                    item[0]
-                  ),
-
-                open:
-                  finiteNumber(
-                    item[1]
-                  ),
-
-                high:
-                  finiteNumber(
-                    item[2]
-                  ),
-
-                low:
-                  finiteNumber(
-                    item[3]
-                  ),
-
-                close:
-                  finiteNumber(
-                    item[4]
-                  ),
-
-                volume:
-                  finiteNumber(
-                    item[5]
-                  ),
-
-                confirmed:
-                  String(
-                    item[8]
-                  ) === "1"
-              })
-            )
-
-            .filter(
-              (
-                item
-              ) =>
-
-                item.timestamp
-                  !== null
-
-                &&
-                item.open
-                  !== null
-
-                &&
-                item.high
-                  !== null
-
-                &&
-                item.low
-                  !== null
-
-                &&
-                item.close
-                  !== null
-            )
-
-            .sort(
-              (
-                a,
-                b
-              ) =>
-                a.timestamp
-                -
-                b.timestamp
-            );
-
-
-        drawCandles(
-          currentCandles
-        );
-
-
-        elements.candleStatus
-          .textContent =
-
-            `${currentCandles.length} candles`;
-
-
-        setEndpointStatus(
-          elements.candlesStatus,
-          true
-        );
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        currentCandles =
-          [];
-
-
-        drawCandles(
-          []
-        );
-
-
-        elements.candleStatus
-          .textContent =
-            "Unavailable";
-
-
-        setEndpointStatus(
-          elements.candlesStatus,
-          false
-        );
-
-
-        log(
-          `Candles error: ${error.message}`,
-          "error"
-        );
-
-        return false;
-
-      }
-
-    }
-
-
-    /*
-     * ==============================
-     * Chart drawing
-     * ==============================
-     */
-
-    function drawCandles(
-      candles
-    ) {
-
-      const canvas =
-        elements.priceChart;
-
-
-      const rect =
-        canvas.getBoundingClientRect();
-
-
-      const dpr =
-        window.devicePixelRatio
-        ||
-        1;
-
-
-      canvas.width =
-        Math.max(
-          1,
-          Math.floor(
-            rect.width
-            *
-            dpr
-          )
-        );
-
-
-      canvas.height =
-        Math.max(
-          1,
-          Math.floor(
-            rect.height
-            *
-            dpr
-          )
-        );
-
-
-      const ctx =
-        canvas.getContext(
-          "2d"
-        );
-
-
-      ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-      );
-
-
-      const width =
-        rect.width;
-
-
-      const height =
-        rect.height;
-
-
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
 
 
       if (
-        !candles.length
+        number === null
       ) {
 
-        ctx.fillStyle =
-          "#606d7d";
-
-
-        ctx.font =
-          "12px sans-serif";
-
-
-        ctx.textAlign =
-          "center";
-
-
-        ctx.fillText(
-          "No candle data",
-          width / 2,
-          height / 2
-        );
-
-        return;
+        return "--";
 
       }
 
 
-      const pad = {
-        top:
-          12,
-
-        right:
-          12,
-
-        bottom:
-          20,
-
-        left:
-          12
-      };
-
-
-      const usableWidth =
-        width
-        -
-        pad.left
-        -
-        pad.right;
-
-
-      const usableHeight =
-        height
-        -
-        pad.top
-        -
-        pad.bottom;
-
-
-      const maxPrice =
-        Math.max(
-          ...candles.map(
-            (
-              candle
-            ) =>
-              candle.high
-          )
-        );
-
-
-      const minPrice =
-        Math.min(
-          ...candles.map(
-            (
-              candle
-            ) =>
-              candle.low
-          )
-        );
-
-
-      const range =
-        maxPrice
-        -
-        minPrice
-        ||
-        1;
-
-
-      const rootStyle =
-        getComputedStyle(
-          document.documentElement
-        );
-
-
-      const upColor =
-        rootStyle
-
-          .getPropertyValue(
-            "--green"
-          )
-
-          .trim();
-
-
-      const downColor =
-        rootStyle
-
-          .getPropertyValue(
-            "--red"
-          )
-
-          .trim();
-
-
-      ctx.strokeStyle =
-        "#1d2632";
-
-
-      ctx.lineWidth =
-        1;
-
-
-      for (
-        let i = 1;
-        i <= 3;
-        i += 1
-      ) {
-
-        const y =
-          pad.top
-          +
-          (
-            usableHeight
-            *
-            i
-          )
-          /
-          4;
-
-
-        ctx.beginPath();
-
-
-        ctx.moveTo(
-          pad.left,
-          y
-        );
-
-
-        ctx.lineTo(
-          width
-          -
-          pad.right,
-          y
-        );
-
-
-        ctx.stroke();
-
-      }
-
-
-      const slot =
-        usableWidth
-        /
-        candles.length;
-
-
-      const bodyWidth =
-        Math.max(
-          2,
-          Math.min(
-            8,
-            slot
-            *
-            0.56
-          )
-        );
-
-
-      const priceToY =
-        (
-          price
-        ) =>
-
-          pad.top
-          +
-          (
-            (
-              maxPrice
-              -
-              price
-            )
-            /
-            range
-          )
-          *
-          usableHeight;
-
-
-      candles.forEach(
-        (
-          candle,
-          index
-        ) => {
-
-          const x =
-            pad.left
-            +
-            slot
-            *
-            index
-            +
-            slot
-            /
-            2;
-
-
-          const openY =
-            priceToY(
-              candle.open
-            );
-
-
-          const closeY =
-            priceToY(
-              candle.close
-            );
-
-
-          const highY =
-            priceToY(
-              candle.high
-            );
-
-
-          const lowY =
-            priceToY(
-              candle.low
-            );
-
-
-          const color =
-            candle.close
-            >=
-            candle.open
-
-              ? upColor
-
-              : downColor;
-
-
-          ctx.strokeStyle =
-            color;
-
-
-          ctx.fillStyle =
-            color;
-
-
-          ctx.beginPath();
-
-
-          ctx.moveTo(
-            x,
-            highY
-          );
-
-
-          ctx.lineTo(
-            x,
-            lowY
-          );
-
-
-          ctx.stroke();
-
-
-          const bodyTop =
-            Math.min(
-              openY,
-              closeY
-            );
-
-
-          const bodyHeight =
-            Math.max(
-              1,
-              Math.abs(
-                closeY
-                -
-                openY
-              )
-            );
-
-
-          ctx.fillRect(
-            x
-            -
-            bodyWidth
-            /
-            2,
-
-            bodyTop,
-
-            bodyWidth,
-
-            bodyHeight
-          );
-
-        }
+      const sign =
+        number > 0
+          ? "+"
+          : "";
+
+
+      return (
+        `${sign}`
+        +
+        `${number.toFixed(
+          digits
+        )}%`
       );
 
     }
 
 
-    /*
-     * ==============================
-     * Refresh selected market
-     * ==============================
-     */
+    function formatFunding(
+      value
+    ) {
 
-    async function refreshMarket() {
+      const number =
+        finiteNumber(
+          value
+        );
+
 
       if (
-        marketLoading
+        number === null
       ) {
 
-        return;
+        return "--";
 
       }
 
 
-      marketLoading =
-        true;
-
-
-      elements.refreshMarketButton
-        .disabled =
-          true;
-
-
-      elements.refreshMarketButton
-        .textContent =
-          "Loading...";
-
-
-      const instId =
-        elements.instrumentSelect
-          .value;
-
-
-      const bar =
-        elements.barSelect
-          .value;
-
-
-      elements.chartSymbol
-        .textContent =
-          instId;
-
-
-      elements.chartTimeframe
-        .textContent =
-
-          `${bar} · 60 candles`;
-
-
-      log(
-        `Refreshing ${instId} / ${bar}`,
-        "info"
+      return (
+        `${(
+          number * 100
+        ).toFixed(
+          5
+        )}%`
       );
-
-
-      const results =
-        await Promise.all(
-          [
-            loadTicker(
-              instId
-            ),
-
-            loadFunding(
-              instId
-            ),
-
-            loadOpenInterest(
-              instId
-            ),
-
-            loadOrderBook(
-              instId
-            ),
-
-            loadCandles(
-              instId,
-              bar
-            )
-          ]
-        );
-
-
-      const successCount =
-        results.filter(
-          Boolean
-        ).length;
-
-
-      if (
-        successCount
-        ===
-        results.length
-      ) {
-
-        setConnection(
-          "online"
-        );
-
-
-        log(
-          `Market refresh complete (${successCount}/${results.length})`,
-          "success"
-        );
-
-      } else if (
-        successCount
-        >
-        0
-      ) {
-
-        setConnection(
-          "partial"
-        );
-
-
-        log(
-          `Market refresh partial (${successCount}/${results.length})`,
-          "error"
-        );
-
-      } else {
-
-        setConnection(
-          "offline"
-        );
-
-
-        log(
-          "Market refresh failed",
-          "error"
-        );
-
-      }
-
-
-      elements.lastUpdate
-        .textContent =
-
-          `Last update: ${
-            new Date()
-              .toLocaleTimeString()
-          }`;
-
-
-      elements.refreshMarketButton
-        .disabled =
-          false;
-
-
-      elements.refreshMarketButton
-        .textContent =
-          "Refresh Market";
-
-
-      marketLoading =
-        false;
 
     }
 
-
-    /*
-     * ==============================
-     * SCOUT Math
-     * ==============================
-     */
 
     function percentageChange(
-      current,
-      reference
+      last,
+      open
     ) {
 
       if (
         !Number.isFinite(
-          current
+          last
         )
         ||
         !Number.isFinite(
-          reference
+          open
         )
         ||
-        reference <= 0
+        open === 0
       ) {
 
         return 0;
@@ -4428,12 +4159,10 @@
 
       return (
         (
-          current
-          -
-          reference
+          last - open
         )
         /
-        reference
+        open
       )
       *
       100;
@@ -4444,7 +4173,7 @@
     function rangePercent(
       high,
       low,
-      reference
+      base
     ) {
 
       if (
@@ -4457,12 +4186,10 @@
         )
         ||
         !Number.isFinite(
-          reference
+          base
         )
         ||
-        reference <= 0
-        ||
-        high < low
+        base <= 0
       ) {
 
         return 0;
@@ -4472,12 +4199,10 @@
 
       return (
         (
-          high
-          -
-          low
+          high - low
         )
         /
-        reference
+        base
       )
       *
       100;
@@ -4506,38 +4231,25 @@
         ask < bid
       ) {
 
-        return null;
+        return Infinity;
 
       }
 
 
-      const midpoint =
+      const mid =
         (
-          bid
-          +
-          ask
+          bid + ask
         )
         /
         2;
 
 
-      if (
-        midpoint <= 0
-      ) {
-
-        return null;
-
-      }
-
-
       return (
         (
-          ask
-          -
-          bid
+          ask - bid
         )
         /
-        midpoint
+        mid
       )
       *
       100;
@@ -4545,27 +4257,1184 @@
     }
 
 
-    function logValue(
-      value
+    /*
+     * ==============================
+     * OKX
+     * ==============================
+     */
+
+    async function okxGet(
+      path,
+      params = {}
     ) {
 
-      if (
-        !Number.isFinite(
-          value
+      const url =
+        new URL(
+          OKX_BASE
+          +
+          path
+        );
+
+
+      Object
+        .entries(
+          params
         )
-        ||
-        value <= 0
+        .forEach(
+          (
+            [
+              key,
+              value
+            ]
+          ) => {
+
+            if (
+              value !== null
+              &&
+              value !== undefined
+              &&
+              value !== ""
+            ) {
+
+              url.searchParams
+                .set(
+                  key,
+                  String(
+                    value
+                  )
+                );
+
+            }
+
+          }
+        );
+
+
+      const response =
+        await fetch(
+          url.toString(),
+          {
+            method:
+              "GET",
+
+            headers:
+              {
+                Accept:
+                  "application/json"
+              },
+
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
       ) {
 
-        return 0;
+        throw new Error(
+          `HTTP ${response.status}`
+        );
 
       }
 
 
-      return Math.log10(
-        1
-        +
-        value
+      const payload =
+        await response.json();
+
+
+      if (
+        String(
+          payload.code
+        )
+        !==
+        "0"
+      ) {
+
+        throw new Error(
+          (
+            `OKX ${payload.code}: `
+            +
+            (
+              payload.msg
+              ||
+              "Unknown error"
+            )
+          )
+        );
+
+      }
+
+
+      return Array.isArray(
+        payload.data
+      )
+        ? payload.data
+        : [];
+
+    }
+
+
+    /*
+     * ==============================
+     * Market Monitor
+     * ==============================
+     */
+
+    async function refreshMarket() {
+
+      if (
+        marketLoading
+      ) {
+
+        return;
+
+      }
+
+
+      marketLoading =
+        true;
+
+
+      elements.refreshMarketButton
+        .disabled =
+          true;
+
+
+      elements.refreshMarketButton
+        .textContent =
+          "Refreshing...";
+
+
+      const symbol =
+        elements.instrumentSelect
+          .value;
+
+
+      const bar =
+        elements.barSelect
+          .value;
+
+
+      elements.chartSymbol
+        .textContent =
+          symbol;
+
+
+      elements.chartSub
+        .textContent =
+          `${bar} · 60 candles`;
+
+
+      try {
+
+        const [
+          tickerResult,
+          candlesResult,
+          booksResult,
+          fundingResult,
+          oiResult
+        ] =
+          await Promise.allSettled(
+            [
+
+              okxGet(
+                "/api/v5/market/ticker",
+                {
+                  instId:
+                    symbol
+                }
+              ),
+
+              okxGet(
+                "/api/v5/market/candles",
+                {
+                  instId:
+                    symbol,
+
+                  bar,
+
+                  limit:
+                    60
+                }
+              ),
+
+              okxGet(
+                "/api/v5/market/books",
+                {
+                  instId:
+                    symbol,
+
+                  sz:
+                    5
+                }
+              ),
+
+              okxGet(
+                "/api/v5/public/funding-rate",
+                {
+                  instId:
+                    symbol
+                }
+              ),
+
+              okxGet(
+                "/api/v5/public/open-interest",
+                {
+                  instType:
+                    "SWAP",
+
+                  instId:
+                    symbol
+                }
+              )
+
+            ]
+          );
+
+
+        /*
+         * Ticker
+         */
+
+        if (
+          tickerResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.tickerStatus,
+            true
+          );
+
+
+          const ticker =
+            tickerResult.value[0]
+            ||
+            {};
+
+
+          const last =
+            finiteNumber(
+              ticker.last
+            );
+
+
+          const open24h =
+            finiteNumber(
+              ticker.open24h
+            );
+
+
+          const high24h =
+            finiteNumber(
+              ticker.high24h
+            );
+
+
+          const low24h =
+            finiteNumber(
+              ticker.low24h
+            );
+
+
+          const vol24h =
+            finiteNumber(
+              ticker.vol24h,
+              0
+            );
+
+
+          const volCcy24h =
+            finiteNumber(
+              ticker.volCcy24h,
+              0
+            );
+
+
+          const change =
+            percentageChange(
+              last,
+              open24h
+            );
+
+
+          elements.lastPrice
+            .textContent =
+              formatPrice(
+                last
+              );
+
+
+          elements.priceChange
+            .textContent =
+              (
+                "24H "
+                +
+                formatSignedPercent(
+                  change
+                )
+              );
+
+
+          elements.priceChange
+            .classList
+            .remove(
+              "positive",
+              "negative"
+            );
+
+
+          if (
+            change > 0
+          ) {
+
+            elements.priceChange
+              .classList
+              .add(
+                "positive"
+              );
+
+          } else if (
+            change < 0
+          ) {
+
+            elements.priceChange
+              .classList
+              .add(
+                "negative"
+              );
+
+          }
+
+
+          let approximateVolume =
+            vol24h;
+
+
+          if (
+            volCcy24h > 0
+            &&
+            Number.isFinite(
+              last
+            )
+          ) {
+
+            approximateVolume =
+              volCcy24h
+              *
+              last;
+
+          }
+
+
+          elements.volume24h
+            .textContent =
+              (
+                "$"
+                +
+                formatCompact(
+                  approximateVolume
+                )
+              );
+
+
+          elements.range24h
+            .textContent =
+              (
+                "Range "
+                +
+                rangePercent(
+                  high24h,
+                  low24h,
+
+                  open24h > 0
+                    ? open24h
+                    : last
+                )
+                .toFixed(
+                  2
+                )
+                +
+                "%"
+              );
+
+        } else {
+
+          setEndpointStatus(
+            elements.tickerStatus,
+            false
+          );
+
+        }
+
+
+        /*
+         * Candles
+         */
+
+        if (
+          candlesResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.candlesStatus,
+            true
+          );
+
+
+          currentCandles =
+            candlesResult.value
+
+              .map(
+                (
+                  row
+                ) => ({
+                  timestamp:
+                    finiteNumber(
+                      row[0]
+                    ),
+
+                  open:
+                    finiteNumber(
+                      row[1]
+                    ),
+
+                  high:
+                    finiteNumber(
+                      row[2]
+                    ),
+
+                  low:
+                    finiteNumber(
+                      row[3]
+                    ),
+
+                  close:
+                    finiteNumber(
+                      row[4]
+                    )
+                })
+              )
+
+              .filter(
+                (
+                  candle
+                ) =>
+                  Number.isFinite(
+                    candle.open
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.high
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.low
+                  )
+                  &&
+                  Number.isFinite(
+                    candle.close
+                  )
+              )
+
+              .reverse();
+
+
+          drawCandles(
+            currentCandles
+          );
+
+        } else {
+
+          setEndpointStatus(
+            elements.candlesStatus,
+            false
+          );
+
+        }
+
+
+        /*
+         * Order book
+         */
+
+        if (
+          booksResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.booksStatus,
+            true
+          );
+
+
+          const book =
+            booksResult.value[0]
+            ||
+            {};
+
+
+          const ask =
+            finiteNumber(
+              book.asks?.[0]?.[0]
+            );
+
+
+          const bid =
+            finiteNumber(
+              book.bids?.[0]?.[0]
+            );
+
+
+          elements.bestAsk
+            .textContent =
+              formatPrice(
+                ask
+              );
+
+
+          elements.bestBid
+            .textContent =
+              formatPrice(
+                bid
+              );
+
+
+          if (
+            Number.isFinite(
+              ask
+            )
+            &&
+            Number.isFinite(
+              bid
+            )
+          ) {
+
+            elements.spreadValue
+              .textContent =
+                formatPrice(
+                  ask - bid
+                );
+
+
+            const spread =
+              spreadPercent(
+                bid,
+                ask
+              );
+
+
+            elements.spreadPercent
+              .textContent =
+                Number.isFinite(
+                  spread
+                )
+                  ? `${spread.toFixed(
+                      5
+                    )}%`
+                  : "--";
+
+          }
+
+        } else {
+
+          setEndpointStatus(
+            elements.booksStatus,
+            false
+          );
+
+        }
+
+
+        /*
+         * Funding
+         */
+
+        if (
+          fundingResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.fundingStatus,
+            true
+          );
+
+
+          const funding =
+            fundingResult.value[0]
+            ||
+            {};
+
+
+          const rate =
+            finiteNumber(
+              funding.fundingRate
+            );
+
+
+          const nextFunding =
+            finiteNumber(
+              funding.nextFundingTime
+            );
+
+
+          elements.fundingRate
+            .textContent =
+              formatFunding(
+                rate
+              );
+
+
+          elements.fundingRate
+            .classList
+            .remove(
+              "positive",
+              "negative"
+            );
+
+
+          if (
+            rate > 0
+          ) {
+
+            elements.fundingRate
+              .classList
+              .add(
+                "positive"
+              );
+
+          } else if (
+            rate < 0
+          ) {
+
+            elements.fundingRate
+              .classList
+              .add(
+                "negative"
+              );
+
+          }
+
+
+          elements.fundingTime
+            .textContent =
+
+              Number.isFinite(
+                nextFunding
+              )
+
+                ? (
+                    "Next "
+                    +
+                    new Date(
+                      nextFunding
+                    )
+                    .toLocaleString()
+                  )
+
+                : "Next funding --";
+
+        } else {
+
+          setEndpointStatus(
+            elements.fundingStatus,
+            false
+          );
+
+        }
+
+
+        /*
+         * Open interest
+         */
+
+        if (
+          oiResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.oiStatus,
+            true
+          );
+
+
+          const oi =
+            oiResult.value[0]
+            ||
+            {};
+
+
+          const oiUsd =
+            finiteNumber(
+              oi.oiUsd
+            );
+
+
+          const oiRaw =
+            finiteNumber(
+              oi.oi
+            );
+
+
+          elements.openInterestUsd
+            .textContent =
+
+              Number.isFinite(
+                oiUsd
+              )
+
+                ? (
+                    "$"
+                    +
+                    formatCompact(
+                      oiUsd
+                    )
+                  )
+
+                : "--";
+
+
+          elements.openInterestRaw
+            .textContent =
+
+              Number.isFinite(
+                oiRaw
+              )
+
+                ? (
+                    "OI "
+                    +
+                    formatCompact(
+                      oiRaw
+                    )
+                  )
+
+                : "OI --";
+
+        } else {
+
+          setEndpointStatus(
+            elements.oiStatus,
+            false
+          );
+
+        }
+
+
+        const anySuccess =
+          [
+            tickerResult,
+            candlesResult,
+            booksResult,
+            fundingResult,
+            oiResult
+          ]
+          .some(
+            (
+              result
+            ) =>
+              result.status
+              ===
+              "fulfilled"
+          );
+
+
+        setConnection(
+          anySuccess
+            ? "online"
+            : "offline"
+        );
+
+
+        if (
+          anySuccess
+        ) {
+
+          log(
+            (
+              `Market refreshed: `
+              +
+              `${symbol} ${bar}`
+            ),
+            "success"
+          );
+
+        }
+
+      } catch (
+        error
+      ) {
+
+        setConnection(
+          "offline"
+        );
+
+
+        log(
+          (
+            `Market refresh error: `
+            +
+            error.message
+          ),
+          "error"
+        );
+
+      } finally {
+
+        marketLoading =
+          false;
+
+
+        elements.refreshMarketButton
+          .disabled =
+            false;
+
+
+        elements.refreshMarketButton
+          .textContent =
+            "Refresh Market";
+
+      }
+
+    }
+
+
+    /*
+     * ==============================
+     * Canvas chart
+     * ==============================
+     */
+
+    function drawCandles(
+      candles
+    ) {
+
+      const canvas =
+        elements.priceChart;
+
+
+      const rect =
+        canvas
+          .getBoundingClientRect();
+
+
+      const ratio =
+        window.devicePixelRatio
+        ||
+        1;
+
+
+      canvas.width =
+        Math.max(
+          1,
+          Math.floor(
+            rect.width
+            *
+            ratio
+          )
+        );
+
+
+      canvas.height =
+        Math.max(
+          1,
+          Math.floor(
+            rect.height
+            *
+            ratio
+          )
+        );
+
+
+      const ctx =
+        canvas
+          .getContext(
+            "2d"
+          );
+
+
+      ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+      );
+
+
+      ctx.clearRect(
+        0,
+        0,
+        rect.width,
+        rect.height
+      );
+
+
+      if (
+        !candles.length
+      ) {
+
+        return;
+
+      }
+
+
+      const padding =
+        {
+          top:
+            10,
+
+          right:
+            12,
+
+          bottom:
+            12,
+
+          left:
+            12
+        };
+
+
+      const width =
+        rect.width
+        -
+        padding.left
+        -
+        padding.right;
+
+
+      const height =
+        rect.height
+        -
+        padding.top
+        -
+        padding.bottom;
+
+
+      const highest =
+        Math.max(
+          ...candles.map(
+            candle =>
+              candle.high
+          )
+        );
+
+
+      const lowest =
+        Math.min(
+          ...candles.map(
+            candle =>
+              candle.low
+          )
+        );
+
+
+      const range =
+        highest - lowest
+        ||
+        1;
+
+
+      const slotWidth =
+        width
+        /
+        candles.length;
+
+
+      const bodyWidth =
+        Math.max(
+          2,
+          Math.min(
+            9,
+            slotWidth
+            *
+            0.62
+          )
+        );
+
+
+      function y(
+        price
+      ) {
+
+        return (
+          padding.top
+          +
+          (
+            highest - price
+          )
+          /
+          range
+          *
+          height
+        );
+
+      }
+
+
+      ctx.strokeStyle =
+        "rgba(96,109,125,0.12)";
+
+
+      ctx.lineWidth =
+        1;
+
+
+      for (
+        let i = 1;
+        i < 5;
+        i += 1
+      ) {
+
+        const gridY =
+          padding.top
+          +
+          height
+          *
+          i
+          /
+          5;
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+          padding.left,
+          gridY
+        );
+
+
+        ctx.lineTo(
+          padding.left
+          +
+          width,
+          gridY
+        );
+
+
+        ctx.stroke();
+
+      }
+
+
+      candles.forEach(
+        (
+          candle,
+          index
+        ) => {
+
+          const x =
+            padding.left
+            +
+            slotWidth
+            *
+            index
+            +
+            slotWidth
+            /
+            2;
+
+
+          const isUp =
+            candle.close
+            >=
+            candle.open;
+
+
+          const color =
+            isUp
+              ? "#39d98a"
+              : "#ff6675";
+
+
+          ctx.strokeStyle =
+            color;
+
+
+          ctx.fillStyle =
+            color;
+
+
+          ctx.beginPath();
+
+
+          ctx.moveTo(
+            x,
+            y(
+              candle.high
+            )
+          );
+
+
+          ctx.lineTo(
+            x,
+            y(
+              candle.low
+            )
+          );
+
+
+          ctx.stroke();
+
+
+          const openY =
+            y(
+              candle.open
+            );
+
+
+          const closeY =
+            y(
+              candle.close
+            );
+
+
+          const top =
+            Math.min(
+              openY,
+              closeY
+            );
+
+
+          const bodyHeight =
+            Math.max(
+              1,
+              Math.abs(
+                closeY
+                -
+                openY
+              )
+            );
+
+
+          ctx.fillRect(
+            x
+            -
+            bodyWidth
+            /
+            2,
+
+            top,
+
+            bodyWidth,
+
+            bodyHeight
+          );
+
+        }
       );
 
     }
@@ -4573,14 +5442,15 @@
 
     /*
      * ==============================
-     * Relative rank scoring
+     * Ranking
      * ==============================
      */
 
     function rankScores(
       rows,
       valueGetter,
-      higherIsBetter = true
+      higherIsBetter =
+        true
     ) {
 
       const values =
@@ -4588,10 +5458,10 @@
 
           .map(
             (
-              row
+              row,
+              index
             ) => ({
-              symbol:
-                row.symbol,
+              index,
 
               value:
                 valueGetter(
@@ -4607,74 +5477,54 @@
               Number.isFinite(
                 item.value
               )
-          );
-
-
-      if (
-        !values.length
-      ) {
-
-        return new Map();
-
-      }
-
-
-      const unique =
-        [
-          ...new Set(
-            values.map(
-              (
-                item
-              ) =>
-                item.value
-            )
           )
-        ]
 
           .sort(
             (
               a,
               b
             ) =>
-              a - b
+              a.value
+              -
+              b.value
           );
 
 
+      const scores =
+        Array(
+          rows.length
+        )
+        .fill(
+          null
+        );
+
+
       if (
-        unique.length
-        ===
-        1
+        values.length === 1
       ) {
 
-        return new Map(
-          values.map(
-            (
-              item
-            ) => [
-              item.symbol,
-              0.5
-            ]
-          )
-        );
+        scores[
+          values[0].index
+        ] =
+          1;
+
+
+        return scores;
 
       }
 
 
-      const lookup =
-        new Map();
-
-
-      unique.forEach(
+      values.forEach(
         (
-          value,
-          index
+          item,
+          rank
         ) => {
 
           let score =
-            index
+            rank
             /
             (
-              unique.length
+              values.length
               -
               1
             );
@@ -4692,39 +5542,19 @@
           }
 
 
-          lookup.set(
-            value,
-            score
-          );
+          scores[
+            item.index
+          ] =
+            score;
 
         }
       );
 
 
-      return new Map(
-        values.map(
-          (
-            item
-          ) => [
-            item.symbol,
-
-            lookup.get(
-              item.value
-            )
-            ??
-            0
-          ]
-        )
-      );
+      return scores;
 
     }
 
-
-    /*
-     * ==============================
-     * Preliminary SCOUT score
-     * ==============================
-     */
 
     function applyPreliminaryScores(
       rows
@@ -4733,21 +5563,15 @@
       const volumeScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
-            logValue(
-              row.approxQuoteVolume
-            )
+          row =>
+            row.approxQuoteVolume
         );
 
 
       const volatilityScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
+          row =>
             row.rangePct
         );
 
@@ -4755,66 +5579,65 @@
       const activityScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
+          row =>
             row.absChangePct
         );
 
 
       rows.forEach(
         (
-          row
+          row,
+          index
         ) => {
 
           row.volumeScore =
-            volumeScores.get(
-              row.symbol
-            )
+            volumeScores[
+              index
+            ]
             ??
             0;
 
 
           row.volatilityScore =
-            volatilityScores.get(
-              row.symbol
-            )
+            volatilityScores[
+              index
+            ]
             ??
             0;
 
 
           row.activityScore =
-            activityScores.get(
-              row.symbol
-            )
+            activityScores[
+              index
+            ]
             ??
             0;
 
 
           row.preliminaryScore =
-            row.volumeScore
-            *
-            0.50
+            (
+              row.volumeScore
+              *
+              0.50
+            )
             +
-            row.volatilityScore
-            *
-            0.30
+            (
+              row.volatilityScore
+              *
+              0.30
+            )
             +
-            row.activityScore
-            *
-            0.20;
+            (
+              row.activityScore
+              *
+              0.20
+            );
 
         }
       );
 
     }
 
-
-    /*
-     * ==============================
-     * Final SCOUT score
-     * ==============================
-     */
 
     function applyFinalScores(
       rows
@@ -4823,233 +5646,160 @@
       const volumeScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
-            logValue(
-              row.approxQuoteVolume
-            )
+          row =>
+            row.approxQuoteVolume
+        );
+
+
+      const spreadScores =
+        rankScores(
+          rows,
+          row =>
+            row.spreadPct,
+          false
         );
 
 
       const volatilityScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
+          row =>
             row.rangePct
+        );
+
+
+      const oiScores =
+        rankScores(
+          rows,
+          row =>
+            row.openInterestUsd
         );
 
 
       const activityScores =
         rankScores(
           rows,
-          (
-            row
-          ) =>
+          row =>
             row.absChangePct
-        );
-
-
-      const liquidityRows =
-        rows.filter(
-          (
-            row
-          ) =>
-            Number.isFinite(
-              row.spreadPct
-            )
-            &&
-            row.spreadPct
-            >=
-            0
-        );
-
-
-      const liquidityScores =
-        rankScores(
-          liquidityRows,
-          (
-            row
-          ) =>
-            row.spreadPct,
-          false
-        );
-
-
-      const oiRows =
-        rows.filter(
-          (
-            row
-          ) =>
-            Number.isFinite(
-              row.openInterestUsd
-            )
-            &&
-            row.openInterestUsd
-            >
-            0
-        );
-
-
-      const oiScores =
-        rankScores(
-          oiRows,
-          (
-            row
-          ) =>
-            logValue(
-              row.openInterestUsd
-            )
         );
 
 
       rows.forEach(
         (
-          row
+          row,
+          index
         ) => {
 
           row.volumeScore =
-            volumeScores.get(
-              row.symbol
-            )
-            ??
-            0;
-
-
-          row.volatilityScore =
-            volatilityScores.get(
-              row.symbol
-            )
-            ??
-            0;
-
-
-          row.activityScore =
-            activityScores.get(
-              row.symbol
-            )
-            ??
-            0;
+            volumeScores[
+              index
+            ];
 
 
           row.liquidityScore =
-            liquidityScores.get(
-              row.symbol
-            )
-            ??
-            0;
+            spreadScores[
+              index
+            ];
+
+
+          row.volatilityScore =
+            volatilityScores[
+              index
+            ];
 
 
           row.openInterestScore =
-            oiScores.get(
-              row.symbol
-            )
-            ??
-            0;
+            oiScores[
+              index
+            ];
 
 
-          const components = [
+          row.activityScore =
+            activityScores[
+              index
+            ];
+
+
+          const components =
             [
-              row.volumeScore,
-              0.30
-            ],
+              [
+                row.volumeScore,
+                0.30
+              ],
 
-            [
-              row.volatilityScore,
-              0.20
-            ],
-
-            [
-              row.activityScore,
-              0.10
-            ]
-          ];
-
-
-          if (
-            Number.isFinite(
-              row.spreadPct
-            )
-          ) {
-
-            components.push(
               [
                 row.liquidityScore,
                 0.25
-              ]
-            );
+              ],
 
-          }
+              [
+                row.volatilityScore,
+                0.20
+              ],
 
-
-          if (
-            Number.isFinite(
-              row.openInterestUsd
-            )
-            &&
-            row.openInterestUsd
-            >
-            0
-          ) {
-
-            components.push(
               [
                 row.openInterestScore,
                 0.15
+              ],
+
+              [
+                row.activityScore,
+                0.10
               ]
-            );
-
-          }
-
-
-          const totalWeight =
-            components.reduce(
+            ]
+            .filter(
               (
-                sum,
                 [
-                  ,
-                  weight
+                  value
                 ]
               ) =>
-                sum
-                +
-                weight,
-              0
+                Number.isFinite(
+                  value
+                )
             );
 
 
-          const weighted =
-            components.reduce(
-              (
-                sum,
-                [
-                  score,
-                  weight
-                ]
-              ) =>
-                sum
-                +
-                score
-                *
-                weight,
-              0
-            );
+          const weight =
+            components
+              .reduce(
+                (
+                  total,
+                  [
+                    ,
+                    componentWeight
+                  ]
+                ) =>
+                  total
+                  +
+                  componentWeight,
+                0
+              );
 
 
           row.finalScore =
+            weight > 0
 
-            totalWeight > 0
-
-              ? Math.max(
-                  0,
-                  Math.min(
-                    1,
-                    weighted
-                    /
-                    totalWeight
-                  )
+              ? (
+                  components
+                    .reduce(
+                      (
+                        total,
+                        [
+                          score,
+                          componentWeight
+                        ]
+                      ) =>
+                        total
+                        +
+                        (
+                          score
+                          *
+                          componentWeight
+                        ),
+                      0
+                    )
+                  /
+                  weight
                 )
 
               : 0;
@@ -5062,7 +5812,122 @@
 
     /*
      * ==============================
-     * SCOUT reasons
+     * Funding attachment
+     * ==============================
+     */
+
+    async function attachFunding(
+      rows
+    ) {
+
+      let nextIndex =
+        0;
+
+
+      let successCount =
+        0;
+
+
+      async function worker() {
+
+        while (
+          true
+        ) {
+
+          const index =
+            nextIndex++;
+
+
+          if (
+            index
+            >=
+            rows.length
+          ) {
+
+            return;
+
+          }
+
+
+          const row =
+            rows[
+              index
+            ];
+
+
+          try {
+
+            const result =
+              await okxGet(
+                "/api/v5/public/funding-rate",
+                {
+                  instId:
+                    row.symbol
+                }
+              );
+
+
+            row.fundingRate =
+              finiteNumber(
+                result[0]
+                  ?.fundingRate
+              );
+
+
+            successCount +=
+              1;
+
+          } catch (
+            error
+          ) {
+
+            row.fundingRate =
+              null;
+
+          }
+
+        }
+
+      }
+
+
+      const workers =
+        [];
+
+
+      const workerCount =
+        Math.min(
+          FUNDING_CONCURRENCY,
+          rows.length
+        );
+
+
+      for (
+        let i = 0;
+        i < workerCount;
+        i += 1
+      ) {
+
+        workers.push(
+          worker()
+        );
+
+      }
+
+
+      await Promise.all(
+        workers
+      );
+
+
+      return successCount;
+
+    }
+
+
+    /*
+     * ==============================
+     * Reasons
      * ==============================
      */
 
@@ -5077,11 +5942,11 @@
       if (
         row.volumeScore
         >=
-        0.75
+        0.8
       ) {
 
         reasons.push(
-          "High relative 24H trading volume"
+          "High relative volume"
         );
 
       }
@@ -5090,11 +5955,11 @@
       if (
         row.liquidityScore
         >=
-        0.75
+        0.8
       ) {
 
         reasons.push(
-          "Tight bid/ask spread"
+          "Strong liquidity"
         );
 
       }
@@ -5103,24 +5968,11 @@
       if (
         row.volatilityScore
         >=
-        0.75
+        0.8
       ) {
 
         reasons.push(
-          "Elevated 24H price range"
-        );
-
-      }
-
-
-      if (
-        row.activityScore
-        >=
-        0.75
-      ) {
-
-        reasons.push(
-          "Strong 24H price activity"
+          "High volatility"
         );
 
       }
@@ -5129,30 +5981,24 @@
       if (
         row.openInterestScore
         >=
-        0.75
+        0.8
       ) {
 
         reasons.push(
-          "High derivatives open interest"
+          "High open interest"
         );
 
       }
 
 
       if (
-        Number.isFinite(
-          row.fundingRate
-        )
-        &&
-        Math.abs(
-          row.fundingRate
-        )
+        row.activityScore
         >=
-        0.0005
+        0.8
       ) {
 
         reasons.push(
-          "Notable funding-rate imbalance"
+          "Strong price activity"
         );
 
       }
@@ -5163,200 +6009,13 @@
       ) {
 
         reasons.push(
-          "Balanced market activity across scanner metrics"
+          "Balanced market quality"
         );
 
       }
 
 
       return reasons;
-
-    }
-
-
-    /*
-     * ==============================
-     * Concurrency helper
-     * ==============================
-     */
-
-    async function mapLimit(
-      items,
-      limit,
-      mapper
-    ) {
-
-      const results =
-        new Array(
-          items.length
-        );
-
-
-      let cursor =
-        0;
-
-
-      async function worker() {
-
-        while (
-          true
-        ) {
-
-          const index =
-            cursor;
-
-
-          cursor +=
-            1;
-
-
-          if (
-            index
-            >=
-            items.length
-          ) {
-
-            return;
-
-          }
-
-
-          try {
-
-            results[index] =
-              await mapper(
-                items[index],
-                index
-              );
-
-          } catch (
-            error
-          ) {
-
-            results[index] = {
-              ok:
-                false,
-
-              error
-            };
-
-          }
-
-        }
-
-      }
-
-
-      const workers =
-        Array.from(
-          {
-            length:
-              Math.min(
-                limit,
-                items.length
-              )
-          },
-
-          () =>
-            worker()
-        );
-
-
-      await Promise.all(
-        workers
-      );
-
-
-      return results;
-
-    }
-
-
-    /*
-     * ==============================
-     * Funding for Top 10 only
-     * ==============================
-     */
-
-    async function attachFunding(
-      rows
-    ) {
-
-      const results =
-        await mapLimit(
-          rows,
-          FUNDING_CONCURRENCY,
-
-          async (
-            row
-          ) => {
-
-            const data =
-              await okxGet(
-                "/api/v5/public/funding-rate",
-                {
-                  instId:
-                    row.symbol
-                }
-              );
-
-
-            return {
-              ok:
-                true,
-
-              rate:
-                finiteNumber(
-                  data[0]
-                    ?.fundingRate
-                )
-            };
-
-          }
-        );
-
-
-      let successes =
-        0;
-
-
-      results.forEach(
-        (
-          result,
-          index
-        ) => {
-
-          if (
-            result?.ok
-          ) {
-
-            rows[index]
-              .fundingRate =
-                result.rate;
-
-
-            successes +=
-              1;
-
-          } else {
-
-            rows[index]
-              .fundingRate =
-                null;
-
-          }
-
-        }
-      );
-
-
-      setEndpointStatus(
-        elements.fundingStatus,
-        successes > 0
-      );
-
-
-      return successes;
 
     }
 
@@ -5380,39 +6039,17 @@
         !rows.length
       ) {
 
-        const tr =
-          document.createElement(
-            "tr"
-          );
-
-
-        const td =
-          document.createElement(
-            "td"
-          );
-
-
-        td.colSpan =
-          10;
-
-
-        td.innerHTML =
-          `
-            <div class="empty-state">
-              No SCOUT candidates returned.
-            </div>
-          `;
-
-
-        tr.appendChild(
-          td
-        );
-
-
         elements.scoutTableBody
-          .appendChild(
-            tr
-          );
+          .innerHTML =
+            `
+              <tr>
+                <td colspan="10">
+                  <div class="empty-state">
+                    No SCOUT candidates returned.
+                  </div>
+                </td>
+              </tr>
+            `;
 
 
         return;
@@ -5433,7 +6070,6 @@
 
 
           const changeClass =
-
             row.changePct > 0
 
               ? "positive"
@@ -5446,7 +6082,6 @@
 
 
           const fundingClass =
-
             row.fundingRate > 0
 
               ? "positive"
@@ -5480,8 +6115,7 @@
 
               <td class="${changeClass}">
                 ${formatSignedPercent(
-                  row.changePct,
-                  2
+                  row.changePct
                 )}
               </td>
 
@@ -5502,7 +6136,7 @@
               </td>
 
               <td>
-                ${formatCompact(
+                $${formatCompact(
                   row.approxQuoteVolume
                 )}
               </td>
@@ -5535,51 +6169,53 @@
             );
 
 
-          const reasonsTr =
+          const reasonsRow =
             document.createElement(
               "tr"
             );
 
 
-          reasonsTr.className =
+          reasonsRow.className =
             "reasons-row";
 
 
-          const reasonsTd =
+          const reasonsCell =
             document.createElement(
               "td"
             );
 
 
-          reasonsTd.colSpan =
+          reasonsCell.colSpan =
             10;
 
 
-          row.reasons.forEach(
-            (
-              reason
-            ) => {
+          row.reasons
+            .forEach(
+              (
+                reason
+              ) => {
 
-              const chip =
-                document.createElement(
-                  "span"
-                );
-
-
-              chip.className =
-                "reason-chip";
+                const chip =
+                  document.createElement(
+                    "span"
+                  );
 
 
-              chip.textContent =
-                reason;
+                chip.className =
+                  "reason-chip";
 
 
-              reasonsTd.appendChild(
-                chip
-              );
+                chip.textContent =
+                  reason;
 
-            }
-          );
+
+                reasonsCell
+                  .appendChild(
+                    chip
+                  );
+
+              }
+            );
 
 
           const scoreChip =
@@ -5593,31 +6229,64 @@
 
 
           scoreChip.textContent =
+            (
+              `V ${(
+                row.volumeScore
+                ??
+                0
+              ).toFixed(
+                2
+              )}`
+              +
+              ` · L ${(
+                row.liquidityScore
+                ??
+                0
+              ).toFixed(
+                2
+              )}`
+              +
+              ` · Vol ${(
+                row.volatilityScore
+                ??
+                0
+              ).toFixed(
+                2
+              )}`
+              +
+              ` · OI ${(
+                row.openInterestScore
+                ??
+                0
+              ).toFixed(
+                2
+              )}`
+              +
+              ` · Act ${(
+                row.activityScore
+                ??
+                0
+              ).toFixed(
+                2
+              )}`
+            );
 
-            `V ${row.volumeScore.toFixed(2)}`
-            +
-            ` · L ${row.liquidityScore.toFixed(2)}`
-            +
-            ` · Vol ${row.volatilityScore.toFixed(2)}`
-            +
-            ` · OI ${row.openInterestScore.toFixed(2)}`
-            +
-            ` · Act ${row.activityScore.toFixed(2)}`;
+
+          reasonsCell
+            .appendChild(
+              scoreChip
+            );
 
 
-          reasonsTd.appendChild(
-            scoreChip
-          );
-
-
-          reasonsTr.appendChild(
-            reasonsTd
-          );
+          reasonsRow
+            .appendChild(
+              reasonsCell
+            );
 
 
           elements.scoutTableBody
             .appendChild(
-              reasonsTr
+              reasonsRow
             );
 
         }
@@ -5658,7 +6327,8 @@
 
 
       elements.scoutSpinner
-        .classList.add(
+        .classList
+        .add(
           "show"
         );
 
@@ -5682,11 +6352,11 @@
       try {
 
         const [
-          instruments,
-          tickers,
-          openInterest
+          instrumentsResult,
+          tickersResult,
+          oiResult
         ] =
-          await Promise.all(
+          await Promise.allSettled(
             [
 
               okxGet(
@@ -5695,40 +6365,7 @@
                   instType:
                     "SWAP"
                 }
-              )
-
-                .then(
-                  (
-                    data
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.instrumentsStatus,
-                      true
-                    );
-
-
-                    return data;
-
-                  }
-                )
-
-                .catch(
-                  (
-                    error
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.instrumentsStatus,
-                      false
-                    );
-
-
-                    throw error;
-
-                  }
-                ),
-
+              ),
 
               okxGet(
                 "/api/v5/market/tickers",
@@ -5736,40 +6373,7 @@
                   instType:
                     "SWAP"
                 }
-              )
-
-                .then(
-                  (
-                    data
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.tickersStatus,
-                      true
-                    );
-
-
-                    return data;
-
-                  }
-                )
-
-                .catch(
-                  (
-                    error
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.tickersStatus,
-                      false
-                    );
-
-
-                    throw error;
-
-                  }
-                ),
-
+              ),
 
               okxGet(
                 "/api/v5/public/open-interest",
@@ -5779,53 +6383,92 @@
                 }
               )
 
-                .then(
-                  (
-                    data
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.oiStatus,
-                      true
-                    );
-
-
-                    return data;
-
-                  }
-                )
-
-                .catch(
-                  (
-                    error
-                  ) => {
-
-                    setEndpointStatus(
-                      elements.oiStatus,
-                      false
-                    );
-
-
-                    log(
-                      `SCOUT bulk OI unavailable: ${error.message}`,
-                      "error"
-                    );
-
-
-                    return [];
-
-                  }
-                )
-
             ]
           );
 
 
-        /*
-         * --------------------------
-         * Filter live USDT-SWAP
-         * --------------------------
-         */
+        if (
+          instrumentsResult.status
+          !==
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.instrumentsStatus,
+            false
+          );
+
+
+          throw instrumentsResult.reason;
+
+        }
+
+
+        setEndpointStatus(
+          elements.instrumentsStatus,
+          true
+        );
+
+
+        if (
+          tickersResult.status
+          !==
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.tickersStatus,
+            false
+          );
+
+
+          throw tickersResult.reason;
+
+        }
+
+
+        setEndpointStatus(
+          elements.tickersStatus,
+          true
+        );
+
+
+        const instruments =
+          instrumentsResult.value;
+
+
+        const tickers =
+          tickersResult.value;
+
+
+        let openInterest =
+          [];
+
+
+        if (
+          oiResult.status
+          ===
+          "fulfilled"
+        ) {
+
+          setEndpointStatus(
+            elements.oiStatus,
+            true
+          );
+
+
+          openInterest =
+            oiResult.value;
+
+        } else {
+
+          setEndpointStatus(
+            elements.oiStatus,
+            false
+          );
+
+        }
+
 
         elements.scoutProgress
           .style.width =
@@ -5846,7 +6489,6 @@
                 (
                   item
                 ) =>
-
                   item.state
                   ===
                   "live"
@@ -5880,56 +6522,39 @@
           );
 
 
-        /*
-         * --------------------------
-         * OI map
-         * --------------------------
-         */
-
         const oiMap =
           new Map();
 
 
-        openInterest.forEach(
-          (
-            item
-          ) => {
+        openInterest
+          .forEach(
+            (
+              item
+            ) => {
 
-            const oiUsd =
-              finiteNumber(
-                item.oiUsd
+              oiMap.set(
+                item.instId,
+                {
+                  oi:
+                    finiteNumber(
+                      item.oi
+                    ),
+
+                  oiUsd:
+                    finiteNumber(
+                      item.oiUsd
+                    ),
+
+                  oiCcy:
+                    finiteNumber(
+                      item.oiCcy
+                    )
+                }
               );
 
+            }
+          );
 
-            const oiCcy =
-              finiteNumber(
-                item.oiCcy
-              );
-
-
-            oiMap.set(
-              item.instId,
-              {
-                oi:
-                  finiteNumber(
-                    item.oi
-                  ),
-
-                oiUsd,
-
-                oiCcy
-              }
-            );
-
-          }
-        );
-
-
-        /*
-         * --------------------------
-         * Build market rows
-         * --------------------------
-         */
 
         const rows =
           [];
@@ -5962,7 +6587,9 @@
 
 
           if (
-            last === null
+            !Number.isFinite(
+              last
+            )
             ||
             last <= 0
           ) {
@@ -6016,33 +6643,22 @@
             );
 
 
-          /*
-           * Approximate quote volume.
-           *
-           * For ranking only.
-           */
-
-          let approxQuoteVolume =
-
-            volCcy24h > 0
-
-              ? volCcy24h
-                *
-                last
-
-              : vol24h;
+          let approximateQuoteVolume =
+            vol24h;
 
 
           if (
-            !Number.isFinite(
-              approxQuoteVolume
+            volCcy24h > 0
+            &&
+            Number.isFinite(
+              last
             )
-            ||
-            approxQuoteVolume < 0
           ) {
 
-            approxQuoteVolume =
-              0;
+            approximateQuoteVolume =
+              volCcy24h
+              *
+              last;
 
           }
 
@@ -6054,15 +6670,13 @@
             );
 
 
-          const rangePctValue =
+          const rangePct =
             rangePercent(
               high24h,
               low24h,
 
               open24h > 0
-
                 ? open24h
-
                 : last
             );
 
@@ -6073,7 +6687,7 @@
             );
 
 
-          let openInterestUsd =
+          let oiUsd =
             oi?.oiUsd
             ??
             null;
@@ -6081,7 +6695,7 @@
 
           if (
             !Number.isFinite(
-              openInterestUsd
+              oiUsd
             )
             &&
             Number.isFinite(
@@ -6089,7 +6703,7 @@
             )
           ) {
 
-            openInterestUsd =
+            oiUsd =
               oi.oiCcy
               *
               last;
@@ -6103,27 +6717,6 @@
 
               last,
 
-              open24h,
-
-              high24h,
-
-              low24h,
-
-              bid,
-
-              ask,
-
-              spreadPct:
-                spreadPercent(
-                  bid,
-                  ask
-                ),
-
-              volume24h:
-                vol24h,
-
-              approxQuoteVolume,
-
               changePct,
 
               absChangePct:
@@ -6131,15 +6724,19 @@
                   changePct
                 ),
 
-              rangePct:
-                rangePctValue,
+              rangePct,
 
-              openInterest:
-                oi?.oi
-                ??
-                null,
+              spreadPct:
+                spreadPercent(
+                  bid,
+                  ask
+                ),
 
-              openInterestUsd,
+              approxQuoteVolume:
+                approximateQuoteVolume,
+
+              openInterestUsd:
+                oiUsd,
 
               fundingRate:
                 null,
@@ -6147,16 +6744,16 @@
               volumeScore:
                 0,
 
-              volatilityScore:
-                0,
-
-              activityScore:
-                0,
-
               liquidityScore:
                 0,
 
+              volatilityScore:
+                0,
+
               openInterestScore:
+                0,
+
+              activityScore:
                 0,
 
               preliminaryScore:
@@ -6178,7 +6775,7 @@
         ) {
 
           throw new Error(
-            "No live USDT-SWAP markets were returned."
+            "No live USDT-SWAP markets."
           );
 
         }
@@ -6190,12 +6787,6 @@
               rows.length
             );
 
-
-        /*
-         * --------------------------
-         * Preliminary score
-         * --------------------------
-         */
 
         elements.scoutProgress
           .style.width =
@@ -6223,12 +6814,6 @@
         );
 
 
-        /*
-         * --------------------------
-         * Top 40 pool
-         * --------------------------
-         */
-
         const detailRows =
           rows.slice(
             0,
@@ -6246,12 +6831,6 @@
             );
 
 
-        /*
-         * --------------------------
-         * Final score
-         * --------------------------
-         */
-
         elements.scoutProgress
           .style.width =
             "65%";
@@ -6259,7 +6838,7 @@
 
         elements.scoutStatusText
           .textContent =
-            "Calculating final market-quality scores...";
+            "Calculating final market quality...";
 
 
         applyFinalScores(
@@ -6278,12 +6857,6 @@
         );
 
 
-        /*
-         * --------------------------
-         * Top 10
-         * --------------------------
-         */
-
         const topRows =
           detailRows.slice(
             0,
@@ -6291,20 +6864,14 @@
           );
 
 
-        /*
-         * --------------------------
-         * Funding for Top 10
-         * --------------------------
-         */
-
         elements.scoutProgress
           .style.width =
-            "78%";
+            "80%";
 
 
         elements.scoutStatusText
           .textContent =
-            "Loading funding for Top 10...";
+            "Loading funding data...";
 
 
         const fundingSuccess =
@@ -6318,29 +6885,13 @@
             row
           ) => {
 
-            row.reasons =
-              buildReasons(
-                row
-              );
+          row.reasons =
+            buildReasons(
+              row
+            );
 
           }
         );
-
-
-        /*
-         * --------------------------
-         * Render
-         * --------------------------
-         */
-
-        elements.scoutProgress
-          .style.width =
-            "94%";
-
-
-        elements.scoutStatusText
-          .textContent =
-            "Rendering SCOUT results...";
 
 
         renderScout(
@@ -6354,7 +6905,6 @@
 
         elements.scoutTopSymbol
           .textContent =
-
             top?.symbol
             ??
             "--";
@@ -6362,26 +6912,26 @@
 
         elements.scoutTopScore
           .textContent =
-
             top
-
-              ? `Score ${
+              ? (
+                  "Score "
+                  +
                   top.finalScore
                     .toFixed(
                       4
                     )
-                }`
-
+                )
               : "Score --";
 
 
         elements.scoutUpdated
           .textContent =
-
-            `Scout update: ${
+            (
+              "Updated "
+              +
               new Date()
                 .toLocaleTimeString()
-            }`;
+            );
 
 
         elements.scoutProgress
@@ -6391,47 +6941,51 @@
 
         elements.scoutStatusText
           .textContent =
-
-            `Complete · ${
-              topRows.length
-            } candidates · funding ${
-              fundingSuccess
-            }/${
-              topRows.length
-            }`;
-
-
-        log(
-          `SCOUT completed: ${
-            rows.length
-          } markets → ${
-            detailRows.length
-          } detail pool → ${
-            topRows.length
-          } candidates.`,
-          "success"
-        );
+            (
+              `Complete · `
+              +
+              `${topRows.length} candidates`
+              +
+              ` · funding `
+              +
+              `${fundingSuccess}/${topRows.length}`
+            );
 
 
         setConnection(
           "online"
         );
 
+
+        log(
+          (
+            `SCOUT completed: `
+            +
+            `${rows.length} markets → `
+            +
+            `${detailRows.length} pool → `
+            +
+            `${topRows.length} candidates`
+          ),
+          "success"
+        );
+
       } catch (
         error
       ) {
 
-        elements.scoutStatusText
-          .textContent =
-
-            `SCOUT failed: ${
-              error.message
-            }`;
-
-
         elements.scoutProgress
           .style.width =
             "0%";
+
+
+        elements.scoutStatusText
+          .textContent =
+            (
+              "SCOUT failed: "
+              +
+              error.message
+            );
 
 
         elements.scoutTableBody
@@ -6441,8 +6995,7 @@
                 <td colspan="10">
                   <div class="empty-state">
                     SCOUT scan failed.
-                    Check System Log /
-                    browser console.
+                    Check System Log.
                   </div>
                 </td>
               </tr>
@@ -6450,7 +7003,11 @@
 
 
         log(
-          `SCOUT error: ${error.message}`,
+          (
+            "SCOUT error: "
+            +
+            error.message
+          ),
           "error"
         );
 
@@ -6471,7 +7028,8 @@
 
 
         elements.scoutSpinner
-          .classList.remove(
+          .classList
+          .remove(
             "show"
           );
 
@@ -6545,13 +7103,25 @@
 
 
     log(
-      "Public market data mode. No API key is loaded.",
+      "Public market-data mode. No private exchange key is loaded.",
       "info"
     );
 
 
     log(
-      "Browser SCOUT uses market ranking only; it does not decide LONG/SHORT.",
+      "SCOUT implementation available in browser and Python backend.",
+      "info"
+    );
+
+
+    log(
+      "NEWS V1 code complete: RSS → Manager → Analyzer → LLM → NewsOutput.",
+      "info"
+    );
+
+
+    log(
+      "NEWS runtime execution remains backend-only.",
       "info"
     );
 
@@ -6564,7 +7134,7 @@
 
     /*
      * ==============================
-     * Automatic refresh
+     * Auto refresh
      * ==============================
      */
 
