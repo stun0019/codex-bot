@@ -10,6 +10,10 @@ from .decision import (
     router as decision_router,
 )
 
+from .opportunities import (
+    router as opportunities_router,
+)
+
 
 router = APIRouter()
 
@@ -19,6 +23,10 @@ router.include_router(
 
 router.include_router(
     decision_router
+)
+
+router.include_router(
+    opportunities_router
 )
 
 
