@@ -93,7 +93,7 @@ async def health(
             "1",
 
         "agents_ready":
-            5,
+            6,
 
         "agents_total":
             6,
@@ -116,7 +116,7 @@ async def agents(
 
     return {
         "ready":
-            5,
+            6,
 
         "total":
             6,
@@ -182,10 +182,10 @@ async def agents(
                     AgentName.DECISION.value,
 
                 "status":
-                    "skeleton",
+                    "v1_ready",
 
                 "endpoint":
-                    None,
+                    "/api/decision",
             },
         ],
     }
@@ -306,7 +306,7 @@ async def charts(
 
 
 # =====================================
-# RISK enrichment helpers
+# RISK ENRICHMENT
 # =====================================
 
 
@@ -403,7 +403,7 @@ async def risk(
     ] = []
 
     # =================================
-    # Optional market enrichment
+    # OPTIONAL ENRICHMENT
     # =================================
 
     if request.enrich:
@@ -540,7 +540,7 @@ async def risk(
                     )
 
     # =================================
-    # Risk analysis
+    # RISK ANALYSIS
     # =================================
 
     service = RiskService()
@@ -570,7 +570,7 @@ async def risk(
     )
 
     # =================================
-    # Attach API diagnostics
+    # DIAGNOSTICS
     # =================================
 
     data = dict(
@@ -676,13 +676,17 @@ async def risk(
     return RiskApiResponse(
         risk=risk_output,
 
-        charts=charts_output,
+        charts=(
+            charts_output
+        ),
 
         sentiment=(
             sentiment_output
         ),
 
-        news=news_output,
+        news=(
+            news_output
+        ),
 
         enrichment_errors=(
             enrichment_errors
