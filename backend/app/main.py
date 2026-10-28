@@ -2,97 +2,97 @@ from __future__ import annotations
 
 import os
 
-from pathlib import (
-    Path,
-)
+from pathlib import Path
 
-from fastapi import (
-    FastAPI,
-)
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
-from fastapi.middleware.cors import (
-    CORSMiddleware,
-)
-
-from fastapi.responses import (
-    FileResponse,
-)
-
-from .api import (
-    router,
-)
+from .api import router
 
 
-def _cors_origins(
-) -> list[
-    str
-]:
+def _cors_origins() -> list[str]:
     """
-    Allowed frontend origins.
+    Build the CORS allow-list.
 
-    Local:
+    GitHub Pages:
+        https://stun0019.github.io
+
+    Local development:
         http://127.0.0.1:8000
         http://localhost:8000
         http://127.0.0.1:5500
         http://localhost:5500
 
-    GitHub Pages:
-        https://stun0019.github.io
-
-    Production override:
+    Optional production additions:
 
         CODEX_CORS_ORIGINS=
-        https://stun0019.github.io,
-        https://example.com
+        https://example.com,
+        https://www.example.com
+
+    Important:
+        Environment variables ADD origins.
+        They do not replace the default origins.
     """
 
-    raw = (
-        os.getenv(
-            "CODEX_CORS_ORIGINS",
-            "",
-        )
-        .strip()
-    )
+    defaults = [
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "https://stun0019.github.io",
+    ]
+
+    raw = os.getenv(
+        "CODEX_CORS_ORIGINS",
+        "",
+    ).strip()
+
+    extras: list[str] = []
 
     if raw:
-
-        return [
-            origin.strip()
-
-            for origin
-            in raw.split(",")
-
+        extras = [
+            origin.strip().rstrip("/")
+            for origin in raw.split(",")
             if origin.strip()
         ]
 
-    return [
-        "http://127.0.0.1:8000",
-        "http://localhost:8000",
+    origins: list[str] = []
 
-        "http://127.0.0.1:5500",
-        "http://localhost:5500",
+    for origin in [
+        *defaults,
+        *extras,
+    ]:
+        normalized = origin.strip().rstrip("/")
 
-        "https://stun0019.github.io",
-    ]
+        if (
+            normalized
+            and
+            normalized not in origins
+        ):
+            origins.append(
+                normalized
+            )
+
+    return origins
 
 
 app = FastAPI(
     title="Codex Bot API",
-
     version="0.1.0",
-
     docs_url="/docs",
-
     redoc_url="/redoc",
 )
 
 
+# =====================================
+# CORS
+# =====================================
+
 app.add_middleware(
     CORSMiddleware,
 
-    allow_origins=(
-        _cors_origins()
-    ),
+    allow_origins=_cors_origins(),
 
     allow_credentials=False,
 
@@ -104,9 +104,19 @@ app.add_middleware(
 
     allow_headers=[
         "Content-Type",
+        "Accept",
+        "Origin",
     ],
+
+    expose_headers=[],
+
+    max_age=86400,
 )
 
+
+# =====================================
+# API ROUTES
+# =====================================
 
 app.include_router(
     router
@@ -123,7 +133,6 @@ _REPO_ROOT = (
     .parents[2]
 )
 
-
 _INDEX_FILE = (
     _REPO_ROOT
     /
@@ -136,12 +145,15 @@ _INDEX_FILE = (
     include_in_schema=False,
 )
 async def dashboard():
+    """
+    Serve the local dashboard when the backend
+    is opened directly.
 
-    if (
-        _INDEX_FILE
-        .is_file()
-    ):
+    GitHub Pages users will normally load
+    index.html from GitHub Pages instead.
+    """
 
+    if _INDEX_FILE.is_file():
         return FileResponse(
             _INDEX_FILE
         )
@@ -158,4 +170,32 @@ async def dashboard():
 
         "docs":
             "/docs",
+    }
+
+
+# =====================================
+# DEBUG / CORS INFO
+# =====================================
+
+@app.get(
+    "/api/cors",
+    include_in_schema=False,
+)
+async def cors_info():
+    """
+    Temporary diagnostic endpoint.
+
+    Useful for confirming what origins
+    Render is actually allowing.
+    """
+
+    return {
+        "status":
+            "ok",
+
+        "allowed_origins":
+            _cors_origins(),
+
+        "github_pages_origin":
+            "https://stun0019.github.io",
     }
