@@ -37,6 +37,13 @@ from .sources import (
     OKXChartsSourceConfig,
 )
 
+from .trade_plan import (
+    TradePlan,
+    TradePlanBuilder,
+    TradePlanConfig,
+)
+
+
 __all__ = [
     "ChartsAgent",
     "ChartsAnalyzer",
@@ -59,4 +66,7 @@ __all__ = [
     "ChartsSourceResult",
     "OKXChartsSource",
     "OKXChartsSourceConfig",
+    "TradePlan",
+    "TradePlanBuilder",
+    "TradePlanConfig",
 ]
