@@ -28,13 +28,22 @@ def _cors_origins(
     str
 ]:
     """
-    本機開發預設 origins。
+    Allowed frontend origins.
 
-    Production 若前後端分開部署：
+    Local:
+        http://127.0.0.1:8000
+        http://localhost:8000
+        http://127.0.0.1:5500
+        http://localhost:5500
+
+    GitHub Pages:
+        https://stun0019.github.io
+
+    Production override:
 
         CODEX_CORS_ORIGINS=
-        https://example.com,
-        https://dashboard.example.com
+        https://stun0019.github.io,
+        https://example.com
     """
 
     raw = (
@@ -62,13 +71,13 @@ def _cors_origins(
 
         "http://127.0.0.1:5500",
         "http://localhost:5500",
+
+        "https://stun0019.github.io",
     ]
 
 
 app = FastAPI(
-    title=(
-        "Codex Bot API"
-    ),
+    title="Codex Bot API",
 
     version="0.1.0",
 
@@ -105,9 +114,8 @@ app.include_router(
 
 
 # =====================================
-# Frontend
+# FRONTEND
 # =====================================
-
 
 _REPO_ROOT = (
     Path(__file__)
