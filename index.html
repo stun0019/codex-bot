@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -17,12 +16,12 @@
   <title>CODEX BOT</title>
 
   <style>
-
     :root {
       --bg: #020407;
       --panel: #080d14;
       --panel2: #0c131d;
       --border: #1b2735;
+      --border2: #273647;
 
       --text: #f4f7fb;
       --muted: #8794a5;
@@ -43,13 +42,15 @@
       --decision: #ff9c42;
     }
 
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       min-height: 100vh;
@@ -62,22 +63,20 @@
         ),
         #020407;
 
-      color:
-        var(--text);
+      color: var(--text);
 
       font-family:
         Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
         sans-serif;
     }
-
 
     body.modal-open {
       overflow: hidden;
     }
-
 
     button,
     select,
@@ -86,17 +85,14 @@
       font: inherit;
     }
 
-
     button {
       cursor: pointer;
     }
-
 
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
-
 
     .container {
       width:
@@ -105,28 +101,20 @@
           calc(100% - 24px)
         );
 
-      margin:
-        0 auto;
+      margin: 0 auto;
     }
-
 
     .positive {
-      color:
-        var(--green) !important;
+      color: var(--green) !important;
     }
-
 
     .negative {
-      color:
-        var(--red) !important;
+      color: var(--red) !important;
     }
-
 
     .warning {
-      color:
-        var(--yellow) !important;
+      color: var(--yellow) !important;
     }
-
 
     /* =====================================
        HEADER
@@ -148,7 +136,6 @@
         blur(16px);
     }
 
-
     .navbar {
       min-height: 62px;
 
@@ -159,14 +146,12 @@
       gap: 12px;
     }
 
-
     .brand {
       display: flex;
       align-items: center;
 
       gap: 9px;
     }
-
 
     .logo {
       width: 36px;
@@ -179,8 +164,7 @@
         1px solid
         var(--border);
 
-      border-radius:
-        10px;
+      border-radius: 10px;
 
       background:
         rgba(77, 159, 255, 0.08);
@@ -188,23 +172,18 @@
       font-weight: 900;
     }
 
-
     .brand-name {
       font-size: 14px;
       font-weight: 850;
     }
 
-
     .brand-sub {
       margin-top: 2px;
 
-      color:
-        var(--muted2);
+      color: var(--muted2);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
-
 
     .header-status {
       display: flex;
@@ -212,7 +191,6 @@
 
       gap: 6px;
     }
-
 
     .pill {
       min-height: 31px;
@@ -223,7 +201,8 @@
       gap: 6px;
 
       padding:
-        6px 9px;
+        6px
+        9px;
 
       border:
         1px solid
@@ -242,12 +221,10 @@
         8px;
     }
 
-
     .pill strong {
       color:
         var(--green);
     }
-
 
     .dot {
       width: 7px;
@@ -260,7 +237,6 @@
         var(--yellow);
     }
 
-
     .dot.online {
       background:
         var(--green);
@@ -269,7 +245,6 @@
         0 0 8px
         var(--green);
     }
-
 
     .dot.offline {
       background:
@@ -280,12 +255,12 @@
         var(--red);
     }
 
-
     .button {
       min-height: 33px;
 
       padding:
-        7px 10px;
+        7px
+        10px;
 
       border:
         1px solid
@@ -304,12 +279,10 @@
         9px;
     }
 
-
     .button:hover:not(:disabled) {
       border-color:
         #40566e;
     }
-
 
     .button.primary {
       border-color:
@@ -319,12 +292,12 @@
         rgba(66, 229, 141, 0.08);
     }
 
-
     .run-all-button {
       min-height: 31px;
 
       padding:
-        6px 12px;
+        6px
+        12px;
 
       border:
         1px solid
@@ -349,36 +322,768 @@
         0.4px;
     }
 
-
     .run-all-button:hover:not(:disabled) {
-      background:
-        rgba(255, 156, 66, 0.15);
-
       border-color:
         var(--orange);
+
+      background:
+        rgba(255, 156, 66, 0.15);
     }
 
+    /* =====================================
+       MAIN
+    ===================================== */
+
+    main {
+      padding:
+        18px
+        0
+        40px;
+    }
+
+    /* =====================================
+       TEAM HERO
+    ===================================== */
+
+    .team-hero {
+      position: relative;
+
+      margin-bottom: 18px;
+
+      padding: 24px;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        #1c2a38;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8, 14, 23, 0.99),
+          rgba(2, 5, 9, 1)
+        );
+    }
+
+    .team-hero::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(77, 159, 255, 0.015) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          rgba(77, 159, 255, 0.015) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        24px
+        24px;
+    }
+
+    .team-hero-glow {
+      position: absolute;
+
+      width: 600px;
+      height: 300px;
+
+      top: -170px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      border-radius: 50%;
+
+      background:
+        rgba(77, 159, 255, 0.14);
+
+      filter:
+        blur(80px);
+
+      pointer-events: none;
+    }
+
+    .team-hero-header {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+    }
+
+    .team-eyebrow {
+      color:
+        #4d9fff;
+
+      font-size: 8px;
+
+      font-weight: 850;
+
+      letter-spacing: 1.4px;
+    }
+
+    .team-hero h1 {
+      max-width: 650px;
+
+      margin-top: 7px;
+
+      font-size:
+        clamp(
+          25px,
+          4vw,
+          42px
+        );
+
+      line-height: 1;
+
+      letter-spacing: -1.2px;
+    }
+
+    .team-hero p {
+      max-width: 620px;
+
+      margin-top: 11px;
+
+      color:
+        #77889b;
+
+      font-size: 9px;
+
+      line-height: 1.7;
+    }
+
+    .hero-system {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      padding:
+        7px
+        10px;
+
+      white-space: nowrap;
+
+      border:
+        1px solid
+        rgba(66, 229, 141, 0.25);
+
+      border-radius:
+        999px;
+
+      color:
+        #9bb3a7;
+
+      background:
+        rgba(66, 229, 141, 0.05);
+
+      font-size: 7px;
+
+      font-weight: 800;
+    }
+
+    .hero-online-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background:
+        #42e58d;
+
+      box-shadow:
+        0 0 9px
+        #42e58d;
+    }
+
+    .command-room {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 22px;
+
+      padding: 13px;
+
+      border:
+        1px solid
+        #152231;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #050a10,
+          #020407
+        );
+    }
+
+    .command-screen {
+      position: relative;
+
+      height: 155px;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        #1b3248;
+
+      border-radius: 10px;
+
+      background:
+        #030a10;
+    }
+
+    .screen-top {
+      height: 28px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding:
+        0
+        10px;
+
+      border-bottom:
+        1px solid
+        #142232;
+
+      color:
+        #7c92a7;
+
+      font-size: 7px;
+
+      letter-spacing: 1px;
+    }
+
+    .screen-live {
+      color:
+        #42e58d;
+    }
+
+    .screen-chart {
+      position: relative;
+
+      height:
+        calc(
+          100%
+          -
+          28px
+        );
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(77, 159, 255, 0.03) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          rgba(77, 159, 255, 0.03) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        28px
+        28px;
+    }
+
+    .screen-symbols {
+      position: absolute;
+
+      top: 9px;
+      left: 10px;
+
+      z-index: 2;
+
+      display: flex;
+
+      gap: 5px;
+    }
+
+    .screen-symbols span {
+      padding:
+        3px
+        6px;
+
+      border:
+        1px solid
+        #162c3e;
+
+      border-radius: 4px;
+
+      color:
+        #668196;
+
+      background:
+        rgba(3, 8, 13, 0.82);
+
+      font-size: 6px;
+    }
+
+    .hero-chart-svg {
+      position: absolute;
+
+      inset:
+        16px
+        10px
+        7px;
+
+      width:
+        calc(
+          100%
+          -
+          20px
+        );
+
+      height:
+        calc(
+          100%
+          -
+          23px
+        );
+
+      overflow: visible;
+    }
+
+    .hero-chart-svg polyline {
+      fill: none;
+
+      stroke:
+        #42e58d;
+
+      stroke-width: 3;
+
+      vector-effect:
+        non-scaling-stroke;
+
+      filter:
+        drop-shadow(
+          0
+          0
+          5px
+          rgba(66, 229, 141, 0.55)
+        );
+    }
+
+    .team-floor {
+      margin-top: 12px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap: 10px;
+    }
+
+    .pixel-agent {
+      --pixel-color:
+        #ffffff;
+
+      position: relative;
+
+      min-height: 150px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      padding:
+        9px
+        9px
+        12px;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        color-mix(
+          in srgb,
+          var(--pixel-color) 28%,
+          #14202c
+        );
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(9, 16, 25, 0.96),
+          rgba(3, 7, 11, 0.99)
+        );
+
+      color:
+        inherit;
+
+      transition:
+        0.16s;
+    }
+
+    .pixel-agent::before {
+      content: "";
+
+      position: absolute;
+
+      width: 90px;
+      height: 90px;
+
+      top: -50px;
+
+      border-radius: 50%;
+
+      background:
+        var(--pixel-color);
+
+      opacity: 0.08;
+
+      filter:
+        blur(24px);
+    }
+
+    .pixel-agent:hover {
+      transform:
+        translateY(-2px);
+
+      border-color:
+        var(--pixel-color);
+
+      box-shadow:
+        0
+        0
+        25px
+        color-mix(
+          in srgb,
+          var(--pixel-color) 12%,
+          transparent
+        );
+    }
+
+    .pixel-agent.working {
+      animation:
+        pixelPulse
+        1.2s
+        infinite;
+    }
+
+    @keyframes pixelPulse {
+      0%,
+      100% {
+        box-shadow:
+          0
+          0
+          0
+          rgba(255,255,255,0);
+      }
+
+      50% {
+        box-shadow:
+          0
+          0
+          26px
+          color-mix(
+            in srgb,
+            var(--pixel-color) 25%,
+            transparent
+          );
+      }
+    }
+
+    .pixel-scout {
+      --pixel-color:
+        var(--scout);
+    }
+
+    .pixel-news {
+      --pixel-color:
+        var(--news);
+    }
+
+    .pixel-sentiment {
+      --pixel-color:
+        var(--sentiment);
+    }
+
+    .pixel-charts {
+      --pixel-color:
+        var(--charts);
+    }
+
+    .pixel-risk {
+      --pixel-color:
+        var(--risk);
+    }
+
+    .pixel-decision {
+      --pixel-color:
+        var(--decision);
+    }
+
+    .pixel-monitor {
+      position: absolute;
+
+      top: 12px;
+
+      width: 78%;
+      height: 48px;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      gap: 5px;
+
+      padding: 7px;
+
+      border:
+        1px solid
+        color-mix(
+          in srgb,
+          var(--pixel-color) 24%,
+          #112130
+        );
+
+      border-radius: 5px;
+
+      background:
+        #02070c;
+    }
+
+    .pixel-monitor span {
+      display: block;
+
+      width: 14%;
+
+      border-radius: 1px;
+
+      background:
+        var(--pixel-color);
+
+      opacity: 0.75;
+    }
+
+    .pixel-monitor span:nth-child(1) {
+      height: 35%;
+    }
+
+    .pixel-monitor span:nth-child(2) {
+      height: 70%;
+    }
+
+    .pixel-monitor span:nth-child(3) {
+      height: 50%;
+    }
+
+    .pixel-character {
+      position: relative;
+      z-index: 3;
+
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 6px;
+
+      border:
+        2px solid
+        var(--pixel-color);
+
+      border-radius: 11px;
+
+      background:
+        color-mix(
+          in srgb,
+          var(--pixel-color) 17%,
+          #04070b
+        );
+
+      font-size: 28px;
+
+      filter:
+        drop-shadow(
+          0
+          0
+          9px
+          var(--pixel-color)
+        );
+    }
+
+    .pixel-agent strong {
+      color:
+        var(--pixel-color);
+
+      font-size: 9px;
+
+      letter-spacing: 0.8px;
+    }
+
+    .pixel-agent small {
+      margin-top: 3px;
+
+      color:
+        #596879;
+
+      font-size: 6px;
+    }
+
+    .pixel-status {
+      margin-top: 5px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 4px;
+
+      color:
+        #667789;
+
+      font-size: 6px;
+    }
+
+    .pixel-status-dot {
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background:
+        var(--pixel-color);
+
+      box-shadow:
+        0
+        0
+        6px
+        var(--pixel-color);
+    }
+
+    .hero-control-bar {
+      margin-top: 12px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 12px;
+
+      padding:
+        10px
+        12px;
+
+      border:
+        1px solid
+        #172534;
+
+      border-radius: 10px;
+
+      background:
+        #050a10;
+    }
+
+    .hero-control-copy strong {
+      display: block;
+
+      font-size: 9px;
+    }
+
+    .hero-control-copy span {
+      display: block;
+
+      margin-top: 2px;
+
+      color:
+        #5d6d7c;
+
+      font-size: 7px;
+    }
+
+    .hero-run-all {
+      min-width: 190px;
+      min-height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      padding:
+        7px
+        14px;
+
+      border:
+        1px solid
+        rgba(255, 156, 66, 0.55);
+
+      border-radius: 9px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 156, 66, 0.13),
+          rgba(255, 156, 66, 0.05)
+        );
+
+      color:
+        #ff9c42;
+
+      font-size: 9px;
+
+      font-weight: 900;
+    }
+
+    .hero-run-all:hover:not(:disabled) {
+      border-color:
+        #ff9c42;
+
+      background:
+        rgba(255, 156, 66, 0.15);
+    }
+
+    .hero-run-all small {
+      color:
+        #996137;
+
+      font-size: 6px;
+
+      font-weight: 700;
+    }
 
     /* =====================================
        MARKET
     ===================================== */
 
-    main {
-      padding:
-        18px 0 40px;
-    }
-
-
     .market {
-      padding:
-        16px;
+      padding: 16px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        16px;
+      border-radius: 16px;
 
       background:
         linear-gradient(
@@ -388,7 +1093,6 @@
         );
     }
 
-
     .market-head {
       display: flex;
       justify-content: space-between;
@@ -397,12 +1101,10 @@
       gap: 12px;
     }
 
-
     .symbol {
       font-size: 12px;
       font-weight: 800;
     }
-
 
     .price {
       margin-top: 3px;
@@ -417,17 +1119,14 @@
       font-weight: 850;
     }
 
-
     .change {
       margin-top: 3px;
 
       color:
         var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
-
 
     .market-controls {
       display: flex;
@@ -437,19 +1136,18 @@
       flex-wrap: wrap;
     }
 
-
     .control {
       min-height: 33px;
 
       padding:
-        7px 9px;
+        7px
+        9px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
       background:
         var(--panel2);
@@ -457,10 +1155,8 @@
       color:
         var(--text);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
-
 
     .chart {
       height: 280px;
@@ -471,8 +1167,7 @@
         1px solid
         var(--border);
 
-      border-radius:
-        11px;
+      border-radius: 11px;
 
       overflow: hidden;
 
@@ -480,12 +1175,10 @@
         #03070c;
     }
 
-
     #priceChart {
       width: 100%;
       height: 100%;
     }
-
 
     .market-mini {
       margin-top: 9px;
@@ -501,90 +1194,67 @@
       gap: 7px;
     }
 
-
     .stat {
-      padding:
-        9px;
+      padding: 9px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
       background:
         rgba(8, 13, 20, 0.75);
     }
 
-
     .stat-label {
       color:
         var(--muted2);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
     }
-
 
     .stat-value {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
-      font-size:
-        11px;
+      font-size: 11px;
 
-      font-weight:
-        750;
+      font-weight: 750;
     }
-
 
     /* =====================================
        AGENTS
     ===================================== */
 
     .agents-section {
-      margin-top:
-        18px;
+      margin-top: 18px;
     }
-
 
     .agents-title {
-      margin-bottom:
-        11px;
+      margin-bottom: 11px;
 
-      text-align:
-        center;
+      text-align: center;
     }
-
 
     .agents-title strong {
-      font-size:
-        15px;
+      font-size: 15px;
     }
 
-
     .agents-title span {
-      display:
-        block;
+      display: block;
 
-      margin-top:
-        3px;
+      margin-top: 3px;
 
       color:
         var(--muted2);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
-
     .agents {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -592,38 +1262,25 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        9px;
+      gap: 9px;
     }
-
 
     .agent {
       --agent-color:
         #ffffff;
 
-      position:
-        relative;
+      position: relative;
 
-      min-height:
-        155px;
+      min-height: 155px;
 
-      display:
-        flex;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      flex-direction:
-        column;
+      overflow: hidden;
 
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      overflow:
-        hidden;
-
-      padding:
-        15px;
+      padding: 15px;
 
       border:
         1px solid
@@ -633,8 +1290,7 @@
           var(--border)
         );
 
-      border-radius:
-        15px;
+      border-radius: 15px;
 
       background:
         linear-gradient(
@@ -643,13 +1299,10 @@
           rgba(4, 8, 13, 0.99)
         );
 
-      cursor:
-        pointer;
+      cursor: pointer;
 
-      transition:
-        0.16s;
+      transition: 0.16s;
     }
-
 
     .agent:hover {
       transform:
@@ -659,85 +1312,72 @@
         var(--agent-color);
     }
 
-
     .agent.working {
       animation:
-        pulseAgent
+        agentPulse
         1.2s
         infinite;
     }
 
-
-    @keyframes pulseAgent {
-
+    @keyframes agentPulse {
       0%,
       100% {
         box-shadow:
-          0 0 0
+          0
+          0
+          0
           rgba(255,255,255,0);
       }
 
       50% {
         box-shadow:
-          0 0 24px
+          0
+          0
+          24px
           color-mix(
             in srgb,
             var(--agent-color) 25%,
             transparent
           );
       }
-
     }
-
 
     .agent.scout {
       --agent-color:
         var(--scout);
     }
 
-
     .agent.news {
       --agent-color:
         var(--news);
     }
-
 
     .agent.sentiment {
       --agent-color:
         var(--sentiment);
     }
 
-
     .agent.charts {
       --agent-color:
         var(--charts);
     }
-
 
     .agent.risk {
       --agent-color:
         var(--risk);
     }
 
-
     .agent.decision {
       --agent-color:
         var(--decision);
     }
 
-
     .alien-box {
-      width:
-        58px;
+      width: 58px;
+      height: 58px;
 
-      height:
-        58px;
-
-      display:
-        grid;
-
-      place-items:
-        center;
+      display: grid;
+      place-items: center;
 
       border:
         1px solid
@@ -747,8 +1387,7 @@
           transparent
         );
 
-      border-radius:
-        17px;
+      border-radius: 17px;
 
       background:
         color-mix(
@@ -758,112 +1397,81 @@
         );
     }
 
-
     .alien {
-      font-size:
-        34px;
+      font-size: 34px;
 
       filter:
         grayscale(1)
         brightness(1.7);
     }
 
-
     .agent-name {
-      margin-top:
-        10px;
+      margin-top: 10px;
 
       color:
         var(--agent-color);
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      font-weight:
-        850;
+      font-weight: 850;
     }
 
-
     .agent-role {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
       color:
         var(--muted2);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
-
     .agent-state {
-      margin-top:
-        8px;
+      margin-top: 8px;
 
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      gap:
-        5px;
+      gap: 5px;
 
       color:
         var(--muted);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      font-weight:
-        800;
+      font-weight: 800;
     }
 
-
     .agent-state-dot {
-      width:
-        6px;
+      width: 6px;
+      height: 6px;
 
-      height:
-        6px;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         var(--agent-color);
 
       box-shadow:
-        0 0 7px
+        0
+        0
+        7px
         var(--agent-color);
     }
-
 
     /* =====================================
        MODAL
     ===================================== */
 
     .modal {
-      position:
-        fixed;
+      position: fixed;
+      inset: 0;
 
-      inset:
-        0;
+      z-index: 500;
 
-      z-index:
-        500;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
 
-      display:
-        none;
-
-      align-items:
-        flex-end;
-
-      justify-content:
-        center;
-
-      padding:
-        18px;
+      padding: 18px;
 
       background:
         rgba(0,0,0,0.75);
@@ -872,12 +1480,9 @@
         blur(8px);
     }
 
-
     .modal.show {
-      display:
-        flex;
+      display: flex;
     }
-
 
     .modal-panel {
       width:
@@ -886,21 +1491,17 @@
           100%
         );
 
-      max-height:
-        90vh;
+      max-height: 90vh;
 
-      overflow-y:
-        auto;
+      overflow-y: auto;
 
-      padding:
-        18px;
+      padding: 18px;
 
       border:
         1px solid
-        #273647;
+        var(--border2);
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
       background:
         linear-gradient(
@@ -910,53 +1511,36 @@
         );
     }
 
-
     .modal-head {
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
 
     .modal-name {
-      font-size:
-        18px;
+      font-size: 18px;
 
-      font-weight:
-        850;
+      font-weight: 850;
     }
 
-
     .modal-role {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
       color:
         var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
-
     .modal-close {
-      width:
-        32px;
-
-      height:
-        32px;
+      width: 32px;
+      height: 32px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         var(--panel);
@@ -965,26 +1549,20 @@
         var(--text);
     }
 
-
     .description {
-      margin-top:
-        14px;
+      margin-top: 14px;
 
       color:
         var(--muted);
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
     }
-
 
     .detail-grid,
     .result-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -992,111 +1570,83 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        7px;
+      gap: 7px;
 
-      margin-top:
-        11px;
+      margin-top: 11px;
     }
 
-
     .detail-box {
-      padding:
-        9px;
+      padding: 9px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
       background:
         rgba(3, 7, 12, 0.8);
     }
 
-
     .detail-label {
       color:
         var(--muted2);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
       text-transform:
         uppercase;
     }
 
-
     .detail-value {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
-      font-size:
-        10px;
+      font-size: 10px;
 
-      font-weight:
-        750;
+      font-weight: 750;
 
       overflow-wrap:
         anywhere;
     }
 
-
     .runtime {
-      margin-top:
-        14px;
+      margin-top: 14px;
 
-      padding-top:
-        13px;
+      padding-top: 13px;
 
       border-top:
         1px solid
         var(--border);
     }
 
-
     .runtime-top {
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      gap:
-        8px;
+      gap: 8px;
     }
-
 
     .runtime-status {
       color:
         var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
-
 
     .result {
-      margin-top:
-        10px;
+      margin-top: 10px;
     }
-
 
     .result-empty,
     .result-summary {
-      padding:
-        12px;
+      padding: 12px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
       background:
         rgba(3, 7, 12, 0.8);
@@ -1104,155 +1654,82 @@
       color:
         var(--muted);
 
-      font-size:
-        9px;
+      font-size: 9px;
 
-      line-height:
-        1.6;
+      line-height: 1.6;
     }
-
 
     .result-list {
-      display:
-        grid;
+      display: grid;
 
-      gap:
-        6px;
+      gap: 6px;
 
-      margin-top:
-        9px;
+      margin-top: 9px;
     }
 
-
     .result-item {
-      padding:
-        8px;
+      padding: 8px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
       background:
         rgba(3, 7, 12, 0.75);
     }
 
-
     .result-item-title {
-      font-size:
-        9px;
+      font-size: 9px;
 
-      font-weight:
-        750;
+      font-weight: 750;
     }
 
-
     .result-item-sub {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
       color:
         var(--muted2);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      line-height:
-        1.5;
+      line-height: 1.5;
     }
-
-
-    .table-wrap {
-      margin-top:
-        9px;
-
-      overflow-x:
-        auto;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        9px;
-    }
-
-
-    table {
-      width:
-        100%;
-
-      border-collapse:
-        collapse;
-
-      font-size:
-        8px;
-    }
-
-
-    th,
-    td {
-      padding:
-        7px;
-
-      border-bottom:
-        1px solid
-        var(--border);
-
-      text-align:
-        right;
-    }
-
-
-    th:first-child,
-    td:first-child {
-      text-align:
-        left;
-    }
-
 
     /* =====================================
        TRADE FORM
     ===================================== */
 
     .trade-form {
-      display:
-        none;
+      display: none;
 
-      margin-top:
-        13px;
+      margin-top: 13px;
     }
-
 
     .trade-form.show {
-      display:
-        block;
+      display: block;
     }
-
 
     .form-title {
       margin:
-        12px 0 7px;
+        12px
+        0
+        7px;
 
       color:
         var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      font-weight:
-        800;
+      font-weight: 800;
 
       text-transform:
         uppercase;
     }
 
-
     .form-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -1260,44 +1737,36 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        7px;
+      gap: 7px;
     }
 
-
     .field label {
-      display:
-        block;
+      display: block;
 
-      margin-bottom:
-        4px;
+      margin-bottom: 4px;
 
       color:
         var(--muted2);
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
-
 
     .field input,
     .field select,
     .field textarea {
-      width:
-        100%;
+      width: 100%;
 
-      min-height:
-        34px;
+      min-height: 34px;
 
       padding:
-        7px 8px;
+        7px
+        8px;
 
       border:
         1px solid
         var(--border);
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
       background:
         #060b12;
@@ -1305,62 +1774,87 @@
       color:
         var(--text);
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
-
     .field textarea {
-      min-height:
-        85px;
+      min-height: 85px;
 
-      resize:
-        vertical;
+      resize: vertical;
 
       font-family:
         monospace;
     }
 
-
     .checkbox-row {
-      margin-top:
-        9px;
+      margin-top: 9px;
 
-      display:
-        flex;
-
-      gap:
-        6px;
-
-      align-items:
-        center;
+      display: flex;
+      gap: 6px;
+      align-items: center;
 
       color:
         var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
     }
-
 
     footer {
       padding:
-        25px 0 35px;
+        25px
+        0
+        35px;
 
       color:
         var(--muted2);
 
-      text-align:
-        center;
+      text-align: center;
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
 
     @media (
       max-width: 720px
     ) {
+      .team-hero {
+        padding: 14px;
+      }
+
+      .team-hero-header {
+        display: block;
+      }
+
+      .hero-system {
+        width: fit-content;
+
+        margin-top: 12px;
+      }
+
+      .team-floor {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
+      .command-screen {
+        height: 120px;
+      }
+
+      .hero-control-bar {
+        display: block;
+      }
+
+      .hero-run-all {
+        width: 100%;
+
+        margin-top: 10px;
+      }
 
       .agents {
         grid-template-columns:
@@ -1370,7 +1864,6 @@
           );
       }
 
-
       .market-mini {
         grid-template-columns:
           repeat(
@@ -1379,7 +1872,6 @@
           );
       }
 
-
       .form-grid {
         grid-template-columns:
           repeat(
@@ -1388,60 +1880,65 @@
           );
       }
 
-
       .market-head {
-        display:
-          block;
+        display: block;
       }
-
 
       .market-controls {
-        margin-top:
-          10px;
+        margin-top: 10px;
       }
-
     }
-
 
     @media (
       max-width: 520px
     ) {
-
       .container {
         width:
-          calc(100% - 16px);
+          calc(
+            100%
+            -
+            16px
+          );
       }
-
 
       .agents-pill {
-        display:
-          none;
+        display: none;
       }
-
 
       .brand-sub {
-        display:
-          none;
+        display: none;
       }
-
 
       .run-all-button {
-        padding:
-          6px 9px;
+        display: none;
       }
 
+      .team-hero h1 {
+        font-size: 25px;
+      }
+
+      .pixel-agent {
+        min-height: 135px;
+      }
+
+      .pixel-monitor {
+        height: 40px;
+      }
+
+      .pixel-character {
+        width: 43px;
+        height: 43px;
+
+        font-size: 25px;
+      }
 
       .chart {
-        height:
-          210px;
+        height: 210px;
       }
-
 
       .form-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
-
 
       .detail-grid,
       .result-grid {
@@ -1451,19 +1948,13 @@
             minmax(0, 1fr)
           );
       }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
   <div class="container navbar">
 
     <div class="brand">
@@ -1473,7 +1964,6 @@
       </div>
 
       <div>
-
         <div class="brand-name">
           CODEX BOT
         </div>
@@ -1481,7 +1971,6 @@
         <div class="brand-sub">
           AI TRADING TEAM
         </div>
-
       </div>
 
     </div>
@@ -1490,7 +1979,6 @@
     <div class="header-status">
 
       <div class="pill">
-
         <span
           id="okxDot"
           class="dot"
@@ -1499,12 +1987,10 @@
         <span id="okxText">
           OKX...
         </span>
-
       </div>
 
 
       <div class="pill">
-
         <span
           id="apiDot"
           class="dot"
@@ -1513,20 +1999,19 @@
         <span id="apiText">
           API...
         </span>
-
       </div>
 
 
       <button
         id="runAllButton"
         class="run-all-button"
+        type="button"
       >
         RUN ALL
       </button>
 
 
       <div class="pill agents-pill">
-
         <span>
           AGENTS
         </span>
@@ -1534,20 +2019,377 @@
         <strong>
           6 / 6
         </strong>
-
       </div>
 
     </div>
 
   </div>
-
 </header>
 
 
 <main class="container">
 
+  <!-- =====================================
+       SIX AGENT HERO
+  ====================================== -->
 
-  <!-- MARKET -->
+  <section class="team-hero">
+
+    <div class="team-hero-glow"></div>
+
+
+    <div class="team-hero-header">
+
+      <div>
+
+        <div class="team-eyebrow">
+          AI TRADING COMMAND CENTER
+        </div>
+
+        <h1>
+          6 AGENTS.
+          ONE TRADING TEAM.
+        </h1>
+
+        <p>
+          SCOUT finds opportunities.
+          NEWS watches market catalysts.
+          SENTIMENT measures positioning.
+          CHARTS reads structure.
+          RISK protects the account.
+          DECISION makes the final call.
+        </p>
+
+      </div>
+
+
+      <div class="hero-system">
+
+        <span class="hero-online-dot"></span>
+
+        <span id="heroAgentStatus">
+          6 / 6 AGENTS READY
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="command-room">
+
+      <div class="command-screen">
+
+        <div class="screen-top">
+
+          <span>
+            MARKET COMMAND
+          </span>
+
+          <span class="screen-live">
+            LIVE
+          </span>
+
+        </div>
+
+
+        <div class="screen-chart">
+
+          <div class="screen-symbols">
+            <span>BTC</span>
+            <span>ETH</span>
+            <span>SOL</span>
+            <span>ENA</span>
+          </div>
+
+
+          <svg
+            class="hero-chart-svg"
+            viewBox="0 0 800 180"
+            preserveAspectRatio="none"
+          >
+
+            <polyline
+              points="
+                0,145
+                45,135
+                80,142
+                125,117
+                165,126
+                210,96
+                250,105
+                300,76
+                345,87
+                390,61
+                440,72
+                490,46
+                540,58
+                590,35
+                640,44
+                690,26
+                740,33
+                800,10
+              "
+            />
+
+          </svg>
+
+        </div>
+
+      </div>
+
+
+      <div class="team-floor">
+
+        <button
+          class="pixel-agent pixel-scout"
+          data-agent="scout"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            SCOUT
+          </strong>
+
+          <small>
+            Opportunity Scanner
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="pixel-agent pixel-news"
+          data-agent="news"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            NEWS
+          </strong>
+
+          <small>
+            News Analyst
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="pixel-agent pixel-sentiment"
+          data-agent="sentiment"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            SENTIMENT
+          </strong>
+
+          <small>
+            Market Sentiment
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="pixel-agent pixel-charts"
+          data-agent="charts"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            CHARTS
+          </strong>
+
+          <small>
+            Technical Analyst
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="pixel-agent pixel-risk"
+          data-agent="risk"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            RISK
+          </strong>
+
+          <small>
+            Risk Manager
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="pixel-agent pixel-decision"
+          data-agent="decision"
+          type="button"
+        >
+
+          <div class="pixel-monitor">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="pixel-character">
+            👾
+          </div>
+
+          <strong>
+            DECISION
+          </strong>
+
+          <small>
+            Final Decision
+          </small>
+
+          <div class="pixel-status">
+            <span class="pixel-status-dot"></span>
+            <span class="pixel-state-text">
+              READY
+            </span>
+          </div>
+
+        </button>
+
+      </div>
+
+
+      <div class="hero-control-bar">
+
+        <div class="hero-control-copy">
+
+          <strong>
+            AI TRADING TEAM
+          </strong>
+
+          <span>
+            Analysis only · Execution off
+          </span>
+
+        </div>
+
+
+        <button
+          id="heroRunAllButton"
+          class="hero-run-all"
+          type="button"
+        >
+
+          <span>
+            ▶
+          </span>
+
+          RUN ALL
+
+          <small>
+            FULL PIPELINE
+          </small>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       MARKET DASHBOARD
+  ====================================== -->
 
   <section class="market">
 
@@ -1663,6 +2505,7 @@
         <button
           id="refreshButton"
           class="button"
+          type="button"
         >
           Refresh
         </button>
@@ -1673,11 +2516,7 @@
 
 
     <div class="chart">
-
-      <canvas
-        id="priceChart"
-      ></canvas>
-
+      <canvas id="priceChart"></canvas>
     </div>
 
 
@@ -1751,18 +2590,20 @@
   </section>
 
 
-  <!-- AGENTS -->
+  <!-- =====================================
+       FUNCTIONAL AGENT CARDS
+  ====================================== -->
 
   <section class="agents-section">
 
     <div class="agents-title">
 
       <strong>
-        AI TRADING TEAM
+        AGENT CONTROL
       </strong>
 
       <span>
-        Tap an agent
+        Open each agent for detailed analysis
       </span>
 
     </div>
@@ -1789,11 +2630,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1817,11 +2655,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1845,11 +2680,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1873,11 +2705,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1901,11 +2730,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1929,11 +2755,8 @@
         </div>
 
         <div class="agent-state">
-
           <span class="agent-state-dot"></span>
-
           V1 READY
-
         </div>
 
       </article>
@@ -1951,7 +2774,9 @@
 </footer>
 
 
-<!-- MODAL -->
+<!-- =====================================
+     MODAL
+====================================== -->
 
 <div
   id="modal"
@@ -1982,6 +2807,7 @@
       <button
         id="modalClose"
         class="modal-close"
+        type="button"
       >
         ×
       </button>
@@ -2001,8 +2827,6 @@
     ></div>
 
 
-    <!-- NORMAL AGENT -->
-
     <div
       id="agentRuntime"
       class="runtime"
@@ -2020,6 +2844,7 @@
         <button
           id="runAgentButton"
           class="button primary"
+          type="button"
         >
           Run Agent
         </button>
@@ -2041,7 +2866,7 @@
     </div>
 
 
-    <!-- RISK / DECISION TRADE FORM -->
+    <!-- RISK / DECISION -->
 
     <div
       id="tradeForm"
@@ -2243,16 +3068,16 @@
       </div>
 
 
-      <div class="field"
-           style="margin-top:10px;">
+      <div
+        class="field"
+        style="margin-top:10px;"
+      >
 
         <label>
           Existing Positions JSON
         </label>
 
-        <textarea
-          id="openPositions"
-        >[]</textarea>
+        <textarea id="openPositions">[]</textarea>
 
       </div>
 
@@ -2271,6 +3096,7 @@
           <button
             id="tradeRunButton"
             class="button primary"
+            type="button"
           >
             Evaluate
           </button>
@@ -2299,7 +3125,6 @@
 
 
 <script>
-
 "use strict";
 
 
@@ -2326,6 +3151,10 @@ const API_BASE = (
 
 const MARKET_REFRESH_MS =
   15000;
+
+
+const API_REFRESH_MS =
+  30000;
 
 
 let candles =
@@ -2371,6 +3200,12 @@ const elements = {
 
   runAllButton:
     $("runAllButton"),
+
+  heroRunAllButton:
+    $("heroRunAllButton"),
+
+  heroAgentStatus:
+    $("heroAgentStatus"),
 
   symbolSelect:
     $("symbolSelect"),
@@ -2501,7 +3336,7 @@ const agentInfo = {
       "Opportunity Scanner",
 
     description:
-      "掃描 OKX USDT 永續市場，找出值得優先研究的交易標的。",
+      "掃描 OKX USDT 永續市場，從成交量、波動、Open Interest 與市場活動中找出值得其他 Agent 優先研究的標的。",
 
     details: [
       [
@@ -2513,8 +3348,8 @@ const agentInfo = {
         "OKX"
       ],
       [
-        "Output",
-        "Opportunity"
+        "Job",
+        "Find Opportunities"
       ]
     ],
 
@@ -2533,7 +3368,7 @@ const agentInfo = {
       "News Analyst",
 
     description:
-      "分析市場新聞與事件方向，辨識可能影響目前標的的利多、利空與重大事件風險。",
+      "分析市場新聞、政策、公司事件與催化劑，判斷事件方向、重要度與對目前標的的影響。",
 
     details: [
       [
@@ -2565,7 +3400,7 @@ const agentInfo = {
       "Market Sentiment",
 
     description:
-      "分析 Funding、Open Interest 與市場擁擠程度，判斷目前多空情緒。",
+      "分析 Funding、Open Interest、Positioning 與市場擁擠程度，判斷多空情緒與 herd risk。",
 
     details: [
       [
@@ -2597,7 +3432,7 @@ const agentInfo = {
       "Technical Analyst",
 
     description:
-      "執行多時間框架技術分析。4H / 1H 用於主要方向，15m 用於進場時機。",
+      "分析市場結構、趨勢、支撐壓力與多時間框架。4H / 1H 用於主方向，15m 用於進場時機。",
 
     details: [
       [
@@ -2629,7 +3464,7 @@ const agentInfo = {
       "Risk Manager",
 
     description:
-      "根據帳戶、槓桿、止損、Risk / Reward、曝險與其他 Agent 證據評估交易風險。",
+      "根據帳戶、槓桿、止損、Risk / Reward、部位曝險與其他 Agent 證據，評估交易是否可以承擔。",
 
     details: [
       [
@@ -2661,7 +3496,7 @@ const agentInfo = {
       "Final Decision Maker",
 
     description:
-      "整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，輸出最終 LONG / SHORT / WAIT。",
+      "整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，使用 RISK Gate 與多時間框架規則輸出最終 LONG / SHORT / WAIT。",
 
     details: [
       [
@@ -2695,7 +3530,9 @@ function escapeHtml(
 ) {
 
   return String(
-    value ?? ""
+    value
+    ??
+    ""
   )
   .replaceAll(
     "&",
@@ -2726,33 +3563,33 @@ function number(
   fallback = null
 ) {
 
-  const n =
+  const parsed =
     Number(
       value
     );
 
 
   return Number.isFinite(
-    n
+    parsed
   )
-    ? n
+    ? parsed
     : fallback;
 
 }
 
 
-function price(
+function formatPrice(
   value
 ) {
 
-  const n =
+  const parsed =
     number(
       value
     );
 
 
   if (
-    n === null
+    parsed === null
   ) {
 
     return "--";
@@ -2762,13 +3599,13 @@ function price(
 
   if (
     Math.abs(
-      n
+      parsed
     )
     >=
     1000
   ) {
 
-    return n.toLocaleString(
+    return parsed.toLocaleString(
       undefined,
       {
         maximumFractionDigits:
@@ -2779,7 +3616,7 @@ function price(
   }
 
 
-  return n.toLocaleString(
+  return parsed.toLocaleString(
     undefined,
     {
       maximumFractionDigits:
@@ -2794,14 +3631,14 @@ function compact(
   value
 ) {
 
-  const n =
+  const parsed =
     number(
       value
     );
 
 
   if (
-    n === null
+    parsed === null
   ) {
 
     return "--";
@@ -2819,7 +3656,7 @@ function compact(
         2
     }
   ).format(
-    n
+    parsed
   );
 
 }
@@ -2858,15 +3695,11 @@ function detailBox(
     <div class="detail-box">
 
       <div class="detail-label">
-        ${escapeHtml(
-          label
-        )}
+        ${escapeHtml(label)}
       </div>
 
       <div class="detail-value">
-        ${escapeHtml(
-          value
-        )}
+        ${escapeHtml(value)}
       </div>
 
     </div>
@@ -3028,6 +3861,14 @@ async function checkBackend(
         );
 
 
+      elements.heroAgentStatus.textContent =
+        (
+          `${health.agents_ready} / `
+          +
+          `${health.agents_total} AGENTS READY`
+        );
+
+
       return;
 
     }
@@ -3057,6 +3898,10 @@ async function checkBackend(
 
   elements.apiText.textContent =
     "API Offline";
+
+
+  elements.heroAgentStatus.textContent =
+    "BACKEND OFFLINE";
 
 }
 
@@ -3099,6 +3944,7 @@ async function okxGet(
   const response =
     await fetch(
       url.toString(),
+
       {
         cache:
           "no-store"
@@ -3242,6 +4088,7 @@ async function refreshMarket(
 
           okxGet(
             "/api/v5/market/ticker",
+
             {
               instId:
                 symbol
@@ -3250,6 +4097,7 @@ async function refreshMarket(
 
           okxGet(
             "/api/v5/market/candles",
+
             {
               instId:
                 symbol,
@@ -3263,6 +4111,7 @@ async function refreshMarket(
 
           okxGet(
             "/api/v5/public/funding-rate",
+
             {
               instId:
                 symbol
@@ -3271,6 +4120,7 @@ async function refreshMarket(
 
           okxGet(
             "/api/v5/public/open-interest",
+
             {
               instType:
                 "SWAP",
@@ -3282,6 +4132,7 @@ async function refreshMarket(
 
           okxGet(
             "/api/v5/market/books",
+
             {
               instId:
                 symbol,
@@ -3327,7 +4178,7 @@ async function refreshMarket(
 
 
       elements.lastPrice.textContent =
-        price(
+        formatPrice(
           last
         );
 
@@ -3452,6 +4303,24 @@ async function refreshMarket(
               )
           })
         )
+        .filter(
+          candle =>
+            Number.isFinite(
+              candle.open
+            )
+            &&
+            Number.isFinite(
+              candle.high
+            )
+            &&
+            Number.isFinite(
+              candle.low
+            )
+            &&
+            Number.isFinite(
+              candle.close
+            )
+        )
         .reverse();
 
 
@@ -3488,6 +4357,11 @@ async function refreshMarket(
             +
             "%";
 
+    } else {
+
+      elements.funding.textContent =
+        "--";
+
     }
 
 
@@ -3513,6 +4387,11 @@ async function refreshMarket(
             compact(
               oi
             );
+
+    } else {
+
+      elements.openInterest.textContent =
+        "--";
 
     }
 
@@ -3587,6 +4466,11 @@ async function refreshMarket(
 
       }
 
+    } else {
+
+      elements.spread.textContent =
+        "--";
+
     }
 
 
@@ -3657,6 +4541,17 @@ function drawChart(
   const rect =
     canvas
     .getBoundingClientRect();
+
+
+  if (
+    rect.width <= 0
+    ||
+    rect.height <= 0
+  ) {
+
+    return;
+
+  }
 
 
   const ratio =
@@ -3793,6 +4688,48 @@ function drawChart(
       usableHeight;
 
 
+  ctx.strokeStyle =
+    "rgba(90,110,130,0.12)";
+
+
+  for (
+    let index = 1;
+    index < 5;
+    index += 1
+  ) {
+
+    const gridY =
+      padding
+      +
+      usableHeight
+      *
+      index
+      /
+      5;
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+      padding,
+      gridY
+    );
+
+
+    ctx.lineTo(
+      rect.width
+      -
+      padding,
+      gridY
+    );
+
+
+    ctx.stroke();
+
+  }
+
+
   candles.forEach(
     (
       candle,
@@ -3896,7 +4833,7 @@ function drawChart(
 
 
 /* =====================================
-   AGENT CARD STATE
+   AGENT STATE
 ===================================== */
 
 function setAgentState(
@@ -3904,32 +4841,15 @@ function setAgentState(
   state
 ) {
 
-  const card =
+  const functionalCard =
     document.querySelector(
       `.agent[data-agent="${agent}"]`
     );
 
 
-  if (
-    !card
-  ) {
-
-    return;
-
-  }
-
-
-  card.classList.toggle(
-    "working",
-    state
-    ===
-    "working"
-  );
-
-
-  const stateElement =
-    card.querySelector(
-      ".agent-state"
+  const heroCard =
+    document.querySelector(
+      `.pixel-agent[data-agent="${agent}"]`
     );
 
 
@@ -3953,15 +4873,82 @@ function setAgentState(
   };
 
 
-  stateElement.innerHTML =
-    `
-      <span class="agent-state-dot"></span>
-      ${
-        labels[state]
-        ||
-        state.toUpperCase()
-      }
-    `;
+  const label =
+    labels[state]
+    ||
+    String(
+      state
+    )
+    .toUpperCase();
+
+
+  if (
+    functionalCard
+  ) {
+
+    functionalCard
+      .classList
+      .toggle(
+        "working",
+        state
+        ===
+        "working"
+      );
+
+
+    const stateElement =
+      functionalCard
+      .querySelector(
+        ".agent-state"
+      );
+
+
+    if (
+      stateElement
+    ) {
+
+      stateElement.innerHTML =
+        `
+          <span class="agent-state-dot"></span>
+          ${escapeHtml(label)}
+        `;
+
+    }
+
+  }
+
+
+  if (
+    heroCard
+  ) {
+
+    heroCard
+      .classList
+      .toggle(
+        "working",
+        state
+        ===
+        "working"
+      );
+
+
+    const stateText =
+      heroCard
+      .querySelector(
+        ".pixel-state-text"
+      );
+
+
+    if (
+      stateText
+    ) {
+
+      stateText.textContent =
+        label;
+
+    }
+
+  }
 
 }
 
@@ -4181,6 +5168,8 @@ async function runAgent(
 
   if (
     busy
+    ||
+    !currentAgent
   ) {
 
     return;
@@ -4202,9 +5191,14 @@ async function runAgent(
   );
 
 
+  elements.runtimeStatus.textContent =
+    "Running...";
+
+
   try {
 
-    let output;
+    let output =
+      null;
 
 
     const context = {
@@ -4313,14 +5307,32 @@ async function runAgent(
     }
 
 
+    if (
+      !output
+    ) {
+
+      throw new Error(
+        "Agent endpoint is not available."
+      );
+
+    }
+
+
     setAgentState(
       currentAgent,
+
       output.status
       ===
       "success"
         ? "success"
         : "error"
     );
+
+
+    elements.runtimeStatus.textContent =
+      output.status
+      ||
+      "complete";
 
 
     renderGenericAgent(
@@ -4336,6 +5348,10 @@ async function runAgent(
       currentAgent,
       "error"
     );
+
+
+    elements.runtimeStatus.textContent =
+      "Error";
 
 
     elements.agentResult.innerHTML =
@@ -4406,6 +5422,7 @@ function renderGenericAgent(
       ]
     );
 
+
     boxes.push(
       [
         "Volatility",
@@ -4433,6 +5450,7 @@ function renderGenericAgent(
       ]
     );
 
+
     boxes.push(
       [
         "Crowding",
@@ -4448,17 +5466,14 @@ function renderGenericAgent(
   elements.agentResult.innerHTML =
     `
       <div class="result-summary">
-
         ${escapeHtml(
           output.summary
           ||
           "Analysis complete."
         )}
-
       </div>
 
       <div class="result-grid">
-
         ${
           boxes
           .map(
@@ -4472,7 +5487,6 @@ function renderGenericAgent(
             ""
           )
         }
-
       </div>
     `;
 
@@ -4777,6 +5791,7 @@ async function runRisk(
 
     setAgentState(
       "risk",
+
       risk.status
       ===
       "success"
@@ -4797,6 +5812,10 @@ async function runRisk(
       "risk",
       "error"
     );
+
+
+    elements.tradeRuntimeStatus.textContent =
+      "Error";
 
 
     elements.tradeResult.innerHTML =
@@ -4839,13 +5858,11 @@ function renderRisk(
   elements.tradeResult.innerHTML =
     `
       <div class="result-summary">
-
         ${escapeHtml(
           risk.summary
           ||
           "Risk analysis complete."
         )}
-
       </div>
 
       <div class="result-grid">
@@ -4856,7 +5873,8 @@ function renderRisk(
             risk.verdict
             ||
             "--"
-          ).toUpperCase()
+          )
+          .toUpperCase()
         )}
 
         ${detailBox(
@@ -4931,6 +5949,10 @@ async function runDecision(
     true;
 
 
+  elements.heroRunAllButton.disabled =
+    true;
+
+
   setAllAgents(
     "working"
   );
@@ -4943,9 +5965,7 @@ async function runDecision(
   elements.tradeResult.innerHTML =
     `
       <div class="result-empty">
-
-        SCOUT → NEWS → SENTIMENT → CHARTS → RISK → DECISION
-
+        SCOUT · NEWS · SENTIMENT · CHARTS · RISK · DECISION
       </div>
     `;
 
@@ -5000,12 +6020,6 @@ async function runDecision(
 
     const decision =
       response.decision
-      ||
-      {};
-
-
-    const finalDecision =
-      decision.decision
       ||
       {};
 
@@ -5103,11 +6117,9 @@ async function runDecision(
     elements.tradeResult.innerHTML =
       `
         <div class="result-summary negative">
-
           ${escapeHtml(
             error.message
           )}
-
         </div>
       `;
 
@@ -5122,6 +6134,10 @@ async function runDecision(
 
 
     elements.runAllButton.disabled =
+      false;
+
+
+    elements.heroRunAllButton.disabled =
       false;
 
   }
@@ -5224,21 +6240,17 @@ function renderDecision(
         <div class="result-item">
 
           <div class="result-item-title negative">
-
             ${escapeHtml(
               gate.name
             )}
-
           </div>
 
           <div class="result-item-sub">
-
             ${escapeHtml(
               gate.reason
               ||
               ""
             )}
-
           </div>
 
         </div>
@@ -5256,11 +6268,9 @@ function renderDecision(
         <div class="result-item">
 
           <div class="result-item-sub">
-
             ${escapeHtml(
               reason
             )}
-
           </div>
 
         </div>
@@ -5285,11 +6295,9 @@ function renderDecision(
           font-weight:900;
         "
       >
-
         ${escapeHtml(
           action
         )}
-
       </div>
 
 
@@ -5395,7 +6403,7 @@ function renderDecision(
 
 
 /* =====================================
-   RUN ALL BUTTON
+   RUN ALL
 ===================================== */
 
 function openRunAll(
@@ -5459,9 +6467,38 @@ elements.runAllButton
   );
 
 
+elements.heroRunAllButton
+  .addEventListener(
+    "click",
+    openRunAll
+  );
+
+
 document
   .querySelectorAll(
     ".agent"
+  )
+  .forEach(
+    card => {
+
+      card.addEventListener(
+        "click",
+        () => {
+
+          openAgent(
+            card.dataset.agent
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+document
+  .querySelectorAll(
+    ".pixel-agent"
   )
   .forEach(
     card => {
@@ -5605,11 +6642,10 @@ setInterval(
     }
 
   },
-  30000
+  API_REFRESH_MS
 );
 
 </script>
-
 
 </body>
 </html>
