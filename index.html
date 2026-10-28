@@ -8,39 +8,41 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <meta
-    name="description"
-    content="Codex Bot Multi-Agent Trading Dashboard"
-  >
-
   <title>CODEX BOT</title>
 
   <style>
     :root {
-      --bg: #020407;
-      --panel: #080d14;
-      --panel2: #0c131d;
-      --border: #1b2735;
-      --border2: #273647;
+      --bg: #020405;
+      --bg2: #05090c;
+      --panel: #071018;
+      --panel2: #0a141d;
+      --line: #162a38;
+      --line2: #214158;
 
-      --text: #f4f7fb;
-      --muted: #8794a5;
-      --muted2: #586676;
+      --text: #eafff4;
+      --muted: #638077;
+      --muted2: #41584f;
 
-      --green: #42e58d;
-      --red: #ff5f6d;
-      --yellow: #ffd54a;
-      --blue: #4d9fff;
-      --purple: #b56cff;
-      --orange: #ff9c42;
+      --green: #59ff9b;
+      --red: #ff5f72;
+      --yellow: #ffe45c;
+      --blue: #58a9ff;
+      --purple: #bd71ff;
+      --orange: #ff9f43;
 
-      --scout: #ffd54a;
-      --news: #ff5f6d;
-      --sentiment: #b56cff;
-      --charts: #4d9fff;
-      --risk: #42e58d;
-      --decision: #ff9c42;
+      --scout: #ffe45c;
+      --news: #ff5f72;
+      --sentiment: #bd71ff;
+      --charts: #58a9ff;
+      --risk: #59ff9b;
+      --decision: #ff9f43;
+
+      --pixel-font:
+        "Courier New",
+        "Lucida Console",
+        monospace;
     }
+
 
     * {
       box-sizing: border-box;
@@ -48,514 +50,496 @@
       padding: 0;
     }
 
+
     html {
-      scroll-behavior: smooth;
+      background:
+        var(--bg);
     }
+
 
     body {
       min-height: 100vh;
 
       background:
         radial-gradient(
-          circle at 50% -15%,
-          rgba(77, 159, 255, 0.13),
-          transparent 35%
+          circle at 50% -20%,
+          rgba(46, 255, 153, 0.07),
+          transparent 34%
         ),
-        #020407;
+        linear-gradient(
+          180deg,
+          #030608,
+          #010203
+        );
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
+        var(--pixel-font);
     }
 
-    body.modal-open {
-      overflow: hidden;
-    }
 
     button,
-    select,
     input,
-    textarea {
-      font: inherit;
+    select {
+      font:
+        inherit;
     }
+
 
     button {
-      cursor: pointer;
+      cursor:
+        pointer;
     }
+
 
     button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+      cursor:
+        not-allowed;
+
+      opacity:
+        0.48;
     }
 
-    .container {
+
+    .app {
       width:
         min(
           1180px,
-          calc(100% - 24px)
+          calc(100% - 20px)
         );
 
-      margin: 0 auto;
+      margin:
+        0 auto;
+
+      padding-bottom:
+        60px;
     }
 
-    .positive {
-      color: var(--green) !important;
-    }
-
-    .negative {
-      color: var(--red) !important;
-    }
-
-    .warning {
-      color: var(--yellow) !important;
-    }
 
     /* =====================================
        HEADER
     ===================================== */
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    .topbar {
+      position:
+        sticky;
+
+      top:
+        0;
+
+      z-index:
+        100;
 
       border-bottom:
-        1px solid
-        var(--border);
+        2px solid
+        #0f2d22;
 
       background:
-        rgba(2, 4, 7, 0.9);
+        rgba(2, 5, 5, 0.94);
 
       backdrop-filter:
-        blur(16px);
+        blur(12px);
     }
 
-    .navbar {
-      min-height: 62px;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .topbar-inner {
+      width:
+        min(
+          1180px,
+          calc(100% - 20px)
+        );
 
-      gap: 12px;
+      min-height:
+        58px;
+
+      margin:
+        0 auto;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
     }
+
 
     .brand {
-      display: flex;
-      align-items: center;
+      display:
+        flex;
 
-      gap: 9px;
+      align-items:
+        center;
+
+      gap:
+        10px;
     }
 
-    .logo {
-      width: 36px;
-      height: 36px;
 
-      display: grid;
-      place-items: center;
+    .brand-icon {
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
 
       border:
-        1px solid
-        var(--border);
-
-      border-radius: 10px;
+        2px solid
+        var(--green);
 
       background:
-        rgba(77, 159, 255, 0.08);
+        #06110b;
 
-      font-weight: 900;
+      box-shadow:
+        4px 4px 0
+        #092117;
+
+      color:
+        var(--green);
+
+      font-size:
+        18px;
+
+      font-weight:
+        900;
     }
 
-    .brand-name {
-      font-size: 14px;
-      font-weight: 850;
+
+    .brand-title {
+      font-size:
+        13px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        1px;
     }
+
 
     .brand-sub {
-      margin-top: 2px;
+      margin-top:
+        2px;
 
-      color: var(--muted2);
+      color:
+        var(--muted);
 
-      font-size: 8px;
+      font-size:
+        7px;
     }
 
-    .header-status {
-      display: flex;
-      align-items: center;
 
-      gap: 6px;
+    .top-status {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
     }
 
-    .pill {
-      min-height: 31px;
 
-      display: flex;
-      align-items: center;
+    .status-chip {
+      min-height:
+        28px;
 
-      gap: 6px;
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        6px;
 
       padding:
-        6px
-        9px;
+        5px
+        8px;
 
       border:
         1px solid
-        var(--border);
-
-      border-radius:
-        999px;
+        var(--line2);
 
       background:
-        var(--panel);
+        #050d12;
+
+      color:
+        #789387;
+
+      font-size:
+        7px;
+    }
+
+
+    .status-dot {
+      width:
+        6px;
+
+      height:
+        6px;
+
+      background:
+        var(--yellow);
+
+      box-shadow:
+        0 0 7px
+        var(--yellow);
+    }
+
+
+    .status-dot.online {
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 7px
+        var(--green);
+    }
+
+
+    .status-dot.offline {
+      background:
+        var(--red);
+
+      box-shadow:
+        0 0 7px
+        var(--red);
+    }
+
+
+    /* =====================================
+       HERO
+    ===================================== */
+
+    .hero {
+      position:
+        relative;
+
+      margin-top:
+        16px;
+
+      padding:
+        18px;
+
+      overflow:
+        hidden;
+
+      border:
+        2px solid
+        #173122;
+
+      background:
+        #030908;
+
+      box-shadow:
+        8px 8px 0
+        #020403;
+    }
+
+
+    .hero::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      pointer-events:
+        none;
+
+      opacity:
+        0.3;
+
+      background-image:
+        linear-gradient(
+          rgba(89, 255, 155, 0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(89, 255, 155, 0.035) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        20px 20px;
+    }
+
+
+    .hero-head {
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-start;
+
+      gap:
+        16px;
+    }
+
+
+    .eyebrow {
+      color:
+        var(--green);
+
+      font-size:
+        7px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        2px;
+    }
+
+
+    .hero h1 {
+      margin-top:
+        7px;
+
+      font-size:
+        clamp(
+          22px,
+          4vw,
+          38px
+        );
+
+      line-height:
+        1;
+
+      letter-spacing:
+        -1px;
+    }
+
+
+    .hero h1 span {
+      color:
+        var(--green);
+    }
+
+
+    .hero-copy {
+      max-width:
+        650px;
+
+      margin-top:
+        10px;
 
       color:
         var(--muted);
 
       font-size:
         8px;
+
+      line-height:
+        1.7;
     }
 
-    .pill strong {
-      color:
-        var(--green);
-    }
 
-    .dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius:
-        50%;
-
-      background:
-        var(--yellow);
-    }
-
-    .dot.online {
-      background:
-        var(--green);
-
-      box-shadow:
-        0 0 8px
-        var(--green);
-    }
-
-    .dot.offline {
-      background:
-        var(--red);
-
-      box-shadow:
-        0 0 8px
-        var(--red);
-    }
-
-    .button {
-      min-height: 33px;
+    .system-ready {
+      min-width:
+        130px;
 
       padding:
-        7px
-        10px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
         8px;
 
-      background:
-        var(--panel2);
-
-      color:
-        var(--text);
-
-      font-size:
-        9px;
-    }
-
-    .button:hover:not(:disabled) {
-      border-color:
-        #40566e;
-    }
-
-    .button.primary {
-      border-color:
-        rgba(66, 229, 141, 0.35);
-
-      background:
-        rgba(66, 229, 141, 0.08);
-    }
-
-    .run-all-button {
-      min-height: 31px;
-
-      padding:
-        6px
-        12px;
-
       border:
         1px solid
-        rgba(255, 156, 66, 0.5);
-
-      border-radius:
-        999px;
+        #20543b;
 
       background:
-        rgba(255, 156, 66, 0.08);
+        #06110c;
 
       color:
-        var(--orange);
+        var(--green);
+
+      text-align:
+        center;
 
       font-size:
-        8px;
-
-      font-weight:
-        900;
-
-      letter-spacing:
-        0.4px;
-    }
-
-    .run-all-button:hover:not(:disabled) {
-      border-color:
-        var(--orange);
-
-      background:
-        rgba(255, 156, 66, 0.15);
-    }
-
-    /* =====================================
-       MAIN
-    ===================================== */
-
-    main {
-      padding:
-        18px
-        0
-        40px;
-    }
-
-    /* =====================================
-       TEAM HERO
-    ===================================== */
-
-    .team-hero {
-      position: relative;
-
-      margin-bottom: 18px;
-
-      padding: 24px;
-
-      overflow: hidden;
-
-      border:
-        1px solid
-        #1c2a38;
-
-      border-radius: 20px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(8, 14, 23, 0.99),
-          rgba(2, 5, 9, 1)
-        );
-    }
-
-    .team-hero::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(77, 159, 255, 0.015) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          rgba(77, 159, 255, 0.015) 1px,
-          transparent 1px
-        );
-
-      background-size:
-        24px
-        24px;
-    }
-
-    .team-hero-glow {
-      position: absolute;
-
-      width: 600px;
-      height: 300px;
-
-      top: -170px;
-      left: 50%;
-
-      transform:
-        translateX(-50%);
-
-      border-radius: 50%;
-
-      background:
-        rgba(77, 159, 255, 0.14);
-
-      filter:
-        blur(80px);
-
-      pointer-events: none;
-    }
-
-    .team-hero-header {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 20px;
-    }
-
-    .team-eyebrow {
-      color:
-        #4d9fff;
-
-      font-size: 8px;
-
-      font-weight: 850;
-
-      letter-spacing: 1.4px;
-    }
-
-    .team-hero h1 {
-      max-width: 650px;
-
-      margin-top: 7px;
-
-      font-size:
-        clamp(
-          25px,
-          4vw,
-          42px
-        );
-
-      line-height: 1;
-
-      letter-spacing: -1.2px;
-    }
-
-    .team-hero p {
-      max-width: 620px;
-
-      margin-top: 11px;
-
-      color:
-        #77889b;
-
-      font-size: 9px;
-
-      line-height: 1.7;
-    }
-
-    .hero-system {
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
-      padding:
-        7px
-        10px;
-
-      white-space: nowrap;
-
-      border:
-        1px solid
-        rgba(66, 229, 141, 0.25);
-
-      border-radius:
-        999px;
-
-      color:
-        #9bb3a7;
-
-      background:
-        rgba(66, 229, 141, 0.05);
-
-      font-size: 7px;
-
-      font-weight: 800;
-    }
-
-    .hero-online-dot {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background:
-        #42e58d;
+        7px;
 
       box-shadow:
-        0 0 9px
-        #42e58d;
+        3px 3px 0
+        #07170f;
     }
 
-    .command-room {
-      position: relative;
-      z-index: 2;
 
-      margin-top: 22px;
-
-      padding: 13px;
-
-      border:
-        1px solid
-        #152231;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          180deg,
-          #050a10,
-          #020407
-        );
-    }
+    /* =====================================
+       COMMAND SCREEN
+    ===================================== */
 
     .command-screen {
-      position: relative;
+      position:
+        relative;
 
-      height: 155px;
+      z-index:
+        2;
 
-      overflow: hidden;
+      height:
+        135px;
+
+      margin-top:
+        16px;
+
+      overflow:
+        hidden;
 
       border:
-        1px solid
-        #1b3248;
-
-      border-radius: 10px;
+        2px solid
+        #173b2b;
 
       background:
-        #030a10;
+        #020806;
+
+      box-shadow:
+        inset
+        0
+        0
+        30px
+        rgba(89,255,155,0.04);
     }
 
-    .screen-top {
-      height: 28px;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .command-screen-head {
+      height:
+        28px;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
 
       padding:
         0
@@ -563,23 +547,25 @@
 
       border-bottom:
         1px solid
-        #142232;
+        #123020;
 
       color:
-        #7c92a7;
+        #527766;
 
-      font-size: 7px;
-
-      letter-spacing: 1px;
+      font-size:
+        7px;
     }
 
-    .screen-live {
+
+    .command-live {
       color:
-        #42e58d;
+        var(--green);
     }
 
-    .screen-chart {
-      position: relative;
+
+    .command-body {
+      position:
+        relative;
 
       height:
         calc(
@@ -588,106 +574,107 @@
           28px
         );
 
-      overflow: hidden;
-
       background:
         linear-gradient(
-          90deg,
-          rgba(77, 159, 255, 0.03) 1px,
+          rgba(89,255,155,0.04) 1px,
           transparent 1px
         ),
         linear-gradient(
-          rgba(77, 159, 255, 0.03) 1px,
+          90deg,
+          rgba(89,255,155,0.04) 1px,
           transparent 1px
         );
 
       background-size:
-        28px
-        28px;
+        24px 24px;
     }
 
-    .screen-symbols {
-      position: absolute;
 
-      top: 9px;
-      left: 10px;
+    .command-line {
+      position:
+        absolute;
 
-      z-index: 2;
+      left:
+        2%;
 
-      display: flex;
+      right:
+        2%;
 
-      gap: 5px;
-    }
-
-    .screen-symbols span {
-      padding:
-        3px
-        6px;
-
-      border:
-        1px solid
-        #162c3e;
-
-      border-radius: 4px;
-
-      color:
-        #668196;
-
-      background:
-        rgba(3, 8, 13, 0.82);
-
-      font-size: 6px;
-    }
-
-    .hero-chart-svg {
-      position: absolute;
-
-      inset:
-        16px
-        10px
-        7px;
-
-      width:
-        calc(
-          100%
-          -
-          20px
-        );
+      bottom:
+        18px;
 
       height:
-        calc(
-          100%
-          -
-          23px
-        );
-
-      overflow: visible;
+        60px;
     }
 
-    .hero-chart-svg polyline {
-      fill: none;
+
+    .command-line svg {
+      width:
+        100%;
+
+      height:
+        100%;
+    }
+
+
+    .command-line polyline {
+      fill:
+        none;
 
       stroke:
-        #42e58d;
+        var(--green);
 
-      stroke-width: 3;
+      stroke-width:
+        3;
 
       vector-effect:
         non-scaling-stroke;
 
       filter:
         drop-shadow(
-          0
-          0
-          5px
-          rgba(66, 229, 141, 0.55)
+          0 0 6px
+          rgba(89,255,155,0.7)
         );
     }
 
-    .team-floor {
-      margin-top: 12px;
 
-      display: grid;
+    .terminal-copy {
+      position:
+        absolute;
+
+      top:
+        9px;
+
+      left:
+        10px;
+
+      color:
+        #385d4b;
+
+      font-size:
+        6px;
+
+      line-height:
+        1.7;
+    }
+
+
+    /* =====================================
+       AGENT GRID
+    ===================================== */
+
+    .agents-grid {
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      margin-top:
+        12px;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -695,874 +682,712 @@
           minmax(0, 1fr)
         );
 
-      gap: 10px;
+      gap:
+        10px;
     }
 
-    .pixel-agent {
-      --pixel-color:
-        #ffffff;
 
-      position: relative;
+    .agent-card {
+      --agent-color:
+        #fff;
 
-      min-height: 150px;
+      position:
+        relative;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
+      min-width:
+        0;
+
+      min-height:
+        168px;
 
       padding:
-        9px
-        9px
         12px;
 
-      overflow: hidden;
-
-      border:
-        1px solid
-        color-mix(
-          in srgb,
-          var(--pixel-color) 28%,
-          #14202c
-        );
-
-      border-radius: 10px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(9, 16, 25, 0.96),
-          rgba(3, 7, 11, 0.99)
-        );
-
-      color:
-        inherit;
-
-      transition:
-        0.16s;
-    }
-
-    .pixel-agent::before {
-      content: "";
-
-      position: absolute;
-
-      width: 90px;
-      height: 90px;
-
-      top: -50px;
-
-      border-radius: 50%;
-
-      background:
-        var(--pixel-color);
-
-      opacity: 0.08;
-
-      filter:
-        blur(24px);
-    }
-
-    .pixel-agent:hover {
-      transform:
-        translateY(-2px);
-
-      border-color:
-        var(--pixel-color);
-
-      box-shadow:
-        0
-        0
-        25px
-        color-mix(
-          in srgb,
-          var(--pixel-color) 12%,
-          transparent
-        );
-    }
-
-    .pixel-agent.working {
-      animation:
-        pixelPulse
-        1.2s
-        infinite;
-    }
-
-    @keyframes pixelPulse {
-      0%,
-      100% {
-        box-shadow:
-          0
-          0
-          0
-          rgba(255,255,255,0);
-      }
-
-      50% {
-        box-shadow:
-          0
-          0
-          26px
-          color-mix(
-            in srgb,
-            var(--pixel-color) 25%,
-            transparent
-          );
-      }
-    }
-
-    .pixel-scout {
-      --pixel-color:
-        var(--scout);
-    }
-
-    .pixel-news {
-      --pixel-color:
-        var(--news);
-    }
-
-    .pixel-sentiment {
-      --pixel-color:
-        var(--sentiment);
-    }
-
-    .pixel-charts {
-      --pixel-color:
-        var(--charts);
-    }
-
-    .pixel-risk {
-      --pixel-color:
-        var(--risk);
-    }
-
-    .pixel-decision {
-      --pixel-color:
-        var(--decision);
-    }
-
-    .pixel-monitor {
-      position: absolute;
-
-      top: 12px;
-
-      width: 78%;
-      height: 48px;
-
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-
-      gap: 5px;
-
-      padding: 7px;
-
-      border:
-        1px solid
-        color-mix(
-          in srgb,
-          var(--pixel-color) 24%,
-          #112130
-        );
-
-      border-radius: 5px;
-
-      background:
-        #02070c;
-    }
-
-    .pixel-monitor span {
-      display: block;
-
-      width: 14%;
-
-      border-radius: 1px;
-
-      background:
-        var(--pixel-color);
-
-      opacity: 0.75;
-    }
-
-    .pixel-monitor span:nth-child(1) {
-      height: 35%;
-    }
-
-    .pixel-monitor span:nth-child(2) {
-      height: 70%;
-    }
-
-    .pixel-monitor span:nth-child(3) {
-      height: 50%;
-    }
-
-    .pixel-character {
-      position: relative;
-      z-index: 3;
-
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
-      margin-bottom: 6px;
+      overflow:
+        hidden;
 
       border:
         2px solid
-        var(--pixel-color);
-
-      border-radius: 11px;
-
-      background:
         color-mix(
           in srgb,
-          var(--pixel-color) 17%,
-          #04070b
+          var(--agent-color) 48%,
+          #172028
         );
 
-      font-size: 28px;
-
-      filter:
-        drop-shadow(
-          0
-          0
-          9px
-          var(--pixel-color)
-        );
-    }
-
-    .pixel-agent strong {
-      color:
-        var(--pixel-color);
-
-      font-size: 9px;
-
-      letter-spacing: 0.8px;
-    }
-
-    .pixel-agent small {
-      margin-top: 3px;
-
-      color:
-        #596879;
-
-      font-size: 6px;
-    }
-
-    .pixel-status {
-      margin-top: 5px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 4px;
-
-      color:
-        #667789;
-
-      font-size: 6px;
-    }
-
-    .pixel-status-dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
       background:
-        var(--pixel-color);
-
-      box-shadow:
-        0
-        0
-        6px
-        var(--pixel-color);
-    }
-
-    .hero-control-bar {
-      margin-top: 12px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 12px;
-
-      padding:
-        10px
-        12px;
-
-      border:
-        1px solid
-        #172534;
-
-      border-radius: 10px;
-
-      background:
-        #050a10;
-    }
-
-    .hero-control-copy strong {
-      display: block;
-
-      font-size: 9px;
-    }
-
-    .hero-control-copy span {
-      display: block;
-
-      margin-top: 2px;
-
-      color:
-        #5d6d7c;
-
-      font-size: 7px;
-    }
-
-    .hero-run-all {
-      min-width: 190px;
-      min-height: 42px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 7px;
-
-      padding:
-        7px
-        14px;
-
-      border:
-        1px solid
-        rgba(255, 156, 66, 0.55);
-
-      border-radius: 9px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255, 156, 66, 0.13),
-          rgba(255, 156, 66, 0.05)
-        );
-
-      color:
-        #ff9c42;
-
-      font-size: 9px;
-
-      font-weight: 900;
-    }
-
-    .hero-run-all:hover:not(:disabled) {
-      border-color:
-        #ff9c42;
-
-      background:
-        rgba(255, 156, 66, 0.15);
-    }
-
-    .hero-run-all small {
-      color:
-        #996137;
-
-      font-size: 6px;
-
-      font-weight: 700;
-    }
-
-    /* =====================================
-       MARKET
-    ===================================== */
-
-    .market {
-      padding: 16px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(10, 17, 27, 0.97),
-          rgba(4, 8, 13, 0.99)
-        );
-    }
-
-    .market-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 12px;
-    }
-
-    .symbol {
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .price {
-      margin-top: 3px;
-
-      font-size:
-        clamp(
-          27px,
-          5vw,
-          40px
-        );
-
-      font-weight: 850;
-    }
-
-    .change {
-      margin-top: 3px;
-
-      color:
-        var(--muted);
-
-      font-size: 9px;
-    }
-
-    .market-controls {
-      display: flex;
-
-      gap: 6px;
-
-      flex-wrap: wrap;
-    }
-
-    .control {
-      min-height: 33px;
-
-      padding:
-        7px
-        9px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 8px;
-
-      background:
-        var(--panel2);
+        #040b10;
 
       color:
         var(--text);
 
-      font-size: 9px;
+      text-align:
+        center;
+
+      box-shadow:
+        5px 5px 0
+        #020405;
+
+      transition:
+        transform 0.1s,
+        border-color 0.1s;
     }
 
-    .chart {
-      height: 280px;
 
-      margin-top: 12px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 11px;
-
-      overflow: hidden;
-
-      background:
-        #03070c;
-    }
-
-    #priceChart {
-      width: 100%;
-      height: 100%;
-    }
-
-    .market-mini {
-      margin-top: 9px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          4,
-          minmax(0, 1fr)
-        );
-
-      gap: 7px;
-    }
-
-    .stat {
-      padding: 9px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 9px;
-
-      background:
-        rgba(8, 13, 20, 0.75);
-    }
-
-    .stat-label {
-      color:
-        var(--muted2);
-
-      font-size: 7px;
-
-      text-transform: uppercase;
-    }
-
-    .stat-value {
-      margin-top: 3px;
-
-      font-size: 11px;
-
-      font-weight: 750;
-    }
-
-    /* =====================================
-       AGENTS
-    ===================================== */
-
-    .agents-section {
-      margin-top: 18px;
-    }
-
-    .agents-title {
-      margin-bottom: 11px;
-
-      text-align: center;
-    }
-
-    .agents-title strong {
-      font-size: 15px;
-    }
-
-    .agents-title span {
-      display: block;
-
-      margin-top: 3px;
-
-      color:
-        var(--muted2);
-
-      font-size: 8px;
-    }
-
-    .agents {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(0, 1fr)
-        );
-
-      gap: 9px;
-    }
-
-    .agent {
-      --agent-color:
-        #ffffff;
-
-      position: relative;
-
-      min-height: 155px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-
-      padding: 15px;
-
-      border:
-        1px solid
-        color-mix(
-          in srgb,
-          var(--agent-color) 28%,
-          var(--border)
-        );
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(11, 18, 28, 0.97),
-          rgba(4, 8, 13, 0.99)
-        );
-
-      cursor: pointer;
-
-      transition: 0.16s;
-    }
-
-    .agent:hover {
+    .agent-card:hover {
       transform:
-        translateY(-2px);
+        translate(
+          -2px,
+          -2px
+        );
 
       border-color:
         var(--agent-color);
+
+      box-shadow:
+        7px 7px 0
+        #020405;
     }
 
-    .agent.working {
+
+    .agent-card.working {
       animation:
-        agentPulse
-        1.2s
+        agentBlink
+        0.7s
         infinite;
     }
 
-    @keyframes agentPulse {
+
+    @keyframes agentBlink {
       0%,
       100% {
-        box-shadow:
-          0
-          0
-          0
-          rgba(255,255,255,0);
+        opacity:
+          1;
       }
 
       50% {
-        box-shadow:
-          0
-          0
-          24px
-          color-mix(
-            in srgb,
-            var(--agent-color) 25%,
-            transparent
-          );
+        opacity:
+          0.68;
       }
     }
 
-    .agent.scout {
+
+    .agent-card.scout {
       --agent-color:
         var(--scout);
     }
 
-    .agent.news {
+
+    .agent-card.news {
       --agent-color:
         var(--news);
     }
 
-    .agent.sentiment {
+
+    .agent-card.sentiment {
       --agent-color:
         var(--sentiment);
     }
 
-    .agent.charts {
+
+    .agent-card.charts {
       --agent-color:
         var(--charts);
     }
 
-    .agent.risk {
+
+    .agent-card.risk {
       --agent-color:
         var(--risk);
     }
 
-    .agent.decision {
+
+    .agent-card.decision {
       --agent-color:
         var(--decision);
     }
 
-    .alien-box {
-      width: 58px;
-      height: 58px;
 
-      display: grid;
-      place-items: center;
+    .agent-console {
+      height:
+        44px;
+
+      margin-bottom:
+        -3px;
+
+      padding:
+        6px;
 
       border:
         1px solid
         color-mix(
           in srgb,
-          var(--agent-color) 45%,
-          transparent
+          var(--agent-color) 35%,
+          #13232d
         );
 
-      border-radius: 17px;
+      background:
+        #010507;
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        center;
+
+      gap:
+        4px;
+    }
+
+
+    .agent-console i {
+      width:
+        8px;
+
+      background:
+        var(--agent-color);
+
+      opacity:
+        0.75;
+
+      box-shadow:
+        0 0 4px
+        var(--agent-color);
+    }
+
+
+    .agent-console i:nth-child(1) {
+      height:
+        10px;
+    }
+
+
+    .agent-console i:nth-child(2) {
+      height:
+        22px;
+    }
+
+
+    .agent-console i:nth-child(3) {
+      height:
+        15px;
+    }
+
+
+    .agent-console i:nth-child(4) {
+      height:
+        27px;
+    }
+
+
+    /* PIXEL BOT */
+
+    .pixel-bot {
+      position:
+        relative;
+
+      width:
+        48px;
+
+      height:
+        42px;
+
+      margin:
+        0 auto
+        6px;
+
+      border:
+        3px solid
+        var(--agent-color);
 
       background:
         color-mix(
           in srgb,
-          var(--agent-color) 10%,
+          var(--agent-color) 19%,
+          #06090b
+        );
+
+      box-shadow:
+        0 0 13px
+        color-mix(
+          in srgb,
+          var(--agent-color) 40%,
           transparent
         );
     }
 
-    .alien {
-      font-size: 34px;
 
-      filter:
-        grayscale(1)
-        brightness(1.7);
+    .pixel-bot::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        4px;
+
+      height:
+        9px;
+
+      top:
+        -11px;
+
+      left:
+        19px;
+
+      background:
+        var(--agent-color);
     }
 
-    .agent-name {
-      margin-top: 10px;
 
+    .pixel-bot::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        8px;
+
+      height:
+        4px;
+
+      top:
+        -14px;
+
+      left:
+        17px;
+
+      background:
+        var(--agent-color);
+    }
+
+
+    .eye {
+      position:
+        absolute;
+
+      top:
+        13px;
+
+      width:
+        6px;
+
+      height:
+        7px;
+
+      background:
+        var(--agent-color);
+    }
+
+
+    .eye.left {
+      left:
+        9px;
+    }
+
+
+    .eye.right {
+      right:
+        9px;
+    }
+
+
+    .bot-mouth {
+      position:
+        absolute;
+
+      width:
+        16px;
+
+      height:
+        3px;
+
+      bottom:
+        7px;
+
+      left:
+        13px;
+
+      background:
+        var(--agent-color);
+    }
+
+
+    .bot-arm {
+      position:
+        absolute;
+
+      width:
+        5px;
+
+      height:
+        18px;
+
+      top:
+        13px;
+
+      background:
+        var(--agent-color);
+    }
+
+
+    .bot-arm.left {
+      left:
+        -8px;
+    }
+
+
+    .bot-arm.right {
+      right:
+        -8px;
+    }
+
+
+    .agent-name {
       color:
         var(--agent-color);
 
-      font-size: 12px;
+      font-size:
+        11px;
 
-      font-weight: 850;
+      font-weight:
+        900;
+
+      letter-spacing:
+        1px;
     }
+
 
     .agent-role {
-      margin-top: 2px;
-
-      color:
-        var(--muted2);
-
-      font-size: 8px;
-    }
-
-    .agent-state {
-      margin-top: 8px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 5px;
+      margin-top:
+        3px;
 
       color:
         var(--muted);
 
-      font-size: 7px;
-
-      font-weight: 800;
+      font-size:
+        6px;
     }
 
-    .agent-state-dot {
-      width: 6px;
-      height: 6px;
 
-      border-radius: 50%;
+    .agent-state {
+      margin-top:
+        7px;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
+      gap:
+        4px;
+
+      color:
+        #526b61;
+
+      font-size:
+        6px;
+    }
+
+
+    .agent-state-dot {
+      width:
+        5px;
+
+      height:
+        5px;
 
       background:
         var(--agent-color);
 
       box-shadow:
-        0
-        0
-        7px
+        0 0 6px
         var(--agent-color);
     }
 
+
     /* =====================================
-       MODAL
+       RUN ALL
     ===================================== */
 
-    .modal {
-      position: fixed;
-      inset: 0;
+    .command-actions {
+      position:
+        relative;
 
-      z-index: 500;
+      z-index:
+        2;
 
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
+      margin-top:
+        13px;
 
-      padding: 18px;
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      gap:
+        10px;
+
+      align-items:
+        stretch;
+    }
+
+
+    .scan-config {
+      padding:
+        10px;
+
+      border:
+        2px solid
+        #183125;
 
       background:
-        rgba(0,0,0,0.75);
-
-      backdrop-filter:
-        blur(8px);
+        #030907;
     }
 
-    .modal.show {
-      display: flex;
+
+    .config-title {
+      margin-bottom:
+        8px;
+
+      color:
+        #537263;
+
+      font-size:
+        7px;
+
+      letter-spacing:
+        1px;
     }
 
-    .modal-panel {
+
+    .config-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          5,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        7px;
+    }
+
+
+    .field label {
+      display:
+        block;
+
+      margin-bottom:
+        4px;
+
+      color:
+        #496456;
+
+      font-size:
+        6px;
+    }
+
+
+    .field input,
+    .field select {
       width:
-        min(
-          780px,
-          100%
-        );
+        100%;
 
-      max-height: 90vh;
+      height:
+        31px;
 
-      overflow-y: auto;
-
-      padding: 18px;
+      padding:
+        5px
+        7px;
 
       border:
         1px solid
-        var(--border2);
+        #1d4431;
 
-      border-radius: 18px;
+      border-radius:
+        0;
+
+      outline:
+        none;
 
       background:
-        linear-gradient(
-          180deg,
-          #0b121c,
-          #05090f
-        );
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-name {
-      font-size: 18px;
-
-      font-weight: 850;
-    }
-
-    .modal-role {
-      margin-top: 2px;
+        #020806;
 
       color:
-        var(--muted);
+        #d9ffeb;
 
-      font-size: 9px;
+      font-size:
+        8px;
     }
 
-    .modal-close {
-      width: 32px;
-      height: 32px;
+
+    .field input:focus,
+    .field select:focus {
+      border-color:
+        var(--green);
+
+      box-shadow:
+        0 0 0
+        1px
+        var(--green);
+    }
+
+
+    .run-all {
+      min-width:
+        180px;
 
       border:
-        1px solid
-        var(--border);
-
-      border-radius: 50%;
+        2px solid
+        var(--orange);
 
       background:
-        var(--panel);
+        #1d0f04;
 
       color:
-        var(--text);
+        var(--orange);
+
+      font-size:
+        12px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        1px;
+
+      box-shadow:
+        5px 5px 0
+        #090401;
     }
 
-    .description {
-      margin-top: 14px;
+
+    .run-all:hover:not(:disabled) {
+      transform:
+        translate(
+          -2px,
+          -2px
+        );
+
+      box-shadow:
+        7px 7px 0
+        #090401;
+    }
+
+
+    .run-all small {
+      display:
+        block;
+
+      margin-top:
+        4px;
 
       color:
-        var(--muted);
+        #9e6330;
 
-      font-size: 10px;
+      font-size:
+        6px;
 
-      line-height: 1.7;
+      letter-spacing:
+        0;
     }
 
-    .detail-grid,
-    .result-grid {
-      display: grid;
+
+    /* =====================================
+       OPPORTUNITIES
+    ===================================== */
+
+    .opportunities {
+      margin-top:
+        20px;
+
+      padding:
+        16px;
+
+      border:
+        2px solid
+        #193629;
+
+      background:
+        #030807;
+
+      box-shadow:
+        8px 8px 0
+        #010302;
+    }
+
+
+    .panel-head {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
+      gap:
+        12px;
+
+      margin-bottom:
+        13px;
+    }
+
+
+    .panel-kicker {
+      color:
+        var(--green);
+
+      font-size:
+        7px;
+
+      letter-spacing:
+        1.7px;
+    }
+
+
+    .panel-title {
+      margin-top:
+        4px;
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+    }
+
+
+    .panel-summary {
+      color:
+        #587062;
+
+      font-size:
+        7px;
+
+      text-align:
+        right;
+    }
+
+
+    .opportunity-grid {
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -1570,604 +1395,1208 @@
           minmax(0, 1fr)
         );
 
-      gap: 7px;
-
-      margin-top: 11px;
+      gap:
+        10px;
     }
 
-    .detail-box {
-      padding: 9px;
+
+    .opportunity-card {
+      --side-color:
+        var(--green);
+
+      position:
+        relative;
+
+      min-width:
+        0;
+
+      padding:
+        12px;
+
+      border:
+        2px solid
+        color-mix(
+          in srgb,
+          var(--side-color) 48%,
+          #1b2b23
+        );
+
+      background:
+        #040b09;
+
+      box-shadow:
+        5px 5px 0
+        #010302;
+    }
+
+
+    .opportunity-card.short {
+      --side-color:
+        var(--red);
+    }
+
+
+    .opp-rank {
+      position:
+        absolute;
+
+      top:
+        0;
+
+      right:
+        0;
+
+      padding:
+        4px
+        6px;
+
+      background:
+        var(--side-color);
+
+      color:
+        #020403;
+
+      font-size:
+        7px;
+
+      font-weight:
+        900;
+    }
+
+
+    .opp-symbol {
+      padding-right:
+        35px;
+
+      color:
+        #eafff4;
+
+      font-size:
+        11px;
+
+      font-weight:
+        900;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+      white-space:
+        nowrap;
+    }
+
+
+    .opp-side {
+      margin-top:
+        5px;
+
+      color:
+        var(--side-color);
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+    }
+
+
+    .opp-confidence {
+      margin-top:
+        2px;
+
+      color:
+        #617d6e;
+
+      font-size:
+        6px;
+    }
+
+
+    .price-block {
+      margin-top:
+        10px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        5px;
+    }
+
+
+    .price-box {
+      padding:
+        7px;
 
       border:
         1px solid
-        var(--border);
-
-      border-radius: 9px;
+        #183328;
 
       background:
-        rgba(3, 7, 12, 0.8);
+        #020705;
     }
 
-    .detail-label {
+
+    .price-label {
       color:
-        var(--muted2);
+        #496456;
 
-      font-size: 7px;
-
-      text-transform:
-        uppercase;
+      font-size:
+        5px;
     }
 
-    .detail-value {
-      margin-top: 4px;
 
-      font-size: 10px;
+    .price-value {
+      margin-top:
+        3px;
 
-      font-weight: 750;
+      color:
+        #d9ffeb;
+
+      font-size:
+        8px;
+
+      font-weight:
+        900;
 
       overflow-wrap:
         anywhere;
     }
 
-    .runtime {
-      margin-top: 14px;
 
-      padding-top: 13px;
+    .opp-meta {
+      margin-top:
+        8px;
 
-      border-top:
-        1px solid
-        var(--border);
-    }
-
-    .runtime-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 8px;
-    }
-
-    .runtime-status {
-      color:
-        var(--muted);
-
-      font-size: 8px;
-    }
-
-    .result {
-      margin-top: 10px;
-    }
-
-    .result-empty,
-    .result-summary {
-      padding: 12px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 9px;
-
-      background:
-        rgba(3, 7, 12, 0.8);
-
-      color:
-        var(--muted);
-
-      font-size: 9px;
-
-      line-height: 1.6;
-    }
-
-    .result-list {
-      display: grid;
-
-      gap: 6px;
-
-      margin-top: 9px;
-    }
-
-    .result-item {
-      padding: 8px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius: 8px;
-
-      background:
-        rgba(3, 7, 12, 0.75);
-    }
-
-    .result-item-title {
-      font-size: 9px;
-
-      font-weight: 750;
-    }
-
-    .result-item-sub {
-      margin-top: 3px;
-
-      color:
-        var(--muted2);
-
-      font-size: 7px;
-
-      line-height: 1.5;
-    }
-
-    /* =====================================
-       TRADE FORM
-    ===================================== */
-
-    .trade-form {
-      display: none;
-
-      margin-top: 13px;
-    }
-
-    .trade-form.show {
-      display: block;
-    }
-
-    .form-title {
-      margin:
-        12px
-        0
-        7px;
-
-      color:
-        var(--muted);
-
-      font-size: 8px;
-
-      font-weight: 800;
-
-      text-transform:
-        uppercase;
-    }
-
-    .form-grid {
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
-          3,
+          2,
           minmax(0, 1fr)
         );
 
-      gap: 7px;
+      gap:
+        5px;
     }
 
-    .field label {
-      display: block;
 
-      margin-bottom: 4px;
+    .meta-row {
+      padding:
+        6px;
+
+      border:
+        1px solid
+        #13291f;
+
+      background:
+        #020604;
+    }
+
+
+    .meta-label {
+      color:
+        #40584c;
+
+      font-size:
+        5px;
+    }
+
+
+    .meta-value {
+      margin-top:
+        3px;
 
       color:
-        var(--muted2);
+        #89ab99;
 
-      font-size: 7px;
+      font-size:
+        7px;
+
+      font-weight:
+        800;
+
+      overflow-wrap:
+        anywhere;
     }
 
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
 
-      min-height: 34px;
+    .risk-approved {
+      color:
+        var(--green);
+    }
+
+
+    .risk-rejected {
+      color:
+        var(--red);
+    }
+
+
+    .opp-reason {
+      margin-top:
+        8px;
+
+      padding-top:
+        7px;
+
+      border-top:
+        1px dashed
+        #183126;
+
+      color:
+        #4e695b;
+
+      font-size:
+        6px;
+
+      line-height:
+        1.55;
+    }
+
+
+    /* =====================================
+       EMPTY / LOADING
+    ===================================== */
+
+    .empty-state {
+      grid-column:
+        1
+        /
+        -1;
+
+      min-height:
+        190px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
 
       padding:
-        7px
+        25px;
+
+      border:
+        1px dashed
+        #244133;
+
+      background:
+        #020604;
+
+      text-align:
+        center;
+    }
+
+
+    .empty-pixel {
+      width:
+        46px;
+
+      height:
+        36px;
+
+      border:
+        3px solid
+        #254b38;
+
+      background:
+        #07110c;
+
+      margin-bottom:
+        12px;
+
+      position:
+        relative;
+    }
+
+
+    .empty-pixel::before,
+    .empty-pixel::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      top:
+        10px;
+
+      width:
+        5px;
+
+      height:
+        6px;
+
+      background:
+        #254b38;
+    }
+
+
+    .empty-pixel::before {
+      left:
+        9px;
+    }
+
+
+    .empty-pixel::after {
+      right:
+        9px;
+    }
+
+
+    .empty-state strong {
+      color:
+        #739784;
+
+      font-size:
+        9px;
+    }
+
+
+    .empty-state span {
+      max-width:
+        450px;
+
+      margin-top:
+        7px;
+
+      color:
+        #3f584b;
+
+      font-size:
+        6px;
+
+      line-height:
+        1.7;
+    }
+
+
+    .scan-progress {
+      margin-top:
+        10px;
+
+      width:
+        min(
+          320px,
+          80%
+        );
+
+      height:
         8px;
 
       border:
         1px solid
-        var(--border);
+        #214b36;
 
-      border-radius: 8px;
+      padding:
+        1px;
 
       background:
-        #060b12;
+        #010302;
+    }
+
+
+    .scan-progress-bar {
+      width:
+        0%;
+
+      height:
+        100%;
+
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 6px
+        var(--green);
+    }
+
+
+    .scanning .scan-progress-bar {
+      animation:
+        scanMove
+        1.5s
+        infinite;
+    }
+
+
+    @keyframes scanMove {
+      0% {
+        width:
+          4%;
+      }
+
+      50% {
+        width:
+          75%;
+      }
+
+      100% {
+        width:
+          100%;
+      }
+    }
+
+
+    /* =====================================
+       AGENT MODAL
+    ===================================== */
+
+    .modal {
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        999;
+
+      display:
+        none;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        16px;
+
+      background:
+        rgba(0, 0, 0, 0.84);
+
+      backdrop-filter:
+        blur(5px);
+    }
+
+
+    .modal.show {
+      display:
+        flex;
+    }
+
+
+    .modal-window {
+      width:
+        min(
+          620px,
+          100%
+        );
+
+      max-height:
+        88vh;
+
+      overflow-y:
+        auto;
+
+      border:
+        2px solid
+        #244936;
+
+      background:
+        #030806;
+
+      box-shadow:
+        8px 8px 0
+        #010201;
+    }
+
+
+    .modal-bar {
+      min-height:
+        36px;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      padding:
+        0 10px;
+
+      border-bottom:
+        2px solid
+        #163323;
+
+      background:
+        #06110c;
+    }
+
+
+    .modal-title {
+      color:
+        var(--green);
+
+      font-size:
+        9px;
+
+      font-weight:
+        900;
+    }
+
+
+    .modal-close {
+      width:
+        25px;
+
+      height:
+        25px;
+
+      border:
+        1px solid
+        #305c43;
+
+      background:
+        #020504;
 
       color:
-        var(--text);
-
-      font-size: 9px;
+        #7eab92;
     }
 
-    .field textarea {
-      min-height: 85px;
 
-      resize: vertical;
-
-      font-family:
-        monospace;
+    .modal-body {
+      padding:
+        14px;
     }
 
-    .checkbox-row {
-      margin-top: 9px;
 
-      display: flex;
-      gap: 6px;
-      align-items: center;
+    .modal-role {
+      color:
+        #6e8c7b;
+
+      font-size:
+        7px;
+    }
+
+
+    .modal-description {
+      margin-top:
+        9px;
 
       color:
-        var(--muted);
+        #779282;
 
-      font-size: 8px;
+      font-size:
+        8px;
+
+      line-height:
+        1.7;
     }
+
+
+    .modal-controls {
+      margin-top:
+        12px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      gap:
+        7px;
+    }
+
+
+    .modal-controls select {
+      min-height:
+        33px;
+
+      border:
+        1px solid
+        #214936;
+
+      background:
+        #020705;
+
+      color:
+        #d9ffeb;
+
+      padding:
+        5px
+        8px;
+
+      font-size:
+        8px;
+    }
+
+
+    .run-agent {
+      min-width:
+        120px;
+
+      border:
+        1px solid
+        var(--green);
+
+      background:
+        #07150e;
+
+      color:
+        var(--green);
+
+      font-size:
+        7px;
+
+      font-weight:
+        900;
+    }
+
+
+    .modal-result {
+      margin-top:
+        12px;
+
+      padding:
+        10px;
+
+      border:
+        1px solid
+        #173629;
+
+      background:
+        #020604;
+
+      color:
+        #6e8e7c;
+
+      font-size:
+        7px;
+
+      line-height:
+        1.7;
+
+      overflow-wrap:
+        anywhere;
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
 
     footer {
-      padding:
-        25px
-        0
-        35px;
+      margin-top:
+        25px;
 
       color:
-        var(--muted2);
+        #2f463b;
 
-      text-align: center;
+      text-align:
+        center;
 
-      font-size: 7px;
+      font-size:
+        6px;
     }
+
 
     /* =====================================
        RESPONSIVE
     ===================================== */
 
     @media (
-      max-width: 720px
+      max-width: 820px
     ) {
-      .team-hero {
-        padding: 14px;
+      .command-actions {
+        grid-template-columns:
+          1fr;
       }
 
-      .team-hero-header {
-        display: block;
+
+      .run-all {
+        min-height:
+          58px;
       }
 
-      .hero-system {
-        width: fit-content;
 
-        margin-top: 12px;
+      .config-grid {
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0, 1fr)
+          );
       }
 
-      .team-floor {
+
+      .opportunity-grid {
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
           );
-      }
-
-      .command-screen {
-        height: 120px;
-      }
-
-      .hero-control-bar {
-        display: block;
-      }
-
-      .hero-run-all {
-        width: 100%;
-
-        margin-top: 10px;
-      }
-
-      .agents {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-      .market-mini {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-      .form-grid {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-      .market-head {
-        display: block;
-      }
-
-      .market-controls {
-        margin-top: 10px;
       }
     }
 
+
     @media (
-      max-width: 520px
+      max-width: 600px
     ) {
-      .container {
+      .app,
+      .topbar-inner {
         width:
           calc(
             100%
             -
-            16px
+            12px
           );
       }
 
-      .agents-pill {
-        display: none;
+
+      .top-status .status-chip:last-child {
+        display:
+          none;
       }
 
-      .brand-sub {
-        display: none;
+
+      .hero {
+        padding:
+          10px;
+
+        box-shadow:
+          4px 4px 0
+          #020403;
       }
 
-      .run-all-button {
-        display: none;
+
+      .hero-head {
+        display:
+          block;
       }
 
-      .team-hero h1 {
-        font-size: 25px;
+
+      .system-ready {
+        width:
+          fit-content;
+
+        margin-top:
+          10px;
       }
 
-      .pixel-agent {
-        min-height: 135px;
+
+      /* user requested 3 per row */
+      .agents-grid {
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0, 1fr)
+          );
+
+        gap:
+          5px;
       }
 
-      .pixel-monitor {
-        height: 40px;
+
+      .agent-card {
+        min-height:
+          138px;
+
+        padding:
+          6px;
+
+        box-shadow:
+          3px 3px 0
+          #020405;
       }
 
-      .pixel-character {
-        width: 43px;
-        height: 43px;
 
-        font-size: 25px;
+      .agent-console {
+        height:
+          34px;
+
+        padding:
+          4px;
       }
 
-      .chart {
-        height: 210px;
+
+      .pixel-bot {
+        width:
+          37px;
+
+        height:
+          34px;
+
+        border-width:
+          2px;
       }
 
-      .form-grid {
-        grid-template-columns: 1fr;
+
+      .pixel-bot::before {
+        left:
+          15px;
       }
 
-      .detail-grid,
-      .result-grid {
+
+      .pixel-bot::after {
+        left:
+          13px;
+      }
+
+
+      .eye {
+        top:
+          10px;
+
+        width:
+          5px;
+
+        height:
+          5px;
+      }
+
+
+      .eye.left {
+        left:
+          7px;
+      }
+
+
+      .eye.right {
+        right:
+          7px;
+      }
+
+
+      .bot-mouth {
+        width:
+          13px;
+
+        left:
+          10px;
+
+        bottom:
+          5px;
+      }
+
+
+      .bot-arm {
+        height:
+          14px;
+
+        top:
+          10px;
+      }
+
+
+      .agent-name {
+        font-size:
+          8px;
+      }
+
+
+      .agent-role {
+        min-height:
+          15px;
+
+        font-size:
+          5px;
+      }
+
+
+      .agent-state {
+        font-size:
+          5px;
+      }
+
+
+      .command-screen {
+        height:
+          105px;
+      }
+
+
+      .config-grid {
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
           );
+      }
+
+
+      .opportunity-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .panel-head {
+        display:
+          block;
+      }
+
+
+      .panel-summary {
+        margin-top:
+          6px;
+
+        text-align:
+          left;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-<header>
-  <div class="container navbar">
+  <!-- ================================
+       TOP BAR
+  ================================= -->
 
-    <div class="brand">
+  <header class="topbar">
 
-      <div class="logo">
-        C
-      </div>
+    <div class="topbar-inner">
 
-      <div>
-        <div class="brand-name">
-          CODEX BOT
+      <div class="brand">
+
+        <div class="brand-icon">
+          C
         </div>
 
-        <div class="brand-sub">
-          AI TRADING TEAM
-        </div>
-      </div>
+        <div>
 
-    </div>
+          <div class="brand-title">
+            CODEX BOT
+          </div>
 
+          <div class="brand-sub">
+            PIXEL AI TRADING TEAM
+          </div>
 
-    <div class="header-status">
-
-      <div class="pill">
-        <span
-          id="okxDot"
-          class="dot"
-        ></span>
-
-        <span id="okxText">
-          OKX...
-        </span>
-      </div>
-
-
-      <div class="pill">
-        <span
-          id="apiDot"
-          class="dot"
-        ></span>
-
-        <span id="apiText">
-          API...
-        </span>
-      </div>
-
-
-      <button
-        id="runAllButton"
-        class="run-all-button"
-        type="button"
-      >
-        RUN ALL
-      </button>
-
-
-      <div class="pill agents-pill">
-        <span>
-          AGENTS
-        </span>
-
-        <strong>
-          6 / 6
-        </strong>
-      </div>
-
-    </div>
-
-  </div>
-</header>
-
-
-<main class="container">
-
-  <!-- =====================================
-       SIX AGENT HERO
-  ====================================== -->
-
-  <section class="team-hero">
-
-    <div class="team-hero-glow"></div>
-
-
-    <div class="team-hero-header">
-
-      <div>
-
-        <div class="team-eyebrow">
-          AI TRADING COMMAND CENTER
         </div>
 
-        <h1>
-          6 AGENTS.
-          ONE TRADING TEAM.
-        </h1>
-
-        <p>
-          SCOUT finds opportunities.
-          NEWS watches market catalysts.
-          SENTIMENT measures positioning.
-          CHARTS reads structure.
-          RISK protects the account.
-          DECISION makes the final call.
-        </p>
-
       </div>
 
 
-      <div class="hero-system">
+      <div class="top-status">
 
-        <span class="hero-online-dot"></span>
+        <div class="status-chip">
 
-        <span id="heroAgentStatus">
-          6 / 6 AGENTS READY
-        </span>
+          <span
+            id="apiDot"
+            class="status-dot"
+          ></span>
+
+          <span id="apiText">
+            API...
+          </span>
+
+        </div>
+
+
+        <div class="status-chip">
+
+          <span
+            id="okxDot"
+            class="status-dot"
+          ></span>
+
+          <span id="okxText">
+            OKX...
+          </span>
+
+        </div>
+
+
+        <div class="status-chip">
+
+          <span>
+            AGENTS
+          </span>
+
+          <strong style="color:var(--green);">
+            6/6
+          </strong>
+
+        </div>
 
       </div>
 
     </div>
 
+  </header>
 
-    <div class="command-room">
+
+  <main class="app">
+
+
+    <!-- ================================
+         HERO COMMAND CENTER
+    ================================= -->
+
+    <section class="hero">
+
+      <div class="hero-head">
+
+        <div>
+
+          <div class="eyebrow">
+            &gt; AI_TRADING_COMMAND_CENTER
+          </div>
+
+          <h1>
+            6 AGENTS.
+            <span>
+              ONE TEAM.
+            </span>
+          </h1>
+
+          <div class="hero-copy">
+            SCOUT scans the market.
+            NEWS tracks catalysts.
+            SENTIMENT measures crowding.
+            CHARTS builds the trade plan.
+            RISK protects the account.
+            DECISION approves the final setup.
+          </div>
+
+        </div>
+
+
+        <div
+          id="heroStatus"
+          class="system-ready"
+        >
+          SYSTEM READY
+        </div>
+
+      </div>
+
+
+      <!-- MARKET COMMAND VISUAL -->
 
       <div class="command-screen">
 
-        <div class="screen-top">
+        <div class="command-screen-head">
 
           <span>
-            MARKET COMMAND
+            MARKET_COMMAND.EXE
           </span>
 
-          <span class="screen-live">
-            LIVE
+          <span class="command-live">
+            ● LIVE
           </span>
 
         </div>
 
 
-        <div class="screen-chart">
+        <div class="command-body">
 
-          <div class="screen-symbols">
-            <span>BTC</span>
-            <span>ETH</span>
-            <span>SOL</span>
-            <span>ENA</span>
+          <div class="terminal-copy">
+            &gt; SCAN OKX-USDT-SWAP<br>
+            &gt; DETECT OPPORTUNITIES<br>
+            &gt; BUILD TRADE PLAN<br>
+            &gt; APPLY RISK GATES
           </div>
 
 
-          <svg
-            class="hero-chart-svg"
-            viewBox="0 0 800 180"
-            preserveAspectRatio="none"
-          >
+          <div class="command-line">
 
-            <polyline
-              points="
-                0,145
-                45,135
-                80,142
-                125,117
-                165,126
-                210,96
-                250,105
-                300,76
-                345,87
-                390,61
-                440,72
-                490,46
-                540,58
-                590,35
-                640,44
-                690,26
-                740,33
-                800,10
-              "
-            />
+            <svg
+              viewBox="0 0 1000 120"
+              preserveAspectRatio="none"
+            >
 
-          </svg>
+              <polyline
+                points="
+                  0,92
+                  55,84
+                  105,98
+                  155,72
+                  205,82
+                  260,58
+                  315,69
+                  370,46
+                  425,58
+                  475,35
+                  530,48
+                  590,27
+                  645,40
+                  705,20
+                  760,29
+                  815,12
+                  870,22
+                  930,7
+                  1000,13
+                "
+              />
+
+            </svg>
+
+          </div>
 
         </div>
 
       </div>
 
 
-      <div class="team-floor">
+      <!-- 3 x 2 AGENTS -->
+
+      <div class="agents-grid">
+
+
+        <!-- SCOUT -->
 
         <button
-          class="pixel-agent pixel-scout"
+          class="agent-card scout"
           data-agent="scout"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             SCOUT
-          </strong>
+          </div>
 
-          <small>
-            Opportunity Scanner
-          </small>
+          <div class="agent-role">
+            OPPORTUNITY SCANNER
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2175,33 +2604,43 @@
         </button>
 
 
+        <!-- NEWS -->
+
         <button
-          class="pixel-agent pixel-news"
+          class="agent-card news"
           data-agent="news"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             NEWS
-          </strong>
+          </div>
 
-          <small>
-            News Analyst
-          </small>
+          <div class="agent-role">
+            EVENT ANALYST
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2209,33 +2648,43 @@
         </button>
 
 
+        <!-- SENTIMENT -->
+
         <button
-          class="pixel-agent pixel-sentiment"
+          class="agent-card sentiment"
           data-agent="sentiment"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             SENTIMENT
-          </strong>
+          </div>
 
-          <small>
-            Market Sentiment
-          </small>
+          <div class="agent-role">
+            MARKET SENTIMENT
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2243,33 +2692,43 @@
         </button>
 
 
+        <!-- CHARTS -->
+
         <button
-          class="pixel-agent pixel-charts"
+          class="agent-card charts"
           data-agent="charts"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             CHARTS
-          </strong>
+          </div>
 
-          <small>
-            Technical Analyst
-          </small>
+          <div class="agent-role">
+            TRADE PLANNER
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2277,33 +2736,43 @@
         </button>
 
 
+        <!-- RISK -->
+
         <button
-          class="pixel-agent pixel-risk"
+          class="agent-card risk"
           data-agent="risk"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             RISK
-          </strong>
+          </div>
 
-          <small>
-            Risk Manager
-          </small>
+          <div class="agent-role">
+            RISK MANAGER
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2311,33 +2780,43 @@
         </button>
 
 
+        <!-- DECISION -->
+
         <button
-          class="pixel-agent pixel-decision"
+          class="agent-card decision"
           data-agent="decision"
           type="button"
         >
 
-          <div class="pixel-monitor">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="agent-console">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-          <div class="pixel-character">
-            👾
+
+          <div class="pixel-bot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="bot-mouth"></span>
+            <span class="bot-arm left"></span>
+            <span class="bot-arm right"></span>
           </div>
 
-          <strong>
+
+          <div class="agent-name">
             DECISION
-          </strong>
+          </div>
 
-          <small>
-            Final Decision
-          </small>
+          <div class="agent-role">
+            FINAL DECISION
+          </div>
 
-          <div class="pixel-status">
-            <span class="pixel-status-dot"></span>
-            <span class="pixel-state-text">
+          <div class="agent-state">
+            <span class="agent-state-dot"></span>
+
+            <span class="state-text">
               READY
             </span>
           </div>
@@ -2347,772 +2826,301 @@
       </div>
 
 
-      <div class="hero-control-bar">
+      <!-- RUN ALL CONFIG -->
 
-        <div class="hero-control-copy">
+      <div class="command-actions">
+
+        <div class="scan-config">
+
+          <div class="config-title">
+            &gt; RUN_ALL_CONFIG
+          </div>
+
+
+          <div class="config-grid">
+
+
+            <div class="field">
+
+              <label>
+                EQUITY USDT
+              </label>
+
+              <input
+                id="accountEquity"
+                type="number"
+                value="10000"
+                min="1"
+                step="0.01"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                AVAILABLE
+              </label>
+
+              <input
+                id="availableBalance"
+                type="number"
+                value="8000"
+                min="0"
+                step="0.01"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                DAILY PNL
+              </label>
+
+              <input
+                id="dailyPnl"
+                type="number"
+                value="0"
+                step="0.01"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                LEVERAGE
+              </label>
+
+              <input
+                id="leverage"
+                type="number"
+                value="3"
+                min="1"
+                max="125"
+                step="0.1"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                CANDIDATES
+              </label>
+
+              <select id="maxCandidates">
+
+                <option value="3">
+                  TOP 3
+                </option>
+
+                <option
+                  value="5"
+                  selected
+                >
+                  TOP 5
+                </option>
+
+                <option value="8">
+                  TOP 8
+                </option>
+
+                <option value="10">
+                  TOP 10
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="runAllButton"
+          class="run-all"
+          type="button"
+        >
+          ▶ RUN ALL
+
+          <small>
+            FIND TRADE OPPORTUNITIES
+          </small>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         OPPORTUNITIES PANEL
+    ================================= -->
+
+    <section class="opportunities">
+
+      <div class="panel-head">
+
+        <div>
+
+          <div class="panel-kicker">
+            &gt; OUTPUT
+          </div>
+
+          <div class="panel-title">
+            TRADE OPPORTUNITIES
+          </div>
+
+        </div>
+
+
+        <div
+          id="opportunitySummary"
+          class="panel-summary"
+        >
+          NO SCAN YET
+        </div>
+
+      </div>
+
+
+      <div
+        id="opportunityGrid"
+        class="opportunity-grid"
+      >
+
+        <div class="empty-state">
+
+          <div class="empty-pixel"></div>
 
           <strong>
-            AI TRADING TEAM
+            WAITING FOR RUN ALL
           </strong>
 
           <span>
-            Analysis only · Execution off
+            SCOUT will scan the market.
+            CHARTS will build Entry / Stop / Target.
+            RISK will validate the position.
+            DECISION will return only actionable setups.
           </span>
 
         </div>
 
-
-        <button
-          id="heroRunAllButton"
-          class="hero-run-all"
-          type="button"
-        >
-
-          <span>
-            ▶
-          </span>
-
-          RUN ALL
-
-          <small>
-            FULL PIPELINE
-          </small>
-
-        </button>
-
       </div>
 
-    </div>
+    </section>
 
-  </section>
 
+    <footer>
+      CODEX BOT · ANALYSIS ONLY · EXECUTION OFF
+    </footer>
 
-  <!-- =====================================
-       MARKET DASHBOARD
-  ====================================== -->
+  </main>
 
-  <section class="market">
 
-    <div class="market-head">
+  <!-- ================================
+       AGENT MODAL
+  ================================= -->
 
-      <div>
+  <div
+    id="agentModal"
+    class="modal"
+  >
 
-        <div
-          id="symbolLabel"
-          class="symbol"
-        >
-          BTC-USDT-SWAP
-        </div>
+    <div class="modal-window">
 
-        <div
-          id="lastPrice"
-          class="price"
-        >
-          --
-        </div>
+      <div class="modal-bar">
 
-        <div
-          id="priceChange"
-          class="change"
-        >
-          24H --
-        </div>
-
-      </div>
-
-
-      <div class="market-controls">
-
-        <select
-          id="symbolSelect"
-          class="control"
-        >
-
-          <option value="BTC-USDT-SWAP">
-            BTC
-          </option>
-
-          <option value="ETH-USDT-SWAP">
-            ETH
-          </option>
-
-          <option value="SOL-USDT-SWAP">
-            SOL
-          </option>
-
-          <option value="XRP-USDT-SWAP">
-            XRP
-          </option>
-
-          <option value="DOGE-USDT-SWAP">
-            DOGE
-          </option>
-
-          <option value="UNI-USDT-SWAP">
-            UNI
-          </option>
-
-          <option value="ENA-USDT-SWAP">
-            ENA
-          </option>
-
-        </select>
-
-
-        <select
-          id="timeframeSelect"
-          class="control"
-        >
-
-          <option value="1m">
-            1m
-          </option>
-
-          <option value="5m">
-            5m
-          </option>
-
-          <option
-            value="15m"
-            selected
-          >
-            15m
-          </option>
-
-          <option value="1H">
-            1H
-          </option>
-
-          <option value="4H">
-            4H
-          </option>
-
-          <option value="1Dutc">
-            1D
-          </option>
-
-          <option value="1Wutc">
-            1W
-          </option>
-
-          <option value="1Mutc">
-            1M
-          </option>
-
-        </select>
-
-
-        <button
-          id="refreshButton"
-          class="button"
-          type="button"
-        >
-          Refresh
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="chart">
-      <canvas id="priceChart"></canvas>
-    </div>
-
-
-    <div class="market-mini">
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Funding
-        </div>
-
-        <div
-          id="funding"
-          class="stat-value"
-        >
-          --
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Open Interest
-        </div>
-
-        <div
-          id="openInterest"
-          class="stat-value"
-        >
-          --
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Volume
-        </div>
-
-        <div
-          id="volume"
-          class="stat-value"
-        >
-          --
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Spread
-        </div>
-
-        <div
-          id="spread"
-          class="stat-value"
-        >
-          --
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       FUNCTIONAL AGENT CARDS
-  ====================================== -->
-
-  <section class="agents-section">
-
-    <div class="agents-title">
-
-      <strong>
-        AGENT CONTROL
-      </strong>
-
-      <span>
-        Open each agent for detailed analysis
-      </span>
-
-    </div>
-
-
-    <div class="agents">
-
-
-      <article
-        class="agent scout"
-        data-agent="scout"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          SCOUT
-        </div>
-
-        <div class="agent-role">
-          Opportunity Scanner
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-      <article
-        class="agent news"
-        data-agent="news"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          NEWS
-        </div>
-
-        <div class="agent-role">
-          News Analyst
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-      <article
-        class="agent sentiment"
-        data-agent="sentiment"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          SENTIMENT
-        </div>
-
-        <div class="agent-role">
-          Market Sentiment
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-      <article
-        class="agent charts"
-        data-agent="charts"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          CHARTS
-        </div>
-
-        <div class="agent-role">
-          Technical Analyst
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-      <article
-        class="agent risk"
-        data-agent="risk"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          RISK
-        </div>
-
-        <div class="agent-role">
-          Risk Manager
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-      <article
-        class="agent decision"
-        data-agent="decision"
-      >
-
-        <div class="alien-box">
-          <span class="alien">👾</span>
-        </div>
-
-        <div class="agent-name">
-          DECISION
-        </div>
-
-        <div class="agent-role">
-          Final Decision
-        </div>
-
-        <div class="agent-state">
-          <span class="agent-state-dot"></span>
-          V1 READY
-        </div>
-
-      </article>
-
-
-    </div>
-
-  </section>
-
-</main>
-
-
-<footer>
-  CODEX BOT · ANALYSIS ONLY · EXECUTION OFF
-</footer>
-
-
-<!-- =====================================
-     MODAL
-====================================== -->
-
-<div
-  id="modal"
-  class="modal"
->
-
-  <div class="modal-panel">
-
-    <div class="modal-head">
-
-      <div>
-
-        <div
-          id="modalName"
-          class="modal-name"
+        <span
+          id="modalTitle"
+          class="modal-title"
         >
           AGENT
-        </div>
+        </span>
+
+        <button
+          id="modalClose"
+          class="modal-close"
+          type="button"
+        >
+          X
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
 
         <div
           id="modalRole"
           class="modal-role"
         ></div>
 
-      </div>
-
-
-      <button
-        id="modalClose"
-        class="modal-close"
-        type="button"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div
-      id="modalDescription"
-      class="description"
-    ></div>
-
-
-    <div
-      id="modalDetails"
-      class="detail-grid"
-    ></div>
-
-
-    <div
-      id="agentRuntime"
-      class="runtime"
-    >
-
-      <div class="runtime-top">
 
         <div
-          id="runtimeStatus"
-          class="runtime-status"
+          id="modalDescription"
+          class="modal-description"
+        ></div>
+
+
+        <div
+          id="modalControls"
+          class="modal-controls"
         >
-          Ready
-        </div>
 
-        <button
-          id="runAgentButton"
-          class="button primary"
-          type="button"
-        >
-          Run Agent
-        </button>
+          <select id="modalSymbol">
 
-      </div>
-
-
-      <div
-        id="agentResult"
-        class="result"
-      >
-
-        <div class="result-empty">
-          No live result yet.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- RISK / DECISION -->
-
-    <div
-      id="tradeForm"
-      class="trade-form"
-    >
-
-      <div class="form-title">
-        Account
-      </div>
-
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>
-            Account Equity USDT
-          </label>
-
-          <input
-            id="tradeEquity"
-            type="number"
-            value="10000"
-            step="0.01"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Available Balance USDT
-          </label>
-
-          <input
-            id="tradeAvailable"
-            type="number"
-            value="8000"
-            step="0.01"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Daily PnL USDT
-          </label>
-
-          <input
-            id="tradeDailyPnl"
-            type="number"
-            value="0"
-            step="0.01"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="form-title">
-        Proposed Trade
-      </div>
-
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>
-            Symbol
-          </label>
-
-          <input
-            id="tradeSymbol"
-            type="text"
-            readonly
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Side
-          </label>
-
-          <select id="tradeSide">
-
-            <option value="long">
-              LONG
+            <option value="BTC-USDT-SWAP">
+              BTC-USDT-SWAP
             </option>
 
-            <option value="short">
-              SHORT
+            <option value="ETH-USDT-SWAP">
+              ETH-USDT-SWAP
+            </option>
+
+            <option value="SOL-USDT-SWAP">
+              SOL-USDT-SWAP
+            </option>
+
+            <option value="ENA-USDT-SWAP">
+              ENA-USDT-SWAP
+            </option>
+
+            <option value="UNI-USDT-SWAP">
+              UNI-USDT-SWAP
+            </option>
+
+            <option value="XRP-USDT-SWAP">
+              XRP-USDT-SWAP
             </option>
 
           </select>
 
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Entry
-          </label>
-
-          <input
-            id="tradeEntry"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Stop Loss
-          </label>
-
-          <input
-            id="tradeStop"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Take Profit
-          </label>
-
-          <input
-            id="tradeTakeProfit"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Leverage
-          </label>
-
-          <input
-            id="tradeLeverage"
-            type="number"
-            value="3"
-            min="1"
-            step="0.1"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Position Notional USDT
-          </label>
-
-          <input
-            id="tradeNotional"
-            type="number"
-            value="1000"
-            step="0.01"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="checkbox-row">
-
-        <input
-          id="includeNews"
-          type="checkbox"
-          checked
-        >
-
-        <label for="includeNews">
-          Include NEWS
-        </label>
-
-      </div>
-
-
-      <div
-        class="field"
-        style="margin-top:10px;"
-      >
-
-        <label>
-          Existing Positions JSON
-        </label>
-
-        <textarea id="openPositions">[]</textarea>
-
-      </div>
-
-
-      <div class="runtime">
-
-        <div class="runtime-top">
-
-          <div
-            id="tradeRuntimeStatus"
-            class="runtime-status"
-          >
-            Ready
-          </div>
 
           <button
-            id="tradeRunButton"
-            class="button primary"
+            id="runAgentButton"
+            class="run-agent"
             type="button"
           >
-            Evaluate
+            RUN AGENT
           </button>
 
         </div>
 
 
         <div
-          id="tradeResult"
-          class="result"
+          id="modalResult"
+          class="modal-result"
         >
-
-          <div class="result-empty">
-            Enter trade plan.
-          </div>
-
+          READY
         </div>
 
       </div>
@@ -3121,3531 +3129,1687 @@
 
   </div>
 
-</div>
 
+  <script>
+    "use strict";
 
-<script>
-"use strict";
 
+    /* =====================================
+       CONFIG
+    ===================================== */
 
-/* =====================================
-   CONFIG
-===================================== */
-
-const OKX_BASE =
-  "https://www.okx.com";
-
-
-const API_BASE = (
-  window.CODEX_API_BASE
-  ||
-  (
-    window.location.protocol
-    ===
-    "file:"
-      ? "http://127.0.0.1:8000"
-      : window.location.origin
-  )
-);
-
-
-const MARKET_REFRESH_MS =
-  15000;
-
-
-const API_REFRESH_MS =
-  30000;
-
-
-let candles =
-  [];
-
-
-let marketLast =
-  null;
-
-
-let currentAgent =
-  null;
-
-
-let busy =
-  false;
-
-
-/* =====================================
-   ELEMENTS
-===================================== */
-
-const $ =
-  id =>
-    document.getElementById(
-      id
-    );
-
-
-const elements = {
-
-  okxDot:
-    $("okxDot"),
-
-  okxText:
-    $("okxText"),
-
-  apiDot:
-    $("apiDot"),
-
-  apiText:
-    $("apiText"),
-
-  runAllButton:
-    $("runAllButton"),
-
-  heroRunAllButton:
-    $("heroRunAllButton"),
-
-  heroAgentStatus:
-    $("heroAgentStatus"),
-
-  symbolSelect:
-    $("symbolSelect"),
-
-  timeframeSelect:
-    $("timeframeSelect"),
-
-  refreshButton:
-    $("refreshButton"),
-
-  symbolLabel:
-    $("symbolLabel"),
-
-  lastPrice:
-    $("lastPrice"),
-
-  priceChange:
-    $("priceChange"),
-
-  funding:
-    $("funding"),
-
-  openInterest:
-    $("openInterest"),
-
-  volume:
-    $("volume"),
-
-  spread:
-    $("spread"),
-
-  chart:
-    $("priceChart"),
-
-  modal:
-    $("modal"),
-
-  modalName:
-    $("modalName"),
-
-  modalRole:
-    $("modalRole"),
-
-  modalDescription:
-    $("modalDescription"),
-
-  modalDetails:
-    $("modalDetails"),
-
-  modalClose:
-    $("modalClose"),
-
-  agentRuntime:
-    $("agentRuntime"),
-
-  runtimeStatus:
-    $("runtimeStatus"),
-
-  runAgentButton:
-    $("runAgentButton"),
-
-  agentResult:
-    $("agentResult"),
-
-  tradeForm:
-    $("tradeForm"),
-
-  tradeEquity:
-    $("tradeEquity"),
-
-  tradeAvailable:
-    $("tradeAvailable"),
-
-  tradeDailyPnl:
-    $("tradeDailyPnl"),
-
-  tradeSymbol:
-    $("tradeSymbol"),
-
-  tradeSide:
-    $("tradeSide"),
-
-  tradeEntry:
-    $("tradeEntry"),
-
-  tradeStop:
-    $("tradeStop"),
-
-  tradeTakeProfit:
-    $("tradeTakeProfit"),
-
-  tradeLeverage:
-    $("tradeLeverage"),
-
-  tradeNotional:
-    $("tradeNotional"),
-
-  includeNews:
-    $("includeNews"),
-
-  openPositions:
-    $("openPositions"),
-
-  tradeRuntimeStatus:
-    $("tradeRuntimeStatus"),
-
-  tradeRunButton:
-    $("tradeRunButton"),
-
-  tradeResult:
-    $("tradeResult")
-
-};
-
-
-/* =====================================
-   AGENT INFO
-===================================== */
-
-const agentInfo = {
-
-  scout: {
-
-    name:
-      "SCOUT",
-
-    role:
-      "Opportunity Scanner",
-
-    description:
-      "掃描 OKX USDT 永續市場，從成交量、波動、Open Interest 與市場活動中找出值得其他 Agent 優先研究的標的。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Source",
-        "OKX"
-      ],
-      [
-        "Job",
-        "Find Opportunities"
-      ]
-    ],
-
-    button:
-      "Run SCOUT"
-
-  },
-
-
-  news: {
-
-    name:
-      "NEWS",
-
-    role:
-      "News Analyst",
-
-    description:
-      "分析市場新聞、政策、公司事件與催化劑，判斷事件方向、重要度與對目前標的的影響。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Source",
-        "RSS / Atom"
-      ],
-      [
-        "Output",
-        "Event Bias"
-      ]
-    ],
-
-    button:
-      "Run NEWS"
-
-  },
-
-
-  sentiment: {
-
-    name:
-      "SENTIMENT",
-
-    role:
-      "Market Sentiment",
-
-    description:
-      "分析 Funding、Open Interest、Positioning 與市場擁擠程度，判斷多空情緒與 herd risk。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Funding",
-        "READY"
-      ],
-      [
-        "OI",
-        "READY"
-      ]
-    ],
-
-    button:
-      "Run SENTIMENT"
-
-  },
-
-
-  charts: {
-
-    name:
-      "CHARTS",
-
-    role:
-      "Technical Analyst",
-
-    description:
-      "分析市場結構、趨勢、支撐壓力與多時間框架。4H / 1H 用於主方向，15m 用於進場時機。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Direction",
-        "4H / 1H"
-      ],
-      [
-        "Entry",
-        "15m"
-      ]
-    ],
-
-    button:
-      "Run CHARTS"
-
-  },
-
-
-  risk: {
-
-    name:
-      "RISK",
-
-    role:
-      "Risk Manager",
-
-    description:
-      "根據帳戶、槓桿、止損、Risk / Reward、部位曝險與其他 Agent 證據，評估交易是否可以承擔。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Verdict",
-        "APPROVE / REDUCE / REJECT"
-      ],
-      [
-        "Execution",
-        "ADVISORY"
-      ]
-    ],
-
-    button:
-      null
-
-  },
-
-
-  decision: {
-
-    name:
-      "DECISION",
-
-    role:
-      "Final Decision Maker",
-
-    description:
-      "整合 SCOUT、NEWS、SENTIMENT、CHARTS 與 RISK，使用 RISK Gate 與多時間框架規則輸出最終 LONG / SHORT / WAIT。",
-
-    details: [
-      [
-        "Status",
-        "V1 READY"
-      ],
-      [
-        "Output",
-        "LONG / SHORT / WAIT"
-      ],
-      [
-        "Execution",
-        "ADVISORY"
-      ]
-    ],
-
-    button:
-      null
-
-  }
-
-};
-
-
-/* =====================================
-   HELPERS
-===================================== */
-
-function escapeHtml(
-  value
-) {
-
-  return String(
-    value
-    ??
-    ""
-  )
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
-
-}
-
-
-function number(
-  value,
-  fallback = null
-) {
-
-  const parsed =
-    Number(
-      value
-    );
-
-
-  return Number.isFinite(
-    parsed
-  )
-    ? parsed
-    : fallback;
-
-}
-
-
-function formatPrice(
-  value
-) {
-
-  const parsed =
-    number(
-      value
-    );
-
-
-  if (
-    parsed === null
-  ) {
-
-    return "--";
-
-  }
-
-
-  if (
-    Math.abs(
-      parsed
-    )
-    >=
-    1000
-  ) {
-
-    return parsed.toLocaleString(
-      undefined,
-      {
-        maximumFractionDigits:
-          2
-      }
-    );
-
-  }
-
-
-  return parsed.toLocaleString(
-    undefined,
-    {
-      maximumFractionDigits:
-        8
-    }
-  );
-
-}
-
-
-function compact(
-  value
-) {
-
-  const parsed =
-    number(
-      value
-    );
-
-
-  if (
-    parsed === null
-  ) {
-
-    return "--";
-
-  }
-
-
-  return new Intl.NumberFormat(
-    undefined,
-    {
-      notation:
-        "compact",
-
-      maximumFractionDigits:
-        2
-    }
-  ).format(
-    parsed
-  );
-
-}
-
-
-function selectedSymbol(
-) {
-
-  return (
-    elements
-    .symbolSelect
-    .value
-  );
-
-}
-
-
-function chartTimeframes(
-) {
-
-  return [
-    "15m",
-    "1H",
-    "4H"
-  ];
-
-}
-
-
-function detailBox(
-  label,
-  value
-) {
-
-  return `
-    <div class="detail-box">
-
-      <div class="detail-label">
-        ${escapeHtml(label)}
-      </div>
-
-      <div class="detail-value">
-        ${escapeHtml(value)}
-      </div>
-
-    </div>
-  `;
-
-}
-
-
-/* =====================================
-   API
-===================================== */
-
-async function apiGet(
-  path
-) {
-
-  const response =
-    await fetch(
-      API_BASE
-      +
-      path,
-
-      {
-        cache:
-          "no-store"
-      }
-    );
-
-
-  if (
-    !response.ok
-  ) {
-
-    throw new Error(
-      `API ${response.status}`
-    );
-
-  }
-
-
-  return (
-    await response.json()
-  );
-
-}
-
-
-async function apiPost(
-  path,
-  body
-) {
-
-  const response =
-    await fetch(
-      API_BASE
-      +
-      path,
-
-      {
-        method:
-          "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body:
-          JSON.stringify(
-            body
-          ),
-
-        cache:
-          "no-store"
-      }
-    );
-
-
-  if (
-    !response.ok
-  ) {
-
-    let message =
-      `API ${response.status}`;
-
-
-    try {
-
-      const error =
-        await response.json();
-
-
-      message +=
-        " "
-        +
-        JSON.stringify(
-          error
-        );
-
-    } catch (
-      error
-    ) {
-
-      // ignore
-
-    }
-
-
-    throw new Error(
-      message
-    );
-
-  }
-
-
-  return (
-    await response.json()
-  );
-
-}
-
-
-async function checkBackend(
-) {
-
-  try {
-
-    const health =
-      await apiGet(
-        "/api/health"
-      );
-
-
-    if (
-      health.status
-      ===
-      "ok"
-    ) {
-
-      elements.apiDot
-        .classList
-        .add(
-          "online"
-        );
-
-
-      elements.apiDot
-        .classList
-        .remove(
-          "offline"
-        );
-
-
-      elements.apiText.textContent =
-        (
-          `API Online · `
-          +
-          `${health.agents_ready}/${health.agents_total}`
-        );
-
-
-      elements.heroAgentStatus.textContent =
-        (
-          `${health.agents_ready} / `
-          +
-          `${health.agents_total} AGENTS READY`
-        );
-
-
-      return;
-
-    }
-
-  } catch (
-    error
-  ) {
-
-    // handled below
-
-  }
-
-
-  elements.apiDot
-    .classList
-    .remove(
-      "online"
-    );
-
-
-  elements.apiDot
-    .classList
-    .add(
-      "offline"
-    );
-
-
-  elements.apiText.textContent =
-    "API Offline";
-
-
-  elements.heroAgentStatus.textContent =
-    "BACKEND OFFLINE";
-
-}
-
-
-/* =====================================
-   OKX
-===================================== */
-
-async function okxGet(
-  path,
-  params = {}
-) {
-
-  const url =
-    new URL(
-      OKX_BASE
-      +
-      path
-    );
-
-
-  for (
-    const [
-      key,
-      value
-    ]
-    of Object.entries(
-      params
-    )
-  ) {
-
-    url.searchParams.set(
-      key,
-      value
-    );
-
-  }
-
-
-  const response =
-    await fetch(
-      url.toString(),
-
-      {
-        cache:
-          "no-store"
-      }
-    );
-
-
-  if (
-    !response.ok
-  ) {
-
-    throw new Error(
-      `OKX ${response.status}`
-    );
-
-  }
-
-
-  const payload =
-    await response.json();
-
-
-  if (
-    String(
-      payload.code
-    )
-    !==
-    "0"
-  ) {
-
-    throw new Error(
-      payload.msg
+    const API_BASE = (
+      window.CODEX_API_BASE
       ||
-      "OKX error"
-    );
-
-  }
-
-
-  return (
-    payload.data
-    ||
-    []
-  );
-
-}
-
-
-function setOkxState(
-  state
-) {
-
-  elements.okxDot
-    .classList
-    .remove(
-      "online",
-      "offline"
-    );
-
-
-  if (
-    state
-    ===
-    "online"
-  ) {
-
-    elements.okxDot
-      .classList
-      .add(
-        "online"
-      );
-
-
-    elements.okxText.textContent =
-      "OKX Online";
-
-
-    return;
-
-  }
-
-
-  if (
-    state
-    ===
-    "partial"
-  ) {
-
-    elements.okxText.textContent =
-      "OKX Partial";
-
-
-    return;
-
-  }
-
-
-  elements.okxDot
-    .classList
-    .add(
-      "offline"
-    );
-
-
-  elements.okxText.textContent =
-    "OKX Offline";
-
-}
-
-
-/* =====================================
-   MARKET
-===================================== */
-
-async function refreshMarket(
-) {
-
-  const symbol =
-    selectedSymbol();
-
-
-  const bar =
-    elements
-    .timeframeSelect
-    .value;
-
-
-  elements.symbolLabel.textContent =
-    symbol;
-
-
-  elements.refreshButton.disabled =
-    true;
-
-
-  try {
-
-    const results =
-      await Promise.allSettled(
-        [
-
-          okxGet(
-            "/api/v5/market/ticker",
-
-            {
-              instId:
-                symbol
-            }
-          ),
-
-          okxGet(
-            "/api/v5/market/candles",
-
-            {
-              instId:
-                symbol,
-
-              bar,
-
-              limit:
-                80
-            }
-          ),
-
-          okxGet(
-            "/api/v5/public/funding-rate",
-
-            {
-              instId:
-                symbol
-            }
-          ),
-
-          okxGet(
-            "/api/v5/public/open-interest",
-
-            {
-              instType:
-                "SWAP",
-
-              instId:
-                symbol
-            }
-          ),
-
-          okxGet(
-            "/api/v5/market/books",
-
-            {
-              instId:
-                symbol,
-
-              sz:
-                1
-            }
-          )
-
-        ]
-      );
-
-
-    const [
-      tickerResult,
-      candleResult,
-      fundingResult,
-      oiResult,
-      bookResult
-    ] = results;
-
-
-    if (
-      tickerResult.status
-      ===
-      "fulfilled"
-    ) {
-
-      const ticker =
-        tickerResult.value[0]
-        ||
-        {};
-
-
-      const last =
-        number(
-          ticker.last
-        );
-
-
-      marketLast =
-        last;
-
-
-      elements.lastPrice.textContent =
-        formatPrice(
-          last
-        );
-
-
-      const open =
-        number(
-          ticker.open24h
-        );
-
-
-      let change =
-        0;
-
-
-      if (
-        last !== null
-        &&
-        open !== null
-        &&
-        open !== 0
-      ) {
-
-        change =
-          (
-            last
-            -
-            open
-          )
-          /
-          open
-          *
-          100;
-
-      }
-
-
-      elements.priceChange.textContent =
-        (
-          "24H "
-          +
-          (
-            change > 0
-              ? "+"
-              : ""
-          )
-          +
-          change.toFixed(
-            2
-          )
-          +
-          "%"
-        );
-
-
-      elements.priceChange.className =
-        (
-          "change "
-          +
-          (
-            change > 0
-              ? "positive"
-              : (
-                  change < 0
-                    ? "negative"
-                    : ""
-                )
-          )
-        );
-
-
-      const volume =
-        number(
-          ticker.volCcy24h,
-          0
-        )
-        *
-        (
-          last
-          ||
-          0
-        );
-
-
-      elements.volume.textContent =
-        "$"
-        +
-        compact(
-          volume
-        );
-
-    }
-
-
-    if (
-      candleResult.status
-      ===
-      "fulfilled"
-    ) {
-
-      candles =
-        candleResult.value
-        .map(
-          row => ({
-            open:
-              Number(
-                row[1]
-              ),
-
-            high:
-              Number(
-                row[2]
-              ),
-
-            low:
-              Number(
-                row[3]
-              ),
-
-            close:
-              Number(
-                row[4]
-              )
-          })
-        )
-        .filter(
-          candle =>
-            Number.isFinite(
-              candle.open
-            )
-            &&
-            Number.isFinite(
-              candle.high
-            )
-            &&
-            Number.isFinite(
-              candle.low
-            )
-            &&
-            Number.isFinite(
-              candle.close
-            )
-        )
-        .reverse();
-
-
-      drawChart();
-
-    }
-
-
-    if (
-      fundingResult.status
-      ===
-      "fulfilled"
-    ) {
-
-      const rate =
-        number(
-          fundingResult
-          .value[0]
-          ?.fundingRate
-        );
-
-
-      elements.funding.textContent =
-        rate === null
-          ? "--"
-          : (
-              rate
-              *
-              100
-            )
-            .toFixed(
-              5
-            )
-            +
-            "%";
-
-    } else {
-
-      elements.funding.textContent =
-        "--";
-
-    }
-
-
-    if (
-      oiResult.status
-      ===
-      "fulfilled"
-    ) {
-
-      const oi =
-        number(
-          oiResult
-          .value[0]
-          ?.oiUsd
-        );
-
-
-      elements.openInterest.textContent =
-        oi === null
-          ? "--"
-          : "$"
-            +
-            compact(
-              oi
-            );
-
-    } else {
-
-      elements.openInterest.textContent =
-        "--";
-
-    }
-
-
-    if (
-      bookResult.status
-      ===
-      "fulfilled"
-    ) {
-
-      const book =
-        bookResult
-        .value[0]
-        ||
-        {};
-
-
-      const bid =
-        number(
-          book.bids
-          ?.[0]
-          ?.[0]
-        );
-
-
-      const ask =
-        number(
-          book.asks
-          ?.[0]
-          ?.[0]
-        );
-
-
-      if (
-        bid !== null
-        &&
-        ask !== null
-      ) {
-
-        const mid =
-          (
-            bid
-            +
-            ask
-          )
-          /
-          2;
-
-
-        const spread =
-          mid > 0
-            ? (
-                ask
-                -
-                bid
-              )
-              /
-              mid
-              *
-              100
-            : null;
-
-
-        elements.spread.textContent =
-          spread === null
-            ? "--"
-            : spread.toFixed(
-                5
-              )
-              +
-              "%";
-
-      }
-
-    } else {
-
-      elements.spread.textContent =
-        "--";
-
-    }
-
-
-    const successCount =
-      results.filter(
-        result =>
-          result.status
-          ===
-          "fulfilled"
-      ).length;
-
-
-    if (
-      successCount
-      ===
-      results.length
-    ) {
-
-      setOkxState(
-        "online"
-      );
-
-    } else if (
-      successCount > 0
-    ) {
-
-      setOkxState(
-        "partial"
-      );
-
-    } else {
-
-      setOkxState(
-        "offline"
-      );
-
-    }
-
-  } catch (
-    error
-  ) {
-
-    setOkxState(
-      "offline"
-    );
-
-  } finally {
-
-    elements.refreshButton.disabled =
-      false;
-
-  }
-
-}
-
-
-/* =====================================
-   CHART
-===================================== */
-
-function drawChart(
-) {
-
-  const canvas =
-    elements.chart;
-
-
-  const rect =
-    canvas
-    .getBoundingClientRect();
-
-
-  if (
-    rect.width <= 0
-    ||
-    rect.height <= 0
-  ) {
-
-    return;
-
-  }
-
-
-  const ratio =
-    window.devicePixelRatio
-    ||
-    1;
-
-
-  canvas.width =
-    Math.floor(
-      rect.width
-      *
-      ratio
-    );
-
-
-  canvas.height =
-    Math.floor(
-      rect.height
-      *
-      ratio
-    );
-
-
-  const ctx =
-    canvas.getContext(
-      "2d"
-    );
-
-
-  ctx.setTransform(
-    ratio,
-    0,
-    0,
-    ratio,
-    0,
-    0
-  );
-
-
-  ctx.clearRect(
-    0,
-    0,
-    rect.width,
-    rect.height
-  );
-
-
-  if (
-    !candles.length
-  ) {
-
-    return;
-
-  }
-
-
-  const high =
-    Math.max(
-      ...candles.map(
-        candle =>
-          candle.high
-      )
-    );
-
-
-  const low =
-    Math.min(
-      ...candles.map(
-        candle =>
-          candle.low
-      )
-    );
-
-
-  const range =
-    high
-    -
-    low
-    ||
-    1;
-
-
-  const padding =
-    10;
-
-
-  const usableWidth =
-    rect.width
-    -
-    padding
-    *
-    2;
-
-
-  const usableHeight =
-    rect.height
-    -
-    padding
-    *
-    2;
-
-
-  const slot =
-    usableWidth
-    /
-    candles.length;
-
-
-  const bodyWidth =
-    Math.max(
-      2,
-      Math.min(
-        7,
-        slot
-        *
-        0.6
-      )
-    );
-
-
-  const y =
-    value =>
-      padding
-      +
       (
-        high
-        -
-        value
-      )
-      /
-      range
-      *
-      usableHeight;
-
-
-  ctx.strokeStyle =
-    "rgba(90,110,130,0.12)";
-
-
-  for (
-    let index = 1;
-    index < 5;
-    index += 1
-  ) {
-
-    const gridY =
-      padding
-      +
-      usableHeight
-      *
-      index
-      /
-      5;
-
-
-    ctx.beginPath();
-
-
-    ctx.moveTo(
-      padding,
-      gridY
-    );
-
-
-    ctx.lineTo(
-      rect.width
-      -
-      padding,
-      gridY
-    );
-
-
-    ctx.stroke();
-
-  }
-
-
-  candles.forEach(
-    (
-      candle,
-      index
-    ) => {
-
-      const x =
-        padding
-        +
-        index
-        *
-        slot
-        +
-        slot
-        /
-        2;
-
-
-      const bullish =
-        candle.close
-        >=
-        candle.open;
-
-
-      const color =
-        bullish
-          ? "#42e58d"
-          : "#ff5f6d";
-
-
-      ctx.strokeStyle =
-        color;
-
-
-      ctx.fillStyle =
-        color;
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        x,
-        y(
-          candle.high
-        )
-      );
-
-
-      ctx.lineTo(
-        x,
-        y(
-          candle.low
-        )
-      );
-
-
-      ctx.stroke();
-
-
-      const openY =
-        y(
-          candle.open
-        );
-
-
-      const closeY =
-        y(
-          candle.close
-        );
-
-
-      ctx.fillRect(
-        x
-        -
-        bodyWidth
-        /
-        2,
-
-        Math.min(
-          openY,
-          closeY
-        ),
-
-        bodyWidth,
-
-        Math.max(
-          1,
-          Math.abs(
-            closeY
-            -
-            openY
-          )
-        )
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================
-   AGENT STATE
-===================================== */
-
-function setAgentState(
-  agent,
-  state
-) {
-
-  const functionalCard =
-    document.querySelector(
-      `.agent[data-agent="${agent}"]`
-    );
-
-
-  const heroCard =
-    document.querySelector(
-      `.pixel-agent[data-agent="${agent}"]`
-    );
-
-
-  const labels = {
-
-    ready:
-      "V1 READY",
-
-    working:
-      "WORKING",
-
-    success:
-      "SUCCESS",
-
-    error:
-      "ERROR",
-
-    skipped:
-      "SKIPPED"
-
-  };
-
-
-  const label =
-    labels[state]
-    ||
-    String(
-      state
-    )
-    .toUpperCase();
-
-
-  if (
-    functionalCard
-  ) {
-
-    functionalCard
-      .classList
-      .toggle(
-        "working",
-        state
+        window.location.protocol
         ===
-        "working"
-      );
-
-
-    const stateElement =
-      functionalCard
-      .querySelector(
-        ".agent-state"
-      );
-
-
-    if (
-      stateElement
-    ) {
-
-      stateElement.innerHTML =
-        `
-          <span class="agent-state-dot"></span>
-          ${escapeHtml(label)}
-        `;
-
-    }
-
-  }
-
-
-  if (
-    heroCard
-  ) {
-
-    heroCard
-      .classList
-      .toggle(
-        "working",
-        state
-        ===
-        "working"
-      );
-
-
-    const stateText =
-      heroCard
-      .querySelector(
-        ".pixel-state-text"
-      );
-
-
-    if (
-      stateText
-    ) {
-
-      stateText.textContent =
-        label;
-
-    }
-
-  }
-
-}
-
-
-function setAllAgents(
-  state
-) {
-
-  [
-    "scout",
-    "news",
-    "sentiment",
-    "charts",
-    "risk",
-    "decision"
-  ]
-  .forEach(
-    agent =>
-      setAgentState(
-        agent,
-        state
+        "file:"
+          ? "http://127.0.0.1:8000"
+          : window.location.origin
       )
-  );
-
-}
-
-
-/* =====================================
-   MODAL
-===================================== */
-
-function openAgent(
-  key
-) {
-
-  const info =
-    agentInfo[
-      key
-    ];
-
-
-  if (
-    !info
-  ) {
-
-    return;
-
-  }
-
-
-  currentAgent =
-    key;
-
-
-  elements.modalName.textContent =
-    info.name;
-
-
-  elements.modalRole.textContent =
-    info.role;
-
-
-  elements.modalDescription.textContent =
-    info.description;
-
-
-  elements.modalDetails.innerHTML =
-    info.details
-    .map(
-      item =>
-        detailBox(
-          item[0],
-          item[1]
-        )
-    )
-    .join(
-      ""
     );
 
 
-  elements.agentResult.innerHTML =
-    `
-      <div class="result-empty">
-        No live result yet.
-      </div>
-    `;
+    const OKX_BASE =
+      "https://www.okx.com";
 
 
-  if (
-    key
-    ===
-    "risk"
-    ||
-    key
-    ===
-    "decision"
-  ) {
-
-    elements.agentRuntime.style.display =
-      "none";
-
-
-    elements.tradeForm
-      .classList
-      .add(
-        "show"
-      );
-
-
-    prepareTradeForm();
-
-
-    if (
-      key
-      ===
-      "decision"
-    ) {
-
-      elements.tradeRunButton.textContent =
-        "RUN ALL · 6 AGENTS";
-
-
-      elements.tradeRuntimeStatus.textContent =
-        "Ready for full pipeline";
-
-
-      elements.tradeResult.innerHTML =
-        `
-          <div class="result-empty">
-            Enter trade plan and run all agents.
-          </div>
-        `;
-
-    } else {
-
-      elements.tradeRunButton.textContent =
-        "Evaluate RISK";
-
-
-      elements.tradeRuntimeStatus.textContent =
-        "Ready for risk review";
-
-
-      elements.tradeResult.innerHTML =
-        `
-          <div class="result-empty">
-            Enter trade plan and evaluate risk.
-          </div>
-        `;
-
-    }
-
-  } else {
-
-    elements.tradeForm
-      .classList
-      .remove(
-        "show"
-      );
-
-
-    elements.agentRuntime.style.display =
-      "";
-
-
-    elements.runAgentButton.textContent =
-      info.button;
-
-
-    elements.runtimeStatus.textContent =
-      "Ready";
-
-  }
-
-
-  elements.modal
-    .classList
-    .add(
-      "show"
-    );
-
-
-  document.body
-    .classList
-    .add(
-      "modal-open"
-    );
-
-}
-
-
-function closeModal(
-) {
-
-  elements.modal
-    .classList
-    .remove(
-      "show"
-    );
-
-
-  document.body
-    .classList
-    .remove(
-      "modal-open"
-    );
-
-}
-
-
-/* =====================================
-   NORMAL AGENTS
-===================================== */
-
-async function runAgent(
-) {
-
-  if (
-    busy
-    ||
-    !currentAgent
-  ) {
-
-    return;
-
-  }
-
-
-  busy =
-    true;
-
-
-  elements.runAgentButton.disabled =
-    true;
-
-
-  setAgentState(
-    currentAgent,
-    "working"
-  );
-
-
-  elements.runtimeStatus.textContent =
-    "Running...";
-
-
-  try {
-
-    let output =
+    let currentAgent =
       null;
 
 
-    const context = {
+    let running =
+      false;
 
-      symbol:
-        selectedSymbol(),
 
-      exchange:
-        "OKX",
+    /* =====================================
+       ELEMENTS
+    ===================================== */
 
-      market_type:
-        "swap",
+    const $ =
+      id =>
+        document.getElementById(
+          id
+        );
 
-      timeframes:
-        chartTimeframes()
+
+    const elements = {
+
+      apiDot:
+        $("apiDot"),
+
+      apiText:
+        $("apiText"),
+
+      okxDot:
+        $("okxDot"),
+
+      okxText:
+        $("okxText"),
+
+      heroStatus:
+        $("heroStatus"),
+
+      accountEquity:
+        $("accountEquity"),
+
+      availableBalance:
+        $("availableBalance"),
+
+      dailyPnl:
+        $("dailyPnl"),
+
+      leverage:
+        $("leverage"),
+
+      maxCandidates:
+        $("maxCandidates"),
+
+      runAllButton:
+        $("runAllButton"),
+
+      opportunityGrid:
+        $("opportunityGrid"),
+
+      opportunitySummary:
+        $("opportunitySummary"),
+
+      modal:
+        $("agentModal"),
+
+      modalTitle:
+        $("modalTitle"),
+
+      modalRole:
+        $("modalRole"),
+
+      modalDescription:
+        $("modalDescription"),
+
+      modalSymbol:
+        $("modalSymbol"),
+
+      modalControls:
+        $("modalControls"),
+
+      runAgentButton:
+        $("runAgentButton"),
+
+      modalResult:
+        $("modalResult"),
+
+      modalClose:
+        $("modalClose")
 
     };
 
 
-    if (
-      currentAgent
-      ===
-      "scout"
+    /* =====================================
+       AGENT INFO
+    ===================================== */
+
+    const agentInfo = {
+
+      scout: {
+
+        name:
+          "SCOUT",
+
+        role:
+          "Opportunity Scanner",
+
+        description:
+          "掃描 OKX USDT 永續市場，依照成交量、價格活動與 Open Interest 找出值得進一步研究的標的。"
+
+      },
+
+
+      news: {
+
+        name:
+          "NEWS",
+
+        role:
+          "Event Analyst",
+
+        description:
+          "檢查重大新聞、事件與催化劑，判斷是否存在與交易方向相反的事件風險。"
+
+      },
+
+
+      sentiment: {
+
+        name:
+          "SENTIMENT",
+
+        role:
+          "Market Sentiment",
+
+        description:
+          "分析 Funding、Open Interest 與 crowding，判斷多空市場情緒與擁擠風險。"
+
+      },
+
+
+      charts: {
+
+        name:
+          "CHARTS",
+
+        role:
+          "Trade Planner",
+
+        description:
+          "4H / 1H 判斷主方向，15m 確認進場，並建立 Entry、Stop Loss、Take Profit、Invalidation 與 R:R。"
+
+      },
+
+
+      risk: {
+
+        name:
+          "RISK",
+
+        role:
+          "Risk Manager",
+
+        description:
+          "根據帳戶 Equity、可用餘額、槓桿、止損、R:R 與總曝險，決定 APPROVE、REDUCE 或 REJECT。"
+
+      },
+
+
+      decision: {
+
+        name:
+          "DECISION",
+
+        role:
+          "Final Decision",
+
+        description:
+          "整合前五個 Agent，通過 RISK Gate 後才允許輸出 LONG 或 SHORT，否則回傳 WAIT。"
+
+      }
+
+    };
+
+
+    /* =====================================
+       HELPERS
+    ===================================== */
+
+    function escapeHtml(
+      value
     ) {
 
-      output =
-        await apiPost(
-          "/api/scout",
+      return String(
+        value
+        ??
+        ""
+      )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+    }
+
+
+    function num(
+      value,
+      fallback = null
+    ) {
+
+      const result =
+        Number(
+          value
+        );
+
+
+      return Number.isFinite(
+        result
+      )
+        ? result
+        : fallback;
+
+    }
+
+
+    function formatPrice(
+      value
+    ) {
+
+      const result =
+        num(
+          value
+        );
+
+
+      if (
+        result === null
+      ) {
+
+        return "--";
+
+      }
+
+
+      if (
+        Math.abs(
+          result
+        )
+        >=
+        1000
+      ) {
+
+        return result.toLocaleString(
+          undefined,
+          {
+            maximumFractionDigits:
+              2
+          }
+        );
+
+      }
+
+
+      return result.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:
+            8
+        }
+      );
+
+    }
+
+
+    function formatUsd(
+      value
+    ) {
+
+      const result =
+        num(
+          value
+        );
+
+
+      if (
+        result === null
+      ) {
+
+        return "--";
+
+      }
+
+
+      return (
+        "$"
+        +
+        result.toLocaleString(
+          undefined,
+          {
+            maximumFractionDigits:
+              2
+          }
+        )
+      );
+
+    }
+
+
+    function percent(
+      value
+    ) {
+
+      const result =
+        num(
+          value,
+          0
+        );
+
+
+      return (
+        result
+        *
+        100
+      )
+      .toFixed(
+        0
+      )
+      +
+      "%";
+
+    }
+
+
+    /* =====================================
+       API
+    ===================================== */
+
+    async function apiGet(
+      path
+    ) {
+
+      const response =
+        await fetch(
+          API_BASE
+          +
+          path,
 
           {
-            context: {
-              symbol:
-                "MARKET",
+            cache:
+              "no-store"
+          }
+        );
 
-              exchange:
-                "OKX",
 
-              market_type:
-                "swap"
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          `API ${response.status}`
+        );
+
+      }
+
+
+      return (
+        await response.json()
+      );
+
+    }
+
+
+    async function apiPost(
+      path,
+      body
+    ) {
+
+      const response =
+        await fetch(
+          API_BASE
+          +
+          path,
+
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
             },
 
-            payload: {
-              symbols: []
+            body:
+              JSON.stringify(
+                body
+              ),
+
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        let message =
+          `API ${response.status}`;
+
+
+        try {
+
+          const payload =
+            await response.json();
+
+
+          message +=
+            " "
+            +
+            JSON.stringify(
+              payload
+            );
+
+        } catch (
+          error
+        ) {
+
+          // ignore
+
+        }
+
+
+        throw new Error(
+          message
+        );
+
+      }
+
+
+      return (
+        await response.json()
+      );
+
+    }
+
+
+    /* =====================================
+       STATUS
+    ===================================== */
+
+    async function checkApi(
+    ) {
+
+      try {
+
+        const health =
+          await apiGet(
+            "/api/health"
+          );
+
+
+        elements.apiDot.className =
+          "status-dot online";
+
+
+        elements.apiText.textContent =
+          (
+            `API ${health.agents_ready}/${health.agents_total}`
+          );
+
+
+        elements.heroStatus.textContent =
+          (
+            `${health.agents_ready}/${health.agents_total} AGENTS READY`
+          );
+
+      } catch (
+        error
+      ) {
+
+        elements.apiDot.className =
+          "status-dot offline";
+
+
+        elements.apiText.textContent =
+          "API OFFLINE";
+
+
+        elements.heroStatus.textContent =
+          "BACKEND OFFLINE";
+
+      }
+
+    }
+
+
+    async function checkOkx(
+    ) {
+
+      try {
+
+        const url =
+          (
+            OKX_BASE
+            +
+            "/api/v5/market/ticker"
+            +
+            "?instId=BTC-USDT-SWAP"
+          );
+
+
+        const response =
+          await fetch(
+            url,
+            {
+              cache:
+                "no-store"
             }
-          }
-        );
+          );
 
-    }
 
-
-    if (
-      currentAgent
-      ===
-      "news"
-    ) {
-
-      output =
-        await apiPost(
-          "/api/news",
-
-          {
-            context,
-
-            focus_symbols: [
-              selectedSymbol()
-            ]
-          }
-        );
-
-    }
-
-
-    if (
-      currentAgent
-      ===
-      "sentiment"
-    ) {
-
-      output =
-        await apiPost(
-          "/api/sentiment",
-
-          {
-            context
-          }
-        );
-
-    }
-
-
-    if (
-      currentAgent
-      ===
-      "charts"
-    ) {
-
-      output =
-        await apiPost(
-          "/api/charts",
-
-          {
-            context
-          }
-        );
-
-    }
-
-
-    if (
-      !output
-    ) {
-
-      throw new Error(
-        "Agent endpoint is not available."
-      );
-
-    }
-
-
-    setAgentState(
-      currentAgent,
-
-      output.status
-      ===
-      "success"
-        ? "success"
-        : "error"
-    );
-
-
-    elements.runtimeStatus.textContent =
-      output.status
-      ||
-      "complete";
-
-
-    renderGenericAgent(
-      currentAgent,
-      output
-    );
-
-  } catch (
-    error
-  ) {
-
-    setAgentState(
-      currentAgent,
-      "error"
-    );
-
-
-    elements.runtimeStatus.textContent =
-      "Error";
-
-
-    elements.agentResult.innerHTML =
-      `
-        <div class="result-summary negative">
-          ${escapeHtml(
-            error.message
-          )}
-        </div>
-      `;
-
-  } finally {
-
-    busy =
-      false;
-
-
-    elements.runAgentButton.disabled =
-      false;
-
-  }
-
-}
-
-
-function renderGenericAgent(
-  agent,
-  output
-) {
-
-  const boxes = [
-    [
-      "Status",
-      output.status
-      ||
-      "--"
-    ],
-    [
-      "Bias",
-      output.bias
-      ||
-      "--"
-    ],
-    [
-      "Confidence",
-      number(
-        output.confidence,
-        0
-      ).toFixed(
-        2
-      )
-    ]
-  ];
-
-
-  if (
-    agent
-    ===
-    "charts"
-  ) {
-
-    boxes.push(
-      [
-        "Trend",
-        output.trend_regime
-        ||
-        "--"
-      ]
-    );
-
-
-    boxes.push(
-      [
-        "Volatility",
-        output.volatility_regime
-        ||
-        "--"
-      ]
-    );
-
-  }
-
-
-  if (
-    agent
-    ===
-    "sentiment"
-  ) {
-
-    boxes.push(
-      [
-        "Regime",
-        output.regime
-        ||
-        "--"
-      ]
-    );
-
-
-    boxes.push(
-      [
-        "Crowding",
-        output.crowding_side
-        ||
-        "--"
-      ]
-    );
-
-  }
-
-
-  elements.agentResult.innerHTML =
-    `
-      <div class="result-summary">
-        ${escapeHtml(
-          output.summary
-          ||
-          "Analysis complete."
-        )}
-      </div>
-
-      <div class="result-grid">
-        ${
-          boxes
-          .map(
-            item =>
-              detailBox(
-                item[0],
-                item[1]
-              )
-          )
-          .join(
-            ""
-          )
-        }
-      </div>
-    `;
-
-}
-
-
-/* =====================================
-   TRADE PAYLOAD
-===================================== */
-
-function requiredPositive(
-  element,
-  label
-) {
-
-  const value =
-    number(
-      element.value
-    );
-
-
-  if (
-    value === null
-    ||
-    value <= 0
-  ) {
-
-    throw new Error(
-      `${label} must be greater than 0`
-    );
-
-  }
-
-
-  return value;
-
-}
-
-
-function prepareTradeForm(
-) {
-
-  const symbol =
-    selectedSymbol();
-
-
-  elements.tradeSymbol.value =
-    symbol;
-
-
-  if (
-    marketLast !== null
-  ) {
-
-    elements.tradeEntry.value =
-      marketLast;
-
-  }
-
-}
-
-
-function buildTradePayload(
-) {
-
-  const symbol =
-    selectedSymbol();
-
-
-  const equity =
-    requiredPositive(
-      elements.tradeEquity,
-      "Account equity"
-    );
-
-
-  const available =
-    number(
-      elements.tradeAvailable.value,
-      0
-    );
-
-
-  const dailyPnl =
-    number(
-      elements.tradeDailyPnl.value,
-      0
-    );
-
-
-  const entry =
-    requiredPositive(
-      elements.tradeEntry,
-      "Entry"
-    );
-
-
-  const stop =
-    requiredPositive(
-      elements.tradeStop,
-      "Stop loss"
-    );
-
-
-  const takeProfit =
-    requiredPositive(
-      elements.tradeTakeProfit,
-      "Take profit"
-    );
-
-
-  const leverage =
-    requiredPositive(
-      elements.tradeLeverage,
-      "Leverage"
-    );
-
-
-  const notional =
-    requiredPositive(
-      elements.tradeNotional,
-      "Notional"
-    );
-
-
-  let openPositions =
-    [];
-
-
-  const raw =
-    elements.openPositions
-    .value
-    .trim();
-
-
-  if (
-    raw
-  ) {
-
-    openPositions =
-      JSON.parse(
-        raw
-      );
-
-
-    if (
-      !Array.isArray(
-        openPositions
-      )
-    ) {
-
-      throw new Error(
-        "Existing positions must be JSON array"
-      );
-
-    }
-
-  }
-
-
-  const proposedTrade = {
-
-    symbol,
-
-    side:
-      elements.tradeSide.value,
-
-    entry_price:
-      entry,
-
-    current_price:
-      marketLast
-      ??
-      entry,
-
-    stop_loss:
-      stop,
-
-    take_profit:
-      takeProfit,
-
-    leverage,
-
-    notional_usdt:
-      notional
-
-  };
-
-
-  const context = {
-
-    symbol,
-
-    exchange:
-      "OKX",
-
-    market_type:
-      "swap",
-
-    timeframes:
-      chartTimeframes()
-
-  };
-
-
-  const riskPayload = {
-
-    account_equity:
-      equity,
-
-    available_balance:
-      available,
-
-    daily_pnl:
-      dailyPnl,
-
-    open_positions:
-      openPositions,
-
-    proposed_trade:
-      proposedTrade
-
-  };
-
-
-  return {
-
-    context,
-    proposedTrade,
-    riskPayload
-
-  };
-
-}
-
-
-/* =====================================
-   RISK
-===================================== */
-
-async function runRisk(
-) {
-
-  if (
-    busy
-  ) {
-
-    return;
-
-  }
-
-
-  busy =
-    true;
-
-
-  elements.tradeRunButton.disabled =
-    true;
-
-
-  setAgentState(
-    "risk",
-    "working"
-  );
-
-
-  elements.tradeRuntimeStatus.textContent =
-    "Running RISK...";
-
-
-  try {
-
-    const data =
-      buildTradePayload();
-
-
-    const response =
-      await apiPost(
-        "/api/risk",
-
-        {
-
-          context:
-            data.context,
-
-          payload:
-            data.riskPayload,
-
-          enrich:
-            true,
-
-          include_news:
-            elements.includeNews.checked
-
-        }
-      );
-
-
-    const risk =
-      response.risk;
-
-
-    setAgentState(
-      "risk",
-
-      risk.status
-      ===
-      "success"
-        ? "success"
-        : "error"
-    );
-
-
-    renderRisk(
-      risk
-    );
-
-  } catch (
-    error
-  ) {
-
-    setAgentState(
-      "risk",
-      "error"
-    );
-
-
-    elements.tradeRuntimeStatus.textContent =
-      "Error";
-
-
-    elements.tradeResult.innerHTML =
-      `
-        <div class="result-summary negative">
-          ${escapeHtml(
-            error.message
-          )}
-        </div>
-      `;
-
-  } finally {
-
-    busy =
-      false;
-
-
-    elements.tradeRunButton.disabled =
-      false;
-
-  }
-
-}
-
-
-function renderRisk(
-  risk
-) {
-
-  const metrics =
-    risk.metrics
-    ||
-    {};
-
-
-  elements.tradeRuntimeStatus.textContent =
-    "RISK complete";
-
-
-  elements.tradeResult.innerHTML =
-    `
-      <div class="result-summary">
-        ${escapeHtml(
-          risk.summary
-          ||
-          "Risk analysis complete."
-        )}
-      </div>
-
-      <div class="result-grid">
-
-        ${detailBox(
-          "Verdict",
-          String(
-            risk.verdict
-            ||
-            "--"
-          )
-          .toUpperCase()
-        )}
-
-        ${detailBox(
-          "Approved",
-          risk.approved
-            ? "YES"
-            : "NO"
-        )}
-
-        ${detailBox(
-          "Confidence",
-          number(
-            risk.confidence,
-            0
-          ).toFixed(
-            2
-          )
-        )}
-
-        ${detailBox(
-          "Risk % Equity",
-          metrics.risk_pct_equity
-          ??
-          "--"
-        )}
-
-        ${detailBox(
-          "R / R",
-          metrics.risk_reward_ratio
-          ??
-          "--"
-        )}
-
-        ${detailBox(
-          "Recommended",
-          metrics.recommended_notional_usdt
-          ??
-          "--"
-        )}
-
-      </div>
-    `;
-
-}
-
-
-/* =====================================
-   DECISION / RUN ALL
-===================================== */
-
-async function runDecision(
-) {
-
-  if (
-    busy
-  ) {
-
-    return;
-
-  }
-
-
-  busy =
-    true;
-
-
-  elements.tradeRunButton.disabled =
-    true;
-
-
-  elements.runAllButton.disabled =
-    true;
-
-
-  elements.heroRunAllButton.disabled =
-    true;
-
-
-  setAllAgents(
-    "working"
-  );
-
-
-  elements.tradeRuntimeStatus.textContent =
-    "All 6 agents working...";
-
-
-  elements.tradeResult.innerHTML =
-    `
-      <div class="result-empty">
-        SCOUT · NEWS · SENTIMENT · CHARTS · RISK · DECISION
-      </div>
-    `;
-
-
-  try {
-
-    const data =
-      buildTradePayload();
-
-
-    const response =
-      await apiPost(
-        "/api/decision",
-
-        {
-
-          context:
-            data.context,
-
-
-          payload: {
-
-            proposed_trade:
-              data.proposedTrade,
-
-            require_risk_approval:
-              true
-
-          },
-
-
-          risk_payload:
-            data.riskPayload,
-
-
-          enrich:
-            true,
-
-
-          include_scout:
-            true,
-
-
-          include_news:
-            elements
-            .includeNews
-            .checked
-
-        }
-      );
-
-
-    const decision =
-      response.decision
-      ||
-      {};
-
-
-    const pipeline =
-      decision.data
-      ?.pipeline
-      ||
-      {};
-
-
-    [
-      "scout",
-      "news",
-      "sentiment",
-      "charts",
-      "risk"
-    ]
-    .forEach(
-      agent => {
-
-        const state =
-          pipeline[
-            agent
-          ];
+        const body =
+          await response.json();
 
 
         if (
-          state
-          ===
-          "success"
+          !response.ok
           ||
-          state
-          ===
-          "provided"
+          String(
+            body.code
+          )
+          !==
+          "0"
         ) {
 
-          setAgentState(
-            agent,
-            "success"
-          );
-
-        } else if (
-          state
-          ===
-          "skipped"
-        ) {
-
-          setAgentState(
-            agent,
-            "skipped"
-          );
-
-        } else {
-
-          setAgentState(
-            agent,
-            "error"
+          throw new Error(
+            "OKX unavailable"
           );
 
         }
 
+
+        elements.okxDot.className =
+          "status-dot online";
+
+
+        elements.okxText.textContent =
+          "OKX LIVE";
+
+      } catch (
+        error
+      ) {
+
+        elements.okxDot.className =
+          "status-dot offline";
+
+
+        elements.okxText.textContent =
+          "OKX OFFLINE";
+
       }
-    );
+
+    }
 
 
-    setAgentState(
-      "decision",
+    /* =====================================
+       AGENT STATE
+    ===================================== */
 
-      decision.status
-      ===
-      "success"
-        ? "success"
-        : "error"
-    );
+    function setAgentState(
+      agent,
+      state
+    ) {
 
-
-    renderDecision(
-      response
-    );
-
-  } catch (
-    error
-  ) {
-
-    setAllAgents(
-      "error"
-    );
-
-
-    elements.tradeRuntimeStatus.textContent =
-      "Pipeline error";
-
-
-    elements.tradeResult.innerHTML =
-      `
-        <div class="result-summary negative">
-          ${escapeHtml(
-            error.message
-          )}
-        </div>
-      `;
-
-  } finally {
-
-    busy =
-      false;
-
-
-    elements.tradeRunButton.disabled =
-      false;
-
-
-    elements.runAllButton.disabled =
-      false;
-
-
-    elements.heroRunAllButton.disabled =
-      false;
-
-  }
-
-}
-
-
-function renderDecision(
-  response
-) {
-
-  const decision =
-    response.decision
-    ||
-    {};
-
-
-  const finalDecision =
-    decision.decision
-    ||
-    {};
-
-
-  const metrics =
-    decision.metrics
-    ||
-    {};
-
-
-  const action =
-    String(
-      finalDecision.action
-      ||
-      decision.bias
-      ||
-      "wait"
-    )
-    .toUpperCase();
-
-
-  const directionalBias =
-    String(
-      decision.directional_bias
-      ||
-      "neutral"
-    )
-    .toUpperCase();
-
-
-  const confidence =
-    number(
-      decision.confidence,
-      0
-    );
-
-
-  const gates =
-    Array.isArray(
-      decision.gates
-    )
-      ? decision.gates
-      : [];
-
-
-  const failed =
-    gates.filter(
-      gate =>
-        gate.status
-        ===
-        "fail"
-    );
-
-
-  const reasoning =
-    Array.isArray(
-      finalDecision.reasoning
-    )
-      ? finalDecision.reasoning
-      : [];
-
-
-  const actionClass =
-    action
-    ===
-    "LONG"
-      ? "positive"
-      : (
-          action
-          ===
-          "SHORT"
-            ? "negative"
-            : "warning"
+      const card =
+        document.querySelector(
+          `.agent-card[data-agent="${agent}"]`
         );
 
 
-  const failedHtml =
-    failed
-    .map(
-      gate => `
-        <div class="result-item">
+      if (
+        !card
+      ) {
 
-          <div class="result-item-title negative">
-            ${escapeHtml(
-              gate.name
-            )}
-          </div>
+        return;
 
-          <div class="result-item-sub">
-            ${escapeHtml(
-              gate.reason
-              ||
-              ""
-            )}
-          </div>
-
-        </div>
-      `
-    )
-    .join(
-      ""
-    );
-
-
-  const reasoningHtml =
-    reasoning
-    .map(
-      reason => `
-        <div class="result-item">
-
-          <div class="result-item-sub">
-            ${escapeHtml(
-              reason
-            )}
-          </div>
-
-        </div>
-      `
-    )
-    .join(
-      ""
-    );
-
-
-  elements.tradeRuntimeStatus.textContent =
-    "DECISION complete";
-
-
-  elements.tradeResult.innerHTML =
-    `
-      <div
-        class="result-summary ${actionClass}"
-        style="
-          text-align:center;
-          font-size:22px;
-          font-weight:900;
-        "
-      >
-        ${escapeHtml(
-          action
-        )}
-      </div>
-
-
-      <div class="result-grid">
-
-        ${detailBox(
-          "Direction",
-          directionalBias
-        )}
-
-        ${detailBox(
-          "Confidence",
-          confidence.toFixed(
-            2
-          )
-        )}
-
-        ${detailBox(
-          "Risk Approved",
-          decision.risk_approved
-            ? "YES"
-            : "NO"
-        )}
-
-        ${detailBox(
-          "Direction Score",
-          number(
-            metrics.directional_score,
-            0
-          ).toFixed(
-            3
-          )
-        )}
-
-        ${detailBox(
-          "Consensus",
-          number(
-            metrics.consensus_score,
-            0
-          ).toFixed(
-            2
-          )
-        )}
-
-        ${detailBox(
-          "Disagreement",
-          number(
-            metrics.disagreement_score,
-            0
-          ).toFixed(
-            2
-          )
-        )}
-
-        ${detailBox(
-          "Recommended Size",
-          finalDecision.position_size
-          ??
-          "--"
-        )}
-
-      </div>
-
-
-      ${
-        failedHtml
-          ? `
-              <div class="form-title">
-                Failed Gates
-              </div>
-
-              <div class="result-list">
-                ${failedHtml}
-              </div>
-            `
-          : `
-              <div
-                class="result-summary positive"
-                style="margin-top:10px;"
-              >
-                All blocking gates passed.
-              </div>
-            `
       }
 
 
-      ${
-        reasoningHtml
-          ? `
-              <div class="form-title">
-                Reasoning
-              </div>
-
-              <div class="result-list">
-                ${reasoningHtml}
-              </div>
-            `
-          : ""
-      }
-    `;
-
-}
+      card.classList.toggle(
+        "working",
+        state
+        ===
+        "working"
+      );
 
 
-/* =====================================
-   RUN ALL
-===================================== */
-
-function openRunAll(
-) {
-
-  openAgent(
-    "decision"
-  );
-
-}
-
-
-/* =====================================
-   EVENTS
-===================================== */
-
-elements.refreshButton
-  .addEventListener(
-    "click",
-    refreshMarket
-  );
-
-
-elements.symbolSelect
-  .addEventListener(
-    "change",
-    () => {
-
-      refreshMarket();
+      const text =
+        card.querySelector(
+          ".state-text"
+        );
 
 
       if (
-        currentAgent
+        text
+      ) {
+
+        text.textContent =
+          String(
+            state
+          )
+          .toUpperCase();
+
+      }
+
+    }
+
+
+    function setAllAgents(
+      state
+    ) {
+
+      [
+        "scout",
+        "news",
+        "sentiment",
+        "charts",
+        "risk",
+        "decision"
+      ]
+      .forEach(
+        agent => {
+
+          setAgentState(
+            agent,
+            state
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================
+       RUN ALL
+    ===================================== */
+
+    function buildOpportunityPayload(
+    ) {
+
+      const equity =
+        num(
+          elements
+          .accountEquity
+          .value
+        );
+
+
+      const available =
+        num(
+          elements
+          .availableBalance
+          .value
+        );
+
+
+      const dailyPnl =
+        num(
+          elements
+          .dailyPnl
+          .value,
+          0
+        );
+
+
+      const leverage =
+        num(
+          elements
+          .leverage
+          .value
+        );
+
+
+      const maxCandidates =
+        Math.floor(
+          num(
+            elements
+            .maxCandidates
+            .value,
+            5
+          )
+        );
+
+
+      if (
+        equity === null
+        ||
+        equity <= 0
+      ) {
+
+        throw new Error(
+          "Account equity must be greater than 0."
+        );
+
+      }
+
+
+      if (
+        available === null
+        ||
+        available < 0
+      ) {
+
+        throw new Error(
+          "Available balance is invalid."
+        );
+
+      }
+
+
+      if (
+        leverage === null
+        ||
+        leverage < 1
+      ) {
+
+        throw new Error(
+          "Leverage is invalid."
+        );
+
+      }
+
+
+      return {
+
+        account_equity:
+          equity,
+
+        available_balance:
+          available,
+
+        daily_pnl:
+          dailyPnl,
+
+        leverage,
+
+        open_positions:
+          [],
+
+        max_candidates:
+          maxCandidates,
+
+        max_concurrency:
+          3,
+
+        include_news:
+          true,
+
+        minimum_scout_score:
+          0
+
+      };
+
+    }
+
+
+    async function runAll(
+    ) {
+
+      if (
+        running
+      ) {
+
+        return;
+
+      }
+
+
+      running =
+        true;
+
+
+      elements.runAllButton.disabled =
+        true;
+
+
+      setAllAgents(
+        "working"
+      );
+
+
+      elements.heroStatus.textContent =
+        "AGENTS WORKING";
+
+
+      elements.opportunitySummary.textContent =
+        "SCANNING MARKET...";
+
+
+      elements.opportunityGrid.innerHTML =
+        `
+          <div class="empty-state scanning">
+
+            <div class="empty-pixel"></div>
+
+            <strong>
+              SIX AGENTS WORKING
+            </strong>
+
+            <span>
+              SCOUT → NEWS → SENTIMENT → CHARTS → RISK → DECISION
+            </span>
+
+            <div class="scan-progress">
+              <div class="scan-progress-bar"></div>
+            </div>
+
+          </div>
+        `;
+
+
+      try {
+
+        const payload =
+          buildOpportunityPayload();
+
+
+        const response =
+          await apiPost(
+            "/api/opportunities",
+            payload
+          );
+
+
+        setAllAgents(
+          "success"
+        );
+
+
+        elements.heroStatus.textContent =
+          "SCAN COMPLETE";
+
+
+        renderOpportunities(
+          response
+        );
+
+      } catch (
+        error
+      ) {
+
+        setAllAgents(
+          "error"
+        );
+
+
+        elements.heroStatus.textContent =
+          "PIPELINE ERROR";
+
+
+        elements.opportunitySummary.textContent =
+          "ERROR";
+
+
+        elements.opportunityGrid.innerHTML =
+          `
+            <div class="empty-state">
+
+              <div class="empty-pixel"></div>
+
+              <strong style="color:var(--red);">
+                RUN ALL FAILED
+              </strong>
+
+              <span>
+                ${escapeHtml(
+                  error.message
+                )}
+              </span>
+
+            </div>
+          `;
+
+      } finally {
+
+        running =
+          false;
+
+
+        elements.runAllButton.disabled =
+          false;
+
+      }
+
+    }
+
+
+    /* =====================================
+       OPPORTUNITY RENDER
+    ===================================== */
+
+    function renderOpportunities(
+      response
+    ) {
+
+      const opportunities =
+        Array.isArray(
+          response.opportunities
+        )
+          ? response.opportunities
+          : [];
+
+
+      elements.opportunitySummary.textContent =
+        (
+          `${response.actionable_count || 0} ACTIONABLE`
+          +
+          " · "
+          +
+          `${response.evaluated_count || 0} EVALUATED`
+        );
+
+
+      if (
+        opportunities.length
+        ===
+        0
+      ) {
+
+        elements.opportunityGrid.innerHTML =
+          `
+            <div class="empty-state">
+
+              <div class="empty-pixel"></div>
+
+              <strong>
+                NO ACTIONABLE TRADE
+              </strong>
+
+              <span>
+                Market was scanned, but no candidate passed
+                CHARTS Trade Plan + RISK + DECISION gates.
+                WAIT is a valid result.
+              </span>
+
+            </div>
+          `;
+
+
+        return;
+
+      }
+
+
+      elements.opportunityGrid.innerHTML =
+        opportunities
+        .map(
+          (
+            opportunity,
+            index
+          ) => {
+
+            const plan =
+              opportunity.trade_plan
+              ||
+              {};
+
+
+            const action =
+              String(
+                opportunity.action
+                ||
+                "wait"
+              )
+              .toUpperCase();
+
+
+            const sideClass =
+              action
+              ===
+              "SHORT"
+                ? "short"
+                : "long";
+
+
+            const reason =
+              (
+                Array.isArray(
+                  opportunity.reasons
+                )
+                &&
+                opportunity.reasons.length
+              )
+                ? opportunity.reasons[0]
+                : "All required gates passed.";
+
+
+            return `
+              <article
+                class="opportunity-card ${sideClass}"
+              >
+
+                <div class="opp-rank">
+                  #${index + 1}
+                </div>
+
+
+                <div class="opp-symbol">
+                  ${escapeHtml(
+                    opportunity.symbol
+                  )}
+                </div>
+
+
+                <div class="opp-side">
+                  ${escapeHtml(
+                    action
+                  )}
+                </div>
+
+
+                <div class="opp-confidence">
+                  CONFIDENCE
+                  ${percent(
+                    opportunity.confidence
+                  )}
+                </div>
+
+
+                <div class="price-block">
+
+                  <div class="price-box">
+
+                    <div class="price-label">
+                      ENTRY
+                    </div>
+
+                    <div class="price-value">
+                      ${formatPrice(
+                        plan.entry_price
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="price-box">
+
+                    <div class="price-label">
+                      STOP
+                    </div>
+
+                    <div class="price-value">
+                      ${formatPrice(
+                        plan.stop_loss
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="price-box">
+
+                    <div class="price-label">
+                      TARGET
+                    </div>
+
+                    <div class="price-value">
+                      ${formatPrice(
+                        plan.take_profit
+                      )}
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="opp-meta">
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      R / R
+                    </div>
+
+                    <div class="meta-value">
+                      ${
+                        num(
+                          plan.risk_reward_ratio
+                        ) !== null
+                          ? num(
+                              plan.risk_reward_ratio
+                            ).toFixed(2)
+                          : "--"
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      RISK
+                    </div>
+
+                    <div
+                      class="meta-value ${
+                        opportunity.risk_approved
+                          ? "risk-approved"
+                          : "risk-rejected"
+                      }"
+                    >
+                      ${escapeHtml(
+                        String(
+                          opportunity.risk_verdict
+                          ||
+                          "--"
+                        )
+                        .toUpperCase()
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      SIZE
+                    </div>
+
+                    <div class="meta-value">
+                      ${formatUsd(
+                        opportunity
+                        .recommended_notional_usdt
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      MAX LOSS
+                    </div>
+
+                    <div class="meta-value">
+                      ${formatUsd(
+                        opportunity
+                        .estimated_loss_usdt
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      ACCOUNT RISK
+                    </div>
+
+                    <div class="meta-value">
+                      ${
+                        num(
+                          opportunity
+                          .risk_pct_equity
+                        ) !== null
+                          ? (
+                              num(
+                                opportunity
+                                .risk_pct_equity
+                              )
+                              .toFixed(2)
+                              +
+                              "%"
+                            )
+                          : "--"
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="meta-row">
+
+                    <div class="meta-label">
+                      SETUP
+                    </div>
+
+                    <div class="meta-value">
+                      ${escapeHtml(
+                        plan.setup_type
+                        ||
+                        "--"
+                      )}
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="opp-reason">
+                  &gt;
+                  ${escapeHtml(
+                    reason
+                  )}
+                </div>
+
+              </article>
+            `;
+
+          }
+        )
+        .join(
+          ""
+        );
+
+    }
+
+
+    /* =====================================
+       AGENT MODAL
+    ===================================== */
+
+    function openAgent(
+      agent
+    ) {
+
+      const info =
+        agentInfo[
+          agent
+        ];
+
+
+      if (
+        !info
+      ) {
+
+        return;
+
+      }
+
+
+      currentAgent =
+        agent;
+
+
+      elements.modalTitle.textContent =
+        info.name;
+
+
+      elements.modalRole.textContent =
+        info.role;
+
+
+      elements.modalDescription.textContent =
+        info.description;
+
+
+      elements.modalResult.textContent =
+        "READY";
+
+
+      if (
+        agent
         ===
         "risk"
         ||
-        currentAgent
+        agent
         ===
         "decision"
       ) {
 
-        prepareTradeForm();
-
-      }
-
-    }
-  );
-
-
-elements.timeframeSelect
-  .addEventListener(
-    "change",
-    refreshMarket
-  );
-
-
-elements.runAllButton
-  .addEventListener(
-    "click",
-    openRunAll
-  );
-
-
-elements.heroRunAllButton
-  .addEventListener(
-    "click",
-    openRunAll
-  );
-
-
-document
-  .querySelectorAll(
-    ".agent"
-  )
-  .forEach(
-    card => {
-
-      card.addEventListener(
-        "click",
-        () => {
-
-          openAgent(
-            card.dataset.agent
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-document
-  .querySelectorAll(
-    ".pixel-agent"
-  )
-  .forEach(
-    card => {
-
-      card.addEventListener(
-        "click",
-        () => {
-
-          openAgent(
-            card.dataset.agent
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-elements.modalClose
-  .addEventListener(
-    "click",
-    closeModal
-  );
-
-
-elements.modal
-  .addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target
-        ===
-        elements.modal
-      ) {
-
-        closeModal();
-
-      }
-
-    }
-  );
-
-
-elements.runAgentButton
-  .addEventListener(
-    "click",
-    runAgent
-  );
-
-
-elements.tradeRunButton
-  .addEventListener(
-    "click",
-    () => {
-
-      if (
-        currentAgent
-        ===
-        "decision"
-      ) {
-
-        runDecision();
+        elements.modalControls.style.display =
+          "none";
 
       } else {
 
-        runRisk();
+        elements.modalControls.style.display =
+          "grid";
 
       }
 
+
+      elements.modal.classList.add(
+        "show"
+      );
+
     }
-  );
 
 
-document
-  .addEventListener(
-    "keydown",
-    event => {
+    function closeAgent(
+    ) {
+
+      elements.modal.classList.remove(
+        "show"
+      );
+
+
+      currentAgent =
+        null;
+
+    }
+
+
+    async function runAgent(
+    ) {
 
       if (
-        event.key
-        ===
-        "Escape"
+        !currentAgent
       ) {
 
-        closeModal();
+        return;
+
+      }
+
+
+      const symbol =
+        elements
+        .modalSymbol
+        .value;
+
+
+      const context = {
+
+        symbol,
+
+        exchange:
+          "OKX",
+
+        market_type:
+          "swap",
+
+        timeframes: [
+          "15m",
+          "1H",
+          "4H"
+        ]
+
+      };
+
+
+      elements.runAgentButton.disabled =
+        true;
+
+
+      elements.modalResult.textContent =
+        "WORKING...";
+
+
+      setAgentState(
+        currentAgent,
+        "working"
+      );
+
+
+      try {
+
+        let result;
+
+
+        if (
+          currentAgent
+          ===
+          "scout"
+        ) {
+
+          result =
+            await apiPost(
+              "/api/scout",
+
+              {
+                context: {
+                  symbol:
+                    "MARKET",
+
+                  exchange:
+                    "OKX",
+
+                  market_type:
+                    "swap"
+                },
+
+                payload: {
+                  symbols: []
+                }
+              }
+            );
+
+        }
+
+
+        if (
+          currentAgent
+          ===
+          "news"
+        ) {
+
+          result =
+            await apiPost(
+              "/api/news",
+
+              {
+                context,
+
+                focus_symbols: [
+                  symbol
+                ]
+              }
+            );
+
+        }
+
+
+        if (
+          currentAgent
+          ===
+          "sentiment"
+        ) {
+
+          result =
+            await apiPost(
+              "/api/sentiment",
+
+              {
+                context
+              }
+            );
+
+        }
+
+
+        if (
+          currentAgent
+          ===
+          "charts"
+        ) {
+
+          result =
+            await apiPost(
+              "/api/charts",
+
+              {
+                context
+              }
+            );
+
+        }
+
+
+        if (
+          !result
+        ) {
+
+          throw new Error(
+            "No runnable endpoint for this agent."
+          );
+
+        }
+
+
+        setAgentState(
+          currentAgent,
+          "success"
+        );
+
+
+        elements.modalResult.innerHTML =
+          `
+            STATUS:
+            ${escapeHtml(
+              result.status
+              ||
+              "--"
+            )}
+            <br>
+
+            BIAS:
+            ${escapeHtml(
+              result.bias
+              ||
+              "--"
+            )}
+            <br>
+
+            CONFIDENCE:
+            ${
+              num(
+                result.confidence
+              ) !== null
+                ? percent(
+                    result.confidence
+                  )
+                : "--"
+            }
+            <br><br>
+
+            ${escapeHtml(
+              result.summary
+              ||
+              "Analysis complete."
+            )}
+          `;
+
+      } catch (
+        error
+      ) {
+
+        setAgentState(
+          currentAgent,
+          "error"
+        );
+
+
+        elements.modalResult.innerHTML =
+          `
+            <span style="color:var(--red);">
+              ${escapeHtml(
+                error.message
+              )}
+            </span>
+          `;
+
+      } finally {
+
+        elements.runAgentButton.disabled =
+          false;
 
       }
 
     }
-  );
 
 
-window
-  .addEventListener(
-    "resize",
-    drawChart
-  );
+    /* =====================================
+       EVENTS
+    ===================================== */
+
+    elements.runAllButton.addEventListener(
+      "click",
+      runAll
+    );
 
 
-/* =====================================
-   START
-===================================== */
+    document
+    .querySelectorAll(
+      ".agent-card"
+    )
+    .forEach(
+      card => {
 
-checkBackend();
+        card.addEventListener(
+          "click",
+          () => {
 
+            openAgent(
+              card.dataset.agent
+            );
 
-refreshMarket();
+          }
+        );
 
-
-setInterval(
-  () => {
-
-    if (
-      document.visibilityState
-      ===
-      "visible"
-    ) {
-
-      refreshMarket();
-
-    }
-
-  },
-  MARKET_REFRESH_MS
-);
+      }
+    );
 
 
-setInterval(
-  () => {
+    elements.modalClose.addEventListener(
+      "click",
+      closeAgent
+    );
 
-    if (
-      document.visibilityState
-      ===
-      "visible"
-    ) {
 
-      checkBackend();
+    elements.modal.addEventListener(
+      "click",
+      event => {
 
-    }
+        if (
+          event.target
+          ===
+          elements.modal
+        ) {
 
-  },
-  API_REFRESH_MS
-);
+          closeAgent();
 
-</script>
+        }
+
+      }
+    );
+
+
+    elements.runAgentButton.addEventListener(
+      "click",
+      runAgent
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key
+          ===
+          "Escape"
+        ) {
+
+          closeAgent();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
+       START
+    ===================================== */
+
+    checkApi();
+
+    checkOkx();
+
+
+    setInterval(
+      checkApi,
+      30000
+    );
+
+
+    setInterval(
+      checkOkx,
+      30000
+    );
+
+  </script>
 
 </body>
 </html>
