@@ -8,6 +8,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="description"
+    content="CODEX BOT - Pixel AI Trading Team"
+  >
+
   <title>CODEX BOT</title>
 
   <style>
@@ -16,11 +21,12 @@
       --bg2: #05090c;
       --panel: #071018;
       --panel2: #0a141d;
-      --line: #162a38;
-      --line2: #214158;
+
+      --line: #163326;
+      --line2: #214936;
 
       --text: #eafff4;
-      --muted: #638077;
+      --muted: #698579;
       --muted2: #41584f;
 
       --green: #59ff9b;
@@ -52,18 +58,19 @@
 
 
     html {
-      background:
-        var(--bg);
+      background: var(--bg);
     }
 
 
     body {
       min-height: 100vh;
 
+      color: var(--text);
+
       background:
         radial-gradient(
           circle at 50% -20%,
-          rgba(46, 255, 153, 0.07),
+          rgba(89, 255, 155, 0.07),
           transparent 34%
         ),
         linear-gradient(
@@ -72,34 +79,33 @@
           #010203
         );
 
-      color:
-        var(--text);
-
-      font-family:
-        var(--pixel-font);
+      font-family: var(--pixel-font);
     }
 
 
     button,
     input,
-    select {
-      font:
-        inherit;
+    select,
+    textarea {
+      font: inherit;
     }
 
 
     button {
-      cursor:
-        pointer;
+      cursor: pointer;
     }
 
 
     button:disabled {
-      cursor:
-        not-allowed;
+      cursor: not-allowed;
+      opacity: 0.48;
+    }
 
-      opacity:
-        0.48;
+
+    input,
+    select,
+    textarea {
+      outline: none;
     }
 
 
@@ -110,34 +116,28 @@
           calc(100% - 20px)
         );
 
-      margin:
-        0 auto;
+      margin: 0 auto;
 
-      padding-bottom:
-        60px;
+      padding-bottom: 60px;
     }
 
 
     /* =====================================
-       HEADER
+       TOP BAR
     ===================================== */
 
     .topbar {
-      position:
-        sticky;
+      position: sticky;
+      top: 0;
 
-      top:
-        0;
-
-      z-index:
-        100;
+      z-index: 100;
 
       border-bottom:
         2px solid
         #0f2d22;
 
       background:
-        rgba(2, 5, 5, 0.94);
+        rgba(2, 5, 5, 0.95);
 
       backdrop-filter:
         blur(12px);
@@ -151,50 +151,32 @@
           calc(100% - 20px)
         );
 
-      min-height:
-        58px;
+      min-height: 58px;
 
-      margin:
-        0 auto;
+      margin: 0 auto;
 
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      gap:
-        12px;
+      gap: 12px;
     }
 
 
     .brand {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      gap:
-        10px;
+      gap: 10px;
     }
 
 
     .brand-icon {
-      width:
-        34px;
+      width: 34px;
+      height: 34px;
 
-      height:
-        34px;
-
-      display:
-        grid;
-
-      place-items:
-        center;
+      display: grid;
+      place-items: center;
 
       border:
         2px solid
@@ -204,68 +186,51 @@
         #06110b;
 
       box-shadow:
-        4px 4px 0
+        4px
+        4px
+        0
         #092117;
 
       color:
         var(--green);
 
-      font-size:
-        18px;
-
-      font-weight:
-        900;
+      font-size: 18px;
+      font-weight: 900;
     }
 
 
     .brand-title {
-      font-size:
-        13px;
+      font-size: 13px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      letter-spacing:
-        1px;
+      letter-spacing: 1px;
     }
 
 
     .brand-sub {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
 
     .top-status {
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      gap:
-        7px;
+      gap: 7px;
     }
 
 
     .status-chip {
-      min-height:
-        28px;
+      min-height: 28px;
 
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      gap:
-        6px;
+      gap: 6px;
 
       padding:
         5px
@@ -281,23 +246,21 @@
       color:
         #789387;
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
 
     .status-dot {
-      width:
-        6px;
-
-      height:
-        6px;
+      width: 6px;
+      height: 6px;
 
       background:
         var(--yellow);
 
       box-shadow:
-        0 0 7px
+        0
+        0
+        7px
         var(--yellow);
     }
 
@@ -307,7 +270,9 @@
         var(--green);
 
       box-shadow:
-        0 0 7px
+        0
+        0
+        7px
         var(--green);
     }
 
@@ -317,7 +282,9 @@
         var(--red);
 
       box-shadow:
-        0 0 7px
+        0
+        0
+        7px
         var(--red);
     }
 
@@ -327,17 +294,13 @@
     ===================================== */
 
     .hero {
-      position:
-        relative;
+      position: relative;
 
-      margin-top:
-        16px;
+      margin-top: 16px;
 
-      padding:
-        18px;
+      padding: 18px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
       border:
         2px solid
@@ -347,26 +310,22 @@
         #030908;
 
       box-shadow:
-        8px 8px 0
+        8px
+        8px
+        0
         #020403;
     }
 
 
     .hero::before {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
+      inset: 0;
 
-      inset:
-        0;
+      pointer-events: none;
 
-      pointer-events:
-        none;
-
-      opacity:
-        0.3;
+      opacity: 0.3;
 
       background-image:
         linear-gradient(
@@ -385,23 +344,14 @@
 
 
     .hero-head {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
 
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        flex-start;
-
-      gap:
-        16px;
+      gap: 16px;
     }
 
 
@@ -409,20 +359,15 @@
       color:
         var(--green);
 
-      font-size:
-        7px;
+      font-size: 7px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      letter-spacing:
-        2px;
+      letter-spacing: 2px;
     }
 
 
     .hero h1 {
-      margin-top:
-        7px;
+      margin-top: 7px;
 
       font-size:
         clamp(
@@ -431,11 +376,9 @@
           38px
         );
 
-      line-height:
-        1;
+      line-height: 1;
 
-      letter-spacing:
-        -1px;
+      letter-spacing: -1px;
     }
 
 
@@ -446,29 +389,23 @@
 
 
     .hero-copy {
-      max-width:
-        650px;
+      max-width: 650px;
 
-      margin-top:
-        10px;
+      margin-top: 10px;
 
       color:
         var(--muted);
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
     }
 
 
     .system-ready {
-      min-width:
-        130px;
+      min-width: 135px;
 
-      padding:
-        8px;
+      padding: 8px;
 
       border:
         1px solid
@@ -480,14 +417,14 @@
       color:
         var(--green);
 
-      text-align:
-        center;
+      text-align: center;
 
-      font-size:
-        7px;
+      font-size: 7px;
 
       box-shadow:
-        3px 3px 0
+        3px
+        3px
+        0
         #07170f;
     }
 
@@ -497,20 +434,14 @@
     ===================================== */
 
     .command-screen {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      height: 125px;
 
-      height:
-        135px;
+      margin-top: 16px;
 
-      margin-top:
-        16px;
-
-      overflow:
-        hidden;
+      overflow: hidden;
 
       border:
         2px solid
@@ -524,22 +455,16 @@
         0
         0
         30px
-        rgba(89,255,155,0.04);
+        rgba(89, 255, 155, 0.04);
     }
 
 
     .command-screen-head {
-      height:
-        28px;
+      height: 28px;
 
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       padding:
         0
@@ -552,8 +477,7 @@
       color:
         #527766;
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
 
@@ -564,8 +488,7 @@
 
 
     .command-body {
-      position:
-        relative;
+      position: relative;
 
       height:
         calc(
@@ -576,12 +499,12 @@
 
       background:
         linear-gradient(
-          rgba(89,255,155,0.04) 1px,
+          rgba(89, 255, 155, 0.04) 1px,
           transparent 1px
         ),
         linear-gradient(
           90deg,
-          rgba(89,255,155,0.04) 1px,
+          rgba(89, 255, 155, 0.04) 1px,
           transparent 1px
         );
 
@@ -590,72 +513,56 @@
     }
 
 
+    .terminal-copy {
+      position: absolute;
+
+      top: 9px;
+      left: 10px;
+
+      color:
+        #385d4b;
+
+      font-size: 6px;
+
+      line-height: 1.7;
+    }
+
+
     .command-line {
-      position:
-        absolute;
+      position: absolute;
 
-      left:
-        2%;
+      left: 2%;
+      right: 2%;
+      bottom: 12px;
 
-      right:
-        2%;
-
-      bottom:
-        18px;
-
-      height:
-        60px;
+      height: 55px;
     }
 
 
     .command-line svg {
-      width:
-        100%;
-
-      height:
-        100%;
+      width: 100%;
+      height: 100%;
     }
 
 
     .command-line polyline {
-      fill:
-        none;
+      fill: none;
 
       stroke:
         var(--green);
 
-      stroke-width:
-        3;
+      stroke-width: 3;
 
       vector-effect:
         non-scaling-stroke;
 
       filter:
         drop-shadow(
-          0 0 6px
+          0
+          0
+          6px
           rgba(89,255,155,0.7)
         );
-    }
-
-
-    .terminal-copy {
-      position:
-        absolute;
-
-      top:
-        9px;
-
-      left:
-        10px;
-
-      color:
-        #385d4b;
-
-      font-size:
-        6px;
-
-      line-height:
-        1.7;
     }
 
 
@@ -664,17 +571,12 @@
     ===================================== */
 
     .agents-grid {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      margin-top: 12px;
 
-      margin-top:
-        12px;
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -682,29 +584,21 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
 
     .agent-card {
-      --agent-color:
-        #fff;
+      --agent-color: #fff;
 
-      position:
-        relative;
+      position: relative;
 
-      min-width:
-        0;
+      min-width: 0;
+      min-height: 164px;
 
-      min-height:
-        168px;
+      padding: 12px;
 
-      padding:
-        12px;
-
-      overflow:
-        hidden;
+      overflow: hidden;
 
       border:
         2px solid
@@ -720,11 +614,12 @@
       color:
         var(--text);
 
-      text-align:
-        center;
+      text-align: center;
 
       box-shadow:
-        5px 5px 0
+        5px
+        5px
+        0
         #020405;
 
       transition:
@@ -744,7 +639,9 @@
         var(--agent-color);
 
       box-shadow:
-        7px 7px 0
+        7px
+        7px
+        0
         #020405;
     }
 
@@ -760,13 +657,11 @@
     @keyframes agentBlink {
       0%,
       100% {
-        opacity:
-          1;
+        opacity: 1;
       }
 
       50% {
-        opacity:
-          0.68;
+        opacity: 0.68;
       }
     }
 
@@ -808,14 +703,11 @@
 
 
     .agent-console {
-      height:
-        44px;
+      height: 42px;
 
-      margin-bottom:
-        -3px;
+      margin-bottom: -2px;
 
-      padding:
-        6px;
+      padding: 6px;
 
       border:
         1px solid
@@ -828,74 +720,63 @@
       background:
         #010507;
 
-      display:
-        flex;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
 
-      align-items:
-        flex-end;
-
-      justify-content:
-        center;
-
-      gap:
-        4px;
+      gap: 4px;
     }
 
 
     .agent-console i {
-      width:
-        8px;
+      width: 8px;
 
       background:
         var(--agent-color);
 
-      opacity:
-        0.75;
+      opacity: 0.75;
 
       box-shadow:
-        0 0 4px
+        0
+        0
+        4px
         var(--agent-color);
     }
 
 
     .agent-console i:nth-child(1) {
-      height:
-        10px;
+      height: 10px;
     }
 
 
     .agent-console i:nth-child(2) {
-      height:
-        22px;
+      height: 22px;
     }
 
 
     .agent-console i:nth-child(3) {
-      height:
-        15px;
+      height: 15px;
     }
 
 
     .agent-console i:nth-child(4) {
-      height:
-        27px;
+      height: 27px;
     }
 
 
-    /* PIXEL BOT */
+    /* =====================================
+       PIXEL BOT
+    ===================================== */
 
     .pixel-bot {
-      position:
-        relative;
+      position: relative;
 
-      width:
-        48px;
-
-      height:
-        42px;
+      width: 48px;
+      height: 42px;
 
       margin:
-        0 auto
+        0
+        auto
         6px;
 
       border:
@@ -910,7 +791,9 @@
         );
 
       box-shadow:
-        0 0 13px
+        0
+        0
+        13px
         color-mix(
           in srgb,
           var(--agent-color) 40%,
@@ -920,23 +803,15 @@
 
 
     .pixel-bot::before {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        4px;
+      width: 4px;
+      height: 9px;
 
-      height:
-        9px;
-
-      top:
-        -11px;
-
-      left:
-        19px;
+      top: -11px;
+      left: 19px;
 
       background:
         var(--agent-color);
@@ -944,23 +819,15 @@
 
 
     .pixel-bot::after {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        8px;
+      width: 8px;
+      height: 4px;
 
-      height:
-        4px;
-
-      top:
-        -14px;
-
-      left:
-        17px;
+      top: -14px;
+      left: 17px;
 
       background:
         var(--agent-color);
@@ -968,17 +835,12 @@
 
 
     .eye {
-      position:
-        absolute;
+      position: absolute;
 
-      top:
-        13px;
+      top: 13px;
 
-      width:
-        6px;
-
-      height:
-        7px;
+      width: 6px;
+      height: 7px;
 
       background:
         var(--agent-color);
@@ -986,32 +848,23 @@
 
 
     .eye.left {
-      left:
-        9px;
+      left: 9px;
     }
 
 
     .eye.right {
-      right:
-        9px;
+      right: 9px;
     }
 
 
     .bot-mouth {
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        16px;
+      width: 16px;
+      height: 3px;
 
-      height:
-        3px;
-
-      bottom:
-        7px;
-
-      left:
-        13px;
+      bottom: 7px;
+      left: 13px;
 
       background:
         var(--agent-color);
@@ -1019,17 +872,12 @@
 
 
     .bot-arm {
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        5px;
+      width: 5px;
+      height: 18px;
 
-      height:
-        18px;
-
-      top:
-        13px;
+      top: 13px;
 
       background:
         var(--agent-color);
@@ -1037,14 +885,12 @@
 
 
     .bot-arm.left {
-      left:
-        -8px;
+      left: -8px;
     }
 
 
     .bot-arm.right {
-      right:
-        -8px;
+      right: -8px;
     }
 
 
@@ -1052,102 +898,77 @@
       color:
         var(--agent-color);
 
-      font-size:
-        11px;
+      font-size: 11px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      letter-spacing:
-        1px;
+      letter-spacing: 1px;
     }
 
 
     .agent-role {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
       color:
         var(--muted);
 
-      font-size:
-        6px;
+      font-size: 6px;
     }
 
 
     .agent-state {
-      margin-top:
-        7px;
+      margin-top: 7px;
 
-      display:
-        flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      gap:
-        4px;
+      gap: 4px;
 
       color:
         #526b61;
 
-      font-size:
-        6px;
+      font-size: 6px;
     }
 
 
     .agent-state-dot {
-      width:
-        5px;
-
-      height:
-        5px;
+      width: 5px;
+      height: 5px;
 
       background:
         var(--agent-color);
 
       box-shadow:
-        0 0 6px
+        0
+        0
+        6px
         var(--agent-color);
     }
 
 
     /* =====================================
-       RUN ALL
+       ACCOUNT SETTINGS
     ===================================== */
 
     .command-actions {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      margin-top: 13px;
 
-      margin-top:
-        13px;
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         1fr
         auto;
 
-      gap:
-        10px;
+      gap: 10px;
 
-      align-items:
-        stretch;
+      align-items: stretch;
     }
 
 
     .scan-config {
-      padding:
-        10px;
-
       border:
         2px solid
         #183125;
@@ -1157,24 +978,81 @@
     }
 
 
-    .config-title {
-      margin-bottom:
-        8px;
+    .scan-config-summary {
+      width: 100%;
+
+      min-height: 58px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 12px;
+
+      padding:
+        10px
+        12px;
+
+      border: 0;
+
+      background:
+        transparent;
 
       color:
-        #537263;
+        var(--text);
 
-      font-size:
-        7px;
+      text-align: left;
+    }
 
-      letter-spacing:
-        1px;
+
+    .config-title {
+      color:
+        var(--green);
+
+      font-size: 7px;
+
+      font-weight: 900;
+
+      letter-spacing: 1px;
+    }
+
+
+    .config-summary-text {
+      margin-top: 5px;
+
+      color:
+        var(--muted);
+
+      font-size: 7px;
+    }
+
+
+    .config-toggle-icon {
+      color:
+        var(--green);
+
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+
+    .scan-config-body {
+      display: none;
+
+      padding:
+        0
+        10px
+        10px;
+    }
+
+
+    .scan-config-body.open {
+      display: block;
     }
 
 
     .config-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -1182,33 +1060,34 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        7px;
+      gap: 7px;
+
+      padding-top: 8px;
+
+      border-top:
+        1px dashed
+        #173729;
     }
 
 
     .field label {
-      display:
-        block;
+      display: block;
 
-      margin-bottom:
-        4px;
+      margin-bottom: 4px;
 
       color:
         #496456;
 
-      font-size:
-        6px;
+      font-size: 6px;
     }
 
 
     .field input,
-    .field select {
-      width:
-        100%;
+    .field select,
+    .field textarea {
+      width: 100%;
 
-      height:
-        31px;
+      min-height: 31px;
 
       padding:
         5px
@@ -1218,11 +1097,7 @@
         1px solid
         #1d4431;
 
-      border-radius:
-        0;
-
-      outline:
-        none;
+      border-radius: 0;
 
       background:
         #020806;
@@ -1230,26 +1105,46 @@
       color:
         #d9ffeb;
 
-      font-size:
-        8px;
+      font-size: 8px;
+    }
+
+
+    .field textarea {
+      min-height: 70px;
+
+      resize: vertical;
     }
 
 
     .field input:focus,
-    .field select:focus {
+    .field select:focus,
+    .field textarea:focus {
       border-color:
         var(--green);
 
       box-shadow:
-        0 0 0
+        0
+        0
+        0
         1px
         var(--green);
     }
 
 
+    .wide-field {
+      grid-column:
+        1
+        /
+        -1;
+    }
+
+
     .run-all {
-      min-width:
-        180px;
+      min-width: 190px;
+
+      padding:
+        10px
+        20px;
 
       border:
         2px solid
@@ -1261,17 +1156,15 @@
       color:
         var(--orange);
 
-      font-size:
-        12px;
+      font-size: 12px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      letter-spacing:
-        1px;
+      letter-spacing: 1px;
 
       box-shadow:
-        5px 5px 0
+        5px
+        5px
+        0
         #090401;
     }
 
@@ -1284,26 +1177,24 @@
         );
 
       box-shadow:
-        7px 7px 0
+        7px
+        7px
+        0
         #090401;
     }
 
 
     .run-all small {
-      display:
-        block;
+      display: block;
 
-      margin-top:
-        4px;
+      margin-top: 4px;
 
       color:
         #9e6330;
 
-      font-size:
-        6px;
+      font-size: 6px;
 
-      letter-spacing:
-        0;
+      letter-spacing: 0;
     }
 
 
@@ -1312,11 +1203,9 @@
     ===================================== */
 
     .opportunities {
-      margin-top:
-        20px;
+      margin-top: 20px;
 
-      padding:
-        16px;
+      padding: 16px;
 
       border:
         2px solid
@@ -1326,26 +1215,21 @@
         #030807;
 
       box-shadow:
-        8px 8px 0
+        8px
+        8px
+        0
         #010302;
     }
 
 
     .panel-head {
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
 
-      justify-content:
-        space-between;
+      gap: 12px;
 
-      align-items:
-        flex-end;
-
-      gap:
-        12px;
-
-      margin-bottom:
-        13px;
+      margin-bottom: 13px;
     }
 
 
@@ -1353,23 +1237,17 @@
       color:
         var(--green);
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      letter-spacing:
-        1.7px;
+      letter-spacing: 1.7px;
     }
 
 
     .panel-title {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
-      font-size:
-        17px;
-
-      font-weight:
-        900;
+      font-size: 17px;
+      font-weight: 900;
     }
 
 
@@ -1377,17 +1255,14 @@
       color:
         #587062;
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      text-align:
-        right;
+      text-align: right;
     }
 
 
     .opportunity-grid {
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -1395,8 +1270,7 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
 
@@ -1404,14 +1278,11 @@
       --side-color:
         var(--green);
 
-      position:
-        relative;
+      position: relative;
 
-      min-width:
-        0;
+      min-width: 0;
 
-      padding:
-        12px;
+      padding: 12px;
 
       border:
         2px solid
@@ -1425,7 +1296,9 @@
         #040b09;
 
       box-shadow:
-        5px 5px 0
+        5px
+        5px
+        0
         #010302;
     }
 
@@ -1437,14 +1310,10 @@
 
 
     .opp-rank {
-      position:
-        absolute;
+      position: absolute;
 
-      top:
-        0;
-
-      right:
-        0;
+      top: 0;
+      right: 0;
 
       padding:
         4px
@@ -1456,71 +1325,53 @@
       color:
         #020403;
 
-      font-size:
-        7px;
-
-      font-weight:
-        900;
+      font-size: 7px;
+      font-weight: 900;
     }
 
 
     .opp-symbol {
-      padding-right:
-        35px;
+      padding-right: 35px;
 
       color:
         #eafff4;
 
-      font-size:
-        11px;
+      font-size: 11px;
+      font-weight: 900;
 
-      font-weight:
-        900;
+      overflow: hidden;
 
-      overflow:
-        hidden;
+      text-overflow: ellipsis;
 
-      text-overflow:
-        ellipsis;
-
-      white-space:
-        nowrap;
+      white-space: nowrap;
     }
 
 
     .opp-side {
-      margin-top:
-        5px;
+      margin-top: 5px;
 
       color:
         var(--side-color);
 
-      font-size:
-        17px;
-
-      font-weight:
-        900;
+      font-size: 17px;
+      font-weight: 900;
     }
 
 
     .opp-confidence {
-      margin-top:
-        2px;
+      margin-top: 2px;
 
       color:
         #617d6e;
 
-      font-size:
-        6px;
+      font-size: 6px;
     }
 
 
     .price-block {
-      margin-top:
-        10px;
+      margin-top: 10px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -1528,14 +1379,12 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        5px;
+      gap: 5px;
     }
 
 
     .price-box {
-      padding:
-        7px;
+      padding: 7px;
 
       border:
         1px solid
@@ -1550,35 +1399,27 @@
       color:
         #496456;
 
-      font-size:
-        5px;
+      font-size: 5px;
     }
 
 
     .price-value {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
       color:
         #d9ffeb;
 
-      font-size:
-        8px;
+      font-size: 8px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      overflow-wrap:
-        anywhere;
+      overflow-wrap: anywhere;
     }
 
 
     .opp-meta {
-      margin-top:
-        8px;
+      margin-top: 8px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -1586,14 +1427,12 @@
           minmax(0, 1fr)
         );
 
-      gap:
-        5px;
+      gap: 5px;
     }
 
 
     .meta-row {
-      padding:
-        6px;
+      padding: 6px;
 
       border:
         1px solid
@@ -1608,26 +1447,20 @@
       color:
         #40584c;
 
-      font-size:
-        5px;
+      font-size: 5px;
     }
 
 
     .meta-value {
-      margin-top:
-        3px;
+      margin-top: 3px;
 
       color:
         #89ab99;
 
-      font-size:
-        7px;
+      font-size: 7px;
+      font-weight: 800;
 
-      font-weight:
-        800;
-
-      overflow-wrap:
-        anywhere;
+      overflow-wrap: anywhere;
     }
 
 
@@ -1644,11 +1477,9 @@
 
 
     .opp-reason {
-      margin-top:
-        8px;
+      margin-top: 8px;
 
-      padding-top:
-        7px;
+      padding-top: 7px;
 
       border-top:
         1px dashed
@@ -1657,11 +1488,9 @@
       color:
         #4e695b;
 
-      font-size:
-        6px;
+      font-size: 6px;
 
-      line-height:
-        1.55;
+      line-height: 1.55;
     }
 
 
@@ -1675,23 +1504,14 @@
         /
         -1;
 
-      min-height:
-        190px;
+      min-height: 190px;
 
-      display:
-        flex;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      flex-direction:
-        column;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      padding:
-        25px;
+      padding: 25px;
 
       border:
         1px dashed
@@ -1700,17 +1520,17 @@
       background:
         #020604;
 
-      text-align:
-        center;
+      text-align: center;
     }
 
 
     .empty-pixel {
-      width:
-        46px;
+      width: 46px;
+      height: 36px;
 
-      height:
-        36px;
+      position: relative;
+
+      margin-bottom: 12px;
 
       border:
         3px solid
@@ -1718,31 +1538,19 @@
 
       background:
         #07110c;
-
-      margin-bottom:
-        12px;
-
-      position:
-        relative;
     }
 
 
     .empty-pixel::before,
     .empty-pixel::after {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      top:
-        10px;
+      top: 10px;
 
-      width:
-        5px;
-
-      height:
-        6px;
+      width: 5px;
+      height: 6px;
 
       background:
         #254b38;
@@ -1750,14 +1558,12 @@
 
 
     .empty-pixel::before {
-      left:
-        9px;
+      left: 9px;
     }
 
 
     .empty-pixel::after {
-      right:
-        9px;
+      right: 9px;
     }
 
 
@@ -1765,48 +1571,40 @@
       color:
         #739784;
 
-      font-size:
-        9px;
+      font-size: 9px;
     }
 
 
     .empty-state span {
-      max-width:
-        450px;
+      max-width: 450px;
 
-      margin-top:
-        7px;
+      margin-top: 7px;
 
       color:
         #3f584b;
 
-      font-size:
-        6px;
+      font-size: 6px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
     }
 
 
     .scan-progress {
-      margin-top:
-        10px;
-
       width:
         min(
           320px,
           80%
         );
 
-      height:
-        8px;
+      height: 8px;
+
+      margin-top: 10px;
+
+      padding: 1px;
 
       border:
         1px solid
         #214b36;
-
-      padding:
-        1px;
 
       background:
         #010302;
@@ -1814,17 +1612,16 @@
 
 
     .scan-progress-bar {
-      width:
-        0%;
-
-      height:
-        100%;
+      width: 0%;
+      height: 100%;
 
       background:
         var(--green);
 
       box-shadow:
-        0 0 6px
+        0
+        0
+        6px
         var(--green);
     }
 
@@ -1839,18 +1636,15 @@
 
     @keyframes scanMove {
       0% {
-        width:
-          4%;
+        width: 4%;
       }
 
       50% {
-        width:
-          75%;
+        width: 75%;
       }
 
       100% {
-        width:
-          100%;
+        width: 100%;
       }
     }
 
@@ -1860,26 +1654,16 @@
     ===================================== */
 
     .modal {
-      position:
-        fixed;
+      position: fixed;
+      inset: 0;
 
-      inset:
-        0;
+      z-index: 999;
 
-      z-index:
-        999;
+      display: none;
+      align-items: center;
+      justify-content: center;
 
-      display:
-        none;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      padding:
-        16px;
+      padding: 16px;
 
       background:
         rgba(0, 0, 0, 0.84);
@@ -1890,8 +1674,7 @@
 
 
     .modal.show {
-      display:
-        flex;
+      display: flex;
     }
 
 
@@ -1902,11 +1685,9 @@
           100%
         );
 
-      max-height:
-        88vh;
+      max-height: 88vh;
 
-      overflow-y:
-        auto;
+      overflow-y: auto;
 
       border:
         2px solid
@@ -1916,26 +1697,23 @@
         #030806;
 
       box-shadow:
-        8px 8px 0
+        8px
+        8px
+        0
         #010201;
     }
 
 
     .modal-bar {
-      min-height:
-        36px;
+      min-height: 36px;
 
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       padding:
-        0 10px;
+        0
+        10px;
 
       border-bottom:
         2px solid
@@ -1950,20 +1728,14 @@
       color:
         var(--green);
 
-      font-size:
-        9px;
-
-      font-weight:
-        900;
+      font-size: 9px;
+      font-weight: 900;
     }
 
 
     .modal-close {
-      width:
-        25px;
-
-      height:
-        25px;
+      width: 25px;
+      height: 25px;
 
       border:
         1px solid
@@ -1978,8 +1750,7 @@
 
 
     .modal-body {
-      padding:
-        14px;
+      padding: 14px;
     }
 
 
@@ -1987,45 +1758,41 @@
       color:
         #6e8c7b;
 
-      font-size:
-        7px;
+      font-size: 7px;
     }
 
 
     .modal-description {
-      margin-top:
-        9px;
+      margin-top: 9px;
 
       color:
         #779282;
 
-      font-size:
-        8px;
+      font-size: 8px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
     }
 
 
     .modal-controls {
-      margin-top:
-        12px;
+      margin-top: 12px;
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         1fr
         auto;
 
-      gap:
-        7px;
+      gap: 7px;
     }
 
 
     .modal-controls select {
-      min-height:
-        33px;
+      min-height: 33px;
+
+      padding:
+        5px
+        8px;
 
       border:
         1px solid
@@ -2037,18 +1804,12 @@
       color:
         #d9ffeb;
 
-      padding:
-        5px
-        8px;
-
-      font-size:
-        8px;
+      font-size: 8px;
     }
 
 
     .run-agent {
-      min-width:
-        120px;
+      min-width: 120px;
 
       border:
         1px solid
@@ -2060,20 +1821,15 @@
       color:
         var(--green);
 
-      font-size:
-        7px;
-
-      font-weight:
-        900;
+      font-size: 7px;
+      font-weight: 900;
     }
 
 
     .modal-result {
-      margin-top:
-        12px;
+      margin-top: 12px;
 
-      padding:
-        10px;
+      padding: 10px;
 
       border:
         1px solid
@@ -2085,14 +1841,11 @@
       color:
         #6e8e7c;
 
-      font-size:
-        7px;
+      font-size: 7px;
 
-      line-height:
-        1.7;
+      line-height: 1.7;
 
-      overflow-wrap:
-        anywhere;
+      overflow-wrap: anywhere;
     }
 
 
@@ -2101,17 +1854,14 @@
     ===================================== */
 
     footer {
-      margin-top:
-        25px;
+      margin-top: 25px;
 
       color:
         #2f463b;
 
-      text-align:
-        center;
+      text-align: center;
 
-      font-size:
-        6px;
+      font-size: 6px;
     }
 
 
@@ -2122,6 +1872,7 @@
     @media (
       max-width: 820px
     ) {
+
       .command-actions {
         grid-template-columns:
           1fr;
@@ -2129,8 +1880,7 @@
 
 
       .run-all {
-        min-height:
-          58px;
+        min-height: 58px;
       }
 
 
@@ -2150,12 +1900,14 @@
             minmax(0, 1fr)
           );
       }
+
     }
 
 
     @media (
       max-width: 600px
     ) {
+
       .app,
       .topbar-inner {
         width:
@@ -2168,37 +1920,35 @@
 
 
       .top-status .status-chip:last-child {
-        display:
-          none;
+        display: none;
       }
 
 
       .hero {
-        padding:
-          10px;
+        padding: 10px;
 
         box-shadow:
-          4px 4px 0
+          4px
+          4px
+          0
           #020403;
       }
 
 
       .hero-head {
-        display:
-          block;
+        display: block;
       }
 
 
       .system-ready {
-        width:
-          fit-content;
+        width: fit-content;
 
-        margin-top:
-          10px;
+        margin-top: 10px;
       }
 
 
-      /* user requested 3 per row */
+      /* 固定：每列 3 個，共兩列 */
+
       .agents-grid {
         grid-template-columns:
           repeat(
@@ -2206,126 +1956,100 @@
             minmax(0, 1fr)
           );
 
-        gap:
-          5px;
+        gap: 5px;
       }
 
 
       .agent-card {
-        min-height:
-          138px;
+        min-height: 138px;
 
-        padding:
-          6px;
+        padding: 6px;
 
         box-shadow:
-          3px 3px 0
+          3px
+          3px
+          0
           #020405;
       }
 
 
       .agent-console {
-        height:
-          34px;
+        height: 34px;
 
-        padding:
-          4px;
+        padding: 4px;
       }
 
 
       .pixel-bot {
-        width:
-          37px;
+        width: 37px;
+        height: 34px;
 
-        height:
-          34px;
-
-        border-width:
-          2px;
+        border-width: 2px;
       }
 
 
       .pixel-bot::before {
-        left:
-          15px;
+        left: 15px;
       }
 
 
       .pixel-bot::after {
-        left:
-          13px;
+        left: 13px;
       }
 
 
       .eye {
-        top:
-          10px;
+        top: 10px;
 
-        width:
-          5px;
-
-        height:
-          5px;
+        width: 5px;
+        height: 5px;
       }
 
 
       .eye.left {
-        left:
-          7px;
+        left: 7px;
       }
 
 
       .eye.right {
-        right:
-          7px;
+        right: 7px;
       }
 
 
       .bot-mouth {
-        width:
-          13px;
+        width: 13px;
 
-        left:
-          10px;
-
-        bottom:
-          5px;
+        left: 10px;
+        bottom: 5px;
       }
 
 
       .bot-arm {
-        height:
-          14px;
+        height: 14px;
 
-        top:
-          10px;
+        top: 10px;
       }
 
 
       .agent-name {
-        font-size:
-          8px;
+        font-size: 8px;
       }
 
 
       .agent-role {
-        min-height:
-          15px;
+        min-height: 15px;
 
-        font-size:
-          5px;
+        font-size: 5px;
       }
 
 
       .agent-state {
-        font-size:
-          5px;
+        font-size: 5px;
       }
 
 
       .command-screen {
-        height:
-          105px;
+        height: 105px;
       }
 
 
@@ -2345,18 +2069,16 @@
 
 
       .panel-head {
-        display:
-          block;
+        display: block;
       }
 
 
       .panel-summary {
-        margin-top:
-          6px;
+        margin-top: 6px;
 
-        text-align:
-          left;
+        text-align: left;
       }
+
     }
   </style>
 </head>
@@ -2364,74 +2086,186 @@
 
 <body>
 
-  <!-- ================================
-       TOP BAR
-  ================================= -->
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="topbar-inner">
+  <div class="topbar-inner">
 
-      <div class="brand">
+    <div class="brand">
 
-        <div class="brand-icon">
-          C
+      <div class="brand-icon">
+        C
+      </div>
+
+      <div>
+
+        <div class="brand-title">
+          CODEX BOT
         </div>
 
-        <div>
+        <div class="brand-sub">
+          PIXEL AI TRADING TEAM
+        </div>
 
-          <div class="brand-title">
-            CODEX BOT
-          </div>
+      </div>
 
-          <div class="brand-sub">
-            PIXEL AI TRADING TEAM
-          </div>
+    </div>
 
+
+    <div class="top-status">
+
+      <div class="status-chip">
+
+        <span
+          id="apiDot"
+          class="status-dot"
+        ></span>
+
+        <span id="apiText">
+          API...
+        </span>
+
+      </div>
+
+
+      <div class="status-chip">
+
+        <span
+          id="okxDot"
+          class="status-dot"
+        ></span>
+
+        <span id="okxText">
+          OKX...
+        </span>
+
+      </div>
+
+
+      <div class="status-chip">
+
+        <span>
+          AGENTS
+        </span>
+
+        <strong style="color:var(--green);">
+          6/6
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="app">
+
+
+  <!-- =====================================
+       HERO
+  ====================================== -->
+
+  <section class="hero">
+
+
+    <div class="hero-head">
+
+      <div>
+
+        <div class="eyebrow">
+          &gt; AI_TRADING_COMMAND_CENTER
+        </div>
+
+        <h1>
+          6 AGENTS.
+          <span>
+            ONE TEAM.
+          </span>
+        </h1>
+
+        <div class="hero-copy">
+          SCOUT 掃描市場 · NEWS 監控事件 ·
+          SENTIMENT 分析市場情緒 ·
+          CHARTS 建立交易計畫 ·
+          RISK 控制風險 ·
+          DECISION 做最終判斷
         </div>
 
       </div>
 
 
-      <div class="top-status">
+      <div
+        id="heroStatus"
+        class="system-ready"
+      >
+        SYSTEM READY
+      </div>
 
-        <div class="status-chip">
+    </div>
 
-          <span
-            id="apiDot"
-            class="status-dot"
-          ></span>
 
-          <span id="apiText">
-            API...
-          </span>
+    <!-- COMMAND VISUAL -->
 
+    <div class="command-screen">
+
+      <div class="command-screen-head">
+
+        <span>
+          MARKET_COMMAND.EXE
+        </span>
+
+        <span class="command-live">
+          ● LIVE
+        </span>
+
+      </div>
+
+
+      <div class="command-body">
+
+        <div class="terminal-copy">
+          &gt; 掃描 OKX USDT 永續市場<br>
+          &gt; 尋找交易候選<br>
+          &gt; 建立 ENTRY / SL / TP<br>
+          &gt; 執行風險審核
         </div>
 
 
-        <div class="status-chip">
+        <div class="command-line">
 
-          <span
-            id="okxDot"
-            class="status-dot"
-          ></span>
+          <svg
+            viewBox="0 0 1000 120"
+            preserveAspectRatio="none"
+          >
 
-          <span id="okxText">
-            OKX...
-          </span>
+            <polyline
+              points="
+                0,92
+                55,84
+                105,98
+                155,72
+                205,82
+                260,58
+                315,69
+                370,46
+                425,58
+                475,35
+                530,48
+                590,27
+                645,40
+                705,20
+                760,29
+                815,12
+                870,22
+                930,7
+                1000,13
+              "
+            />
 
-        </div>
-
-
-        <div class="status-chip">
-
-          <span>
-            AGENTS
-          </span>
-
-          <strong style="color:var(--green);">
-            6/6
-          </strong>
+          </svg>
 
         </div>
 
@@ -2439,403 +2273,303 @@
 
     </div>
 
-  </header>
+
+    <!-- =====================================
+         AGENTS 3 x 2
+    ====================================== -->
+
+    <div class="agents-grid">
 
 
-  <main class="app">
+      <button
+        class="agent-card scout"
+        data-agent="scout"
+        type="button"
+      >
 
-
-    <!-- ================================
-         HERO COMMAND CENTER
-    ================================= -->
-
-    <section class="hero">
-
-      <div class="hero-head">
-
-        <div>
-
-          <div class="eyebrow">
-            &gt; AI_TRADING_COMMAND_CENTER
-          </div>
-
-          <h1>
-            6 AGENTS.
-            <span>
-              ONE TEAM.
-            </span>
-          </h1>
-
-          <div class="hero-copy">
-            SCOUT scans the market.
-            NEWS tracks catalysts.
-            SENTIMENT measures crowding.
-            CHARTS builds the trade plan.
-            RISK protects the account.
-            DECISION approves the final setup.
-          </div>
-
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
         </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          SCOUT
+        </div>
+
+        <div class="agent-role">
+          機會掃描
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+      <button
+        class="agent-card news"
+        data-agent="news"
+        type="button"
+      >
+
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          NEWS
+        </div>
+
+        <div class="agent-role">
+          新聞分析
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+      <button
+        class="agent-card sentiment"
+        data-agent="sentiment"
+        type="button"
+      >
+
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          SENTIMENT
+        </div>
+
+        <div class="agent-role">
+          市場情緒
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+      <button
+        class="agent-card charts"
+        data-agent="charts"
+        type="button"
+      >
+
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          CHARTS
+        </div>
+
+        <div class="agent-role">
+          交易計畫
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+      <button
+        class="agent-card risk"
+        data-agent="risk"
+        type="button"
+      >
+
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          RISK
+        </div>
+
+        <div class="agent-role">
+          風險管理
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+      <button
+        class="agent-card decision"
+        data-agent="decision"
+        type="button"
+      >
+
+        <div class="agent-console">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="pixel-bot">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="bot-mouth"></span>
+          <span class="bot-arm left"></span>
+          <span class="bot-arm right"></span>
+        </div>
+
+        <div class="agent-name">
+          DECISION
+        </div>
+
+        <div class="agent-role">
+          最終決策
+        </div>
+
+        <div class="agent-state">
+          <span class="agent-state-dot"></span>
+
+          <span class="state-text">
+            READY
+          </span>
+        </div>
+
+      </button>
+
+
+    </div>
+
+
+    <!-- =====================================
+         COLLAPSED ACCOUNT CONFIG
+    ====================================== -->
+
+    <div class="command-actions">
+
+
+      <div class="scan-config">
+
+
+        <button
+          id="toggleScanConfig"
+          class="scan-config-summary"
+          type="button"
+        >
+
+          <div>
+
+            <div class="config-title">
+              &gt; 交易帳戶設定
+            </div>
+
+            <div
+              id="scanConfigSummary"
+              class="config-summary-text"
+            >
+              資金 10,000 USDT · 槓桿 3x · 掃描 TOP 5
+            </div>
+
+          </div>
+
+
+          <span
+            id="scanConfigArrow"
+            class="config-toggle-icon"
+          >
+            ＋
+          </span>
+
+        </button>
 
 
         <div
-          id="heroStatus"
-          class="system-ready"
+          id="scanConfigBody"
+          class="scan-config-body"
         >
-          SYSTEM READY
-        </div>
-
-      </div>
-
-
-      <!-- MARKET COMMAND VISUAL -->
-
-      <div class="command-screen">
-
-        <div class="command-screen-head">
-
-          <span>
-            MARKET_COMMAND.EXE
-          </span>
-
-          <span class="command-live">
-            ● LIVE
-          </span>
-
-        </div>
-
-
-        <div class="command-body">
-
-          <div class="terminal-copy">
-            &gt; SCAN OKX-USDT-SWAP<br>
-            &gt; DETECT OPPORTUNITIES<br>
-            &gt; BUILD TRADE PLAN<br>
-            &gt; APPLY RISK GATES
-          </div>
-
-
-          <div class="command-line">
-
-            <svg
-              viewBox="0 0 1000 120"
-              preserveAspectRatio="none"
-            >
-
-              <polyline
-                points="
-                  0,92
-                  55,84
-                  105,98
-                  155,72
-                  205,82
-                  260,58
-                  315,69
-                  370,46
-                  425,58
-                  475,35
-                  530,48
-                  590,27
-                  645,40
-                  705,20
-                  760,29
-                  815,12
-                  870,22
-                  930,7
-                  1000,13
-                "
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- 3 x 2 AGENTS -->
-
-      <div class="agents-grid">
-
-
-        <!-- SCOUT -->
-
-        <button
-          class="agent-card scout"
-          data-agent="scout"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            SCOUT
-          </div>
-
-          <div class="agent-role">
-            OPPORTUNITY SCANNER
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-
-        <!-- NEWS -->
-
-        <button
-          class="agent-card news"
-          data-agent="news"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            NEWS
-          </div>
-
-          <div class="agent-role">
-            EVENT ANALYST
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-
-        <!-- SENTIMENT -->
-
-        <button
-          class="agent-card sentiment"
-          data-agent="sentiment"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            SENTIMENT
-          </div>
-
-          <div class="agent-role">
-            MARKET SENTIMENT
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-
-        <!-- CHARTS -->
-
-        <button
-          class="agent-card charts"
-          data-agent="charts"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            CHARTS
-          </div>
-
-          <div class="agent-role">
-            TRADE PLANNER
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-
-        <!-- RISK -->
-
-        <button
-          class="agent-card risk"
-          data-agent="risk"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            RISK
-          </div>
-
-          <div class="agent-role">
-            RISK MANAGER
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-
-        <!-- DECISION -->
-
-        <button
-          class="agent-card decision"
-          data-agent="decision"
-          type="button"
-        >
-
-          <div class="agent-console">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-
-
-          <div class="pixel-bot">
-            <span class="eye left"></span>
-            <span class="eye right"></span>
-            <span class="bot-mouth"></span>
-            <span class="bot-arm left"></span>
-            <span class="bot-arm right"></span>
-          </div>
-
-
-          <div class="agent-name">
-            DECISION
-          </div>
-
-          <div class="agent-role">
-            FINAL DECISION
-          </div>
-
-          <div class="agent-state">
-            <span class="agent-state-dot"></span>
-
-            <span class="state-text">
-              READY
-            </span>
-          </div>
-
-        </button>
-
-      </div>
-
-
-      <!-- RUN ALL CONFIG -->
-
-      <div class="command-actions">
-
-        <div class="scan-config">
-
-          <div class="config-title">
-            &gt; RUN_ALL_CONFIG
-          </div>
-
 
           <div class="config-grid">
 
@@ -2843,7 +2577,7 @@
             <div class="field">
 
               <label>
-                EQUITY USDT
+                帳戶總權益
               </label>
 
               <input
@@ -2860,7 +2594,7 @@
             <div class="field">
 
               <label>
-                AVAILABLE
+                可用餘額
               </label>
 
               <input
@@ -2877,7 +2611,7 @@
             <div class="field">
 
               <label>
-                DAILY PNL
+                今日損益
               </label>
 
               <input
@@ -2893,7 +2627,7 @@
             <div class="field">
 
               <label>
-                LEVERAGE
+                槓桿
               </label>
 
               <input
@@ -2911,7 +2645,7 @@
             <div class="field">
 
               <label>
-                CANDIDATES
+                掃描候選
               </label>
 
               <select id="maxCandidates">
@@ -2939,1877 +2673,2201 @@
 
             </div>
 
+
+            <div class="field wide-field">
+
+              <label>
+                目前持倉 JSON
+              </label>
+
+              <textarea id="openPositions">[]</textarea>
+
+            </div>
+
+
           </div>
 
         </div>
-
-
-        <button
-          id="runAllButton"
-          class="run-all"
-          type="button"
-        >
-          ▶ RUN ALL
-
-          <small>
-            FIND TRADE OPPORTUNITIES
-          </small>
-        </button>
 
       </div>
 
-    </section>
+
+      <button
+        id="runAllButton"
+        class="run-all"
+        type="button"
+      >
+        ▶ RUN ALL
+
+        <small>
+          尋找可交易機會
+        </small>
+      </button>
 
 
-    <!-- ================================
-         OPPORTUNITIES PANEL
-    ================================= -->
+    </div>
 
-    <section class="opportunities">
 
-      <div class="panel-head">
+  </section>
 
-        <div>
 
-          <div class="panel-kicker">
-            &gt; OUTPUT
-          </div>
+  <!-- =====================================
+       OPPORTUNITIES
+  ====================================== -->
 
-          <div class="panel-title">
-            TRADE OPPORTUNITIES
-          </div>
+  <section class="opportunities">
 
+
+    <div class="panel-head">
+
+      <div>
+
+        <div class="panel-kicker">
+          &gt; OUTPUT
         </div>
 
-
-        <div
-          id="opportunitySummary"
-          class="panel-summary"
-        >
-          NO SCAN YET
+        <div class="panel-title">
+          TRADE OPPORTUNITIES
         </div>
 
       </div>
 
 
       <div
-        id="opportunityGrid"
-        class="opportunity-grid"
+        id="opportunitySummary"
+        class="panel-summary"
       >
+        尚未掃描
+      </div>
 
-        <div class="empty-state">
+    </div>
 
-          <div class="empty-pixel"></div>
 
-          <strong>
-            WAITING FOR RUN ALL
-          </strong>
+    <div
+      id="opportunityGrid"
+      class="opportunity-grid"
+    >
 
-          <span>
-            SCOUT will scan the market.
-            CHARTS will build Entry / Stop / Target.
-            RISK will validate the position.
-            DECISION will return only actionable setups.
-          </span>
+      <div class="empty-state">
 
-        </div>
+        <div class="empty-pixel"></div>
+
+        <strong>
+          等待 RUN ALL
+        </strong>
+
+        <span>
+          系統會掃描市場並透過六個 Agent
+          篩選目前可交易標的，
+          最後顯示方向、進場價、止損、目標與風險。
+        </span>
 
       </div>
 
-    </section>
+    </div>
 
 
-    <footer>
-      CODEX BOT · ANALYSIS ONLY · EXECUTION OFF
-    </footer>
-
-  </main>
+  </section>
 
 
-  <!-- ================================
-       AGENT MODAL
-  ================================= -->
+  <footer>
+    CODEX BOT · ANALYSIS ONLY · EXECUTION OFF
+  </footer>
 
-  <div
-    id="agentModal"
-    class="modal"
-  >
 
-    <div class="modal-window">
+</main>
 
-      <div class="modal-bar">
 
-        <span
-          id="modalTitle"
-          class="modal-title"
-        >
-          AGENT
-        </span>
+<!-- =====================================
+     AGENT MODAL
+====================================== -->
+
+<div
+  id="agentModal"
+  class="modal"
+>
+
+  <div class="modal-window">
+
+
+    <div class="modal-bar">
+
+      <span
+        id="modalTitle"
+        class="modal-title"
+      >
+        AGENT
+      </span>
+
+      <button
+        id="modalClose"
+        class="modal-close"
+        type="button"
+      >
+        X
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        id="modalRole"
+        class="modal-role"
+      ></div>
+
+
+      <div
+        id="modalDescription"
+        class="modal-description"
+      ></div>
+
+
+      <div
+        id="modalControls"
+        class="modal-controls"
+      >
+
+        <select id="modalSymbol">
+
+          <option value="BTC-USDT-SWAP">
+            BTC-USDT-SWAP
+          </option>
+
+          <option value="ETH-USDT-SWAP">
+            ETH-USDT-SWAP
+          </option>
+
+          <option value="SOL-USDT-SWAP">
+            SOL-USDT-SWAP
+          </option>
+
+          <option value="ENA-USDT-SWAP">
+            ENA-USDT-SWAP
+          </option>
+
+          <option value="UNI-USDT-SWAP">
+            UNI-USDT-SWAP
+          </option>
+
+          <option value="XRP-USDT-SWAP">
+            XRP-USDT-SWAP
+          </option>
+
+        </select>
+
 
         <button
-          id="modalClose"
-          class="modal-close"
+          id="runAgentButton"
+          class="run-agent"
           type="button"
         >
-          X
+          執行 AGENT
         </button>
 
       </div>
 
 
-      <div class="modal-body">
-
-        <div
-          id="modalRole"
-          class="modal-role"
-        ></div>
-
-
-        <div
-          id="modalDescription"
-          class="modal-description"
-        ></div>
-
-
-        <div
-          id="modalControls"
-          class="modal-controls"
-        >
-
-          <select id="modalSymbol">
-
-            <option value="BTC-USDT-SWAP">
-              BTC-USDT-SWAP
-            </option>
-
-            <option value="ETH-USDT-SWAP">
-              ETH-USDT-SWAP
-            </option>
-
-            <option value="SOL-USDT-SWAP">
-              SOL-USDT-SWAP
-            </option>
-
-            <option value="ENA-USDT-SWAP">
-              ENA-USDT-SWAP
-            </option>
-
-            <option value="UNI-USDT-SWAP">
-              UNI-USDT-SWAP
-            </option>
-
-            <option value="XRP-USDT-SWAP">
-              XRP-USDT-SWAP
-            </option>
-
-          </select>
-
-
-          <button
-            id="runAgentButton"
-            class="run-agent"
-            type="button"
-          >
-            RUN AGENT
-          </button>
-
-        </div>
-
-
-        <div
-          id="modalResult"
-          class="modal-result"
-        >
-          READY
-        </div>
-
+      <div
+        id="modalResult"
+        class="modal-result"
+      >
+        READY
       </div>
 
     </div>
 
   </div>
 
-
-  <script>
-    "use strict";
+</div>
 
 
-    /* =====================================
-       CONFIG
-    ===================================== */
+<script>
+"use strict";
 
-    const API_BASE = (
-      window.CODEX_API_BASE
-      ||
+
+/* =====================================
+   PUBLIC BACKEND
+===================================== */
+
+/*
+  Render 部署完成後，只需要改這一行。
+
+  Example:
+
+  const PUBLIC_API_BASE =
+    "https://codex-bot-api.onrender.com";
+*/
+
+const PUBLIC_API_BASE =
+  "https://YOUR-RENDER-SERVICE.onrender.com";
+
+
+/*
+  GitHub Pages:
+      使用 Render Backend
+
+  localhost:
+      使用目前 localhost
+
+  file://:
+      使用 127.0.0.1:8000
+*/
+
+const API_BASE = (
+  window.CODEX_API_BASE
+  ||
+  (
+    window.location.hostname
+    .endsWith(
+      ".github.io"
+    )
+      ? PUBLIC_API_BASE
+      : (
+          window.location.protocol
+          ===
+          "file:"
+            ? "http://127.0.0.1:8000"
+            : window.location.origin
+        )
+  )
+);
+
+
+const OKX_BASE =
+  "https://www.okx.com";
+
+
+let currentAgent =
+  null;
+
+
+let running =
+  false;
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const $ =
+  id =>
+    document.getElementById(
+      id
+    );
+
+
+const elements = {
+
+  apiDot:
+    $("apiDot"),
+
+  apiText:
+    $("apiText"),
+
+  okxDot:
+    $("okxDot"),
+
+  okxText:
+    $("okxText"),
+
+  heroStatus:
+    $("heroStatus"),
+
+  accountEquity:
+    $("accountEquity"),
+
+  availableBalance:
+    $("availableBalance"),
+
+  dailyPnl:
+    $("dailyPnl"),
+
+  leverage:
+    $("leverage"),
+
+  maxCandidates:
+    $("maxCandidates"),
+
+  openPositions:
+    $("openPositions"),
+
+  toggleScanConfig:
+    $("toggleScanConfig"),
+
+  scanConfigBody:
+    $("scanConfigBody"),
+
+  scanConfigArrow:
+    $("scanConfigArrow"),
+
+  scanConfigSummary:
+    $("scanConfigSummary"),
+
+  runAllButton:
+    $("runAllButton"),
+
+  opportunityGrid:
+    $("opportunityGrid"),
+
+  opportunitySummary:
+    $("opportunitySummary"),
+
+  modal:
+    $("agentModal"),
+
+  modalTitle:
+    $("modalTitle"),
+
+  modalRole:
+    $("modalRole"),
+
+  modalDescription:
+    $("modalDescription"),
+
+  modalSymbol:
+    $("modalSymbol"),
+
+  modalControls:
+    $("modalControls"),
+
+  runAgentButton:
+    $("runAgentButton"),
+
+  modalResult:
+    $("modalResult"),
+
+  modalClose:
+    $("modalClose")
+
+};
+
+
+/* =====================================
+   AGENT INFO
+===================================== */
+
+const agentInfo = {
+
+  scout: {
+
+    name:
+      "SCOUT",
+
+    role:
+      "機會掃描員",
+
+    description:
+      "掃描 OKX USDT 永續市場，依照成交量、價格活動與 Open Interest 找出值得其他 Agent 進一步研究的標的。"
+
+  },
+
+
+  news: {
+
+    name:
+      "NEWS",
+
+    role:
+      "新聞分析員",
+
+    description:
+      "檢查市場新聞、重大事件與催化劑，判斷是否存在與交易方向相反的事件風險。"
+
+  },
+
+
+  sentiment: {
+
+    name:
+      "SENTIMENT",
+
+    role:
+      "市場情緒員",
+
+    description:
+      "分析 Funding、Open Interest 與市場 crowding，判斷目前多空情緒與擁擠風險。"
+
+  },
+
+
+  charts: {
+
+    name:
+      "CHARTS",
+
+    role:
+      "圖表分析員",
+
+    description:
+      "4H / 1H 判斷主方向，15m 確認進場時機，並建立 Entry、Stop Loss、Take Profit、Invalidation 與 R:R。"
+
+  },
+
+
+  risk: {
+
+    name:
+      "RISK",
+
+    role:
+      "風險管理員",
+
+    description:
+      "根據帳戶權益、可用餘額、槓桿、止損、Risk / Reward 與帳戶曝險，判斷 APPROVE、REDUCE 或 REJECT。"
+
+  },
+
+
+  decision: {
+
+    name:
+      "DECISION",
+
+    role:
+      "最終決策員",
+
+    description:
+      "整合前五個 Agent。只有通過 RISK Gate 的交易才可能得到 LONG 或 SHORT，否則輸出 WAIT。"
+
+  }
+
+};
+
+
+/* =====================================
+   HELPERS
+===================================== */
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value
+    ??
+    ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+function num(
+  value,
+  fallback = null
+) {
+
+  const result =
+    Number(
+      value
+    );
+
+
+  return Number.isFinite(
+    result
+  )
+    ? result
+    : fallback;
+
+}
+
+
+function formatPrice(
+  value
+) {
+
+  const result =
+    num(
+      value
+    );
+
+
+  if (
+    result === null
+  ) {
+
+    return "--";
+
+  }
+
+
+  if (
+    Math.abs(
+      result
+    )
+    >=
+    1000
+  ) {
+
+    return result.toLocaleString(
+      undefined,
+      {
+        maximumFractionDigits:
+          2
+      }
+    );
+
+  }
+
+
+  return result.toLocaleString(
+    undefined,
+    {
+      maximumFractionDigits:
+        8
+    }
+  );
+
+}
+
+
+function formatUsd(
+  value
+) {
+
+  const result =
+    num(
+      value
+    );
+
+
+  if (
+    result === null
+  ) {
+
+    return "--";
+
+  }
+
+
+  return (
+    "$"
+    +
+    result.toLocaleString(
+      undefined,
+      {
+        maximumFractionDigits:
+          2
+      }
+    )
+  );
+
+}
+
+
+function formatConfidence(
+  value
+) {
+
+  const result =
+    num(
+      value,
+      0
+    );
+
+
+  return (
+    result
+    *
+    100
+  )
+  .toFixed(
+    0
+  )
+  +
+  "%";
+
+}
+
+
+/* =====================================
+   ACCOUNT CONFIG
+===================================== */
+
+function updateScanConfigSummary(
+) {
+
+  const equity =
+    num(
+      elements
+      .accountEquity
+      .value,
+      0
+    );
+
+
+  const leverage =
+    num(
+      elements
+      .leverage
+      .value,
+      1
+    );
+
+
+  const candidates =
+    elements
+    .maxCandidates
+    .value;
+
+
+  elements
+  .scanConfigSummary
+  .textContent =
+    (
+      `資金 ${equity.toLocaleString()} USDT`
+      +
+      ` · 槓桿 ${leverage}x`
+      +
+      ` · 掃描 TOP ${candidates}`
+    );
+
+}
+
+
+function toggleScanConfig(
+) {
+
+  const open =
+    elements
+    .scanConfigBody
+    .classList
+    .toggle(
+      "open"
+    );
+
+
+  elements
+  .scanConfigArrow
+  .textContent =
+    open
+      ? "－"
+      : "＋";
+
+}
+
+
+/* =====================================
+   API
+===================================== */
+
+async function apiGet(
+  path
+) {
+
+  const response =
+    await fetch(
+      API_BASE
+      +
+      path,
+
+      {
+        cache:
+          "no-store"
+      }
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      `API ${response.status}`
+    );
+
+  }
+
+
+  return (
+    await response.json()
+  );
+
+}
+
+
+async function apiPost(
+  path,
+  body
+) {
+
+  const response =
+    await fetch(
+      API_BASE
+      +
+      path,
+
+      {
+        method:
+          "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(
+            body
+          ),
+
+        cache:
+          "no-store"
+      }
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    let message =
+      `API ${response.status}`;
+
+
+    try {
+
+      const payload =
+        await response.json();
+
+
+      message +=
+        " "
+        +
+        JSON.stringify(
+          payload
+        );
+
+    } catch (
+      error
+    ) {
+
+      // Ignore body parsing failure.
+    }
+
+
+    throw new Error(
+      message
+    );
+
+  }
+
+
+  return (
+    await response.json()
+  );
+
+}
+
+
+/* =====================================
+   API STATUS
+===================================== */
+
+function publicApiConfigured(
+) {
+
+  return !(
+    API_BASE.includes(
+      "YOUR-RENDER-SERVICE"
+    )
+  );
+
+}
+
+
+async function checkApi(
+) {
+
+  if (
+    window.location.hostname
+    .endsWith(
+      ".github.io"
+    )
+    &&
+    !publicApiConfigured()
+  ) {
+
+    elements.apiDot.className =
+      "status-dot offline";
+
+
+    elements.apiText.textContent =
+      "API 未設定";
+
+
+    elements.heroStatus.textContent =
+      "請設定 Render API";
+
+
+    return;
+
+  }
+
+
+  try {
+
+    const health =
+      await apiGet(
+        "/api/health"
+      );
+
+
+    elements.apiDot.className =
+      "status-dot online";
+
+
+    elements.apiText.textContent =
       (
-        window.location.protocol
-        ===
-        "file:"
-          ? "http://127.0.0.1:8000"
-          : window.location.origin
+        `API ${health.agents_ready}/${health.agents_total}`
+      );
+
+
+    elements.heroStatus.textContent =
+      (
+        `${health.agents_ready}/${health.agents_total} AGENTS READY`
+      );
+
+  } catch (
+    error
+  ) {
+
+    elements.apiDot.className =
+      "status-dot offline";
+
+
+    elements.apiText.textContent =
+      "API OFFLINE";
+
+
+    elements.heroStatus.textContent =
+      "BACKEND OFFLINE";
+
+  }
+
+}
+
+
+/* =====================================
+   OKX STATUS
+===================================== */
+
+async function checkOkx(
+) {
+
+  try {
+
+    const url =
+      (
+        OKX_BASE
+        +
+        "/api/v5/market/ticker"
+        +
+        "?instId=BTC-USDT-SWAP"
+      );
+
+
+    const response =
+      await fetch(
+        url,
+
+        {
+          cache:
+            "no-store"
+        }
+      );
+
+
+    const body =
+      await response.json();
+
+
+    if (
+      !response.ok
+      ||
+      String(
+        body.code
+      )
+      !==
+      "0"
+    ) {
+
+      throw new Error(
+        "OKX unavailable"
+      );
+
+    }
+
+
+    elements.okxDot.className =
+      "status-dot online";
+
+
+    elements.okxText.textContent =
+      "OKX LIVE";
+
+  } catch (
+    error
+  ) {
+
+    elements.okxDot.className =
+      "status-dot offline";
+
+
+    elements.okxText.textContent =
+      "OKX OFFLINE";
+
+  }
+
+}
+
+
+/* =====================================
+   AGENT STATE
+===================================== */
+
+function setAgentState(
+  agent,
+  state
+) {
+
+  const card =
+    document.querySelector(
+      `.agent-card[data-agent="${agent}"]`
+    );
+
+
+  if (
+    !card
+  ) {
+
+    return;
+
+  }
+
+
+  card.classList.toggle(
+    "working",
+    state
+    ===
+    "working"
+  );
+
+
+  const text =
+    card.querySelector(
+      ".state-text"
+    );
+
+
+  if (
+    text
+  ) {
+
+    text.textContent =
+      String(
+        state
+      )
+      .toUpperCase();
+
+  }
+
+}
+
+
+function setAllAgents(
+  state
+) {
+
+  [
+    "scout",
+    "news",
+    "sentiment",
+    "charts",
+    "risk",
+    "decision"
+  ]
+  .forEach(
+    agent => {
+
+      setAgentState(
+        agent,
+        state
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================
+   RUN ALL PAYLOAD
+===================================== */
+
+function buildOpportunityPayload(
+) {
+
+  const equity =
+    num(
+      elements
+      .accountEquity
+      .value
+    );
+
+
+  const available =
+    num(
+      elements
+      .availableBalance
+      .value
+    );
+
+
+  const dailyPnl =
+    num(
+      elements
+      .dailyPnl
+      .value,
+      0
+    );
+
+
+  const leverage =
+    num(
+      elements
+      .leverage
+      .value
+    );
+
+
+  const maxCandidates =
+    Math.floor(
+      num(
+        elements
+        .maxCandidates
+        .value,
+        5
       )
     );
 
 
-    const OKX_BASE =
-      "https://www.okx.com";
+  if (
+    equity === null
+    ||
+    equity <= 0
+  ) {
+
+    throw new Error(
+      "帳戶總權益必須大於 0。"
+    );
+
+  }
 
 
-    let currentAgent =
-      null;
+  if (
+    available === null
+    ||
+    available < 0
+  ) {
+
+    throw new Error(
+      "可用餘額格式錯誤。"
+    );
+
+  }
 
 
-    let running =
+  if (
+    leverage === null
+    ||
+    leverage < 1
+  ) {
+
+    throw new Error(
+      "槓桿格式錯誤。"
+    );
+
+  }
+
+
+  let openPositions =
+    [];
+
+
+  const rawPositions =
+    elements
+    .openPositions
+    .value
+    .trim();
+
+
+  if (
+    rawPositions
+  ) {
+
+    openPositions =
+      JSON.parse(
+        rawPositions
+      );
+
+
+    if (
+      !Array.isArray(
+        openPositions
+      )
+    ) {
+
+      throw new Error(
+        "目前持倉必須是 JSON Array。"
+      );
+
+    }
+
+  }
+
+
+  return {
+
+    account_equity:
+      equity,
+
+    available_balance:
+      available,
+
+    daily_pnl:
+      dailyPnl,
+
+    leverage,
+
+    open_positions:
+      openPositions,
+
+    max_candidates:
+      maxCandidates,
+
+    max_concurrency:
+      3,
+
+    include_news:
+      true,
+
+    minimum_scout_score:
+      0
+
+  };
+
+}
+
+
+/* =====================================
+   RUN ALL
+===================================== */
+
+async function runAll(
+) {
+
+  if (
+    running
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    window.location.hostname
+    .endsWith(
+      ".github.io"
+    )
+    &&
+    !publicApiConfigured()
+  ) {
+
+    elements.opportunitySummary.textContent =
+      "BACKEND 尚未設定";
+
+
+    elements.opportunityGrid.innerHTML =
+      `
+        <div class="empty-state">
+
+          <div class="empty-pixel"></div>
+
+          <strong style="color:var(--red);">
+            請先設定 Render API
+          </strong>
+
+          <span>
+            請把 index.html 裡的
+            PUBLIC_API_BASE
+            換成實際 Render Backend 網址。
+          </span>
+
+        </div>
+      `;
+
+
+    return;
+
+  }
+
+
+  running =
+    true;
+
+
+  elements.runAllButton.disabled =
+    true;
+
+
+  setAllAgents(
+    "working"
+  );
+
+
+  elements.heroStatus.textContent =
+    "AGENTS WORKING";
+
+
+  elements.opportunitySummary.textContent =
+    "正在掃描市場...";
+
+
+  elements.opportunityGrid.innerHTML =
+    `
+      <div class="empty-state scanning">
+
+        <div class="empty-pixel"></div>
+
+        <strong>
+          六個 AGENT 工作中
+        </strong>
+
+        <span>
+          SCOUT → NEWS → SENTIMENT →
+          CHARTS → RISK → DECISION
+        </span>
+
+        <div class="scan-progress">
+          <div class="scan-progress-bar"></div>
+        </div>
+
+      </div>
+    `;
+
+
+  try {
+
+    const payload =
+      buildOpportunityPayload();
+
+
+    const response =
+      await apiPost(
+        "/api/opportunities",
+        payload
+      );
+
+
+    setAllAgents(
+      "success"
+    );
+
+
+    elements.heroStatus.textContent =
+      "SCAN COMPLETE";
+
+
+    renderOpportunities(
+      response
+    );
+
+  } catch (
+    error
+  ) {
+
+    setAllAgents(
+      "error"
+    );
+
+
+    elements.heroStatus.textContent =
+      "PIPELINE ERROR";
+
+
+    elements.opportunitySummary.textContent =
+      "執行失敗";
+
+
+    elements.opportunityGrid.innerHTML =
+      `
+        <div class="empty-state">
+
+          <div class="empty-pixel"></div>
+
+          <strong style="color:var(--red);">
+            RUN ALL FAILED
+          </strong>
+
+          <span>
+            ${escapeHtml(
+              error.message
+            )}
+          </span>
+
+        </div>
+      `;
+
+  } finally {
+
+    running =
       false;
 
 
-    /* =====================================
-       ELEMENTS
-    ===================================== */
+    elements.runAllButton.disabled =
+      false;
 
-    const $ =
-      id =>
-        document.getElementById(
-          id
-        );
+  }
 
+}
 
-    const elements = {
 
-      apiDot:
-        $("apiDot"),
+/* =====================================
+   OPPORTUNITY RENDER
+===================================== */
 
-      apiText:
-        $("apiText"),
+function renderOpportunities(
+  response
+) {
 
-      okxDot:
-        $("okxDot"),
+  const opportunities =
+    Array.isArray(
+      response.opportunities
+    )
+      ? response.opportunities
+      : [];
 
-      okxText:
-        $("okxText"),
 
-      heroStatus:
-        $("heroStatus"),
-
-      accountEquity:
-        $("accountEquity"),
-
-      availableBalance:
-        $("availableBalance"),
-
-      dailyPnl:
-        $("dailyPnl"),
-
-      leverage:
-        $("leverage"),
-
-      maxCandidates:
-        $("maxCandidates"),
-
-      runAllButton:
-        $("runAllButton"),
-
-      opportunityGrid:
-        $("opportunityGrid"),
-
-      opportunitySummary:
-        $("opportunitySummary"),
-
-      modal:
-        $("agentModal"),
-
-      modalTitle:
-        $("modalTitle"),
-
-      modalRole:
-        $("modalRole"),
-
-      modalDescription:
-        $("modalDescription"),
-
-      modalSymbol:
-        $("modalSymbol"),
-
-      modalControls:
-        $("modalControls"),
-
-      runAgentButton:
-        $("runAgentButton"),
-
-      modalResult:
-        $("modalResult"),
-
-      modalClose:
-        $("modalClose")
-
-    };
-
-
-    /* =====================================
-       AGENT INFO
-    ===================================== */
-
-    const agentInfo = {
-
-      scout: {
-
-        name:
-          "SCOUT",
-
-        role:
-          "Opportunity Scanner",
-
-        description:
-          "掃描 OKX USDT 永續市場，依照成交量、價格活動與 Open Interest 找出值得進一步研究的標的。"
-
-      },
-
-
-      news: {
-
-        name:
-          "NEWS",
-
-        role:
-          "Event Analyst",
-
-        description:
-          "檢查重大新聞、事件與催化劑，判斷是否存在與交易方向相反的事件風險。"
-
-      },
-
-
-      sentiment: {
-
-        name:
-          "SENTIMENT",
-
-        role:
-          "Market Sentiment",
-
-        description:
-          "分析 Funding、Open Interest 與 crowding，判斷多空市場情緒與擁擠風險。"
-
-      },
-
-
-      charts: {
-
-        name:
-          "CHARTS",
-
-        role:
-          "Trade Planner",
-
-        description:
-          "4H / 1H 判斷主方向，15m 確認進場，並建立 Entry、Stop Loss、Take Profit、Invalidation 與 R:R。"
-
-      },
-
-
-      risk: {
-
-        name:
-          "RISK",
-
-        role:
-          "Risk Manager",
-
-        description:
-          "根據帳戶 Equity、可用餘額、槓桿、止損、R:R 與總曝險，決定 APPROVE、REDUCE 或 REJECT。"
-
-      },
-
-
-      decision: {
-
-        name:
-          "DECISION",
-
-        role:
-          "Final Decision",
-
-        description:
-          "整合前五個 Agent，通過 RISK Gate 後才允許輸出 LONG 或 SHORT，否則回傳 WAIT。"
-
-      }
-
-    };
-
-
-    /* =====================================
-       HELPERS
-    ===================================== */
-
-    function escapeHtml(
-      value
-    ) {
-
-      return String(
-        value
-        ??
-        ""
-      )
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
-
-    }
-
-
-    function num(
-      value,
-      fallback = null
-    ) {
-
-      const result =
-        Number(
-          value
-        );
-
-
-      return Number.isFinite(
-        result
-      )
-        ? result
-        : fallback;
-
-    }
-
-
-    function formatPrice(
-      value
-    ) {
-
-      const result =
-        num(
-          value
-        );
-
-
-      if (
-        result === null
-      ) {
-
-        return "--";
-
-      }
-
-
-      if (
-        Math.abs(
-          result
-        )
-        >=
-        1000
-      ) {
-
-        return result.toLocaleString(
-          undefined,
-          {
-            maximumFractionDigits:
-              2
-          }
-        );
-
-      }
-
-
-      return result.toLocaleString(
-        undefined,
-        {
-          maximumFractionDigits:
-            8
-        }
-      );
-
-    }
-
-
-    function formatUsd(
-      value
-    ) {
-
-      const result =
-        num(
-          value
-        );
-
-
-      if (
-        result === null
-      ) {
-
-        return "--";
-
-      }
-
-
-      return (
-        "$"
-        +
-        result.toLocaleString(
-          undefined,
-          {
-            maximumFractionDigits:
-              2
-          }
-        )
-      );
-
-    }
-
-
-    function percent(
-      value
-    ) {
-
-      const result =
-        num(
-          value,
-          0
-        );
-
-
-      return (
-        result
-        *
-        100
-      )
-      .toFixed(
-        0
-      )
+  elements.opportunitySummary.textContent =
+    (
+      `${response.actionable_count || 0} 可交易`
       +
-      "%";
+      " · "
+      +
+      `${response.evaluated_count || 0} 已評估`
+    );
 
-    }
 
+  if (
+    opportunities.length
+    ===
+    0
+  ) {
 
-    /* =====================================
-       API
-    ===================================== */
+    elements.opportunityGrid.innerHTML =
+      `
+        <div class="empty-state">
 
-    async function apiGet(
-      path
-    ) {
+          <div class="empty-pixel"></div>
 
-      const response =
-        await fetch(
-          API_BASE
-          +
-          path,
+          <strong>
+            目前沒有可交易標的
+          </strong>
 
-          {
-            cache:
-              "no-store"
-          }
-        );
+          <span>
+            市場已完成掃描，
+            但目前沒有候選通過
+            CHARTS Trade Plan、
+            RISK 與 DECISION Gate。
+            WAIT 本身就是有效結果。
+          </span>
 
+        </div>
+      `;
 
-      if (
-        !response.ok
-      ) {
 
-        throw new Error(
-          `API ${response.status}`
-        );
+    return;
 
-      }
+  }
 
 
-      return (
-        await response.json()
-      );
+  elements.opportunityGrid.innerHTML =
+    opportunities
+    .map(
+      (
+        opportunity,
+        index
+      ) => {
 
-    }
-
-
-    async function apiPost(
-      path,
-      body
-    ) {
-
-      const response =
-        await fetch(
-          API_BASE
-          +
-          path,
-
-          {
-            method:
-              "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify(
-                body
-              ),
-
-            cache:
-              "no-store"
-          }
-        );
-
-
-      if (
-        !response.ok
-      ) {
-
-        let message =
-          `API ${response.status}`;
-
-
-        try {
-
-          const payload =
-            await response.json();
-
-
-          message +=
-            " "
-            +
-            JSON.stringify(
-              payload
-            );
-
-        } catch (
-          error
-        ) {
-
-          // ignore
-
-        }
-
-
-        throw new Error(
-          message
-        );
-
-      }
-
-
-      return (
-        await response.json()
-      );
-
-    }
-
-
-    /* =====================================
-       STATUS
-    ===================================== */
-
-    async function checkApi(
-    ) {
-
-      try {
-
-        const health =
-          await apiGet(
-            "/api/health"
-          );
-
-
-        elements.apiDot.className =
-          "status-dot online";
-
-
-        elements.apiText.textContent =
-          (
-            `API ${health.agents_ready}/${health.agents_total}`
-          );
-
-
-        elements.heroStatus.textContent =
-          (
-            `${health.agents_ready}/${health.agents_total} AGENTS READY`
-          );
-
-      } catch (
-        error
-      ) {
-
-        elements.apiDot.className =
-          "status-dot offline";
-
-
-        elements.apiText.textContent =
-          "API OFFLINE";
-
-
-        elements.heroStatus.textContent =
-          "BACKEND OFFLINE";
-
-      }
-
-    }
-
-
-    async function checkOkx(
-    ) {
-
-      try {
-
-        const url =
-          (
-            OKX_BASE
-            +
-            "/api/v5/market/ticker"
-            +
-            "?instId=BTC-USDT-SWAP"
-          );
-
-
-        const response =
-          await fetch(
-            url,
-            {
-              cache:
-                "no-store"
-            }
-          );
-
-
-        const body =
-          await response.json();
-
-
-        if (
-          !response.ok
+        const plan =
+          opportunity.trade_plan
           ||
+          {};
+
+
+        const action =
           String(
-            body.code
-          )
-          !==
-          "0"
-        ) {
-
-          throw new Error(
-            "OKX unavailable"
-          );
-
-        }
-
-
-        elements.okxDot.className =
-          "status-dot online";
-
-
-        elements.okxText.textContent =
-          "OKX LIVE";
-
-      } catch (
-        error
-      ) {
-
-        elements.okxDot.className =
-          "status-dot offline";
-
-
-        elements.okxText.textContent =
-          "OKX OFFLINE";
-
-      }
-
-    }
-
-
-    /* =====================================
-       AGENT STATE
-    ===================================== */
-
-    function setAgentState(
-      agent,
-      state
-    ) {
-
-      const card =
-        document.querySelector(
-          `.agent-card[data-agent="${agent}"]`
-        );
-
-
-      if (
-        !card
-      ) {
-
-        return;
-
-      }
-
-
-      card.classList.toggle(
-        "working",
-        state
-        ===
-        "working"
-      );
-
-
-      const text =
-        card.querySelector(
-          ".state-text"
-        );
-
-
-      if (
-        text
-      ) {
-
-        text.textContent =
-          String(
-            state
+            opportunity.action
+            ||
+            "wait"
           )
           .toUpperCase();
 
-      }
 
-    }
-
-
-    function setAllAgents(
-      state
-    ) {
-
-      [
-        "scout",
-        "news",
-        "sentiment",
-        "charts",
-        "risk",
-        "decision"
-      ]
-      .forEach(
-        agent => {
-
-          setAgentState(
-            agent,
-            state
-          );
-
-        }
-      );
-
-    }
+        const sideClass =
+          action
+          ===
+          "SHORT"
+            ? "short"
+            : "long";
 
 
-    /* =====================================
-       RUN ALL
-    ===================================== */
-
-    function buildOpportunityPayload(
-    ) {
-
-      const equity =
-        num(
-          elements
-          .accountEquity
-          .value
-        );
-
-
-      const available =
-        num(
-          elements
-          .availableBalance
-          .value
-        );
-
-
-      const dailyPnl =
-        num(
-          elements
-          .dailyPnl
-          .value,
-          0
-        );
-
-
-      const leverage =
-        num(
-          elements
-          .leverage
-          .value
-        );
-
-
-      const maxCandidates =
-        Math.floor(
-          num(
-            elements
-            .maxCandidates
-            .value,
-            5
+        const reason =
+          (
+            Array.isArray(
+              opportunity.reasons
+            )
+            &&
+            opportunity.reasons.length
           )
-        );
+            ? opportunity.reasons[0]
+            : "所有必要 Gate 已通過。";
 
 
-      if (
-        equity === null
-        ||
-        equity <= 0
-      ) {
+        return `
+          <article
+            class="opportunity-card ${sideClass}"
+          >
 
-        throw new Error(
-          "Account equity must be greater than 0."
-        );
-
-      }
-
-
-      if (
-        available === null
-        ||
-        available < 0
-      ) {
-
-        throw new Error(
-          "Available balance is invalid."
-        );
-
-      }
-
-
-      if (
-        leverage === null
-        ||
-        leverage < 1
-      ) {
-
-        throw new Error(
-          "Leverage is invalid."
-        );
-
-      }
-
-
-      return {
-
-        account_equity:
-          equity,
-
-        available_balance:
-          available,
-
-        daily_pnl:
-          dailyPnl,
-
-        leverage,
-
-        open_positions:
-          [],
-
-        max_candidates:
-          maxCandidates,
-
-        max_concurrency:
-          3,
-
-        include_news:
-          true,
-
-        minimum_scout_score:
-          0
-
-      };
-
-    }
-
-
-    async function runAll(
-    ) {
-
-      if (
-        running
-      ) {
-
-        return;
-
-      }
-
-
-      running =
-        true;
-
-
-      elements.runAllButton.disabled =
-        true;
-
-
-      setAllAgents(
-        "working"
-      );
-
-
-      elements.heroStatus.textContent =
-        "AGENTS WORKING";
-
-
-      elements.opportunitySummary.textContent =
-        "SCANNING MARKET...";
-
-
-      elements.opportunityGrid.innerHTML =
-        `
-          <div class="empty-state scanning">
-
-            <div class="empty-pixel"></div>
-
-            <strong>
-              SIX AGENTS WORKING
-            </strong>
-
-            <span>
-              SCOUT → NEWS → SENTIMENT → CHARTS → RISK → DECISION
-            </span>
-
-            <div class="scan-progress">
-              <div class="scan-progress-bar"></div>
+            <div class="opp-rank">
+              #${index + 1}
             </div>
 
-          </div>
+
+            <div class="opp-symbol">
+              ${escapeHtml(
+                opportunity.symbol
+              )}
+            </div>
+
+
+            <div class="opp-side">
+              ${escapeHtml(
+                action
+              )}
+            </div>
+
+
+            <div class="opp-confidence">
+              信心
+              ${formatConfidence(
+                opportunity.confidence
+              )}
+            </div>
+
+
+            <div class="price-block">
+
+
+              <div class="price-box">
+
+                <div class="price-label">
+                  進場
+                </div>
+
+                <div class="price-value">
+                  ${formatPrice(
+                    plan.entry_price
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="price-box">
+
+                <div class="price-label">
+                  止損
+                </div>
+
+                <div class="price-value">
+                  ${formatPrice(
+                    plan.stop_loss
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="price-box">
+
+                <div class="price-label">
+                  目標
+                </div>
+
+                <div class="price-value">
+                  ${formatPrice(
+                    plan.take_profit
+                  )}
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="opp-meta">
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  R / R
+                </div>
+
+                <div class="meta-value">
+                  ${
+                    num(
+                      plan.risk_reward_ratio
+                    ) !== null
+                      ? num(
+                          plan.risk_reward_ratio
+                        )
+                        .toFixed(
+                          2
+                        )
+                      : "--"
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  風控
+                </div>
+
+                <div
+                  class="
+                    meta-value
+                    ${
+                      opportunity.risk_approved
+                        ? "risk-approved"
+                        : "risk-rejected"
+                    }
+                  "
+                >
+                  ${escapeHtml(
+                    String(
+                      opportunity.risk_verdict
+                      ||
+                      "--"
+                    )
+                    .toUpperCase()
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  建議部位
+                </div>
+
+                <div class="meta-value">
+                  ${formatUsd(
+                    opportunity
+                    .recommended_notional_usdt
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  最大預估虧損
+                </div>
+
+                <div class="meta-value">
+                  ${formatUsd(
+                    opportunity
+                    .estimated_loss_usdt
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  帳戶風險
+                </div>
+
+                <div class="meta-value">
+                  ${
+                    num(
+                      opportunity
+                      .risk_pct_equity
+                    ) !== null
+                      ? (
+                          num(
+                            opportunity
+                            .risk_pct_equity
+                          )
+                          .toFixed(
+                            2
+                          )
+                          +
+                          "%"
+                        )
+                      : "--"
+                  }
+                </div>
+
+              </div>
+
+
+              <div class="meta-row">
+
+                <div class="meta-label">
+                  Setup
+                </div>
+
+                <div class="meta-value">
+                  ${escapeHtml(
+                    plan.setup_type
+                    ||
+                    "--"
+                  )}
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="opp-reason">
+              &gt;
+              ${escapeHtml(
+                reason
+              )}
+            </div>
+
+
+          </article>
         `;
 
-
-      try {
-
-        const payload =
-          buildOpportunityPayload();
-
-
-        const response =
-          await apiPost(
-            "/api/opportunities",
-            payload
-          );
-
-
-        setAllAgents(
-          "success"
-        );
-
-
-        elements.heroStatus.textContent =
-          "SCAN COMPLETE";
-
-
-        renderOpportunities(
-          response
-        );
-
-      } catch (
-        error
-      ) {
-
-        setAllAgents(
-          "error"
-        );
-
-
-        elements.heroStatus.textContent =
-          "PIPELINE ERROR";
-
-
-        elements.opportunitySummary.textContent =
-          "ERROR";
-
-
-        elements.opportunityGrid.innerHTML =
-          `
-            <div class="empty-state">
-
-              <div class="empty-pixel"></div>
-
-              <strong style="color:var(--red);">
-                RUN ALL FAILED
-              </strong>
-
-              <span>
-                ${escapeHtml(
-                  error.message
-                )}
-              </span>
-
-            </div>
-          `;
-
-      } finally {
-
-        running =
-          false;
-
-
-        elements.runAllButton.disabled =
-          false;
-
       }
-
-    }
-
-
-    /* =====================================
-       OPPORTUNITY RENDER
-    ===================================== */
-
-    function renderOpportunities(
-      response
-    ) {
-
-      const opportunities =
-        Array.isArray(
-          response.opportunities
-        )
-          ? response.opportunities
-          : [];
-
-
-      elements.opportunitySummary.textContent =
-        (
-          `${response.actionable_count || 0} ACTIONABLE`
-          +
-          " · "
-          +
-          `${response.evaluated_count || 0} EVALUATED`
-        );
-
-
-      if (
-        opportunities.length
-        ===
-        0
-      ) {
-
-        elements.opportunityGrid.innerHTML =
-          `
-            <div class="empty-state">
-
-              <div class="empty-pixel"></div>
-
-              <strong>
-                NO ACTIONABLE TRADE
-              </strong>
-
-              <span>
-                Market was scanned, but no candidate passed
-                CHARTS Trade Plan + RISK + DECISION gates.
-                WAIT is a valid result.
-              </span>
-
-            </div>
-          `;
-
-
-        return;
-
-      }
-
-
-      elements.opportunityGrid.innerHTML =
-        opportunities
-        .map(
-          (
-            opportunity,
-            index
-          ) => {
-
-            const plan =
-              opportunity.trade_plan
-              ||
-              {};
-
-
-            const action =
-              String(
-                opportunity.action
-                ||
-                "wait"
-              )
-              .toUpperCase();
-
-
-            const sideClass =
-              action
-              ===
-              "SHORT"
-                ? "short"
-                : "long";
-
-
-            const reason =
-              (
-                Array.isArray(
-                  opportunity.reasons
-                )
-                &&
-                opportunity.reasons.length
-              )
-                ? opportunity.reasons[0]
-                : "All required gates passed.";
-
-
-            return `
-              <article
-                class="opportunity-card ${sideClass}"
-              >
-
-                <div class="opp-rank">
-                  #${index + 1}
-                </div>
-
-
-                <div class="opp-symbol">
-                  ${escapeHtml(
-                    opportunity.symbol
-                  )}
-                </div>
-
-
-                <div class="opp-side">
-                  ${escapeHtml(
-                    action
-                  )}
-                </div>
-
-
-                <div class="opp-confidence">
-                  CONFIDENCE
-                  ${percent(
-                    opportunity.confidence
-                  )}
-                </div>
-
-
-                <div class="price-block">
-
-                  <div class="price-box">
-
-                    <div class="price-label">
-                      ENTRY
-                    </div>
-
-                    <div class="price-value">
-                      ${formatPrice(
-                        plan.entry_price
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="price-box">
-
-                    <div class="price-label">
-                      STOP
-                    </div>
-
-                    <div class="price-value">
-                      ${formatPrice(
-                        plan.stop_loss
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="price-box">
-
-                    <div class="price-label">
-                      TARGET
-                    </div>
-
-                    <div class="price-value">
-                      ${formatPrice(
-                        plan.take_profit
-                      )}
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                <div class="opp-meta">
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      R / R
-                    </div>
-
-                    <div class="meta-value">
-                      ${
-                        num(
-                          plan.risk_reward_ratio
-                        ) !== null
-                          ? num(
-                              plan.risk_reward_ratio
-                            ).toFixed(2)
-                          : "--"
-                      }
-                    </div>
-
-                  </div>
-
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      RISK
-                    </div>
-
-                    <div
-                      class="meta-value ${
-                        opportunity.risk_approved
-                          ? "risk-approved"
-                          : "risk-rejected"
-                      }"
-                    >
-                      ${escapeHtml(
-                        String(
-                          opportunity.risk_verdict
-                          ||
-                          "--"
-                        )
-                        .toUpperCase()
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      SIZE
-                    </div>
-
-                    <div class="meta-value">
-                      ${formatUsd(
-                        opportunity
-                        .recommended_notional_usdt
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      MAX LOSS
-                    </div>
-
-                    <div class="meta-value">
-                      ${formatUsd(
-                        opportunity
-                        .estimated_loss_usdt
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      ACCOUNT RISK
-                    </div>
-
-                    <div class="meta-value">
-                      ${
-                        num(
-                          opportunity
-                          .risk_pct_equity
-                        ) !== null
-                          ? (
-                              num(
-                                opportunity
-                                .risk_pct_equity
-                              )
-                              .toFixed(2)
-                              +
-                              "%"
-                            )
-                          : "--"
-                      }
-                    </div>
-
-                  </div>
-
-
-                  <div class="meta-row">
-
-                    <div class="meta-label">
-                      SETUP
-                    </div>
-
-                    <div class="meta-value">
-                      ${escapeHtml(
-                        plan.setup_type
-                        ||
-                        "--"
-                      )}
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                <div class="opp-reason">
-                  &gt;
-                  ${escapeHtml(
-                    reason
-                  )}
-                </div>
-
-              </article>
-            `;
-
-          }
-        )
-        .join(
-          ""
-        );
-
-    }
-
-
-    /* =====================================
-       AGENT MODAL
-    ===================================== */
-
-    function openAgent(
-      agent
-    ) {
-
-      const info =
-        agentInfo[
-          agent
-        ];
-
-
-      if (
-        !info
-      ) {
-
-        return;
-
-      }
-
-
-      currentAgent =
-        agent;
-
-
-      elements.modalTitle.textContent =
-        info.name;
-
-
-      elements.modalRole.textContent =
-        info.role;
-
-
-      elements.modalDescription.textContent =
-        info.description;
-
-
-      elements.modalResult.textContent =
-        "READY";
-
-
-      if (
-        agent
-        ===
-        "risk"
-        ||
-        agent
-        ===
-        "decision"
-      ) {
-
-        elements.modalControls.style.display =
-          "none";
-
-      } else {
-
-        elements.modalControls.style.display =
-          "grid";
-
-      }
-
-
-      elements.modal.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function closeAgent(
-    ) {
-
-      elements.modal.classList.remove(
-        "show"
-      );
-
-
-      currentAgent =
-        null;
-
-    }
-
-
-    async function runAgent(
-    ) {
-
-      if (
-        !currentAgent
-      ) {
-
-        return;
-
-      }
-
-
-      const symbol =
-        elements
-        .modalSymbol
-        .value;
-
-
-      const context = {
-
-        symbol,
-
-        exchange:
-          "OKX",
-
-        market_type:
-          "swap",
-
-        timeframes: [
-          "15m",
-          "1H",
-          "4H"
-        ]
-
-      };
-
-
-      elements.runAgentButton.disabled =
-        true;
-
-
-      elements.modalResult.textContent =
-        "WORKING...";
-
-
-      setAgentState(
-        currentAgent,
-        "working"
-      );
-
-
-      try {
-
-        let result;
-
-
-        if (
-          currentAgent
-          ===
-          "scout"
-        ) {
-
-          result =
-            await apiPost(
-              "/api/scout",
-
-              {
-                context: {
-                  symbol:
-                    "MARKET",
-
-                  exchange:
-                    "OKX",
-
-                  market_type:
-                    "swap"
-                },
-
-                payload: {
-                  symbols: []
-                }
-              }
-            );
-
-        }
-
-
-        if (
-          currentAgent
-          ===
-          "news"
-        ) {
-
-          result =
-            await apiPost(
-              "/api/news",
-
-              {
-                context,
-
-                focus_symbols: [
-                  symbol
-                ]
-              }
-            );
-
-        }
-
-
-        if (
-          currentAgent
-          ===
-          "sentiment"
-        ) {
-
-          result =
-            await apiPost(
-              "/api/sentiment",
-
-              {
-                context
-              }
-            );
-
-        }
-
-
-        if (
-          currentAgent
-          ===
-          "charts"
-        ) {
-
-          result =
-            await apiPost(
-              "/api/charts",
-
-              {
-                context
-              }
-            );
-
-        }
-
-
-        if (
-          !result
-        ) {
-
-          throw new Error(
-            "No runnable endpoint for this agent."
-          );
-
-        }
-
-
-        setAgentState(
-          currentAgent,
-          "success"
-        );
-
-
-        elements.modalResult.innerHTML =
-          `
-            STATUS:
-            ${escapeHtml(
-              result.status
-              ||
-              "--"
-            )}
-            <br>
-
-            BIAS:
-            ${escapeHtml(
-              result.bias
-              ||
-              "--"
-            )}
-            <br>
-
-            CONFIDENCE:
-            ${
-              num(
-                result.confidence
-              ) !== null
-                ? percent(
-                    result.confidence
-                  )
-                : "--"
-            }
-            <br><br>
-
-            ${escapeHtml(
-              result.summary
-              ||
-              "Analysis complete."
-            )}
-          `;
-
-      } catch (
-        error
-      ) {
-
-        setAgentState(
-          currentAgent,
-          "error"
-        );
-
-
-        elements.modalResult.innerHTML =
-          `
-            <span style="color:var(--red);">
-              ${escapeHtml(
-                error.message
-              )}
-            </span>
-          `;
-
-      } finally {
-
-        elements.runAgentButton.disabled =
-          false;
-
-      }
-
-    }
-
-
-    /* =====================================
-       EVENTS
-    ===================================== */
-
-    elements.runAllButton.addEventListener(
-      "click",
-      runAll
-    );
-
-
-    document
-    .querySelectorAll(
-      ".agent-card"
     )
-    .forEach(
-      card => {
+    .join(
+      ""
+    );
 
-        card.addEventListener(
-          "click",
-          () => {
+}
 
-            openAgent(
-              card.dataset.agent
-            );
 
+/* =====================================
+   AGENT MODAL
+===================================== */
+
+function openAgent(
+  agent
+) {
+
+  const info =
+    agentInfo[
+      agent
+    ];
+
+
+  if (
+    !info
+  ) {
+
+    return;
+
+  }
+
+
+  currentAgent =
+    agent;
+
+
+  elements.modalTitle.textContent =
+    info.name;
+
+
+  elements.modalRole.textContent =
+    info.role;
+
+
+  elements.modalDescription.textContent =
+    info.description;
+
+
+  elements.modalResult.textContent =
+    "READY";
+
+
+  /*
+    RISK / DECISION 的完整工作
+    目前透過 RUN ALL workflow 執行。
+  */
+
+  if (
+    agent
+    ===
+    "risk"
+    ||
+    agent
+    ===
+    "decision"
+  ) {
+
+    elements.modalControls.style.display =
+      "none";
+
+
+    elements.modalResult.textContent =
+      "此 Agent 由 RUN ALL 完整流程自動呼叫。";
+
+  } else {
+
+    elements.modalControls.style.display =
+      "grid";
+
+  }
+
+
+  elements.modal.classList.add(
+    "show"
+  );
+
+}
+
+
+function closeAgent(
+) {
+
+  elements.modal.classList.remove(
+    "show"
+  );
+
+
+  currentAgent =
+    null;
+
+}
+
+
+/* =====================================
+   RUN SINGLE AGENT
+===================================== */
+
+async function runAgent(
+) {
+
+  if (
+    !currentAgent
+  ) {
+
+    return;
+
+  }
+
+
+  const symbol =
+    elements
+    .modalSymbol
+    .value;
+
+
+  const context = {
+
+    symbol,
+
+    exchange:
+      "OKX",
+
+    market_type:
+      "swap",
+
+    timeframes: [
+      "15m",
+      "1H",
+      "4H"
+    ]
+
+  };
+
+
+  elements.runAgentButton.disabled =
+    true;
+
+
+  elements.modalResult.textContent =
+    "WORKING...";
+
+
+  setAgentState(
+    currentAgent,
+    "working"
+  );
+
+
+  try {
+
+    let result;
+
+
+    if (
+      currentAgent
+      ===
+      "scout"
+    ) {
+
+      result =
+        await apiPost(
+          "/api/scout",
+
+          {
+            context: {
+              symbol:
+                "MARKET",
+
+              exchange:
+                "OKX",
+
+              market_type:
+                "swap"
+            },
+
+            payload: {
+              symbols: []
+            }
           }
+        );
+
+    }
+
+
+    if (
+      currentAgent
+      ===
+      "news"
+    ) {
+
+      result =
+        await apiPost(
+          "/api/news",
+
+          {
+            context,
+
+            focus_symbols: [
+              symbol
+            ]
+          }
+        );
+
+    }
+
+
+    if (
+      currentAgent
+      ===
+      "sentiment"
+    ) {
+
+      result =
+        await apiPost(
+          "/api/sentiment",
+
+          {
+            context
+          }
+        );
+
+    }
+
+
+    if (
+      currentAgent
+      ===
+      "charts"
+    ) {
+
+      result =
+        await apiPost(
+          "/api/charts",
+
+          {
+            context
+          }
+        );
+
+    }
+
+
+    if (
+      !result
+    ) {
+
+      throw new Error(
+        "此 Agent 沒有可直接執行的 endpoint。"
+      );
+
+    }
+
+
+    setAgentState(
+      currentAgent,
+      "success"
+    );
+
+
+    elements.modalResult.innerHTML =
+      `
+        STATUS:
+        ${escapeHtml(
+          result.status
+          ||
+          "--"
+        )}
+        <br>
+
+        BIAS:
+        ${escapeHtml(
+          result.bias
+          ||
+          "--"
+        )}
+        <br>
+
+        CONFIDENCE:
+        ${
+          num(
+            result.confidence
+          ) !== null
+            ? formatConfidence(
+                result.confidence
+              )
+            : "--"
+        }
+        <br><br>
+
+        ${escapeHtml(
+          result.summary
+          ||
+          "Analysis complete."
+        )}
+      `;
+
+  } catch (
+    error
+  ) {
+
+    setAgentState(
+      currentAgent,
+      "error"
+    );
+
+
+    elements.modalResult.innerHTML =
+      `
+        <span style="color:var(--red);">
+          ${escapeHtml(
+            error.message
+          )}
+        </span>
+      `;
+
+  } finally {
+
+    elements.runAgentButton.disabled =
+      false;
+
+  }
+
+}
+
+
+/* =====================================
+   EVENTS
+===================================== */
+
+elements
+.toggleScanConfig
+.addEventListener(
+  "click",
+  toggleScanConfig
+);
+
+
+[
+  elements.accountEquity,
+  elements.leverage,
+  elements.maxCandidates
+]
+.forEach(
+  element => {
+
+    element.addEventListener(
+      "input",
+      updateScanConfigSummary
+    );
+
+
+    element.addEventListener(
+      "change",
+      updateScanConfigSummary
+    );
+
+  }
+);
+
+
+elements
+.runAllButton
+.addEventListener(
+  "click",
+  runAll
+);
+
+
+document
+.querySelectorAll(
+  ".agent-card"
+)
+.forEach(
+  card => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        openAgent(
+          card.dataset.agent
         );
 
       }
     );
 
-
-    elements.modalClose.addEventListener(
-      "click",
-      closeAgent
-    );
+  }
+);
 
 
-    elements.modal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target
-          ===
-          elements.modal
-        ) {
-
-          closeAgent();
-
-        }
-
-      }
-    );
+elements
+.modalClose
+.addEventListener(
+  "click",
+  closeAgent
+);
 
 
-    elements.runAgentButton.addEventListener(
-      "click",
-      runAgent
-    );
+elements
+.modal
+.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target
+      ===
+      elements.modal
+    ) {
+
+      closeAgent();
+
+    }
+
+  }
+);
 
 
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key
-          ===
-          "Escape"
-        ) {
-
-          closeAgent();
-
-        }
-
-      }
-    );
+elements
+.runAgentButton
+.addEventListener(
+  "click",
+  runAgent
+);
 
 
-    /* =====================================
-       START
-    ===================================== */
+document.addEventListener(
+  "keydown",
+  event => {
 
-    checkApi();
+    if (
+      event.key
+      ===
+      "Escape"
+    ) {
 
-    checkOkx();
+      closeAgent();
+
+    }
+
+  }
+);
 
 
-    setInterval(
-      checkApi,
-      30000
-    );
+/* =====================================
+   START
+===================================== */
+
+updateScanConfigSummary();
 
 
-    setInterval(
-      checkOkx,
-      30000
-    );
+checkApi();
 
-  </script>
+
+checkOkx();
+
+
+setInterval(
+  checkApi,
+  30000
+);
+
+
+setInterval(
+  checkOkx,
+  30000
+);
+
+</script>
 
 </body>
 </html>
